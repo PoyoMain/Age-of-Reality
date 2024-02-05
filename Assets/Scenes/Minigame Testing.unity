@@ -490,6 +490,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6633343848253367670, guid: 85fe218a22f91564e8d4efdb1ccd4e9b, type: 3}
+      propertyPath: listLength
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6633343848253367670, guid: 85fe218a22f91564e8d4efdb1ccd4e9b, type: 3}
       propertyPath: lines.Array.size
       value: 3
       objectReference: {fileID: 0}
