@@ -9,13 +9,16 @@ public class LineGenerator : MonoBehaviour
     public Camera cam;
     Line activeLine;
 
-    public float totalPercentage = 100;
+    public double totalPercentage = 0;
 
     //Start and endpoint of line on screen
     //has to be manually put in, update to automatically get for each line based off of minigame
     public Vector2 lineStart;
     public Vector2 endOfLine;
     public GameObject[] lines;
+
+    public float totalPoints = 0;
+    public float closePoints = 0;
 
     public List<LineRenderer> lineRenderers;
     //keeps the starting end end point of each line recorded.

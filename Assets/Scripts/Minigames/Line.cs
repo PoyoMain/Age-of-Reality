@@ -35,7 +35,14 @@ public class Line : MonoBehaviour
 
             }
             //lineGenerator.DistanceToClosestPoint(position, lineGenerator.lineStart, lineGenerator.endOfLine);
-            Debug.Log(index);
+            //Debug.Log(index);
+            if (tempDistance < .2f)
+            {
+                lineGenerator.closePoints++;
+            }
+            lineGenerator.totalPercentage = 100 * (lineGenerator.closePoints / lineGenerator.totalPoints);
+            //Debug.Log(index);
+            //Debug.Log(tempDistance);
             return;
         }
 
@@ -54,8 +61,15 @@ public class Line : MonoBehaviour
                 }
 
             }
-            Debug.Log(index);
-            //Debug.Log(lineGenerator.DistanceToClosestPoint(position, lineGenerator.lineStart, lineGenerator.endOfLine));
+            //Debug.Log(index);
+            if (tempDistance < .2f)
+            {
+                lineGenerator.closePoints++;
+            }
+            lineGenerator.totalPercentage = 100 * (lineGenerator.closePoints / lineGenerator.totalPoints);
+            //Debug.Log(lineGenerator.closePoints);
+            //Debug.Log(lineGenerator.closePoints / lineGenerator.totalPoints);
+            Debug.Log(lineGenerator.totalPercentage);
         }
     }
 
@@ -63,6 +77,7 @@ public class Line : MonoBehaviour
     {
         points.Add(point);
         tempDistance = 100f;
+        lineGenerator.totalPoints++;
         //Debug.Log(Vector2.Distance(point, testLine.transform.position));
 
         lineRenderer.positionCount = points.Count;
