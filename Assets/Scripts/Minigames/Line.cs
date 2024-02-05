@@ -5,9 +5,16 @@ using UnityEngine;
 public class Line : MonoBehaviour
 {
     public LineRenderer lineRenderer;
-
+    public LineGenerator lineGenerator;
     List<Vector2> points;
+    public GameObject testLine;
+    float tempDistance = 100;
+    int index;
 
+    public void setRefrence(LineGenerator refrence)
+    {
+        lineGenerator = refrence;
+    }
 
     public void UpdateLine(Vector2 position)
     {
@@ -15,18 +22,48 @@ public class Line : MonoBehaviour
         {
             points = new List<Vector2>();
             SetPoint(position);
+
+            for (int i = 0; i < lineGenerator.listLength; i++)
+            {
+                //Debug.Log(lineGenerator.DistanceToClosestPoint(position, lineGenerator.startingPos[i], lineGenerator.endingPos[i]));
+                if (tempDistance > lineGenerator.DistanceToClosestPoint(position, lineGenerator.startingPos[i], lineGenerator.endingPos[i]))
+                {
+                    tempDistance = lineGenerator.DistanceToClosestPoint(position, lineGenerator.startingPos[i], lineGenerator.endingPos[i]);
+                    index = i;
+
+                }
+
+            }
+            //lineGenerator.DistanceToClosestPoint(position, lineGenerator.lineStart, lineGenerator.endOfLine);
+            Debug.Log(index);
             return;
         }
 
         if (Vector2.Distance(points.Last(), position) > .1f)
         {
             SetPoint(position);
+            //Debug.Log(lineGenerator.listLength);
+            for (int i = 0; i < lineGenerator.listLength; i++)
+            {
+                //Debug.Log(lineGenerator.DistanceToClosestPoint(position, lineGenerator.startingPos[i], lineGenerator.endingPos[i]));
+                if (tempDistance > lineGenerator.DistanceToClosestPoint(position, lineGenerator.startingPos[i], lineGenerator.endingPos[i]))
+                {
+                    tempDistance = lineGenerator.DistanceToClosestPoint(position, lineGenerator.startingPos[i], lineGenerator.endingPos[i]);
+                    index = i;
+                    //Debug.Log(index);
+                }
+
+            }
+            Debug.Log(index);
+            //Debug.Log(lineGenerator.DistanceToClosestPoint(position, lineGenerator.lineStart, lineGenerator.endOfLine));
         }
     }
 
     void SetPoint(Vector2 point)
     {
         points.Add(point);
+        tempDistance = 100f;
+        //Debug.Log(Vector2.Distance(point, testLine.transform.position));
 
         lineRenderer.positionCount = points.Count;
         lineRenderer.SetPosition(points.Count - 1, point);
