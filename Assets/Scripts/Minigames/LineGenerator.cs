@@ -26,12 +26,13 @@ public class LineGenerator : MonoBehaviour
     public List<Vector2> startingPos;
     public List<Vector2> endingPos;
     public int listLength { get; set; }
-    public void Start()
+    public void OnEnable()
     {
         cam = Camera.main;
         lineRenderers = new List<LineRenderer>();
         startingPos = new List<Vector2>();
         endingPos = new List<Vector2>();
+        distanceNeeded = 0;
 
         if (lines == null)
         {

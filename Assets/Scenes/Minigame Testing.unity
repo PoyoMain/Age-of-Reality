@@ -215,7 +215,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &1590180879
+--- !u!1001 &602029952
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -225,11 +225,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3336688353112418798, guid: 85fe218a22f91564e8d4efdb1ccd4e9b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -7.81
       objectReference: {fileID: 0}
     - target: {fileID: 3336688353112418798, guid: 85fe218a22f91564e8d4efdb1ccd4e9b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 1.25
       objectReference: {fileID: 0}
     - target: {fileID: 3336688353112418798, guid: 85fe218a22f91564e8d4efdb1ccd4e9b, type: 3}
       propertyPath: m_LocalPosition.z
@@ -267,6 +267,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LineGenerator
       objectReference: {fileID: 0}
+    - target: {fileID: 8266496425803752895, guid: 85fe218a22f91564e8d4efdb1ccd4e9b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -277,4 +281,4 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 445917141}
-  - {fileID: 1590180879}
+  - {fileID: 602029952}
