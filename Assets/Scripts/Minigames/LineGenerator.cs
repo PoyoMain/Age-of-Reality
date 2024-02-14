@@ -48,8 +48,8 @@ public class LineGenerator : MonoBehaviour
             //gets the first and last value of each linerender position into another list
             foreach (LineRenderer obj in lineRenderers)
             {
-                startingPos.Add(obj.GetPosition(0));
-                endingPos.Add(obj.GetPosition(obj.positionCount - 1));
+                startingPos.Add(obj.GetPosition(0) + gameObject.transform.position);
+                endingPos.Add(obj.GetPosition(obj.positionCount - 1) + gameObject.transform.position);
                 distanceNeeded += Vector2.Distance(obj.GetPosition(0), obj.GetPosition(obj.positionCount - 1));
                 listLength = startingPos.Count;
                 //Debug.Log(listLength);
