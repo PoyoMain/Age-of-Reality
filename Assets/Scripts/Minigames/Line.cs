@@ -73,18 +73,16 @@ public class Line : MonoBehaviour
             }
             if (lineGenerator.distanceNeeded > lineGenerator.distanceTravelled)
             {
-                lineGenerator.totalPercentage = 100 * (((lineGenerator.distanceTravelled / lineGenerator.distanceNeeded) + (lineGenerator.closePoints / lineGenerator.totalPoints)) / 2);
+                lineGenerator.totalPercentage = 100 * ((lineGenerator.distanceTravelled / lineGenerator.distanceNeeded) * (lineGenerator.closePoints / lineGenerator.totalPoints));
             }
             else
             {
-                lineGenerator.totalPercentage = 100 * (((lineGenerator.distanceNeeded / lineGenerator.distanceTravelled) + (lineGenerator.closePoints / lineGenerator.totalPoints)) / 2);
+                lineGenerator.totalPercentage = 100 * ((lineGenerator.distanceNeeded / lineGenerator.distanceTravelled) * (lineGenerator.closePoints / lineGenerator.totalPoints));
             }
             lineGenerator.totalPercentage = Mathf.RoundToInt(lineGenerator.totalPercentage);
-
             //lineGenerator.totalPercentage = 100 * (lineGenerator.closePoints / lineGenerator.totalPoints);
             //Debug.Log(lineGenerator.closePoints);
             //Debug.Log(lineGenerator.closePoints / lineGenerator.totalPoints);
-            Debug.Log(lineGenerator.totalPercentage);
         }
     }
 
