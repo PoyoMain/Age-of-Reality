@@ -9,6 +9,7 @@ public class Line : MonoBehaviour
     List<Vector2> points;
     public GameObject testLine;
     float tempDistance = 100;
+    public Vector2 pastPoint;
     int index;
 
     public void setRefrence(LineGenerator refrence)
@@ -39,6 +40,7 @@ public class Line : MonoBehaviour
             if (tempDistance < .2f)
             {
                 lineGenerator.closePoints++;
+                pastPoint = position;
             }
             lineGenerator.totalPercentage = 100 * (lineGenerator.closePoints / lineGenerator.totalPoints);
             //Debug.Log(index);
@@ -61,12 +63,24 @@ public class Line : MonoBehaviour
                 }
 
             }
+
             //Debug.Log(index);
             if (tempDistance < .2f)
             {
                 lineGenerator.closePoints++;
+                lineGenerator.distanceTravelled += Vector2.Distance(pastPoint, position);
+                pastPoint = position;
             }
-            lineGenerator.totalPercentage = 100 * (lineGenerator.closePoints / lineGenerator.totalPoints);
+            if (lineGenerator.distanceNeeded > lineGenerator.distanceTravelled)
+            {
+                lineGenerator.totalPercentage = 100 * (lineGenerator.distanceTravelled / lineGenerator.distanceNeeded);
+            }
+            else
+            {
+                lineGenerator.totalPercentage = 100 * (lineGenerator.distanceNeeded / lineGenerator.distanceTravelled);
+            }
+
+            //lineGenerator.totalPercentage = 100 * (lineGenerator.closePoints / lineGenerator.totalPoints);
             //Debug.Log(lineGenerator.closePoints);
             //Debug.Log(lineGenerator.closePoints / lineGenerator.totalPoints);
             Debug.Log(lineGenerator.totalPercentage);
