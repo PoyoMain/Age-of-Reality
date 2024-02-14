@@ -12,7 +12,7 @@ public class LineGenerator : MonoBehaviour
     public float distanceNeeded = 0;
     public float distanceTravelled = 0;
 
-    public double totalPercentage = 0;
+    public float totalPercentage = 0;
     public float totalPoints = 0;
     public float closePoints = 0;
 
