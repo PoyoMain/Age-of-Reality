@@ -9,6 +9,9 @@ public class LineGenerator : MonoBehaviour
     public Camera cam;
     Line activeLine;
 
+    public float distanceNeeded = 0;
+    public float distanceTravelled = 0;
+
     public double totalPercentage = 0;
     public float totalPoints = 0;
     public float closePoints = 0;
@@ -47,6 +50,7 @@ public class LineGenerator : MonoBehaviour
             {
                 startingPos.Add(obj.GetPosition(0));
                 endingPos.Add(obj.GetPosition(obj.positionCount - 1));
+                distanceNeeded += Vector2.Distance(obj.GetPosition(0), obj.GetPosition(obj.positionCount - 1));
                 listLength = startingPos.Count;
                 //Debug.Log(listLength);
             }
