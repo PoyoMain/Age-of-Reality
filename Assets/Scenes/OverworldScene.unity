@@ -702,6 +702,7 @@ MonoBehaviour:
   player: {fileID: 6225348202641077688}
   battleManager: {fileID: 894439767}
   overworldCamera: {fileID: 519420031}
+  minigame: {fileID: 8266496425803752895, guid: 85fe218a22f91564e8d4efdb1ccd4e9b, type: 3}
   enemyHit: {fileID: 0}
 --- !u!1 &763444056
 GameObject:

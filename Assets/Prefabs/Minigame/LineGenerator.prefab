@@ -28,7 +28,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 7879301540010600978}
   - {fileID: 8712265024272693669}
@@ -114,20 +114,40 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9058770358148240058, guid: 500f6183cedc17546b58058f99f2218c, type: 3}
-      propertyPath: m_Positions.Array.data[0].x
+      propertyPath: m_SortingLayer
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 9058770358148240058, guid: 500f6183cedc17546b58058f99f2218c, type: 3}
-      propertyPath: m_Positions.Array.data[0].y
+      propertyPath: m_SortingOrder
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9058770358148240058, guid: 500f6183cedc17546b58058f99f2218c, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 1471637549
+      objectReference: {fileID: 0}
+    - target: {fileID: 9058770358148240058, guid: 500f6183cedc17546b58058f99f2218c, type: 3}
+      propertyPath: m_Parameters.numCapVertices
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 9058770358148240058, guid: 500f6183cedc17546b58058f99f2218c, type: 3}
+      propertyPath: m_Positions.Array.data[0].x
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 9058770358148240058, guid: 500f6183cedc17546b58058f99f2218c, type: 3}
+      propertyPath: m_Positions.Array.data[0].y
+      value: -3
+      objectReference: {fileID: 0}
+    - target: {fileID: 9058770358148240058, guid: 500f6183cedc17546b58058f99f2218c, type: 3}
       propertyPath: m_Positions.Array.data[1].x
-      value: 3
+      value: -9
       objectReference: {fileID: 0}
     - target: {fileID: 9058770358148240058, guid: 500f6183cedc17546b58058f99f2218c, type: 3}
       propertyPath: m_Positions.Array.data[1].y
-      value: -2
+      value: -3
+      objectReference: {fileID: 0}
+    - target: {fileID: 9058770358148240058, guid: 500f6183cedc17546b58058f99f2218c, type: 3}
+      propertyPath: m_Parameters.widthMultiplier
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -197,12 +217,44 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9058770358148240058, guid: 500f6183cedc17546b58058f99f2218c, type: 3}
-      propertyPath: m_Positions.Array.data[1].x
+      propertyPath: m_SortingLayer
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 9058770358148240058, guid: 500f6183cedc17546b58058f99f2218c, type: 3}
-      propertyPath: m_Positions.Array.data[1].y
+      propertyPath: m_SortingOrder
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9058770358148240058, guid: 500f6183cedc17546b58058f99f2218c, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 1471637549
+      objectReference: {fileID: 0}
+    - target: {fileID: 9058770358148240058, guid: 500f6183cedc17546b58058f99f2218c, type: 3}
+      propertyPath: m_Parameters.numCapVertices
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 9058770358148240058, guid: 500f6183cedc17546b58058f99f2218c, type: 3}
+      propertyPath: m_Positions.Array.data[0].x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9058770358148240058, guid: 500f6183cedc17546b58058f99f2218c, type: 3}
+      propertyPath: m_Positions.Array.data[0].y
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 9058770358148240058, guid: 500f6183cedc17546b58058f99f2218c, type: 3}
+      propertyPath: m_Positions.Array.data[1].x
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 9058770358148240058, guid: 500f6183cedc17546b58058f99f2218c, type: 3}
+      propertyPath: m_Positions.Array.data[1].y
+      value: -3
+      objectReference: {fileID: 0}
+    - target: {fileID: 9058770358148240058, guid: 500f6183cedc17546b58058f99f2218c, type: 3}
+      propertyPath: m_Parameters.widthMultiplier
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9058770358148240058, guid: 500f6183cedc17546b58058f99f2218c, type: 3}
+      propertyPath: m_Parameters.numCornerVertices
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -272,12 +324,28 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9058770358148240058, guid: 500f6183cedc17546b58058f99f2218c, type: 3}
+      propertyPath: m_SortingLayer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9058770358148240058, guid: 500f6183cedc17546b58058f99f2218c, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9058770358148240058, guid: 500f6183cedc17546b58058f99f2218c, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 1471637549
+      objectReference: {fileID: 0}
+    - target: {fileID: 9058770358148240058, guid: 500f6183cedc17546b58058f99f2218c, type: 3}
+      propertyPath: m_Parameters.numCapVertices
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 9058770358148240058, guid: 500f6183cedc17546b58058f99f2218c, type: 3}
       propertyPath: m_Positions.Array.data[0].x
-      value: 3
+      value: -9
       objectReference: {fileID: 0}
     - target: {fileID: 9058770358148240058, guid: 500f6183cedc17546b58058f99f2218c, type: 3}
       propertyPath: m_Positions.Array.data[0].y
-      value: -2
+      value: -3
       objectReference: {fileID: 0}
     - target: {fileID: 9058770358148240058, guid: 500f6183cedc17546b58058f99f2218c, type: 3}
       propertyPath: m_Positions.Array.data[1].x
@@ -285,7 +353,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9058770358148240058, guid: 500f6183cedc17546b58058f99f2218c, type: 3}
       propertyPath: m_Positions.Array.data[1].y
-      value: 0
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 9058770358148240058, guid: 500f6183cedc17546b58058f99f2218c, type: 3}
+      propertyPath: m_Parameters.widthMultiplier
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

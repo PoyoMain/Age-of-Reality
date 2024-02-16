@@ -8,6 +8,7 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private PlayerController player; // The player's overworld character
     [SerializeField] private BattleManager battleManager;
     [SerializeField] private Camera overworldCamera;
+    [SerializeField] private GameObject minigame;
 
     private GameState State;
 
@@ -16,6 +17,12 @@ public class GameManager : Singleton<GameManager>
         get { return player.Party; }
     }
     [HideInInspector] public Enemy enemyHit; // The enemy hit by the player
+
+    protected override void Awake()
+    {
+        base.Awake();
+        Instantiate(minigame, player.transform.position, Quaternion.identity);
+    }
 
     // Method to change the state of the game
     public void ChangeGameState(GameState newState)

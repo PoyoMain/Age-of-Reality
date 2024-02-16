@@ -72,9 +72,9 @@ LineRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: 1471637549
+  m_SortingLayer: 2
+  m_SortingOrder: 2
   m_Positions:
   - {x: 0, y: 0, z: 0}
   - {x: 1, y: 0, z: 0}
@@ -85,8 +85,8 @@ LineRenderer:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0.0041923523
-        value: 0.19191933
+        time: 0
+        value: 1
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -152,3 +152,4 @@ MonoBehaviour:
   lineRenderer: {fileID: 8592363984788378300}
   lineGenerator: {fileID: 6633343848253367670, guid: 85fe218a22f91564e8d4efdb1ccd4e9b, type: 3}
   testLine: {fileID: 8962312039684443172, guid: 3e03c361f89250a4c9ea6998c4a49b80, type: 3}
+  pastPoint: {x: 0, y: 0}
