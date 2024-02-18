@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3336688353112418798}
   - component: {fileID: 6633343848253367670}
   m_Layer: 0
-  m_Name: LineGenerator
+  m_Name: Magic_Triangle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -115,7 +115,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9058770358148240058, guid: 500f6183cedc17546b58058f99f2218c, type: 3}
       propertyPath: m_SortingLayer
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 9058770358148240058, guid: 500f6183cedc17546b58058f99f2218c, type: 3}
       propertyPath: m_SortingOrder
@@ -123,7 +123,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9058770358148240058, guid: 500f6183cedc17546b58058f99f2218c, type: 3}
       propertyPath: m_SortingLayerID
-      value: 1471637549
+      value: -588061379
       objectReference: {fileID: 0}
     - target: {fileID: 9058770358148240058, guid: 500f6183cedc17546b58058f99f2218c, type: 3}
       propertyPath: m_Parameters.numCapVertices
@@ -131,19 +131,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9058770358148240058, guid: 500f6183cedc17546b58058f99f2218c, type: 3}
       propertyPath: m_Positions.Array.data[0].x
-      value: 9
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 9058770358148240058, guid: 500f6183cedc17546b58058f99f2218c, type: 3}
       propertyPath: m_Positions.Array.data[0].y
-      value: -3
+      value: -4.5
       objectReference: {fileID: 0}
     - target: {fileID: 9058770358148240058, guid: 500f6183cedc17546b58058f99f2218c, type: 3}
       propertyPath: m_Positions.Array.data[1].x
-      value: -9
+      value: -8
       objectReference: {fileID: 0}
     - target: {fileID: 9058770358148240058, guid: 500f6183cedc17546b58058f99f2218c, type: 3}
       propertyPath: m_Positions.Array.data[1].y
-      value: -3
+      value: -4.5
       objectReference: {fileID: 0}
     - target: {fileID: 9058770358148240058, guid: 500f6183cedc17546b58058f99f2218c, type: 3}
       propertyPath: m_Parameters.widthMultiplier
@@ -217,44 +217,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9058770358148240058, guid: 500f6183cedc17546b58058f99f2218c, type: 3}
-      propertyPath: m_SortingLayer
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 9058770358148240058, guid: 500f6183cedc17546b58058f99f2218c, type: 3}
-      propertyPath: m_SortingOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9058770358148240058, guid: 500f6183cedc17546b58058f99f2218c, type: 3}
-      propertyPath: m_SortingLayerID
-      value: 1471637549
-      objectReference: {fileID: 0}
-    - target: {fileID: 9058770358148240058, guid: 500f6183cedc17546b58058f99f2218c, type: 3}
-      propertyPath: m_Parameters.numCapVertices
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 9058770358148240058, guid: 500f6183cedc17546b58058f99f2218c, type: 3}
-      propertyPath: m_Positions.Array.data[0].x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9058770358148240058, guid: 500f6183cedc17546b58058f99f2218c, type: 3}
       propertyPath: m_Positions.Array.data[0].y
-      value: 6
+      value: 4.5
       objectReference: {fileID: 0}
     - target: {fileID: 9058770358148240058, guid: 500f6183cedc17546b58058f99f2218c, type: 3}
       propertyPath: m_Positions.Array.data[1].x
-      value: 9
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 9058770358148240058, guid: 500f6183cedc17546b58058f99f2218c, type: 3}
       propertyPath: m_Positions.Array.data[1].y
-      value: -3
-      objectReference: {fileID: 0}
-    - target: {fileID: 9058770358148240058, guid: 500f6183cedc17546b58058f99f2218c, type: 3}
-      propertyPath: m_Parameters.widthMultiplier
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9058770358148240058, guid: 500f6183cedc17546b58058f99f2218c, type: 3}
-      propertyPath: m_Parameters.numCornerVertices
-      value: 0
+      value: -4.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -325,7 +297,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9058770358148240058, guid: 500f6183cedc17546b58058f99f2218c, type: 3}
       propertyPath: m_SortingLayer
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 9058770358148240058, guid: 500f6183cedc17546b58058f99f2218c, type: 3}
       propertyPath: m_SortingOrder
@@ -333,7 +305,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9058770358148240058, guid: 500f6183cedc17546b58058f99f2218c, type: 3}
       propertyPath: m_SortingLayerID
-      value: 1471637549
+      value: -588061379
       objectReference: {fileID: 0}
     - target: {fileID: 9058770358148240058, guid: 500f6183cedc17546b58058f99f2218c, type: 3}
       propertyPath: m_Parameters.numCapVertices
@@ -341,11 +313,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9058770358148240058, guid: 500f6183cedc17546b58058f99f2218c, type: 3}
       propertyPath: m_Positions.Array.data[0].x
-      value: -9
+      value: -8
       objectReference: {fileID: 0}
     - target: {fileID: 9058770358148240058, guid: 500f6183cedc17546b58058f99f2218c, type: 3}
       propertyPath: m_Positions.Array.data[0].y
-      value: -3
+      value: -4.5
       objectReference: {fileID: 0}
     - target: {fileID: 9058770358148240058, guid: 500f6183cedc17546b58058f99f2218c, type: 3}
       propertyPath: m_Positions.Array.data[1].x
@@ -353,7 +325,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9058770358148240058, guid: 500f6183cedc17546b58058f99f2218c, type: 3}
       propertyPath: m_Positions.Array.data[1].y
-      value: 6
+      value: 4.5
       objectReference: {fileID: 0}
     - target: {fileID: 9058770358148240058, guid: 500f6183cedc17546b58058f99f2218c, type: 3}
       propertyPath: m_Parameters.widthMultiplier

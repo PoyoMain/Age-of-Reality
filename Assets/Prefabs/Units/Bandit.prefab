@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5838549659622388325}
   - component: {fileID: 7363229011833097624}
   m_Layer: 0
-  m_Name: Looter
+  m_Name: Bandit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -8,7 +8,7 @@ public abstract class ScriptableUnitBase : ScriptableObject
     /// <summary>
     /// Party members
     /// </summary>
-    public Party Party;
+    public Ability Ability;
 
     /// <summary>
     /// Stats of this unit
@@ -39,10 +39,11 @@ public struct Stats
     public int Attack;
     public int Defense;
     public int Speed;
+    public int Stamina;
 }
 
-public enum Party
+public enum Ability
 {
-    Hero,
-    Enemy
+    Melee,
+    Magic
 }
