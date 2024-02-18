@@ -9,6 +9,8 @@ public class BattleManager : MonoBehaviour
     public static event Action<BattleState> OnBeforeStateChanged; // Event that happens before a state change
     public static event Action<BattleState> OnAfterStateChanged; // Event that happens after a state change
 
+    [SerializeField] private MinigameManager minigameManager; // Manages the minigame
+
     [SerializeField] private float speed = 2; // Speed the units move on the board
     [SerializeField] private ActionSelectMenu AttackMenu; // Battle menu that controls which action the player will take
 
@@ -143,7 +145,7 @@ public class BattleManager : MonoBehaviour
 
         yield return new WaitForSeconds(0.5f);
 
-        while(pickingEnemy)
+        while (pickingEnemy)
         {
             if (battleControls.SelectionUp.triggered) EnemySelect(true);
             else if (battleControls.SelectionDown.triggered) EnemySelect(false);
@@ -152,6 +154,19 @@ public class BattleManager : MonoBehaviour
         }
 
         selectedEnemy.selectIndicator.SetActive(false);
+
+        LineGenerator minigame = ResourceStorage.Instance.GetMinigame(Enum.GetName(typeof(MinigameType), AttackMenu.chosenAttack.Minigame));
+        minigameManager.SetMinigame(minigame);
+        minigameManager.gameObject.SetActive(true);
+        //Instantiate(minigame, GridInfo.GridWorldMidPoint, Quaternion.identity);
+
+        while(minigameManager.MinigameRunning)
+        {
+            yield return null;
+        }
+
+        minigameManager.gameObject.SetActive(false);
+
         turnOrder[0].Attack(AttackMenu.chosenAttack, selectedEnemy);
 
         if (selectedEnemy.Stats.Health <= 0)

@@ -28,7 +28,7 @@ public class LineGenerator : MonoBehaviour
     public int listLength { get; set; }
     public void OnEnable()
     {
-        cam = Camera.main;
+        cam = GameManager.Instance.GetBattleCamera();
         lineRenderers = new List<LineRenderer>();
         startingPos = new List<Vector2>();
         endingPos = new List<Vector2>();
@@ -66,7 +66,7 @@ public class LineGenerator : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
-            GameObject newLine = Instantiate(linePrefab);
+            GameObject newLine = Instantiate(linePrefab, transform);
             activeLine = newLine.GetComponent<Line>();
             activeLine.setRefrence(this);
             //startingPos.Add(mousePos);

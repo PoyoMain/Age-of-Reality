@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Net.Mail;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -8,6 +10,8 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private PlayerController player; // The player's overworld character
     [SerializeField] private BattleManager battleManager;
     [SerializeField] private Camera overworldCamera;
+    [SerializeField] private Camera battleCamera;
+    [SerializeField] private LineGenerator minigame;
 
     private GameState State;
 
@@ -16,6 +20,17 @@ public class GameManager : Singleton<GameManager>
         get { return player.Party; }
     }
     [HideInInspector] public Enemy enemyHit; // The enemy hit by the player
+
+    protected override void Awake()
+    {
+        base.Awake();
+    }
+
+    //private void Start()
+    //{
+    //    LineGenerator minigame = ResourceStorage.Instance.GetMinigame(Enum.GetName(typeof(MinigameType), MinigameType.Magic_Triangle));
+    //    Instantiate(minigame, player.transform.position, Quaternion.identity);
+    //}
 
     // Method to change the state of the game
     public void ChangeGameState(GameState newState)
@@ -69,6 +84,16 @@ public class GameManager : Singleton<GameManager>
     {
         enemyHit = enemy;
         ChangeGameState(GameState.DuringBattle);
+    }
+
+    public Camera GetBattleCamera()
+    {
+        return battleCamera;
+    }
+
+    public Camera GetOverworldCamera()
+    {
+        return overworldCamera;
     }
 
     private void FixedUpdate()

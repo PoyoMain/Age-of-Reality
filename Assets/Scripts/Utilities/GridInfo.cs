@@ -165,11 +165,11 @@ public class GridInfo : MonoBehaviour
     {
         float x1 = grid[cols - 1, 0].WorldPosition.x;
         float x2 = grid[0, 0].WorldPosition.x;
-        float z1 = grid[0, rows - 1].WorldPosition.z;
-        float z2 = grid[0, 0].WorldPosition.z;
+        float y1 = grid[0, rows - 1].WorldPosition.y;
+        float y2 = grid[0, 0].WorldPosition.y;
 
-        Vector2 midpoint = new((x1 + x2) / 2, (z1 + z2) / 2);
+        Vector2 midpoint = new((x1 + x2) / 2, (y1 + y2) / 2);
 
-        return new(midpoint.x, transform.position.y, midpoint.y);
+        return new(midpoint.x, midpoint.y, transform.position.z);
     }
 }

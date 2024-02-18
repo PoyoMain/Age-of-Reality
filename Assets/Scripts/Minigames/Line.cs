@@ -37,7 +37,7 @@ public class Line : MonoBehaviour
             }
             //lineGenerator.DistanceToClosestPoint(position, lineGenerator.lineStart, lineGenerator.endOfLine);
             //Debug.Log(index);
-            if (tempDistance < .2f)
+            if (tempDistance < .6f)
             {
                 lineGenerator.closePoints++;
                 pastPoint = position;
@@ -65,7 +65,7 @@ public class Line : MonoBehaviour
             }
 
             //Debug.Log(index);
-            if (tempDistance < .2f)
+            if (tempDistance < .6f)
             {
                 lineGenerator.closePoints++;
                 lineGenerator.distanceTravelled += Vector2.Distance(pastPoint, position);
