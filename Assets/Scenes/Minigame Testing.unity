@@ -225,11 +225,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3336688353112418798, guid: 85fe218a22f91564e8d4efdb1ccd4e9b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -7.81
+      value: -6.32
       objectReference: {fileID: 0}
     - target: {fileID: 3336688353112418798, guid: 85fe218a22f91564e8d4efdb1ccd4e9b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.25
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 3336688353112418798, guid: 85fe218a22f91564e8d4efdb1ccd4e9b, type: 3}
       propertyPath: m_LocalPosition.z
@@ -263,13 +263,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5822651435978913475, guid: 85fe218a22f91564e8d4efdb1ccd4e9b, type: 3}
+      propertyPath: m_Parameters.widthMultiplier
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5822651435978913475, guid: 85fe218a22f91564e8d4efdb1ccd4e9b, type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].time
+      value: 0.074738406
+      objectReference: {fileID: 0}
+    - target: {fileID: 5822651435978913475, guid: 85fe218a22f91564e8d4efdb1ccd4e9b, type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].value
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8266496425803752895, guid: 85fe218a22f91564e8d4efdb1ccd4e9b, type: 3}
       propertyPath: m_Name
       value: LineGenerator
       objectReference: {fileID: 0}
     - target: {fileID: 8266496425803752895, guid: 85fe218a22f91564e8d4efdb1ccd4e9b, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
