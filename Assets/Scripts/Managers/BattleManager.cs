@@ -99,7 +99,7 @@ public class BattleManager : MonoBehaviour
 
         turnOrder.AddRange(PartyUnits);
         turnOrder.AddRange(EnemyUnits);
-        turnOrder.Sort((a, b) => a.Stats.Speed.CompareTo(b.Stats.Speed));
+        //turnOrder.Sort((a, b) => a.Stats.Speed.CompareTo(b.Stats.Speed));
 
         ChangeState(BattleState.HeroTurn);
     }
@@ -167,7 +167,7 @@ public class BattleManager : MonoBehaviour
 
         minigameManager.gameObject.SetActive(false);
 
-        turnOrder[0].Attack(AttackMenu.chosenAttack, selectedEnemy);
+        turnOrder[0].Attack(AttackMenu.chosenAttack, selectedEnemy, multiplier: AttackMenu.chosenAttack.Stats.multiplier);
 
         if (selectedEnemy.Stats.Health <= 0)
         {
@@ -210,7 +210,19 @@ public class BattleManager : MonoBehaviour
             yield return null;
         }
 
-        
+        EnemyUnitBase enemy = turnOrder[0] as EnemyUnitBase;
+        ScriptableAttack chosenAttack = enemy.data.attacks[UnityEngine.Random.Range(0, enemy.data.attacks.Count)];
+        HeroUnitBase chosenTarget = PartyUnits[UnityEngine.Random.Range(0, PartyUnits.Count)];
+
+        turnOrder[0].Attack(chosenAttack, chosenTarget);
+        print(chosenTarget.Stats.Health);
+
+        if (chosenTarget.Stats.Health <= 0)
+        {
+            turnOrder.Remove(chosenTarget);
+            PartyUnits.Remove(chosenTarget);
+            Destroy(chosenTarget.gameObject);
+        }
 
         while (!turnOrder[0].Move(startPos, speed))
         {

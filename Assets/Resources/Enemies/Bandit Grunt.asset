@@ -10,15 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0eefaf64bd6d79143854aae1932ae3a8, type: 3}
-  m_Name: Looter
+  m_Name: Bandit Grunt
   m_EditorClassIdentifier: 
-  Party: 0
+  Prefab: {fileID: 7363229011833097624, guid: 13d4f072e10f9654cb522dbd699957b2, type: 3}
+  Description: 
+  Sprite: {fileID: 0}
   _stats:
     Health: 0
     Attack: 0
     Defense: 0
     Speed: 0
-  Prefab: {fileID: 7363229011833097624, guid: 13d4f072e10f9654cb522dbd699957b2, type: 3}
-  Description: 
-  Sprite: {fileID: 0}
-  Class: 0
+    XP: 0
+  attacks:
+  - {fileID: 11400000, guid: fcf377c82c2a78d40b11dd91c2469062, type: 2}

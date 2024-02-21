@@ -18,6 +18,7 @@ public class MinigameManager : MonoBehaviour
     private Animator anim;
 
     public bool MinigameRunning { get; private set; }
+    private bool isDrawing;
 
     private void Awake()
     {
@@ -31,6 +32,8 @@ public class MinigameManager : MonoBehaviour
 
         _minigame = Instantiate(_minigamePrefab, GridInfo.GridWorldMidPoint, Quaternion.identity, transform);
         UpdatePercentText();
+
+        isDrawing = true;
     }
 
     public void SetMinigame(LineGenerator minigameToSpawn)
@@ -42,17 +45,18 @@ public class MinigameManager : MonoBehaviour
     private void Update()
     {
         
-        if (timer > 0)
+        if (timer > 0 && isDrawing)
         {
             timer -= Time.deltaTime;
             UpdateTimerText(timer);
             UpdatePercentText();
 
-            if (timer <= 0)
+            if (timer <= 0 || _minigame.DoneDrawing)
             {
                 UpdateTimerText(0);
                 _minigame.enabled = false;
                 anim.SetTrigger("MinigameDone");
+                isDrawing = false;
             }
         }
     }

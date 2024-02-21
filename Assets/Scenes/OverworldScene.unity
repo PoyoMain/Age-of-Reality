@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 60164444}
   - component: {fileID: 60164443}
   m_Layer: 5
-  m_Name: Txt_Melee
+  m_Name: Txt_Attack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -180,7 +180,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Melee
+  m_text: Attack
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -651,7 +651,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: afb15740988dada4c9a9931cb4f1e9a3, type: 2}
   - {fileID: 11400000, guid: afb15740988dada4c9a9931cb4f1e9a3, type: 2}
   team: []
-  type: 4
+  type: {fileID: 11400000, guid: afb15740988dada4c9a9931cb4f1e9a3, type: 2}
 --- !u!58 &508801932
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1179,7 +1179,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   allies: []
   team: []
-  type: 4
+  type: {fileID: 11400000, guid: afb15740988dada4c9a9931cb4f1e9a3, type: 2}
 --- !u!58 &763444058
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1691,8 +1691,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1248717826}
-  - component: {fileID: 1248717827}
   - component: {fileID: 1248717828}
+  - component: {fileID: 1248717827}
   m_Layer: 0
   m_Name: MinigameManager
   m_TagString: Untagged
@@ -1731,7 +1731,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _percentDisplayText: {fileID: 1771725854}
   _timeDisplayText: {fileID: 142469512}
-  minigameCompleteTime: 5
+  minigameCompleteTime: 7
 --- !u!95 &1248717828
 Animator:
   serializedVersion: 5
@@ -2399,7 +2399,7 @@ GameObject:
   - component: {fileID: 1805456960}
   - component: {fileID: 1805456959}
   m_Layer: 5
-  m_Name: MeleeButton
+  m_Name: AttackButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3157,7 +3157,7 @@ MonoBehaviour:
   allies:
   - {fileID: 11400000, guid: afb15740988dada4c9a9931cb4f1e9a3, type: 2}
   team: []
-  type: 4
+  type: {fileID: 11400000, guid: afb15740988dada4c9a9931cb4f1e9a3, type: 2}
 --- !u!50 &7942285961093800576
 Rigidbody2D:
   serializedVersion: 4

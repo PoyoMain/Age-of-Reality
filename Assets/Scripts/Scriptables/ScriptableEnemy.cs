@@ -1,18 +1,26 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Scriptable Enemy")]
 public class ScriptableEnemy : ScriptableUnitBase
-{ 
-    public EnemyClass Class;
+{
+    /// <summary>
+    /// Stats of this unit
+    /// </summary>
+    [SerializeField] private EnemyStats _stats;
+    public EnemyStats BaseStats { get { return _stats; } }
+
+    public List<ScriptableAttack> attacks;
 }
 
-public enum EnemyClass
+[Serializable]
+public struct EnemyStats
 {
-    Slime,
-    Orc,
-    Wolf,
-    Dragon,
-    Looter
+    public int Health;
+    public int Attack;
+    public int Defense;
+    public int Speed;
+    public int XP;
 }

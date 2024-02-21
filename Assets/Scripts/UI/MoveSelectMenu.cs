@@ -14,7 +14,7 @@ public class MoveSelectMenu : MonoBehaviour
     [HideInInspector] public List<MoveOption> moveButtons;
     [HideInInspector] public int moveIndex;
 
-    [HideInInspector] public ActionType menuType; // The type of menu this is
+    [HideInInspector] public Ability menuType; // The type of menu this is
     [SerializeField] private int maxElementsOnScreen = 4; // The maximum number of moves that can be displayed at one time
     private int _maxElementsOnScreen;
     private Vector2 elementRange = Vector2.zero;
@@ -74,7 +74,7 @@ public class MoveSelectMenu : MonoBehaviour
     {
         switch (menuType)
         {
-            case ActionType.Melee:
+            case Ability.Melee:
                 if (attackButton == null)
                 {
                     Debug.LogError("Attack Button prefab not set in inspector");
@@ -92,7 +92,23 @@ public class MoveSelectMenu : MonoBehaviour
 
                 EventSystem.current.SetSelectedGameObject(moveButtons[0].gameObject);
                 break;
-            case ActionType.Magic:
+            case Ability.Magic:
+                if (attackButton == null)
+                {
+                    Debug.LogError("Attack Button prefab not set in inspector");
+                    return;
+                }
+
+                foreach (ScriptableAttack attack in currentUnit.data.magicAttacks)
+                {
+                    AttackOption moveOption = Instantiate(attackButton, transform).GetComponent<AttackOption>();
+                    moveButtons.Add(moveOption);
+                    moveOption.Attack = attack;
+                    moveOption.gameObject.name = attack.name;
+                    moveOption.GetComponentInChildren<TextMeshProUGUI>().text = attack.name;
+                }
+
+                EventSystem.current.SetSelectedGameObject(moveButtons[0].gameObject);
                 break;
         }
     }    
