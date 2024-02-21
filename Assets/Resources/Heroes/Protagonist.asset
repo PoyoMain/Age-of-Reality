@@ -12,12 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4633a8873c239db46a7e4c3ac174e78c, type: 3}
   m_Name: Protagonist
   m_EditorClassIdentifier: 
-  Party: 0
+  Ability: 0
   _stats:
     Health: 0
     Attack: 0
     Defense: 0
     Speed: 0
+    Stamina: 0
   Prefab: {fileID: 397257287913442836, guid: a0a1aa82c29f92a45938483299d949c4, type: 3}
   Description: 
   Sprite: {fileID: 0}

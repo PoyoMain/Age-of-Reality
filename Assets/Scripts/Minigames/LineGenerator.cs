@@ -16,6 +16,8 @@ public class LineGenerator : MonoBehaviour
     public float totalPoints = 0;
     public float closePoints = 0;
 
+    public bool DoneDrawing = false;
+
     //Start and endpoint of line on screen
     public GameObject[] lines;
 
@@ -76,6 +78,10 @@ public class LineGenerator : MonoBehaviour
         {
             //endingPos.Add(mousePos);
             activeLine = null;
+            if (totalPercentage > 90)
+            {
+                DoneDrawing = true;
+            }
         }
 
         if (activeLine != null)
