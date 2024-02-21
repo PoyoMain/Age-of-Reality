@@ -16,10 +16,10 @@ MonoBehaviour:
   Description: 
   Sprite: {fileID: 0}
   _stats:
-    Health: 0
-    Attack: 0
-    Defense: 0
-    Speed: 0
-    XP: 0
+    Health: 50
+    Attack: 1
+    Defense: 1
+    Speed: 1
+    XP: 1
   attacks:
   - {fileID: 11400000, guid: fcf377c82c2a78d40b11dd91c2469062, type: 2}

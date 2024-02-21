@@ -12,5 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7881ab63be3d3c7449111fd757f496a1, type: 3}
   m_Name: Dagger
   m_EditorClassIdentifier: 
-  _attackStats:
-    attackPower: 0
+  _stats:
+    attackPower: 10
+    multiplier: 1
+  Minigame: 0
