@@ -11,4 +11,10 @@ public class NPC_Choice_Overlay : MonoBehaviour
             choiceUI.SetActive(true);
         }
     }
+
+    public void buttonClick()
+    {
+        choiceUI.SetActive(false);
+        Time.timeScale = 1f;
+    }
 }
