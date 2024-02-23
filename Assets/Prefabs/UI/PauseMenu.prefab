@@ -4653,8 +4653,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 7024062826002957194}
         m_TargetAssemblyTypeName: TempPause, Assembly-CSharp
-        m_MethodName: Quit_Game
-        m_Mode: 1
+        m_MethodName: ChangeScene
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
