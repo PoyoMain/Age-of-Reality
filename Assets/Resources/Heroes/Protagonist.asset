@@ -15,7 +15,7 @@ MonoBehaviour:
   Prefab: {fileID: 397257287913442836, guid: a0a1aa82c29f92a45938483299d949c4, type: 3}
   Description: 
   Sprite: {fileID: 0}
-  Ability: 1
+  Ability: 0
   _stats:
     Health: 100
     Attack: 1
