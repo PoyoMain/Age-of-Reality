@@ -78,7 +78,7 @@ public class LineGenerator : MonoBehaviour
         {
             //endingPos.Add(mousePos);
             activeLine = null;
-            if (totalPercentage > 90)
+            if (totalPercentage > 60)
             {
                 DoneDrawing = true;
             }

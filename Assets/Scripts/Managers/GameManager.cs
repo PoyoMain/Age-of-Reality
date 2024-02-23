@@ -10,11 +10,12 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private PlayerController player; // The player's overworld character
     [SerializeField] private BattleManager battleManager;
     [SerializeField] private Camera overworldCamera;
-    private AudioSource overworldAudio;
+    private AudioSource overworldAudioSource;
     private float overworldAudioStartVolume;
 
     [SerializeField] private Camera battleCamera;
-    private AudioSource battleAudio;
+    private AudioSource battleAudioSource;
+    private AudioBG battleAudioManager;
     private float battleAudioStartVolume;
 
     [SerializeField] private LineGenerator minigame;
@@ -34,11 +35,12 @@ public class GameManager : Singleton<GameManager>
     {
         base.Awake();
 
-        overworldAudio = overworldCamera.gameObject.GetComponent<AudioSource>();
-        overworldAudioStartVolume = overworldAudio.volume;
+        overworldAudioSource = overworldCamera.gameObject.GetComponent<AudioSource>();
+        overworldAudioStartVolume = overworldAudioSource.volume;
 
-        battleAudio = battleCamera.gameObject.GetComponent<AudioSource>();
-        battleAudioStartVolume = battleAudio.volume;
+        battleAudioManager =  battleCamera.gameObject.GetComponent<AudioBG>();
+        battleAudioSource = battleCamera.gameObject.GetComponent<AudioSource>();
+        battleAudioStartVolume = battleAudioSource.volume;
     }
 
     //private void Start()
@@ -78,19 +80,22 @@ public class GameManager : Singleton<GameManager>
         enemyHit.Freeze();
         player.Freeze();
 
-        while (overworldAudio.volume > 0.1)
+        while (overworldAudioSource.volume > 0.1)
         {
-            overworldAudio.volume -=  Time.deltaTime / audioFadeOutTime;
+            overworldAudioSource.volume -=  Time.deltaTime / audioFadeOutTime;
             yield return null;
         }
 
         modeTransitioning = false;
 
+        if (enemyHit.isBoss) battleAudioManager.playAltTracks = true;
+        else battleAudioManager.playAltTracks = false;
+
         battleManager.gameObject.SetActive(true);
         battleManager.enabled = true; // activates the battle manager
 
         overworldCamera.gameObject.SetActive(false); // deactivates the overworld camera
-        overworldAudio.volume = overworldAudioStartVolume;
+        overworldAudioSource.volume = overworldAudioStartVolume;
 
 
     }
@@ -105,9 +110,9 @@ public class GameManager : Singleton<GameManager>
     {
         modeTransitioning = true;
 
-        while (battleAudio.volume > 0.1)
+        while (battleAudioSource.volume > 0.1)
         {
-            battleAudio.volume -= Time.deltaTime / audioFadeOutTime;
+            battleAudioSource.volume -= Time.deltaTime / audioFadeOutTime;
             yield return null;
         }
 
@@ -115,7 +120,7 @@ public class GameManager : Singleton<GameManager>
 
         battleManager.gameObject.SetActive(false);
         battleManager.enabled = false; // Deactivates the battle manager
-        battleAudio.volume = battleAudioStartVolume;
+        battleAudioSource.volume = battleAudioStartVolume;
 
         overworldCamera.gameObject.SetActive(true); // Activates the overworld camera
 

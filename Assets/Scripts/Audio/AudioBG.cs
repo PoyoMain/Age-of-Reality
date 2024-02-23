@@ -4,7 +4,11 @@ using UnityEngine;
 
 public class AudioBG : MonoBehaviour
 {
-    [SerializeField] private List<AudioClip> audioClips;
+    [SerializeField] private List<AudioClip> audioClipsMain;
+    [SerializeField] private List<AudioClip> audioClipsAlt;
+
+    private List<AudioClip> audioClipsToPlay;
+
     private AudioSource _audioSource;
 
     [SerializeField] private float audioSwapTime;
@@ -12,13 +16,25 @@ public class AudioBG : MonoBehaviour
 
     [SerializeField] private float fadeTime;
 
+    [HideInInspector] public bool playAltTracks;
+
     private void Awake()
     {
         _audioSource = GetComponent<AudioSource>();
     }
     private void OnEnable()
     {
-        if (audioClips == null) return;
+        if (!playAltTracks)
+        {
+            if (audioClipsMain == null) return;
+            audioClipsToPlay = audioClipsMain;
+        }
+        else
+        {
+            if (audioClipsAlt == null) return;
+            audioClipsToPlay = audioClipsAlt;
+        }
+        
 
         StartCoroutine(PlayBGAudio());
     }
@@ -28,7 +44,7 @@ public class AudioBG : MonoBehaviour
         int index = 0;
         float startVolume = _audioSource.volume;
 
-        _audioSource.clip = audioClips[0];
+        _audioSource.clip = audioClipsToPlay[0];
         _audioSource.Play();
         _audioSource.volume = 0;
         _timer = audioSwapTime;
@@ -55,8 +71,8 @@ public class AudioBG : MonoBehaviour
                     yield return null;
                 }
 
-                index = (index >= audioClips.Count - 1) ? 0 : index + 1;
-                _audioSource.clip = audioClips[index];
+                index = (index >= audioClipsToPlay.Count - 1) ? 0 : index + 1;
+                _audioSource.clip = audioClipsToPlay[index];
                 _audioSource.Play();
                 _timer = audioSwapTime;
 

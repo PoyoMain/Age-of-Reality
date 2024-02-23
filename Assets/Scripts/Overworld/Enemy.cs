@@ -16,6 +16,8 @@ public class Enemy : MonoBehaviour
     private Collider coll;
     private Rigidbody2D rigid;
 
+    public bool isBoss;
+
     // Start is called before the first frame update
     void Start()
     {
