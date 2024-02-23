@@ -33,6 +33,9 @@ public class BattleManager : MonoBehaviour
     private int enemyIndex;
     private bool pickingEnemy;
 
+    [SerializeField] private PlayerHealth playerHealthUI;
+    [SerializeField] private PlayerHealth enemyHealthUI;
+
     void Awake()
     {
         playerControls = new PlayerControls();
@@ -89,6 +92,8 @@ public class BattleManager : MonoBehaviour
     private void SpawningHeroesCase()
     {
         PartyUnits = UnitManager.Instance.SpawnHeroes(GameManager.Instance.Party);
+        turnOrder.AddRange(PartyUnits);
+        playerHealthUI.InitializePlayerUI(PartyUnits[0]);
 
         ChangeState(BattleState.SpawningEnemies);
     }
@@ -96,8 +101,6 @@ public class BattleManager : MonoBehaviour
     private void SpawningEnemiesCase()
     {
         EnemyUnits = UnitManager.Instance.SpawnEnemies(GameManager.Instance.enemyHit.team);
-
-        turnOrder.AddRange(PartyUnits);
         turnOrder.AddRange(EnemyUnits);
         //turnOrder.Sort((a, b) => a.Stats.Speed.CompareTo(b.Stats.Speed));
 
@@ -142,6 +145,8 @@ public class BattleManager : MonoBehaviour
         pickingEnemy = true;
         selectedEnemy = EnemyUnits[0];
         selectedEnemy.selectIndicator.SetActive(true);
+        enemyHealthUI.InitializeEnemyUI(selectedEnemy);
+        enemyHealthUI.gameObject.SetActive(true);
 
         yield return new WaitForSeconds(0.5f);
 
@@ -168,6 +173,7 @@ public class BattleManager : MonoBehaviour
         minigameManager.gameObject.SetActive(false);
 
         turnOrder[0].Attack(AttackMenu.chosenAttack, selectedEnemy, multiplier: AttackMenu.chosenAttack.Stats.multiplier);
+        enemyHealthUI.UpdateHealth(selectedEnemy.Stats.Health);
 
         if (selectedEnemy.Stats.Health <= 0)
         {
@@ -184,6 +190,7 @@ public class BattleManager : MonoBehaviour
             yield return null;
         }
 
+        enemyHealthUI.gameObject.SetActive(false);
         NextTurn();
     }
 
@@ -215,7 +222,7 @@ public class BattleManager : MonoBehaviour
         HeroUnitBase chosenTarget = PartyUnits[UnityEngine.Random.Range(0, PartyUnits.Count)];
 
         turnOrder[0].Attack(chosenAttack, chosenTarget);
-        print(chosenTarget.Stats.Health);
+        playerHealthUI.UpdateHealth(chosenTarget.Stats.Health);
 
         if (chosenTarget.Stats.Health <= 0)
         {
@@ -273,6 +280,7 @@ public class BattleManager : MonoBehaviour
         }
 
         selectedEnemy.selectIndicator.SetActive(true);
+        enemyHealthUI.UpdateEntireUI(selectedEnemy.Stats.Health, selectedEnemy.data.name);
     }
 
 
