@@ -16,7 +16,7 @@ MonoBehaviour:
   Description: 
   Sprite: {fileID: 0}
   _stats:
-    Health: 50
+    Health: 20
     Attack: 1
     Defense: 1
     Speed: 1
