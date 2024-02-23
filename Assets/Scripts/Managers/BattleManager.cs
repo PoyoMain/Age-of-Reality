@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class BattleManager : MonoBehaviour
@@ -75,6 +76,7 @@ public class BattleManager : MonoBehaviour
                 print("Lose");
                 DespawnUnits();
                 GameManager.Instance.ChangeGameState(GameState.Overworld);
+                SceneManager.LoadScene("DeathScene");
                 break;
             default:
                 Debug.LogError("No case for " + newState + " game state");
