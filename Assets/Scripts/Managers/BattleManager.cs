@@ -2,12 +2,15 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class BattleManager : MonoBehaviour
 {
     public static event Action<BattleState> OnBeforeStateChanged; // Event that happens before a state change
     public static event Action<BattleState> OnAfterStateChanged; // Event that happens after a state change
+
+    [SerializeField] private MinigameManager minigameManager; // Manages the minigame
 
     [SerializeField] private float speed = 2; // Speed the units move on the board
     [SerializeField] private ActionSelectMenu AttackMenu; // Battle menu that controls which action the player will take
@@ -30,6 +33,9 @@ public class BattleManager : MonoBehaviour
     private EnemyUnitBase selectedEnemy;
     private int enemyIndex;
     private bool pickingEnemy;
+
+    [SerializeField] private PlayerHealth playerHealthUI;
+    [SerializeField] private PlayerHealth enemyHealthUI;
 
     void Awake()
     {
@@ -70,6 +76,7 @@ public class BattleManager : MonoBehaviour
                 print("Lose");
                 DespawnUnits();
                 GameManager.Instance.ChangeGameState(GameState.Overworld);
+                SceneManager.LoadScene("DeathScene");
                 break;
             default:
                 Debug.LogError("No case for " + newState + " game state");
@@ -87,6 +94,8 @@ public class BattleManager : MonoBehaviour
     private void SpawningHeroesCase()
     {
         PartyUnits = UnitManager.Instance.SpawnHeroes(GameManager.Instance.Party);
+        turnOrder.AddRange(PartyUnits);
+        playerHealthUI.InitializePlayerUI(PartyUnits[0]);
 
         ChangeState(BattleState.SpawningEnemies);
     }
@@ -94,10 +103,8 @@ public class BattleManager : MonoBehaviour
     private void SpawningEnemiesCase()
     {
         EnemyUnits = UnitManager.Instance.SpawnEnemies(GameManager.Instance.enemyHit.team);
-
-        turnOrder.AddRange(PartyUnits);
         turnOrder.AddRange(EnemyUnits);
-        turnOrder.Sort((a, b) => a.Stats.Speed.CompareTo(b.Stats.Speed));
+        //turnOrder.Sort((a, b) => a.Stats.Speed.CompareTo(b.Stats.Speed));
 
         ChangeState(BattleState.HeroTurn);
     }
@@ -140,10 +147,12 @@ public class BattleManager : MonoBehaviour
         pickingEnemy = true;
         selectedEnemy = EnemyUnits[0];
         selectedEnemy.selectIndicator.SetActive(true);
+        enemyHealthUI.InitializeEnemyUI(selectedEnemy);
+        enemyHealthUI.gameObject.SetActive(true);
 
         yield return new WaitForSeconds(0.5f);
 
-        while(pickingEnemy)
+        while (pickingEnemy)
         {
             if (battleControls.SelectionUp.triggered) EnemySelect(true);
             else if (battleControls.SelectionDown.triggered) EnemySelect(false);
@@ -152,7 +161,21 @@ public class BattleManager : MonoBehaviour
         }
 
         selectedEnemy.selectIndicator.SetActive(false);
-        turnOrder[0].Attack(AttackMenu.chosenAttack, selectedEnemy);
+
+        LineGenerator minigame = ResourceStorage.Instance.GetMinigame(Enum.GetName(typeof(MinigameType), AttackMenu.chosenAttack.Minigame));
+        minigameManager.SetMinigame(minigame);
+        minigameManager.gameObject.SetActive(true);
+        //Instantiate(minigame, GridInfo.GridWorldMidPoint, Quaternion.identity);
+
+        while(minigameManager.MinigameRunning)
+        {
+            yield return null;
+        }
+
+        minigameManager.gameObject.SetActive(false);
+
+        turnOrder[0].Attack(AttackMenu.chosenAttack, selectedEnemy, multiplier: AttackMenu.chosenAttack.Stats.multiplier);
+        enemyHealthUI.UpdateHealth(selectedEnemy.Stats.Health);
 
         if (selectedEnemy.Stats.Health <= 0)
         {
@@ -169,6 +192,7 @@ public class BattleManager : MonoBehaviour
             yield return null;
         }
 
+        enemyHealthUI.gameObject.SetActive(false);
         NextTurn();
     }
 
@@ -195,7 +219,19 @@ public class BattleManager : MonoBehaviour
             yield return null;
         }
 
-        
+        EnemyUnitBase enemy = turnOrder[0] as EnemyUnitBase;
+        ScriptableAttack chosenAttack = enemy.data.attacks[UnityEngine.Random.Range(0, enemy.data.attacks.Count)];
+        HeroUnitBase chosenTarget = PartyUnits[UnityEngine.Random.Range(0, PartyUnits.Count)];
+
+        turnOrder[0].Attack(chosenAttack, chosenTarget);
+        playerHealthUI.UpdateHealth(chosenTarget.Stats.Health);
+
+        if (chosenTarget.Stats.Health <= 0)
+        {
+            turnOrder.Remove(chosenTarget);
+            PartyUnits.Remove(chosenTarget);
+            Destroy(chosenTarget.gameObject);
+        }
 
         while (!turnOrder[0].Move(startPos, speed))
         {
@@ -246,6 +282,7 @@ public class BattleManager : MonoBehaviour
         }
 
         selectedEnemy.selectIndicator.SetActive(true);
+        enemyHealthUI.UpdateEntireUI(selectedEnemy.Stats.Health, selectedEnemy.data.name);
     }
 
 

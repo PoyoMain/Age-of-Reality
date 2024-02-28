@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Net.Mail;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -8,6 +10,18 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private PlayerController player; // The player's overworld character
     [SerializeField] private BattleManager battleManager;
     [SerializeField] private Camera overworldCamera;
+    private AudioSource overworldAudioSource;
+    private float overworldAudioStartVolume;
+
+    [SerializeField] private Camera battleCamera;
+    private AudioSource battleAudioSource;
+    private AudioBG battleAudioManager;
+    private float battleAudioStartVolume;
+
+    [SerializeField] private LineGenerator minigame;
+
+    [SerializeField] private float audioFadeOutTime;
+    [HideInInspector] public bool modeTransitioning;
 
     private GameState State;
 
@@ -16,6 +30,24 @@ public class GameManager : Singleton<GameManager>
         get { return player.Party; }
     }
     [HideInInspector] public Enemy enemyHit; // The enemy hit by the player
+
+    protected override void Awake()
+    {
+        base.Awake();
+
+        overworldAudioSource = overworldCamera.gameObject.GetComponent<AudioSource>();
+        overworldAudioStartVolume = overworldAudioSource.volume;
+
+        battleAudioManager =  battleCamera.gameObject.GetComponent<AudioBG>();
+        battleAudioSource = battleCamera.gameObject.GetComponent<AudioSource>();
+        battleAudioStartVolume = battleAudioSource.volume;
+    }
+
+    //private void Start()
+    //{
+    //    LineGenerator minigame = ResourceStorage.Instance.GetMinigame(Enum.GetName(typeof(MinigameType), MinigameType.Magic_Triangle));
+    //    Instantiate(minigame, player.transform.position, Quaternion.identity);
+    //}
 
     // Method to change the state of the game
     public void ChangeGameState(GameState newState)
@@ -36,23 +68,60 @@ public class GameManager : Singleton<GameManager>
     // Starts a battle. 
     void StartBattle()
     {
+        
+
+        StartCoroutine(StartBattleCoroutine());
+    }
+
+    IEnumerator StartBattleCoroutine()
+    {
+        modeTransitioning = true;
+
         enemyHit.Freeze();
         player.Freeze();
-        //DontDestroyOnLoad(this.enemyHit.gameObject);
-        //SceneManager.LoadScene("BattleScene");
+
+        while (overworldAudioSource.volume > 0.1)
+        {
+            overworldAudioSource.volume -=  Time.deltaTime / audioFadeOutTime;
+            yield return null;
+        }
+
+        modeTransitioning = false;
+
+        if (enemyHit.isBoss) battleAudioManager.playAltTracks = true;
+        else battleAudioManager.playAltTracks = false;
 
         battleManager.gameObject.SetActive(true);
         battleManager.enabled = true; // activates the battle manager
+
         overworldCamera.gameObject.SetActive(false); // deactivates the overworld camera
+        overworldAudioSource.volume = overworldAudioStartVolume;
+
+
     }
 
     // Called at the end of a battle
     void EndBattle()
     {
-        //SceneManager.LoadScene("OverworldScene");
+        StartCoroutine(EndBattleCoroutine());  
+    }
+
+    IEnumerator EndBattleCoroutine()
+    {
+        modeTransitioning = true;
+
+        while (battleAudioSource.volume > 0.1)
+        {
+            battleAudioSource.volume -= Time.deltaTime / audioFadeOutTime;
+            yield return null;
+        }
+
+        modeTransitioning = false;
 
         battleManager.gameObject.SetActive(false);
         battleManager.enabled = false; // Deactivates the battle manager
+        battleAudioSource.volume = battleAudioStartVolume;
+
         overworldCamera.gameObject.SetActive(true); // Activates the overworld camera
 
         if (battleManager.State == BattleState.Win)
@@ -63,12 +132,23 @@ public class GameManager : Singleton<GameManager>
         {
             enemyHit.MakeInvincible(); // If the player loses, make the enemy invincible for a few seconds
         }
+
     }
 
     public void EnemyHit(Enemy enemy)
     {
         enemyHit = enemy;
         ChangeGameState(GameState.DuringBattle);
+    }
+
+    public Camera GetBattleCamera()
+    {
+        return battleCamera;
+    }
+
+    public Camera GetOverworldCamera()
+    {
+        return overworldCamera;
     }
 
     private void FixedUpdate()

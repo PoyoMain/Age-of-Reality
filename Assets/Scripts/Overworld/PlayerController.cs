@@ -20,7 +20,7 @@ public class PlayerController : MonoBehaviour
     private PlayerControls playerControls;
     private PlayerControls.OverworldControlsActions overworldActions;
     private Rigidbody2D rigid;
-    //private Animator anim;
+    private Animator anim;
 
     void Awake()
     {
@@ -28,7 +28,7 @@ public class PlayerController : MonoBehaviour
         overworldActions = playerControls.OverworldControls;
 
         rigid = GetComponent<Rigidbody2D>();
-        //anim = GetComponentInChildren<Animator>();
+        anim = GetComponentInChildren<Animator>();
     }
 
     public void HandleUpdate()
@@ -48,6 +48,12 @@ public class PlayerController : MonoBehaviour
         Vector3 moveDirection = new(input.x, input.y, 0);
         //rigid.MovePosition(speed * Time.deltaTime * transform.TransformDirection(moveDirection)); // Moves the player
         rigid.velocity = speed * moveDirection; // Moves the player
+
+        if (moveDirection != Vector3.zero) anim.SetBool("isMoving", true);
+        else anim.SetBool("isMoving", false);
+
+        anim.SetFloat("X", input.x);
+        anim.SetFloat("Y", input.y);
 
         //Uncomment if this ends up being a sidescroller
         //if (!controller.isGrounded) controller.Move(9.8f * Time.deltaTime * Vector3.down); // If off the ground, go towards the ground

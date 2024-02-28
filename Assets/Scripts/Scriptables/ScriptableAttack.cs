@@ -14,7 +14,9 @@ public abstract class ScriptableAttack : ScriptableObject
     /// <summary>
     /// The type of attack this is
     /// </summary>
-    protected AttackType _attackType; 
+    protected AttackType _attackType;
+
+    public MinigameType Minigame;
     
 }
 
@@ -22,11 +24,23 @@ public abstract class ScriptableAttack : ScriptableObject
 public struct AttackStats
 {
     public int attackPower;
+    public float multiplier;
 }
 
 public enum AttackType
 {
     Melee,
     Magic
+}
+
+public enum MinigameType
+{
+    Magic_Triangle,
+    Magic_Square,
+    Magic_Pentagon,
+
+    Melee_One,
+    Melee_Two,
+    Melee_Three,
 }
 

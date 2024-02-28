@@ -7,7 +7,7 @@ public class Enemy : MonoBehaviour
 {
     [SerializeField] private List<ScriptableEnemy> allies;
     [HideInInspector] public List<ScriptableEnemy> team; // The enemy party including this enemy
-    public EnemyClass type;
+    public ScriptableEnemy type;
 
     private readonly float invincibleTime = 5f; // Time enemy is invincible
     private float invincibleTimer; // Timer checking how long enemy has been invincible for
@@ -16,10 +16,12 @@ public class Enemy : MonoBehaviour
     private Collider coll;
     private Rigidbody2D rigid;
 
+    public bool isBoss;
+
     // Start is called before the first frame update
     void Start()
     {
-        team.Add(ResourceStorage.Instance.GetEnemy(Enum.GetName(typeof(EnemyClass), type)));
+        team.Add(type);
         team.AddRange(allies);
 
         mRend = GetComponent<MeshRenderer>();

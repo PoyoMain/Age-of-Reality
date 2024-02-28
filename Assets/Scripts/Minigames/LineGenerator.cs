@@ -9,9 +9,14 @@ public class LineGenerator : MonoBehaviour
     public Camera cam;
     Line activeLine;
 
-    public double totalPercentage = 0;
+    public float distanceNeeded = 0;
+    public float distanceTravelled = 0;
+
+    public float totalPercentage = 0;
     public float totalPoints = 0;
     public float closePoints = 0;
+
+    public bool DoneDrawing = false;
 
     //Start and endpoint of line on screen
     public GameObject[] lines;
@@ -23,12 +28,13 @@ public class LineGenerator : MonoBehaviour
     public List<Vector2> startingPos;
     public List<Vector2> endingPos;
     public int listLength { get; set; }
-    public void Start()
+    public void OnEnable()
     {
-        cam = Camera.main;
+        cam = GameManager.Instance.GetBattleCamera();
         lineRenderers = new List<LineRenderer>();
         startingPos = new List<Vector2>();
         endingPos = new List<Vector2>();
+        distanceNeeded = 0;
 
         if (lines == null)
         {
@@ -45,8 +51,9 @@ public class LineGenerator : MonoBehaviour
             //gets the first and last value of each linerender position into another list
             foreach (LineRenderer obj in lineRenderers)
             {
-                startingPos.Add(obj.GetPosition(0));
-                endingPos.Add(obj.GetPosition(obj.positionCount - 1));
+                startingPos.Add(obj.GetPosition(0) + gameObject.transform.position);
+                endingPos.Add(obj.GetPosition(obj.positionCount - 1) + gameObject.transform.position);
+                distanceNeeded += Vector2.Distance(obj.GetPosition(0), obj.GetPosition(obj.positionCount - 1));
                 listLength = startingPos.Count;
                 //Debug.Log(listLength);
             }
@@ -61,7 +68,7 @@ public class LineGenerator : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
-            GameObject newLine = Instantiate(linePrefab);
+            GameObject newLine = Instantiate(linePrefab, transform);
             activeLine = newLine.GetComponent<Line>();
             activeLine.setRefrence(this);
             //startingPos.Add(mousePos);
@@ -71,6 +78,10 @@ public class LineGenerator : MonoBehaviour
         {
             //endingPos.Add(mousePos);
             activeLine = null;
+            if (totalPercentage > 60)
+            {
+                DoneDrawing = true;
+            }
         }
 
         if (activeLine != null)

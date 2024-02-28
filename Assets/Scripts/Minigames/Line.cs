@@ -9,6 +9,7 @@ public class Line : MonoBehaviour
     List<Vector2> points;
     public GameObject testLine;
     float tempDistance = 100;
+    public Vector2 pastPoint;
     int index;
 
     public void setRefrence(LineGenerator refrence)
@@ -36,11 +37,12 @@ public class Line : MonoBehaviour
             }
             //lineGenerator.DistanceToClosestPoint(position, lineGenerator.lineStart, lineGenerator.endOfLine);
             //Debug.Log(index);
-            if (tempDistance < .2f)
+            if (tempDistance < .5f)
             {
                 lineGenerator.closePoints++;
+                pastPoint = position;
             }
-            lineGenerator.totalPercentage = 100 * (lineGenerator.closePoints / lineGenerator.totalPoints);
+            //lineGenerator.totalPercentage = 100 * (lineGenerator.closePoints / lineGenerator.totalPoints);
             //Debug.Log(index);
             //Debug.Log(tempDistance);
             return;
@@ -61,15 +63,26 @@ public class Line : MonoBehaviour
                 }
 
             }
+
             //Debug.Log(index);
-            if (tempDistance < .2f)
+            if (tempDistance < .5f)
             {
                 lineGenerator.closePoints++;
+                lineGenerator.distanceTravelled += Vector2.Distance(pastPoint, position);
+                pastPoint = position;
             }
-            lineGenerator.totalPercentage = 100 * (lineGenerator.closePoints / lineGenerator.totalPoints);
+            if (lineGenerator.distanceNeeded > lineGenerator.distanceTravelled)
+            {
+                lineGenerator.totalPercentage = 100 * ((lineGenerator.distanceTravelled / lineGenerator.distanceNeeded) * (lineGenerator.closePoints / lineGenerator.totalPoints));
+            }
+            else
+            {
+                lineGenerator.totalPercentage = 100 * ((lineGenerator.distanceNeeded / lineGenerator.distanceTravelled) * (lineGenerator.closePoints / lineGenerator.totalPoints));
+            }
+            lineGenerator.totalPercentage = Mathf.RoundToInt(lineGenerator.totalPercentage);
+            //lineGenerator.totalPercentage = 100 * (lineGenerator.closePoints / lineGenerator.totalPoints);
             //Debug.Log(lineGenerator.closePoints);
             //Debug.Log(lineGenerator.closePoints / lineGenerator.totalPoints);
-            Debug.Log(lineGenerator.totalPercentage);
         }
     }
 
