@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DrawGrid : MonoBehaviour
+public class DrawGrid : LineMinigameBase
 {
     private Camera _cam;
     private DrawLine _line;
@@ -14,13 +14,6 @@ public class DrawGrid : MonoBehaviour
     private List<DrawPoint> points;
 
     [SerializeField] private int pointsToPut;
-    public bool DoneDrawing
-    {
-        get
-        {
-            return _line.letGo;
-        }
-    }
  
     private void Awake()
     {
@@ -48,6 +41,7 @@ public class DrawGrid : MonoBehaviour
 
     IEnumerator Minigame()
     {
+        int pointsHit = 0;
         int pointNum = pointsToPut;
 
         Vector2Int pointSpot = new(Random.Range(0, pointCountW - 1), Random.Range(0, pointCountH - 1));
@@ -62,6 +56,9 @@ public class DrawGrid : MonoBehaviour
             {
                 yield return null;
             }
+
+            pointsHit++;
+            totalPercentage = Mathf.FloorToInt(pointsHit / pointNum);
 
             bool newPointPicked = false;
             Vector2Int prevPointSpot = pointSpot;
@@ -85,6 +82,7 @@ public class DrawGrid : MonoBehaviour
             }
             else
             {
+                DoneDrawing = true;
                 _line.enabled = false;
             }
             
@@ -95,8 +93,9 @@ public class DrawGrid : MonoBehaviour
 
     private void Update()
     {
-        if (DoneDrawing)
+        if (_line.letGo && !DoneDrawing)
         {
+            DoneDrawing = true;
             _line.enabled = false;
             StopCoroutine(Minigame());
         }

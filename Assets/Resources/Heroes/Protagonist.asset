@@ -22,6 +22,12 @@ MonoBehaviour:
     Defense: 1
     Speed: 1
     Stamina: 1
+    XPLevels:
+      Level1XP: 2
+      Level2XP: 2
+      Level3XP: 2
+      Level4XP: 2
+      Level5XP: 2
   meleeAttacks:
   - {fileID: 11400000, guid: fcf377c82c2a78d40b11dd91c2469062, type: 2}
   magicAttacks:

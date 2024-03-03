@@ -78,6 +78,11 @@ public class BattleManager : MonoBehaviour
                 GameManager.Instance.ChangeGameState(GameState.Overworld);
                 SceneManager.LoadScene("DeathScene");
                 break;
+            case BattleState.Flee:
+                print("Flee");
+                DespawnUnits();
+                GameManager.Instance.ChangeGameState(GameState.Overworld);
+                break;
             default:
                 Debug.LogError("No case for " + newState + " game state");
                 break;
@@ -179,6 +184,8 @@ public class BattleManager : MonoBehaviour
 
         if (selectedEnemy.Stats.Health <= 0)
         {
+            HeroUnitBase currentHero = turnOrder[0] as HeroUnitBase;
+            currentHero.data.IncreaseXP(selectedEnemy.data.BaseStats.XP);
             turnOrder.Remove(selectedEnemy);
             EnemyUnits.Remove(selectedEnemy);
             Destroy(selectedEnemy.gameObject);
@@ -327,5 +334,6 @@ public enum BattleState
     PickingEnemy,
     EnemyTurn,
     Win,
-    Lose
+    Lose,
+    Flee,
 }

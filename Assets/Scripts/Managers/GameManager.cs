@@ -130,7 +130,7 @@ public class GameManager : Singleton<GameManager>
         }
         else
         {
-            enemyHit.MakeInvincible(); // If the player loses, make the enemy invincible for a few seconds
+            enemyHit.MakeInvincible(); // If the player flees, make the enemy invincible for a few seconds
         }
 
     }
