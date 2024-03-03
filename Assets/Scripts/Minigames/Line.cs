@@ -11,6 +11,7 @@ public class Line : MonoBehaviour
     float tempDistance = 100;
     public Vector2 pastPoint;
     int index;
+    public EdgeCollider2D lineCollider;
 
     public void setRefrence(LineGenerator refrence)
     {
@@ -42,6 +43,8 @@ public class Line : MonoBehaviour
                 lineGenerator.closePoints++;
                 pastPoint = position;
             }
+            pastPoint = position;
+            SetCollider(lineRenderer);
             //lineGenerator.totalPercentage = 100 * (lineGenerator.closePoints / lineGenerator.totalPoints);
             //Debug.Log(index);
             //Debug.Log(tempDistance);
@@ -71,6 +74,7 @@ public class Line : MonoBehaviour
                 lineGenerator.distanceTravelled += Vector2.Distance(pastPoint, position);
                 pastPoint = position;
             }
+            pastPoint = position;
             if (lineGenerator.distanceNeeded > lineGenerator.distanceTravelled)
             {
                 lineGenerator.totalPercentage = 100 * ((lineGenerator.distanceTravelled / lineGenerator.distanceNeeded) * (lineGenerator.closePoints / lineGenerator.totalPoints));
@@ -80,10 +84,12 @@ public class Line : MonoBehaviour
                 lineGenerator.totalPercentage = 100 * ((lineGenerator.distanceNeeded / lineGenerator.distanceTravelled) * (lineGenerator.closePoints / lineGenerator.totalPoints));
             }
             lineGenerator.totalPercentage = Mathf.RoundToInt(lineGenerator.totalPercentage);
+            SetCollider(lineRenderer);
             //lineGenerator.totalPercentage = 100 * (lineGenerator.closePoints / lineGenerator.totalPoints);
             //Debug.Log(lineGenerator.closePoints);
             //Debug.Log(lineGenerator.closePoints / lineGenerator.totalPoints);
         }
+
     }
 
     void SetPoint(Vector2 point)
@@ -95,5 +101,18 @@ public class Line : MonoBehaviour
 
         lineRenderer.positionCount = points.Count;
         lineRenderer.SetPosition(points.Count - 1, point);
+    }
+
+    void SetCollider(LineRenderer lRend)
+    {
+        List<Vector2> edges = new();
+
+        for (int point = 0; point < lRend.positionCount; point++)
+        {
+            Vector3 lRendPoint = lRend.GetPosition(point);
+            edges.Add(new Vector2(lRendPoint.x - lineGenerator.transform.position.x, lRendPoint.y - lineGenerator.transform.position.y));
+        }
+
+        lineCollider.SetPoints(edges);
     }
 }

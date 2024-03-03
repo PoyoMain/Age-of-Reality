@@ -558,13 +558,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2665040498182395017, guid: 85fe218a22f91564e8d4efdb1ccd4e9b, type: 3}
+      propertyPath: m_Parameters.widthMultiplier
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 3336688353112418798, guid: 85fe218a22f91564e8d4efdb1ccd4e9b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6.32
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3336688353112418798, guid: 85fe218a22f91564e8d4efdb1ccd4e9b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.05
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3336688353112418798, guid: 85fe218a22f91564e8d4efdb1ccd4e9b, type: 3}
       propertyPath: m_LocalPosition.z
@@ -598,9 +602,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5007720493778773364, guid: 85fe218a22f91564e8d4efdb1ccd4e9b, type: 3}
+      propertyPath: m_Parameters.widthMultiplier
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 5822651435978913475, guid: 85fe218a22f91564e8d4efdb1ccd4e9b, type: 3}
       propertyPath: m_Parameters.widthMultiplier
-      value: 0.1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 5822651435978913475, guid: 85fe218a22f91564e8d4efdb1ccd4e9b, type: 3}
       propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].time
