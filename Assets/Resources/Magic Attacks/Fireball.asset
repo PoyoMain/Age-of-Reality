@@ -13,4 +13,6 @@ MonoBehaviour:
   m_Name: Fireball
   m_EditorClassIdentifier: 
   _stats:
-    attackPower: 0
+    attackPower: 15
+    multiplier: 1
+  Minigame: 0

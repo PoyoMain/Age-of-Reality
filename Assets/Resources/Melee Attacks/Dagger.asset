@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: Dagger
   m_EditorClassIdentifier: 
   _stats:
-    attackPower: 0
+    attackPower: 10
+    multiplier: 1
   Minigame: 0

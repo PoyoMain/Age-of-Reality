@@ -6,17 +6,6 @@ using UnityEngine;
 public abstract class ScriptableUnitBase : ScriptableObject
 {
     /// <summary>
-    /// Party members
-    /// </summary>
-    public Ability Ability;
-
-    /// <summary>
-    /// Stats of this unit
-    /// </summary>
-    [SerializeField] private Stats _stats;
-    public Stats BaseStats { get { return _stats; } }
-
-    /// <summary>
     /// Prefab of this unit to spawn in
     /// </summary>
     public UnitBase Prefab;

@@ -70,8 +70,8 @@ public class ActionSelectMenu : MonoBehaviour
                 }
                 break;
             case MenuState.SecondaryMenu:
+                moveSelectMenu.menuType = moveSelectMenu.currentUnit.data.Ability;
                 moveSelectMenu.gameObject.SetActive(true);
-                moveSelectMenu.menuType = selectedAction.actionType;
                 
                 foreach (ActionOption option in actionButtons)
                 {
@@ -134,11 +134,9 @@ public class ActionSelectMenu : MonoBehaviour
             case MenuState.SecondaryMenu:
                 switch (selectedAction.actionType)
                 {
-                    case ActionType.Melee:
+                    case ActionType.Attack:
                         chosenAttack = (moveSelectMenu.moveButtons[moveIndex] as AttackOption).Attack;
                         ChangeState(MenuState.ActionMenu);
-                        break;
-                    case ActionType.Magic:
                         break;
                 }
                 break;

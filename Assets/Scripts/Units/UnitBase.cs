@@ -4,27 +4,13 @@ using UnityEngine;
 
 public abstract class UnitBase : MonoBehaviour
 {
-    public Stats Stats { get; private set; }
 
-    /// <summary>
-    /// Sets the stats of the unit
-    /// </summary>
-    /// <param name="stats">The new stats</param>
-    public virtual void SetStats(Stats stats)
-    {
-        Stats = stats;
-    }
 
     /// <summary>
     /// Damages the unit
     /// </summary>
     /// <param name="damage">The amount of damage to deal</param>
-    public void TakeDamage(int damage)
-    {
-        Stats newStats = Stats;
-        newStats.Health -= damage;
-        SetStats(newStats);
-    }
+    public abstract void TakeDamage(int damage);
 
     protected bool _canMove;
 
@@ -33,12 +19,7 @@ public abstract class UnitBase : MonoBehaviour
     /// </summary>
     /// <param name="attack">The attack being used</param>
     /// <param name="target">The target of the attack</param>
-    public void Attack(ScriptableAttack attack, UnitBase target)
-    {
-        int damage = attack.Stats.attackPower - target.Stats.Defense;
-        target.TakeDamage(damage);
-    }
-
+    public abstract void Attack(ScriptableAttack attack, UnitBase target, float multiplier = 1f, float accuracy = 1f);
 
     /// <summary>
     /// Moves the unit
