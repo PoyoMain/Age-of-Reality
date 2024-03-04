@@ -11,10 +11,14 @@ public class MoveSelectMenu : MonoBehaviour
     private VerticalLayoutGroup vertLayoutGroup;
 
     [SerializeField] private GameObject attackButton;
+    [SerializeField] private GameObject itemButton;
+    [SerializeField] private GameObject fleeButton;
+
     [HideInInspector] public List<MoveOption> moveButtons;
     [HideInInspector] public int moveIndex;
 
     [HideInInspector] public Ability menuType; // The type of menu this is
+    [HideInInspector] public ActionType actionChosen;
     [SerializeField] private int maxElementsOnScreen = 4; // The maximum number of moves that can be displayed at one time
     private int _maxElementsOnScreen;
     private Vector2 elementRange = Vector2.zero;
@@ -72,44 +76,70 @@ public class MoveSelectMenu : MonoBehaviour
     /// </summary>
     private void SpawnButtons()
     {
-        switch (menuType)
+        switch (actionChosen)
         {
-            case Ability.Melee:
-                if (attackButton == null)
+            case ActionType.Attack:
+                switch (menuType)
                 {
-                    Debug.LogError("Attack Button prefab not set in inspector");
-                    return;
-                }
+                    case Ability.Melee:
+                        if (attackButton == null)
+                        {
+                            Debug.LogError("Attack Button prefab not set in inspector");
+                            return;
+                        }
 
-                foreach (ScriptableAttack attack in currentUnit.data.meleeAttacks)
-                {
-                    AttackOption moveOption = Instantiate(attackButton, transform).GetComponent<AttackOption>();
-                    moveButtons.Add(moveOption);
-                    moveOption.Attack = attack;
-                    moveOption.gameObject.name = attack.name;
-                    moveOption.GetComponentInChildren<TextMeshProUGUI>().text = attack.name;
-                }
+                        foreach (ScriptableAttack attack in currentUnit.data.meleeAttacks)
+                        {
+                            AttackOption moveOption = Instantiate(attackButton, transform).GetComponent<AttackOption>();
+                            moveButtons.Add(moveOption);
+                            moveOption.Attack = attack;
+                            moveOption.gameObject.name = attack.name;
+                            moveOption.GetComponentInChildren<TextMeshProUGUI>().text = attack.name;
+                        }
 
-                EventSystem.current.SetSelectedGameObject(moveButtons[0].gameObject);
+                        EventSystem.current.SetSelectedGameObject(moveButtons[0].gameObject);
+                        break;
+                    case Ability.Magic:
+                        if (attackButton == null)
+                        {
+                            Debug.LogError("Attack Button prefab not set in inspector");
+                            return;
+                        }
+
+                        foreach (ScriptableAttack attack in currentUnit.data.magicAttacks)
+                        {
+                            AttackOption moveOption = Instantiate(attackButton, transform).GetComponent<AttackOption>();
+                            moveButtons.Add(moveOption);
+                            moveOption.Attack = attack;
+                            moveOption.gameObject.name = attack.name;
+                            moveOption.GetComponentInChildren<TextMeshProUGUI>().text = attack.name;
+                        }
+
+                        EventSystem.current.SetSelectedGameObject(moveButtons[0].gameObject);
+                        break;
+                }
                 break;
-            case Ability.Magic:
-                if (attackButton == null)
+            case ActionType.Item:
+                if (itemButton == null)
                 {
-                    Debug.LogError("Attack Button prefab not set in inspector");
+                    Debug.LogError("Item Button prefab not set in inspector");
                     return;
                 }
 
-                foreach (ScriptableAttack attack in currentUnit.data.magicAttacks)
+                foreach (var item in currentUnit.data.ItemInventory.Inventory)
                 {
-                    AttackOption moveOption = Instantiate(attackButton, transform).GetComponent<AttackOption>();
+                    ItemOption moveOption = Instantiate(itemButton, transform).GetComponent<ItemOption>();
                     moveButtons.Add(moveOption);
-                    moveOption.Attack = attack;
-                    moveOption.gameObject.name = attack.name;
-                    moveOption.GetComponentInChildren<TextMeshProUGUI>().text = attack.name;
+                    moveOption.item = item.Value.item;
+                    moveOption.gameObject.name = item.Value.item.name;
+                    moveOption.GetComponentInChildren<TextMeshProUGUI>().text = item.Value.item.name;
                 }
 
                 EventSystem.current.SetSelectedGameObject(moveButtons[0].gameObject);
+                
+                break;
+            case ActionType.Flee:
                 break;
         }
-    }    
+    }
 }

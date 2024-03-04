@@ -32,3 +32,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: fcf377c82c2a78d40b11dd91c2469062, type: 2}
   magicAttacks:
   - {fileID: 11400000, guid: 18ebe147ad1d46748ae6c35f34a63de0, type: 2}
+  ItemInventory: {fileID: 11400000, guid: 224083c2894e58840b91dc7132be5e43, type: 2}

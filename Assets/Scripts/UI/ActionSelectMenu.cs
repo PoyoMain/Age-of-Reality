@@ -71,6 +71,7 @@ public class ActionSelectMenu : MonoBehaviour
                 break;
             case MenuState.SecondaryMenu:
                 moveSelectMenu.menuType = moveSelectMenu.currentUnit.data.Ability;
+                moveSelectMenu.actionChosen = selectedAction.actionType;
                 moveSelectMenu.gameObject.SetActive(true);
                 
                 foreach (ActionOption option in actionButtons)
@@ -136,6 +137,10 @@ public class ActionSelectMenu : MonoBehaviour
                 {
                     case ActionType.Attack:
                         chosenAttack = (moveSelectMenu.moveButtons[moveIndex] as AttackOption).Attack;
+                        ChangeState(MenuState.ActionMenu);
+                        break;
+
+                    case ActionType.Item:
                         ChangeState(MenuState.ActionMenu);
                         break;
                 }

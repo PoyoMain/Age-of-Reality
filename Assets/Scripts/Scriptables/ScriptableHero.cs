@@ -21,6 +21,8 @@ public class ScriptableHero : ScriptableUnitBase
 
     public List<ScriptableMagicAttack> magicAttacks;
 
+    public ScriptableInventory ItemInventory;
+
     public void IncreaseLevel(int excessXP)
     {
         _stats.Level++;
