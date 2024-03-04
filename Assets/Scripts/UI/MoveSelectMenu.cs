@@ -128,11 +128,14 @@ public class MoveSelectMenu : MonoBehaviour
 
                 foreach (var item in currentUnit.data.ItemInventory.Inventory)
                 {
-                    ItemOption moveOption = Instantiate(itemButton, transform).GetComponent<ItemOption>();
-                    moveButtons.Add(moveOption);
-                    moveOption.item = item.Value.item;
-                    moveOption.gameObject.name = item.Value.item.name;
-                    moveOption.GetComponentInChildren<TextMeshProUGUI>().text = item.Value.item.name;
+                    if (currentUnit.data.ItemInventory.HasItem(item.Key))
+                    {
+                        ItemOption moveOption = Instantiate(itemButton, transform).GetComponent<ItemOption>();
+                        moveButtons.Add(moveOption);
+                        moveOption.item = item.Value.item;
+                        moveOption.gameObject.name = item.Value.item.name;
+                        moveOption.GetComponentInChildren<TextMeshProUGUI>().text = item.Value.item.name;
+                    }
                 }
 
                 EventSystem.current.SetSelectedGameObject(moveButtons[0].gameObject);

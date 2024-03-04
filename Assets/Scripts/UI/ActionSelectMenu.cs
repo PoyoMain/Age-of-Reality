@@ -13,6 +13,7 @@ public class ActionSelectMenu : MonoBehaviour
 
     [SerializeField] private MoveSelectMenu moveSelectMenu; // The sub menu to select moves
     [HideInInspector] public ScriptableAttack chosenAttack = null; // The attack chosen from the move select menu
+    [HideInInspector] public ScriptableItem chosenItem = null;
     private MoveOption selectedMove;
     private List<MoveOption> moveButtons;
     private int moveIndex;
@@ -130,7 +131,7 @@ public class ActionSelectMenu : MonoBehaviour
         switch (menuState)
         {
             case MenuState.ActionMenu:
-                ChangeState(MenuState.SecondaryMenu);
+                if (actionButtons[actionIndex].button.interactable) ChangeState(MenuState.SecondaryMenu);
                 break;
             case MenuState.SecondaryMenu:
                 switch (selectedAction.actionType)
@@ -141,6 +142,7 @@ public class ActionSelectMenu : MonoBehaviour
                         break;
 
                     case ActionType.Item:
+                        chosenItem = (moveSelectMenu.moveButtons[moveIndex] as ItemOption).item;
                         ChangeState(MenuState.ActionMenu);
                         break;
                 }
@@ -150,6 +152,9 @@ public class ActionSelectMenu : MonoBehaviour
 
     public void SetCurrentUnit(HeroUnitBase hero)
     {
+        if (hero.data.ItemInventory.IsEmpty) actionButtons[1].button.interactable = false;
+        else actionButtons[1].button.interactable = true;
+
         moveSelectMenu.currentUnit = hero;
     }
 
@@ -158,6 +163,7 @@ public class ActionSelectMenu : MonoBehaviour
         battleControls.Enable();
 
         selectedAction = actionButtons[0];
+
         EventSystem.current.SetSelectedGameObject(selectedAction.gameObject);
         ChangeState(MenuState.ActionMenu);
     }

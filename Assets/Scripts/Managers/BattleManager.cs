@@ -34,6 +34,10 @@ public class BattleManager : MonoBehaviour
     private int enemyIndex;
     private bool pickingEnemy;
 
+    private HeroUnitBase selectedPlayer;
+    private int playerIndex;
+    private bool pickingPlayer;
+
     [SerializeField] private PlayerHealth playerHealthUI;
     [SerializeField] private PlayerHealth enemyHealthUI;
 
@@ -125,6 +129,11 @@ public class BattleManager : MonoBehaviour
             return;
         }
 
+        foreach (HeroUnitBase unit in PartyUnits) 
+        {
+            unit.DoEffects();
+        }
+
         StartCoroutine(HeroTurnCoroutine());        
     }
 
@@ -140,7 +149,7 @@ public class BattleManager : MonoBehaviour
         AttackMenu.gameObject.SetActive(true);
         AttackMenu.SetCurrentUnit(CurrentPartyMemberActive);
 
-        while (AttackMenu.chosenAttack == null)
+        while (AttackMenu.chosenAttack == null && AttackMenu.chosenItem == null)
         {
             if (battleControls.SelectionUp.triggered) AttackMenu.SelectUp();
             else if (battleControls.SelectionDown.triggered) AttackMenu.SelectDown();
@@ -148,51 +157,94 @@ public class BattleManager : MonoBehaviour
             yield return null;
         }
 
-        AttackMenu.gameObject.SetActive(false);
-        pickingEnemy = true;
-        selectedEnemy = EnemyUnits[0];
-        selectedEnemy.selectIndicator.SetActive(true);
-        enemyHealthUI.InitializeEnemyUI(selectedEnemy);
-        enemyHealthUI.gameObject.SetActive(true);
-
-        yield return new WaitForSeconds(0.5f);
-
-        while (pickingEnemy)
+        if (AttackMenu.chosenAttack != null)
         {
-            if (battleControls.SelectionUp.triggered) EnemySelect(true);
-            else if (battleControls.SelectionDown.triggered) EnemySelect(false);
-            else if (battleControls.Select.triggered) pickingEnemy = false;
-            yield return null;
+            AttackMenu.gameObject.SetActive(false);
+            pickingEnemy = true;
+            selectedEnemy = EnemyUnits[0];
+            selectedEnemy.selectIndicator.SetActive(true);
+            enemyHealthUI.InitializeEnemyUI(selectedEnemy);
+            enemyHealthUI.gameObject.SetActive(true);
+
+            yield return new WaitForSeconds(0.5f);
+
+            while (pickingEnemy)
+            {
+                if (battleControls.SelectionUp.triggered) EnemySelect(true);
+                else if (battleControls.SelectionDown.triggered) EnemySelect(false);
+                else if (battleControls.Select.triggered) pickingEnemy = false;
+                yield return null;
+            }
+
+            selectedEnemy.selectIndicator.SetActive(false);
+
+            LineGenerator minigame = ResourceStorage.Instance.GetMinigame(Enum.GetName(typeof(MinigameType), AttackMenu.chosenAttack.Minigame));
+            minigameManager.SetMinigame(minigame);
+            minigameManager.gameObject.SetActive(true);
+            //Instantiate(minigame, GridInfo.GridWorldMidPoint, Quaternion.identity);
+
+            while (minigameManager.MinigameRunning)
+            {
+                yield return null;
+            }
+
+            minigameManager.gameObject.SetActive(false);
+
+            turnOrder[0].Attack(AttackMenu.chosenAttack, selectedEnemy, multiplier: AttackMenu.chosenAttack.Stats.multiplier);
+            enemyHealthUI.UpdateHealth(selectedEnemy.Stats.Health);
+
+            if (selectedEnemy.Stats.Health <= 0)
+            {
+                HeroUnitBase currentHero = turnOrder[0] as HeroUnitBase;
+                currentHero.data.IncreaseXP(selectedEnemy.data.BaseStats.XP);
+                turnOrder.Remove(selectedEnemy);
+                EnemyUnits.Remove(selectedEnemy);
+                Destroy(selectedEnemy.gameObject);
+            }
+
+            AttackMenu.gameObject.SetActive(false);
+            AttackMenu.chosenAttack = null;
+        }
+        else if (AttackMenu.chosenItem != null)
+        {
+            AttackMenu.gameObject.SetActive(false);
+            pickingPlayer = true;
+            selectedPlayer = PartyUnits[0];
+            selectedPlayer.selectIndicator.SetActive(true);
+            playerHealthUI.InitializePlayerUI(selectedPlayer);
+
+            yield return new WaitForSeconds(0.5f);
+
+            while (pickingPlayer)
+            {
+                print("Hi");
+                if (battleControls.SelectionUp.triggered) PlayerSelect(true);
+                else if (battleControls.SelectionDown.triggered) PlayerSelect(false);
+                else if (battleControls.Select.triggered) pickingPlayer = false;
+                yield return null;
+            }
+
+            selectedPlayer.selectIndicator.SetActive(false);
+
+            switch (AttackMenu.chosenItem.Effect)
+            {
+                case ItemEffect.Heal:
+                    selectedPlayer.SetEffects(AttackMenu.chosenItem);
+                    HeroUnitBase playerUnit = turnOrder[0] as HeroUnitBase;
+                    playerHealthUI.UpdateHealth(playerUnit.Stats.Health);
+                    playerUnit.data.ItemInventory.UseItem(AttackMenu.chosenItem);
+                    break;
+                case ItemEffect.AttackBoost:
+                    break;
+                case ItemEffect.Evasiveness:
+                    break;
+            }
+
+            AttackMenu.gameObject.SetActive(false);
+            AttackMenu.chosenItem = null;
         }
 
-        selectedEnemy.selectIndicator.SetActive(false);
 
-        LineGenerator minigame = ResourceStorage.Instance.GetMinigame(Enum.GetName(typeof(MinigameType), AttackMenu.chosenAttack.Minigame));
-        minigameManager.SetMinigame(minigame);
-        minigameManager.gameObject.SetActive(true);
-        //Instantiate(minigame, GridInfo.GridWorldMidPoint, Quaternion.identity);
-
-        while(minigameManager.MinigameRunning)
-        {
-            yield return null;
-        }
-
-        minigameManager.gameObject.SetActive(false);
-
-        turnOrder[0].Attack(AttackMenu.chosenAttack, selectedEnemy, multiplier: AttackMenu.chosenAttack.Stats.multiplier);
-        enemyHealthUI.UpdateHealth(selectedEnemy.Stats.Health);
-
-        if (selectedEnemy.Stats.Health <= 0)
-        {
-            HeroUnitBase currentHero = turnOrder[0] as HeroUnitBase;
-            currentHero.data.IncreaseXP(selectedEnemy.data.BaseStats.XP);
-            turnOrder.Remove(selectedEnemy);
-            EnemyUnits.Remove(selectedEnemy);
-            Destroy(selectedEnemy.gameObject);
-        }
-
-        AttackMenu.gameObject.SetActive(false);
-        AttackMenu.chosenAttack = null;
 
         while (!turnOrder[0].Move(startPos, speed))
         {
@@ -212,6 +264,11 @@ public class BattleManager : MonoBehaviour
         {
             ChangeState(BattleState.Lose);
             return;
+        }
+
+        foreach (EnemyUnitBase unit in EnemyUnits)
+        {
+            unit.DoEffects();
         }
 
         StartCoroutine(EnemyTurnCoroutine());
@@ -290,6 +347,24 @@ public class BattleManager : MonoBehaviour
 
         selectedEnemy.selectIndicator.SetActive(true);
         enemyHealthUI.UpdateEntireUI(selectedEnemy.Stats.Health, selectedEnemy.data.name);
+    }
+
+    /// <summary>
+    /// Select an player
+    /// </summary>
+    /// <param name="up">The direction of the new selection</param>
+    void PlayerSelect(bool up)
+    {
+        playerIndex = up ? (playerIndex + 1) % PartyUnits.Count : (playerIndex - 1) < 0 ? PartyUnits.Count - 1 : playerIndex - 1;
+        selectedPlayer = PartyUnits[playerIndex];
+
+        foreach (HeroUnitBase player in PartyUnits)
+        {
+            player.selectIndicator.SetActive(false);
+        }
+
+        selectedPlayer.selectIndicator.SetActive(true);
+        playerHealthUI.UpdateEntireUI(selectedPlayer.Stats.Health, selectedPlayer.data.name);
     }
 
 

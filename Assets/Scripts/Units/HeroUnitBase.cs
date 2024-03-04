@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,12 @@ using UnityEngine;
 public abstract class HeroUnitBase : UnitBase
 {
     [HideInInspector] public ScriptableHero data;
+    private Dictionary<ItemEffect, int> effectTurns = new Dictionary<ItemEffect, int>()
+    {
+        { ItemEffect.Heal, 0 },
+        { ItemEffect.AttackBoost, 0 },
+        { ItemEffect.Evasiveness, 0 },
+    };
 
     public HeroStats Stats { get; private set; }
 
@@ -63,6 +70,62 @@ public abstract class HeroUnitBase : UnitBase
     {
         HeroStats newStats = Stats;
         newStats.Health -= damage;
+        SetStats(newStats);
+    }
+
+    public override void SetEffects(ScriptableItem item)
+    {
+        switch (item.Effect)
+        {
+            case ItemEffect.Heal:
+                Heal(item);
+                Effect newEffect = new()
+                {
+                    durationInTurns = item.EffectDurationInTurns,
+                    effect = item.Effect,
+                    itemCausingEffect = item,
+                };
+                currentEffects.Add(newEffect);
+                break;
+        }
+    }
+
+    public override void DoEffects()
+    {
+        List<Effect> finishedEffects = new ();
+        foreach (Effect effect in currentEffects)
+        {
+            switch (effect.effect)
+            {
+                case ItemEffect.Heal:
+                    Heal(effect.itemCausingEffect);
+                    break;
+                case ItemEffect.AttackBoost:
+                    break;
+                case ItemEffect.Evasiveness:
+                    break;
+            }
+
+            effect.durationInTurns--;
+
+            if (effect.durationInTurns <= 0)
+            {
+                finishedEffects.Add(effect);
+            }
+        }
+
+        foreach (Effect effect in  finishedEffects)
+        {
+            currentEffects.Remove(effect);
+        }
+
+        finishedEffects.Clear();
+    }
+
+    void Heal(ScriptableItem item)
+    {
+        HeroStats newStats = Stats;
+        newStats.Health += item.EffectAmount;
         SetStats(newStats);
     }
 }

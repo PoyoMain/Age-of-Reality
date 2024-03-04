@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6ea38829803de44689bc2f91cf338f7, type: 3}
   m_Name: Health Potion
   m_EditorClassIdentifier: 
-  Name: 
   Description: 
   Sprite: {fileID: 0}
   Effect: 0
+  EffectAmount: 30
+  EffectDurationInTurns: 1

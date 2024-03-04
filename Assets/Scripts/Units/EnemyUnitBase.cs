@@ -4,8 +4,6 @@ using UnityEngine;
 
 public abstract class EnemyUnitBase : UnitBase
 {
-    public GameObject selectIndicator;
-
     [HideInInspector] public ScriptableEnemy data;
 
     public EnemyStats Stats { get; private set; }
@@ -66,5 +64,50 @@ public abstract class EnemyUnitBase : UnitBase
         EnemyStats newStats = Stats;
         newStats.Health -= damage;
         SetStats(newStats);
+    }
+
+    public override void SetEffects(ScriptableItem item)
+    {
+        switch (item.Effect)
+        {
+            case ItemEffect.Heal:
+                Effect newEffect = new()
+                {
+                    durationInTurns = item.EffectDurationInTurns,
+                    effect = item.Effect,
+                    itemCausingEffect = item,
+                };
+                currentEffects.Add(newEffect);
+                break;
+        }
+    }
+
+    public override void DoEffects()
+    {
+        foreach (Effect effect in currentEffects)
+        {
+            switch (effect.effect)
+            {
+                case ItemEffect.Heal:
+                    Heal(effect.itemCausingEffect);
+                    break;
+                case ItemEffect.AttackBoost:
+                    break;
+                case ItemEffect.Evasiveness:
+                    break;
+            }
+
+            effect.durationInTurns--;
+
+            if (effect.durationInTurns <= 0)
+            {
+                currentEffects.Remove(effect);
+            }
+        }
+    }
+
+    void Heal(ScriptableItem item)
+    {
+        TakeDamage(-item.EffectAmount);
     }
 }

@@ -121,6 +121,11 @@ public struct HeroStats
 
         return levelXP;
     }
+
+    public void SetHealth(int newHealth)
+    {
+        Health = newHealth;
+    }
 }
 
 [Serializable]

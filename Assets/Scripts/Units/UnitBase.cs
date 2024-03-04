@@ -1,10 +1,13 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class UnitBase : MonoBehaviour
 {
+    public GameObject selectIndicator;
 
+    protected List<Effect> currentEffects = new();
 
     /// <summary>
     /// Damages the unit
@@ -43,4 +46,20 @@ public abstract class UnitBase : MonoBehaviour
 
         return distance <= 0.01f;
     }
+
+    public void DecreaseEffects()
+    {
+
+    }
+
+    public abstract void SetEffects(ScriptableItem item);
+
+    public abstract void DoEffects();
+}
+
+public class Effect
+{
+    public int durationInTurns;
+    public ItemEffect effect;
+    public ScriptableItem itemCausingEffect;
 }

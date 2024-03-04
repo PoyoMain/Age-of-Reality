@@ -8,8 +8,8 @@ public class ScriptableItem : ScriptableObject
     public string Description;
     public Sprite Sprite;
     public ItemEffect Effect;
-    public float EffectAmount;
-    public float EffectDuration;
+    public int EffectAmount;
+    public int EffectDurationInTurns;
 
 }
 

@@ -16,4 +16,4 @@ MonoBehaviour:
   - Key: 0
     Value:
       item: {fileID: 11400000, guid: 84892117910462542a78ddd8585684cf, type: 2}
-      Amount: 1
+      Amount: 3
