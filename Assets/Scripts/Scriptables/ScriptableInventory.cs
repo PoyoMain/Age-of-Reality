@@ -7,14 +7,13 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Scriptable Inventory")]
 public class ScriptableInventory : ScriptableObject
 {
-    [SerializeField]
     public List<DictEntry> Inventory;
 
     public bool IsEmpty
     {
         get
         {
-            return isEmpty();
+            return IsInventoryEmpty();
         }
         private set { }
     }
@@ -33,11 +32,11 @@ public class ScriptableInventory : ScriptableObject
         }
     }
 
-    public bool HasItem(Items key)
+    public bool HasItem(ScriptableItem itemToCheck)
     {
         foreach (DictEntry entry in Inventory)
         {
-            if (entry.Key.Equals(key))
+            if (entry.Value.item.Equals(itemToCheck))
             {
                 if (entry.Value.Amount > 0)
                 {
@@ -54,7 +53,20 @@ public class ScriptableInventory : ScriptableObject
         return false;
     }
 
-    bool isEmpty()
+    private int ContainsItemEntry(ScriptableItem itemToCheck)
+    {
+        for (int i = 0; i < Inventory.Count; i++)
+        {
+            if (Inventory[i].Value.item.Equals(itemToCheck))
+            {
+                return i;
+            }
+        }
+
+        return -1;
+    }
+
+    bool IsInventoryEmpty()
     {
         foreach (DictEntry item in Inventory)
         {
@@ -66,7 +78,25 @@ public class ScriptableInventory : ScriptableObject
 
         return true;
     }
-    
+
+    public void AddToInventory(ScriptableItem itemToAdd)
+    {
+        int itemPos = ContainsItemEntry(itemToAdd);
+        if (itemPos != -1)
+        {
+            Inventory[itemPos].Value.Amount++;
+        }
+        else
+        {
+            Items newType = itemToAdd.Type;
+            Inventory.Add(new DictEntry(newType, new Item(itemToAdd)));
+        }
+    }
+
+    private void OnDisable()
+    {
+        Inventory.Clear();
+    }
 }
 public enum Items { HealthPot, Sword, Card }
 
@@ -75,6 +105,12 @@ public class Item
 {
     public ScriptableItem item;
     public int Amount;
+
+    public Item(ScriptableItem itemToAdd) 
+    {
+        item = itemToAdd;
+        Amount = 1;
+    }
 }
 
 [Serializable]
@@ -82,5 +118,11 @@ public class DictEntry
 {
     public Items Key;
     public Item Value;
+
+    public DictEntry(Items newKey, Item newValue)
+    {
+        this.Key = newKey;
+        this.Value = newValue;
+    }
 }
 

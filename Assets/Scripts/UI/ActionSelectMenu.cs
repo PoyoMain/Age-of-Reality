@@ -152,7 +152,7 @@ public class ActionSelectMenu : MonoBehaviour
 
     public void SetCurrentUnit(HeroUnitBase hero)
     {
-        if (hero.data.ItemInventory.IsEmpty) actionButtons[1].button.interactable = false;
+        if (GameManager.Instance.ItemInventory.IsEmpty) actionButtons[1].button.interactable = false;
         else actionButtons[1].button.interactable = true;
 
         moveSelectMenu.currentUnit = hero;

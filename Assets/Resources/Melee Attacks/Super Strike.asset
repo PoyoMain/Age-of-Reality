@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7881ab63be3d3c7449111fd757f496a1, type: 3}
-  m_Name: Stab
+  m_Name: Super Strike
   m_EditorClassIdentifier: 
   _stats:
     attackPower: 10
-    multiplier: 1
+    multiplier: 3
   Minigame: 3

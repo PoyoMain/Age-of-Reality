@@ -126,15 +126,16 @@ public class MoveSelectMenu : MonoBehaviour
                     return;
                 }
 
-                foreach (var item in currentUnit.data.ItemInventory.Inventory)
+                foreach (var item in GameManager.Instance.ItemInventory.Inventory)
                 {
-                    if (currentUnit.data.ItemInventory.HasItem(item.Key))
+                    
+                    if (GameManager.Instance.ItemInventory.HasItem(item.Value.item))
                     {
                         ItemOption moveOption = Instantiate(itemButton, transform).GetComponent<ItemOption>();
                         moveButtons.Add(moveOption);
                         moveOption.item = item.Value.item;
                         moveOption.gameObject.name = item.Value.item.name;
-                        moveOption.GetComponentInChildren<TextMeshProUGUI>().text = item.Value.item.name;
+                        moveOption.GetComponentInChildren<TextMeshProUGUI>().text = item.Value.item.name + " x" + item.Value.Amount;
                     }
                 }
 

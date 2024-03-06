@@ -126,6 +126,7 @@ public abstract class HeroUnitBase : UnitBase
     {
         HeroStats newStats = Stats;
         newStats.Health += item.EffectAmount;
+        newStats.Health = Mathf.Clamp(newStats.Health, 0, data.BaseStats.Health);
         SetStats(newStats);
     }
 }

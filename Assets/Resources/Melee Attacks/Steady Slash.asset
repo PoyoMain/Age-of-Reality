@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b400a6182e610d045aa2d60d725b1b9d, type: 3}
-  m_Name: Singe
+  m_Script: {fileID: 11500000, guid: 7881ab63be3d3c7449111fd757f496a1, type: 3}
+  m_Name: Steady Slash
   m_EditorClassIdentifier: 
   _stats:
     attackPower: 10
     multiplier: 2
-  Minigame: 0
+  Minigame: 3

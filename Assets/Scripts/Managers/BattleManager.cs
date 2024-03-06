@@ -40,6 +40,11 @@ public class BattleManager : MonoBehaviour
 
     [SerializeField] private PlayerHealth playerHealthUI;
     [SerializeField] private PlayerHealth enemyHealthUI;
+    [Space(15f)]
+    [SerializeField] private XPWindow xpWindow;
+    [SerializeField] private ScriptableLevelSystem levelSystem;
+    [Space(15f)] 
+    [SerializeField] private List<ScriptableItem> givenItems;
 
     void Awake()
     {
@@ -73,8 +78,7 @@ public class BattleManager : MonoBehaviour
                 break;
             case BattleState.Win:
                 print("Win");
-                DespawnUnits();
-                GameManager.Instance.ChangeGameState(GameState.Overworld);
+                WinCase();
                 break;
             case BattleState.Lose:
                 print("Lose");
@@ -97,6 +101,7 @@ public class BattleManager : MonoBehaviour
 
     private void StartingCase()
     {
+        turnOrder.Clear();
         ChangeState(BattleState.SpawningHeroes);
     }
 
@@ -197,6 +202,15 @@ public class BattleManager : MonoBehaviour
             {
                 HeroUnitBase currentHero = turnOrder[0] as HeroUnitBase;
                 currentHero.data.IncreaseXP(selectedEnemy.data.BaseStats.XP);
+
+                foreach (ItemDrop item in selectedEnemy.data.droppableItems)
+                {
+                    if (UnityEngine.Random.Range(0, 1) <= item.ChanceToDrop)
+                    {
+                        givenItems.Add(item.Item);
+                    }
+                }
+
                 turnOrder.Remove(selectedEnemy);
                 EnemyUnits.Remove(selectedEnemy);
                 Destroy(selectedEnemy.gameObject);
@@ -232,7 +246,7 @@ public class BattleManager : MonoBehaviour
                     selectedPlayer.SetEffects(AttackMenu.chosenItem);
                     HeroUnitBase playerUnit = turnOrder[0] as HeroUnitBase;
                     playerHealthUI.UpdateHealth(playerUnit.Stats.Health);
-                    playerUnit.data.ItemInventory.UseItem(AttackMenu.chosenItem);
+                    GameManager.Instance.ItemInventory.UseItem(AttackMenu.chosenItem);
                     break;
                 case ItemEffect.AttackBoost:
                     break;
@@ -308,6 +322,63 @@ public class BattleManager : MonoBehaviour
         yield return null;
     }
 
+    private void WinCase()
+    {
+        StartCoroutine(WinCoroutine());
+    }
+
+    private IEnumerator WinCoroutine()
+    {
+        DespawnUnits(true);
+        xpWindow.gameObject.SetActive(true);
+        xpWindow.ActivateWinVisual(givenItems);
+
+        foreach (var item in givenItems)
+        {
+            GameManager.Instance.ItemInventory.AddToInventory(item);
+        }
+
+        while (!Input.GetMouseButtonDown(0))
+        {
+            yield return null;
+        }
+
+        foreach (HeroUnitBase heroUnit in PartyUnits)
+        {
+            bool canLevelUp = false;
+
+            HeroStats prevData = heroUnit.data.BaseStats;
+            List<ScriptableAttack> newAttacks = new();
+            
+
+            while (heroUnit.data.LevelUp(levelSystem, out ScriptableAttack newAttack))
+            {
+                canLevelUp = true;
+                if (newAttack != null)
+                {
+                    newAttacks.Add(newAttack);
+                }
+                yield return null;
+            }
+            HeroStats currentData = heroUnit.data.BaseStats;
+
+            if (canLevelUp)
+            {
+                xpWindow.SetXPStats(heroUnit.data.name, prevData, currentData, newAttacks);
+                xpWindow.ActivateXPVisual();
+
+                while (!Input.GetMouseButtonDown(0))
+                {
+                    yield return null;
+                }
+            }   
+        }
+
+        xpWindow.gameObject.SetActive(false);
+        DespawnUnits();
+        GameManager.Instance.ChangeGameState(GameState.Overworld);
+    }
+
     /// <summary>
     /// Puts the current unit at the back of the list and determines which side's turn it is
     /// </summary>
@@ -371,20 +442,24 @@ public class BattleManager : MonoBehaviour
     /// <summary>
     /// Despawns units at the end of battle 
     /// </summary>
-    void DespawnUnits()
+    void DespawnUnits(bool keepPlayers = false)
     {
         for (int i = 0; i < EnemyUnits.Count; i++)
         {
+            turnOrder.Remove(EnemyUnits[i]);
             Destroy(EnemyUnits[i].gameObject);
         }
         EnemyUnits.Clear();
 
-        for (int i = 0; i < PartyUnits.Count; i++)
+        if (!keepPlayers)
         {
-            Destroy(PartyUnits[i].gameObject);
+            for (int i = 0; i < PartyUnits.Count; i++)
+            {
+                turnOrder.Remove(PartyUnits[i]);
+                Destroy(PartyUnits[i].gameObject);
+            }
+            PartyUnits.Clear();
         }
-        PartyUnits.Clear();
-        turnOrder.Clear();
     }
 
     private void OnEnable()
@@ -406,7 +481,6 @@ public enum BattleState
     SpawningHeroes,
     SpawningEnemies,
     HeroTurn,
-    PickingEnemy,
     EnemyTurn,
     Win,
     Lose,

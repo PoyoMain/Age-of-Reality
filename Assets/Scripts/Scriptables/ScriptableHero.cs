@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Scriptable Hero")]
+[CreateAssetMenu(fileName = "New Scriptable Hero", menuName = "Scripatble Character/Hero")]
 public class ScriptableHero : ScriptableUnitBase
 {
     /// <summary>
@@ -21,19 +21,17 @@ public class ScriptableHero : ScriptableUnitBase
 
     public List<ScriptableMagicAttack> magicAttacks;
 
-    public ScriptableInventory ItemInventory;
-
-    public void IncreaseLevel(int excessXP)
-    {
-        _stats.Level++;
-        _stats.XP = excessXP;
-        Debug.Log("Level Up");
-    }
-
     public void ResetCharacter()
     {
         _stats.Level = 1;
         _stats.XP = 0;
+        _stats.Attack = 1;
+        _stats.Health = 100;
+        _stats.Defense = 1;
+        _stats.Speed = 1;
+        _stats.Stamina = 1;
+        meleeAttacks.RemoveRange(1, meleeAttacks.Count - 1);
+        magicAttacks.RemoveRange(1, magicAttacks.Count - 1);
     }
 
     public void IncreaseXP(int xp)
@@ -41,16 +39,65 @@ public class ScriptableHero : ScriptableUnitBase
         _stats.XP += xp;
 
         Debug.Log("XP " + _stats.XP);
+    }
 
-        if (_stats.XP >= _stats.XPToLevelUp)
+    public bool LevelUp(ScriptableLevelSystem levelSystem, out ScriptableAttack unlockedAttack)
+    {
+        Level nextLevel = null;
+
+        foreach (Level level in levelSystem.levels)
+        {
+            if ((_stats.Level + 1) == level.lvl)
+            {
+                nextLevel = level;
+                break;
+            }
+        }
+
+        unlockedAttack = null;
+
+        if (_stats.XP >= nextLevel.XPToReachLevel)
         {
             IncreaseLevel(_stats.XP - _stats.XPToLevelUp);
 
-            if (_stats.XP >= _stats.XPToLevelUp)
+            if (Ability == Ability.Melee)
             {
-                IncreaseXP(0);
+                ScriptableMeleeAttack newAttack = nextLevel.MeleeAttackUnlocked;
+                if (newAttack != null)
+                {
+                    unlockedAttack = newAttack;
+                    meleeAttacks.Add(newAttack);
+                }
             }
+            else if (Ability == Ability.Magic)
+            {
+                ScriptableMagicAttack newAttack = nextLevel.MagicAttackUnlocked;
+                if (newAttack != null)
+                {
+                    unlockedAttack = newAttack;
+                    magicAttacks.Add(newAttack);
+                }
+            }
+            
+            return true;
         }
+
+        return false;
+
+        //if (_stats.XP >= _stats.XPToLevelUp)
+        //{
+        //    IncreaseLevel(_stats.XP - _stats.XPToLevelUp);
+        //    return true;
+        //}
+
+        //return false;
+    }
+
+    private void IncreaseLevel(int excessXP)
+    {
+        _stats.Level++;
+        _stats.XP = excessXP;
+        Debug.Log("Level Up");
     }
 
     private void OnDisable()
@@ -80,7 +127,7 @@ public struct HeroStats
         set;
     }
 
-    public int XPToLevelUp
+    public readonly int XPToLevelUp
     {
         get
         {
@@ -88,37 +135,17 @@ public struct HeroStats
         }
     }
 
-    int GetXPToLevelUP()
+    private readonly int GetXPToLevelUP()
     {
-        int levelXP;
-
-        switch (Level)
+        int levelXP = Level switch
         {
-            case 1:
-                levelXP = XPLevels.Level1XP;
-                break;
-
-            case 2:
-                levelXP = XPLevels.Level1XP;
-                break;
-
-            case 3:
-                levelXP = XPLevels.Level1XP;
-                break;
-
-            case 4:
-                levelXP = XPLevels.Level1XP;
-                break;
-
-            case 5:
-                levelXP = XPLevels.Level1XP;
-                break;
-
-            default:
-                levelXP = 0;
-                break;
-        }
-
+            1 => XPLevels.Level2XP,
+            2 => XPLevels.Level3XP,
+            3 => XPLevels.Level4XP,
+            4 => XPLevels.Level5XP,
+            5 => 100,
+            _ => 0,
+        };
         return levelXP;
     }
 
@@ -131,7 +158,6 @@ public struct HeroStats
 [Serializable]
 public struct XPLevels
 {
-    public int Level1XP;
     public int Level2XP;
     public int Level3XP;
     public int Level4XP;

@@ -18,8 +18,6 @@ public class GameManager : Singleton<GameManager>
     private AudioBG battleAudioManager;
     private float battleAudioStartVolume;
 
-    [SerializeField] private LineGenerator minigame;
-
     [SerializeField] private float audioFadeOutTime;
     [HideInInspector] public bool modeTransitioning;
 
@@ -30,6 +28,8 @@ public class GameManager : Singleton<GameManager>
         get { return player.Party; }
     }
     [HideInInspector] public Enemy enemyHit; // The enemy hit by the player
+
+    public ScriptableInventory ItemInventory;
 
     protected override void Awake()
     {
@@ -42,12 +42,6 @@ public class GameManager : Singleton<GameManager>
         battleAudioSource = battleCamera.gameObject.GetComponent<AudioSource>();
         battleAudioStartVolume = battleAudioSource.volume;
     }
-
-    //private void Start()
-    //{
-    //    LineGenerator minigame = ResourceStorage.Instance.GetMinigame(Enum.GetName(typeof(MinigameType), MinigameType.Magic_Triangle));
-    //    Instantiate(minigame, player.transform.position, Quaternion.identity);
-    //}
 
     // Method to change the state of the game
     public void ChangeGameState(GameState newState)
@@ -158,6 +152,11 @@ public class GameManager : Singleton<GameManager>
         {
             player.HandleUpdate();
         }
+    }
+
+    private void OnDisable()
+    {
+        ItemInventory.Inventory.Clear();
     }
 }
 
