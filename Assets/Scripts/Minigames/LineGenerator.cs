@@ -28,6 +28,7 @@ public class LineGenerator : MonoBehaviour
     public List<Vector2> startingPos;
     public List<Vector2> endingPos;
     public GameObject battleParent;
+    public List<Vector2> drawnPoints;
     public int listLength { get; set; }
     public void OnEnable()
     {
@@ -35,6 +36,7 @@ public class LineGenerator : MonoBehaviour
         lineRenderers = new List<LineRenderer>();
         startingPos = new List<Vector2>();
         endingPos = new List<Vector2>();
+        drawnPoints = new List<Vector2>();
         distanceNeeded = 0;
         battleParent = transform.parent.parent.gameObject;
 
