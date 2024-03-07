@@ -615,6 +615,107 @@ MonoBehaviour:
   rows: 5
   cols: 5
   scaleMult: 2
+--- !u!1 &330762869
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 330762873}
+  - component: {fileID: 330762872}
+  - component: {fileID: 330762871}
+  - component: {fileID: 330762870}
+  m_Layer: 5
+  m_Name: Canvas
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &330762870
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 330762869}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+--- !u!114 &330762871
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 330762869}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_UiScaleMode: 0
+  m_ReferencePixelsPerUnit: 100
+  m_ScaleFactor: 1
+  m_ReferenceResolution: {x: 800, y: 600}
+  m_ScreenMatchMode: 0
+  m_MatchWidthOrHeight: 0
+  m_PhysicalUnit: 3
+  m_FallbackScreenDPI: 96
+  m_DefaultSpriteDPI: 96
+  m_DynamicPixelsPerUnit: 1
+  m_PresetInfoIsWorld: 0
+--- !u!223 &330762872
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 330762869}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 0
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 0
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
+  m_AdditionalShaderChannelsFlag: 0
+  m_UpdateRectTransformForStandalone: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_TargetDisplay: 0
+--- !u!224 &330762873
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 330762869}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0, y: 0}
 --- !u!1 &508801930
 GameObject:
   m_ObjectHideFlags: 0
@@ -651,7 +752,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: afb15740988dada4c9a9931cb4f1e9a3, type: 2}
   - {fileID: 11400000, guid: afb15740988dada4c9a9931cb4f1e9a3, type: 2}
   team: []
-  type: 4
+  type: {fileID: 0}
 --- !u!58 &508801932
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1018,6 +1119,8 @@ MonoBehaviour:
   overworldCamera: {fileID: 519420031}
   battleCamera: {fileID: 1564340127}
   minigame: {fileID: 6633343848253367670, guid: 85fe218a22f91564e8d4efdb1ccd4e9b, type: 3}
+  audioFadeOutTime: 0
+  modeTransitioning: 0
   enemyHit: {fileID: 0}
 --- !u!1 &763444056
 GameObject:
@@ -1053,7 +1156,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   allies: []
   team: []
-  type: 4
+  type: {fileID: 0}
 --- !u!58 &763444058
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1235,6 +1338,8 @@ MonoBehaviour:
   minigameManager: {fileID: 1248717827}
   speed: 5
   AttackMenu: {fileID: 1500403169}
+  playerHealthUI: {fileID: 0}
+  enemyHealthUI: {fileID: 0}
 --- !u!1 &1014016180
 GameObject:
   m_ObjectHideFlags: 0
@@ -2917,7 +3022,7 @@ MonoBehaviour:
   allies:
   - {fileID: 11400000, guid: afb15740988dada4c9a9931cb4f1e9a3, type: 2}
   team: []
-  type: 4
+  type: {fileID: 0}
 --- !u!50 &7942285961093800576
 Rigidbody2D:
   serializedVersion: 4
@@ -2959,3 +3064,4 @@ SceneRoots:
   - {fileID: 763444061}
   - {fileID: 508801935}
   - {fileID: 1260236390}
+  - {fileID: 330762873}
