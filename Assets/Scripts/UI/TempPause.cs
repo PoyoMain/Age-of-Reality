@@ -72,11 +72,11 @@ public class TempPause : MonoBehaviour
 
     public void read()
     {
-        for (int i = 0; i < gameInventory.Inventory.Count; i++)
+        for (int i = 0; i < GameManager.Instance.ItemInventory.Inventory.Count; i++)
         {
            if (gameInventory.Inventory[i].Value.Amount > 0) 
             {
-                ButtonsList[i].gameObject.GetComponentInChildren<TextMeshProUGUI>().text = gameInventory.Inventory[i].Value.item.name;
+                ButtonsList[i].gameObject.GetComponentInChildren<TextMeshProUGUI>().text = GameManager.Instance.ItemInventory.Inventory[i].Value.item.name;
             }
         }
     }
