@@ -1,13 +1,17 @@
+using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
+using UnityEngine.UI;
 public class TempPause : MonoBehaviour
 {
     public bool isPaused = false;
     public GameObject pauseMenu;
     public GameObject statsMenu;
     public GameObject itemMenu;
-
+    [SerializeField]
+    private ScriptableInventory gameInventory;
+    public List <Button> ButtonsList;
     public void Update()
     {
         if (Input.GetKeyDown(KeyCode.Tab))
@@ -62,5 +66,18 @@ public class TempPause : MonoBehaviour
         itemMenu.SetActive(true);
         Time.timeScale = 0;
         isPaused = true;
+        read();
+    }
+
+
+    public void read()
+    {
+        for (int i = 0; i < gameInventory.Inventory.Count; i++)
+        {
+           if (gameInventory.Inventory[i].Value.Amount > 0) 
+            {
+                ButtonsList[i].gameObject.GetComponentInChildren<TextMeshProUGUI>().text = gameInventory.Inventory[i].Value.item.name;
+            }
+        }
     }
 }

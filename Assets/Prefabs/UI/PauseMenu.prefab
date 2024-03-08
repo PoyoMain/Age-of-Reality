@@ -3543,6 +3543,15 @@ MonoBehaviour:
   pauseMenu: {fileID: 5499606883337998497}
   statsMenu: {fileID: 2058466646821022292}
   itemMenu: {fileID: 8381150428453073579}
+  gameInventory: {fileID: 11400000, guid: 224083c2894e58840b91dc7132be5e43, type: 2}
+  ButtonsList:
+  - {fileID: 1840538482274443195}
+  - {fileID: 7232517000841780508}
+  - {fileID: 3099534661981911725}
+  - {fileID: 5170822732643606730}
+  - {fileID: 7302448368454607226}
+  - {fileID: 3466127892471548327}
+  - {fileID: 723699262654384498}
 --- !u!1 &6682941466322146550
 GameObject:
   m_ObjectHideFlags: 0
