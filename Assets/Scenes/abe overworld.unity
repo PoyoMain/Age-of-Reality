@@ -731,9 +731,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackButton: {fileID: 1869174001798438961, guid: c22280473f116364ca73ce30eb44fe06, type: 3}
+<<<<<<< Updated upstream
   moveButtons: []
   moveIndex: 0
   menuType: 0
+=======
+  itemButton: {fileID: 0}
+  fleeButton: {fileID: 0}
+  moveButtons: []
+  moveIndex: 0
+  menuType: 0
+  actionChosen: 0
+>>>>>>> Stashed changes
   maxElementsOnScreen: 4
   currentUnit: {fileID: 0}
 --- !u!114 &307806987
@@ -4940,6 +4949,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSelectMenu: {fileID: 307806986}
   chosenAttack: {fileID: 0}
+<<<<<<< Updated upstream
+=======
+  chosenItem: {fileID: 0}
+>>>>>>> Stashed changes
 --- !u!114 &648692551
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6684,6 +6697,12 @@ MonoBehaviour:
   AttackMenu: {fileID: 648692550}
   playerHealthUI: {fileID: 1945807496}
   enemyHealthUI: {fileID: 1066887303}
+<<<<<<< Updated upstream
+=======
+  xpWindow: {fileID: 0}
+  levelSystem: {fileID: 0}
+  givenItems: []
+>>>>>>> Stashed changes
 --- !u!1 &1188880730
 GameObject:
   m_ObjectHideFlags: 0
@@ -46274,10 +46293,17 @@ MonoBehaviour:
   battleManager: {fileID: 1147949609}
   overworldCamera: {fileID: 1670287033}
   battleCamera: {fileID: 935077435}
+<<<<<<< Updated upstream
   minigame: {fileID: 6633343848253367670, guid: 85fe218a22f91564e8d4efdb1ccd4e9b, type: 3}
   audioFadeOutTime: 0.5
   modeTransitioning: 0
   enemyHit: {fileID: 0}
+=======
+  audioFadeOutTime: 0.5
+  modeTransitioning: 0
+  enemyHit: {fileID: 0}
+  ItemInventory: {fileID: 0}
+>>>>>>> Stashed changes
 --- !u!4 &1730933673
 Transform:
   m_ObjectHideFlags: 0
