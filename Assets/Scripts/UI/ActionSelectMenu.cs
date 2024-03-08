@@ -1,9 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.UI;
 
 public class ActionSelectMenu : MonoBehaviour
 {
@@ -19,7 +17,7 @@ public class ActionSelectMenu : MonoBehaviour
 
     private PlayerControls playerControls;
     private PlayerControls.BattleControlsActions battleControls;
-    
+
     private MenuState menuState;
 
     private void Awake()
@@ -37,7 +35,7 @@ public class ActionSelectMenu : MonoBehaviour
         EventSystem.current.SetSelectedGameObject(selectedAction.gameObject);
     }
 
-    
+
 
     private void Update()
     {
@@ -72,7 +70,7 @@ public class ActionSelectMenu : MonoBehaviour
             case MenuState.SecondaryMenu:
                 moveSelectMenu.menuType = moveSelectMenu.currentUnit.data.Ability;
                 moveSelectMenu.gameObject.SetActive(true);
-                
+
                 foreach (ActionOption option in actionButtons)
                 {
                     option.button.interactable = false;
@@ -101,14 +99,14 @@ public class ActionSelectMenu : MonoBehaviour
                 EventSystem.current.SetSelectedGameObject(selectedMove.gameObject);
                 break;
         }
-        
+
     }
 
     /// <summary>
     /// Navigate down the menu
     /// </summary>
     public void SelectDown()
-    { 
+    {
         switch (menuState)
         {
             case MenuState.ActionMenu:
@@ -160,6 +158,13 @@ public class ActionSelectMenu : MonoBehaviour
     private void OnDisable()
     {
         battleControls.Disable();
+    }
+
+    public void selectButton(int index)
+    {
+        selectedAction = actionButtons[index];
+        EventSystem.current.SetSelectedGameObject(selectedAction.gameObject);
+        Select();
     }
 }
 
