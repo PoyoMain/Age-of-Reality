@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 58162661}
   - component: {fileID: 58162663}
   - component: {fileID: 58162662}
+  - component: {fileID: 58162664}
   m_Layer: 5
   m_Name: Image_Middle
   m_TagString: Untagged
@@ -198,6 +199,27 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 58162660}
   m_CullTransparentMesh: 1
+--- !u!95 &58162664
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 58162660}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &72887191
 GameObject:
   m_ObjectHideFlags: 0
@@ -5221,6 +5243,7 @@ GameObject:
   - component: {fileID: 653951818}
   - component: {fileID: 653951820}
   - component: {fileID: 653951819}
+  - component: {fileID: 653951821}
   m_Layer: 5
   m_Name: Image_Right
   m_TagString: Untagged
@@ -5285,6 +5308,27 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 653951817}
   m_CullTransparentMesh: 1
+--- !u!95 &653951821
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 653951817}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &685660826
 GameObject:
   m_ObjectHideFlags: 0
@@ -13329,6 +13373,14 @@ PlayableDirector:
     value: {fileID: 951033982}
   - key: {fileID: 5305789207936114024, guid: 9d6561592bdf1684294a9ae3c137edeb, type: 2}
     value: {fileID: 1730276894}
+  - key: {fileID: 3754753875424713541, guid: 9d6561592bdf1684294a9ae3c137edeb, type: 2}
+    value: {fileID: 58162660}
+  - key: {fileID: -6504088343790478445, guid: 9d6561592bdf1684294a9ae3c137edeb, type: 2}
+    value: {fileID: 58162664}
+  - key: {fileID: -2611168702399591765, guid: 9d6561592bdf1684294a9ae3c137edeb, type: 2}
+    value: {fileID: 653951817}
+  - key: {fileID: 3615496875278054982, guid: 9d6561592bdf1684294a9ae3c137edeb, type: 2}
+    value: {fileID: 653951821}
   m_ExposedReferences:
     m_References: []
 --- !u!1 &1770513896
