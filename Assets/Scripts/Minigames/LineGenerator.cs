@@ -36,6 +36,8 @@ public class LineGenerator : LineMinigameBase
     public int listLength { get; set; }
     public void OnEnable()
     {
+        StartedDrawing = false;
+
         cam = GameManager.Instance.GetBattleCamera();
         lineRenderers = new List<LineRenderer>();
         startingPos = new List<Vector2>();
@@ -77,6 +79,8 @@ public class LineGenerator : LineMinigameBase
 
         if (Input.GetMouseButtonDown(0))
         {
+            StartedDrawing = true;
+
             GameObject newLine = Instantiate(linePrefab, transform);
             activeLine = newLine.GetComponent<Line>();
             activeLine.setRefrence(this);

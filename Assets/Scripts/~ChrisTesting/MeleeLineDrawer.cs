@@ -14,6 +14,7 @@ public class MeleeLineDrawer : MonoBehaviour
     [SerializeField] private float minDistance = 0.01f;
 
     [HideInInspector] public bool letGo;
+    [HideInInspector] public bool started = false;
 
     private void OnEnable()
     {
@@ -30,6 +31,8 @@ public class MeleeLineDrawer : MonoBehaviour
             line = Instantiate(linePrefab, transform);
             previousPosition = transform.position;
             lineCollider = line.gameObject.GetComponent<EdgeCollider2D>();
+
+            started = true;
         }
         else if (Input.GetMouseButton(0))
         {

@@ -19,6 +19,8 @@ public class MeleeMinigame : LineMinigameBase
  
     private void Awake()
     {
+        StartedDrawing = false;
+
         _cam = GameManager.Instance.GetBattleCamera();
         _line = GetComponentInChildren<MeleeLineDrawer>();
         MakePointGrid();
@@ -100,6 +102,12 @@ public class MeleeMinigame : LineMinigameBase
             DoneDrawing = true;
             _line.enabled = false;
             StopCoroutine(Minigame());
+        }
+
+        if (_line.started)
+        {
+            _line.started = false;
+            StartedDrawing = true;
         }
     }
 }

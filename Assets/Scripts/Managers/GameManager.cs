@@ -31,6 +31,8 @@ public class GameManager : Singleton<GameManager>
 
     public ScriptableInventory ItemInventory;
 
+    [HideInInspector] public int perfectMinigameCount;
+
     protected override void Awake()
     {
         base.Awake();

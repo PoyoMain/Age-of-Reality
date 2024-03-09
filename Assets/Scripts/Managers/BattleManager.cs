@@ -40,9 +40,11 @@ public class BattleManager : MonoBehaviour
 
     [SerializeField] private PlayerHealth playerHealthUI;
     [SerializeField] private PlayerHealth enemyHealthUI;
+
     [Space(15f)]
     [SerializeField] private XPWindow xpWindow;
     [SerializeField] private ScriptableLevelSystem levelSystem;
+
     [Space(15f)] 
     [SerializeField] private List<ScriptableItem> givenItems;
 
@@ -183,8 +185,8 @@ public class BattleManager : MonoBehaviour
 
             selectedEnemy.selectIndicator.SetActive(false);
 
-            LineMinigameBase minigame = ResourceStorage.Instance.GetMinigame(Enum.GetName(typeof(MinigameType), AttackMenu.chosenAttack.Minigame));
-            minigameManager.SetMinigame(minigame);
+            LineMinigameBase minigame = AttackMenu.chosenAttack.Minigame;
+            minigameManager.SetMinigame(minigame, AttackMenu.chosenAttack.SecondsToComplete);
             minigameManager.gameObject.SetActive(true);
             //Instantiate(minigame, GridInfo.GridWorldMidPoint, Quaternion.identity);
 
