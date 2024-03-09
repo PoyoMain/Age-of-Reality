@@ -8,6 +8,7 @@ public class MinigameManager : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _percentDisplayText;
     [SerializeField] private TextMeshProUGUI _timeDisplayText;
+    [SerializeField] private GameObject _clickIndicator;
 
     private float timer;
 
@@ -30,6 +31,8 @@ public class MinigameManager : MonoBehaviour
         UpdatePercentText();
 
         isDrawing = true;
+
+        _clickIndicator.SetActive(true);
     }
 
     public void SetMinigame(LineMinigameBase minigameToSpawn, int completeTime)
@@ -45,6 +48,11 @@ public class MinigameManager : MonoBehaviour
     {
         if (_minigame.StartedDrawing)
         {
+            if (_clickIndicator.activeSelf == true)
+            {
+                _clickIndicator.SetActive(false);
+            }
+
             if (timer > 0 && isDrawing)
             {
                 timer -= Time.deltaTime;

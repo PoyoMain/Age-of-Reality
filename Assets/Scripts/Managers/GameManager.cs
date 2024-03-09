@@ -159,6 +159,7 @@ public class GameManager : Singleton<GameManager>
     private void OnDisable()
     {
         ItemInventory.Inventory.Clear();
+        perfectMinigameCount = 0;
     }
 }
 
