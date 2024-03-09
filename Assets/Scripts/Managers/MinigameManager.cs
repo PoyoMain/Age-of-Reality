@@ -12,8 +12,8 @@ public class MinigameManager : MonoBehaviour
     [SerializeField] private float minigameCompleteTime;
     private float timer;
 
-    private LineGenerator _minigamePrefab;
-    private LineGenerator _minigame;
+    private LineMinigameBase _minigamePrefab;
+    private LineMinigameBase _minigame;
 
     private Animator anim;
 
@@ -36,7 +36,7 @@ public class MinigameManager : MonoBehaviour
         isDrawing = true;
     }
 
-    public void SetMinigame(LineGenerator minigameToSpawn)
+    public void SetMinigame(LineMinigameBase minigameToSpawn)
     {
         _minigamePrefab = minigameToSpawn;
         MinigameRunning = true;

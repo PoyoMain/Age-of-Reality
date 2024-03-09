@@ -183,7 +183,7 @@ public class BattleManager : MonoBehaviour
 
             selectedEnemy.selectIndicator.SetActive(false);
 
-            LineGenerator minigame = ResourceStorage.Instance.GetMinigame(Enum.GetName(typeof(MinigameType), AttackMenu.chosenAttack.Minigame));
+            LineMinigameBase minigame = ResourceStorage.Instance.GetMinigame(Enum.GetName(typeof(MinigameType), AttackMenu.chosenAttack.Minigame));
             minigameManager.SetMinigame(minigame);
             minigameManager.gameObject.SetActive(true);
             //Instantiate(minigame, GridInfo.GridWorldMidPoint, Quaternion.identity);

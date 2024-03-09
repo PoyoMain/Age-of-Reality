@@ -2,38 +2,40 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DrawGrid : LineMinigameBase
+public class MeleeMinigame : LineMinigameBase
 {
     private Camera _cam;
-    private DrawLine _line;
+    private MeleeLineDrawer _line;
 
+    [Space(30f)]
     [SerializeField] private int pointCountW;
     [SerializeField] private int pointCountH;
-
-    [SerializeField] private DrawPoint pointPrefab;
-    private List<DrawPoint> points;
+    [Space(15f)]
+    [SerializeField] private Transform gridParent;
+    [SerializeField] private MeleePoint pointPrefab;
+    private List<MeleePoint> points;
 
     [SerializeField] private int pointsToPut;
  
     private void Awake()
     {
-        _cam = Camera.main;
-        _line = GetComponentInChildren<DrawLine>();
-        GetStats();
+        _cam = GameManager.Instance.GetBattleCamera();
+        _line = GetComponentInChildren<MeleeLineDrawer>();
+        MakePointGrid();
 
         StartCoroutine(Minigame());
     }
 
-    private void GetStats()
+    private void MakePointGrid()
     {
-        points = new List<DrawPoint>();
+        points = new List<MeleePoint>();
 
         for (int y = 1; y <= pointCountH; y++)
         {
             for (int x = 1; x <= pointCountW; x++)
             {
                 Vector3 pointPos = new((Screen.width / (pointCountW + 1)) * x, (Screen.height / (pointCountH + 1))  * y, 1f);
-                DrawPoint spawnedPoint = Instantiate(pointPrefab, _cam.ScreenToWorldPoint(pointPos), Quaternion.identity, this.transform);
+                MeleePoint spawnedPoint = Instantiate(pointPrefab, _cam.ScreenToWorldPoint(pointPos), Quaternion.identity, gridParent);
                 points.Add(spawnedPoint);
             }
         }
@@ -46,7 +48,7 @@ public class DrawGrid : LineMinigameBase
 
         Vector2Int pointSpot = new(Random.Range(0, pointCountW - 1), Random.Range(0, pointCountH - 1));
         int pointSpotInList = pointSpotInList = (Mathf.Clamp(pointSpot.y - 1, 0, pointCountH) * pointCountW) + pointSpot.x;
-        DrawPoint chosenPoint = points[pointSpotInList];
+        MeleePoint chosenPoint = points[pointSpotInList];
         
         for (int i = 1; i <= pointNum; i++)
         {
@@ -58,7 +60,7 @@ public class DrawGrid : LineMinigameBase
             }
 
             pointsHit++;
-            totalPercentage = Mathf.FloorToInt(pointsHit / pointNum);
+            totalPercentage = ((float)pointsHit / (float)pointNum) * 100;
 
             bool newPointPicked = false;
             Vector2Int prevPointSpot = pointSpot;
@@ -85,7 +87,7 @@ public class DrawGrid : LineMinigameBase
                 DoneDrawing = true;
                 _line.enabled = false;
             }
-            
+         
         }
 
         print("Done");

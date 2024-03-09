@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DrawLine : MonoBehaviour
+public class MeleeLineDrawer : MonoBehaviour
 {
     private Camera _cam;
 
@@ -17,7 +17,7 @@ public class DrawLine : MonoBehaviour
 
     private void OnEnable()
     {
-        _cam = Camera.main;
+        _cam = GameManager.Instance.GetBattleCamera();
         previousPosition = transform.position;
         linePrefab.positionCount = 1;
         letGo = false;
@@ -27,7 +27,7 @@ public class DrawLine : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            line = Instantiate(linePrefab);
+            line = Instantiate(linePrefab, transform);
             previousPosition = transform.position;
             lineCollider = line.gameObject.GetComponent<EdgeCollider2D>();
         }
@@ -66,7 +66,8 @@ public class DrawLine : MonoBehaviour
         for (int point = 0; point < lRend.positionCount; point++)
         {
             Vector3 lRendPoint = lRend.GetPosition(point);
-            edges.Add(new Vector2(lRendPoint.x, lRendPoint.y));
+            Vector3 localLRendPoint = transform.InverseTransformPoint(lRendPoint);
+            edges.Add(new Vector2(localLRendPoint.x, localLRendPoint.y));
         }
 
         lineCollider.SetPoints(edges);
@@ -75,7 +76,7 @@ public class DrawLine : MonoBehaviour
     public void LineHitPoint()
     {
         Destroy(line.gameObject);
-        line = Instantiate(linePrefab);
+        line = Instantiate(linePrefab, transform);
         previousPosition = transform.position;
         lineCollider = line.gameObject.GetComponent<EdgeCollider2D>();
     }

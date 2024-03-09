@@ -2,9 +2,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class LineGenerator : MonoBehaviour
+public class LineGenerator : LineMinigameBase
 {
-
+    [Space(30f)]
     public GameObject linePrefab;
     public Camera cam;
     Line activeLine;
@@ -12,11 +12,8 @@ public class LineGenerator : MonoBehaviour
     public float distanceNeeded = 0;
     public float distanceTravelled = 0;
 
-    public float totalPercentage = 0;
     public float totalPoints = 0;
     public float closePoints = 0;
-
-    public bool DoneDrawing = false;
 
     //Start and endpoint of line on screen
     public GameObject[] lines;

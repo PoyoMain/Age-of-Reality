@@ -171,12 +171,12 @@ public class ActionSelectMenu : MonoBehaviour
         battleControls.Disable();
     }
 
-    public void selectButton(int index)
-    {
-        selectedAction = actionButtons[index];
-        EventSystem.current.SetSelectedGameObject(selectedAction.gameObject);
-        Select();
-    }
+    //public void selectButton(int index)
+    //{
+    //    selectedAction = actionButtons[index];
+    //    EventSystem.current.SetSelectedGameObject(selectedAction.gameObject);
+    //    Select();
+    //}
 }
 
 // States of the menu

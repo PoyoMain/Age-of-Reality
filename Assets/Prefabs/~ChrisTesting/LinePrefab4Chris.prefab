@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 4739587048315024805}
   - component: {fileID: 6344096399165995479}
   - component: {fileID: -7101789291321106877}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: LinePrefab4Chris
-  m_TagString: Player
+  m_TagString: Line
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -73,9 +73,9 @@ LineRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: -588061379
+  m_SortingLayer: 4
+  m_SortingOrder: 5
   m_Positions:
   - {x: -0.114547946, y: 2.365406, z: 0}
   m_Parameters:

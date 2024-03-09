@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider2D), typeof(SpriteRenderer))]
-public class DrawPoint : MonoBehaviour
+public class MeleePoint : MonoBehaviour
 {
     [HideInInspector] public bool hit;
     private SpriteRenderer sRend;
@@ -22,7 +22,7 @@ public class DrawPoint : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Player") && Active)
+        if (collision.gameObject.CompareTag("Line") && Active)
         {
             Deactivate();
         }
