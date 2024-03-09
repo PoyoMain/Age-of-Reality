@@ -156,7 +156,7 @@ public class BattleManager : MonoBehaviour
         AttackMenu.gameObject.SetActive(true);
         AttackMenu.SetCurrentUnit(CurrentPartyMemberActive);
 
-        while (AttackMenu.chosenAttack == null && AttackMenu.chosenItem == null)
+        while (AttackMenu.chosenAttack == null && AttackMenu.chosenItem == null && !AttackMenu.flee)
         {
             if (battleControls.SelectionUp.triggered) AttackMenu.SelectUp();
             else if (battleControls.SelectionDown.triggered) AttackMenu.SelectDown();
@@ -216,6 +216,8 @@ public class BattleManager : MonoBehaviour
                 turnOrder.Remove(selectedEnemy);
                 EnemyUnits.Remove(selectedEnemy);
                 Destroy(selectedEnemy.gameObject);
+
+                GameManager.Instance.enemiesDefeated++;
             }
 
             AttackMenu.gameObject.SetActive(false);
@@ -259,7 +261,12 @@ public class BattleManager : MonoBehaviour
             AttackMenu.gameObject.SetActive(false);
             AttackMenu.chosenItem = null;
         }
-
+        else if (AttackMenu.flee)
+        {
+            AttackMenu.gameObject.SetActive(false);
+            ChangeState(BattleState.Flee);
+            yield break;
+        }
 
 
         while (!turnOrder[0].Move(startPos, speed))

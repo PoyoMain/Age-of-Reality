@@ -21,6 +21,8 @@ public class ActionSelectMenu : MonoBehaviour
 
     private MenuState menuState;
 
+    [HideInInspector] public bool flee = false;
+
     private void Awake()
     {
         playerControls = new PlayerControls();
@@ -129,6 +131,11 @@ public class ActionSelectMenu : MonoBehaviour
         switch (menuState)
         {
             case MenuState.ActionMenu:
+                if (actionButtons[actionIndex].actionType == ActionType.Flee)
+                {
+                    flee = true;
+                    return;
+                }
                 if (actionButtons[actionIndex].button.interactable) ChangeState(MenuState.SecondaryMenu);
                 break;
             case MenuState.SecondaryMenu:
