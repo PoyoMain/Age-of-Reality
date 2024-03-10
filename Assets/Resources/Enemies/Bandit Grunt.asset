@@ -20,9 +20,9 @@ MonoBehaviour:
     Attack: 1
     Defense: 1
     Speed: 1
-    XP: 5
+    XP: 1
   attacks:
   - {fileID: 11400000, guid: fcf377c82c2a78d40b11dd91c2469062, type: 2}
   droppableItems:
   - Item: {fileID: 11400000, guid: 84892117910462542a78ddd8585684cf, type: 2}
-    ChanceToDrop: 1
+    ChanceToDrop: 0.25
