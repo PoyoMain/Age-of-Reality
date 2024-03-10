@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -11,7 +12,10 @@ public class TempPause : MonoBehaviour
     public GameObject itemMenu;
     [SerializeField]
     private ScriptableInventory gameInventory;
-    public List <Button> ButtonsList;
+    public List <PauseItemButton> ButtonsList;
+    [SerializeField] private TextMeshProUGUI itemNameText;
+    [SerializeField] private TextMeshProUGUI itemDescriptionText;
+    [SerializeField] private SpriteRenderer itemSprite;
     public void Update()
     {
         if (Input.GetKeyDown(KeyCode.Tab))
@@ -77,7 +81,17 @@ public class TempPause : MonoBehaviour
            if (gameInventory.Inventory[i].Value.Amount > 0) 
             {
                 ButtonsList[i].gameObject.GetComponentInChildren<TextMeshProUGUI>().text = GameManager.Instance.ItemInventory.Inventory[i].Value.item.name;
+                ButtonsList[i].item = GameManager.Instance.ItemInventory.Inventory[i].Value;
             }
         }
+    }
+
+    public void changeText( int index ) 
+    {
+        itemNameText.text = ButtonsList[index].item.item.name;
+        itemDescriptionText.text = ButtonsList[index].item.item.Description;
+        itemSprite.sprite = ButtonsList[index].item.item.Sprite;
+
+
     }
 }
