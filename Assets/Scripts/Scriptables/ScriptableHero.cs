@@ -38,7 +38,7 @@ public class ScriptableHero : ScriptableUnitBase
     {
         _stats.XP += xp;
 
-        Debug.Log("XP " + _stats.XP);
+        Debug.Log("XP Gained: " + _stats.XP);
     }
 
     public bool LevelUp(ScriptableLevelSystem levelSystem, out ScriptableAttack unlockedAttack)
