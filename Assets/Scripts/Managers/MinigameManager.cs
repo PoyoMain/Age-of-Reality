@@ -20,6 +20,16 @@ public class MinigameManager : MonoBehaviour
     public bool MinigameRunning { get; private set; }
     private bool isDrawing;
 
+    public float Accuracy
+    {
+        get
+        {
+            return _minigame.totalPercentage;
+        }
+
+        private set { }
+    }
+
     private void Awake()
     {
         anim = GetComponent<Animator>();

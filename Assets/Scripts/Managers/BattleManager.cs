@@ -197,7 +197,7 @@ public class BattleManager : MonoBehaviour
 
             minigameManager.gameObject.SetActive(false);
 
-            turnOrder[0].Attack(AttackMenu.chosenAttack, selectedEnemy, multiplier: AttackMenu.chosenAttack.Stats.multiplier);
+            turnOrder[0].Attack(AttackMenu.chosenAttack, selectedEnemy, multiplier: AttackMenu.chosenAttack.Stats.multiplier, accuracy: minigameManager.Accuracy);
             enemyHealthUI.UpdateHealth(selectedEnemy.Stats.Health);
 
             if (selectedEnemy.Stats.Health <= 0)
