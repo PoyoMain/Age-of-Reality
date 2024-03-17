@@ -110,4 +110,9 @@ public abstract class EnemyUnitBase : UnitBase
     {
         TakeDamage(-item.EffectAmount);
     }
+
+    public override void Select()
+    {
+        SendMessageUpwards("EnemySelected", this);
+    }
 }

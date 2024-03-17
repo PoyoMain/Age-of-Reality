@@ -6,7 +6,7 @@ using UnityEngine;
 public abstract class HeroUnitBase : UnitBase
 {
     [HideInInspector] public ScriptableHero data;
-    private Dictionary<ItemEffect, int> effectTurns = new Dictionary<ItemEffect, int>()
+    private Dictionary<ItemEffect, int> effectTurns = new()
     {
         { ItemEffect.Heal, 0 },
         { ItemEffect.AttackBoost, 0 },
@@ -128,5 +128,10 @@ public abstract class HeroUnitBase : UnitBase
         newStats.Health += item.EffectAmount;
         newStats.Health = Mathf.Clamp(newStats.Health, 0, data.BaseStats.Health);
         SetStats(newStats);
+    }
+
+    public override void Select()
+    {
+        SendMessageUpwards("PlayerSelected", this);
     }
 }

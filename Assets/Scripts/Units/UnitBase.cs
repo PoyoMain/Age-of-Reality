@@ -2,10 +2,13 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
+[RequireComponent(typeof(Animator), typeof(Button))]
 public abstract class UnitBase : MonoBehaviour
 {
     public GameObject selectIndicator;
+    public bool IsSelected;
 
     protected List<Effect> currentEffects = new();
 
@@ -55,6 +58,28 @@ public abstract class UnitBase : MonoBehaviour
     public abstract void SetEffects(ScriptableItem item);
 
     public abstract void DoEffects();
+
+    public abstract void Select();
+
+    private void Update()
+    {
+        if (Input.GetMouseButtonUp(0))
+        {
+            if (Vector2.Distance(GameManager.Instance.GetBattleCamera().ScreenToWorldPoint(Input.mousePosition), transform.position) < 1f)
+            {
+                Select();
+            }
+        }
+
+        if (!IsSelected)
+        {
+            selectIndicator.SetActive(false);
+        }
+        else
+        {
+            selectIndicator.SetActive(true);
+        }
+    }
 }
 
 public class Effect

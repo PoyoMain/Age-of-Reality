@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using static UnityEngine.EventSystems.EventTrigger;
 
 public class BattleManager : MonoBehaviour
 {
@@ -31,11 +32,9 @@ public class BattleManager : MonoBehaviour
 
     // Variables for picking an enemy to attck
     private EnemyUnitBase selectedEnemy;
-    private int enemyIndex;
     private bool pickingEnemy;
 
     private HeroUnitBase selectedPlayer;
-    private int playerIndex;
     private bool pickingPlayer;
 
     [SerializeField] private PlayerHealth playerHealthUI;
@@ -158,32 +157,23 @@ public class BattleManager : MonoBehaviour
 
         while (AttackMenu.chosenAttack == null && AttackMenu.chosenItem == null && !AttackMenu.flee)
         {
-            if (battleControls.SelectionUp.triggered) AttackMenu.SelectUp();
-            else if (battleControls.SelectionDown.triggered) AttackMenu.SelectDown();
-            else if (battleControls.Select.triggered) AttackMenu.Select();
             yield return null;
         }
 
         if (AttackMenu.chosenAttack != null)
         {
             AttackMenu.gameObject.SetActive(false);
-            pickingEnemy = true;
-            selectedEnemy = EnemyUnits[0];
-            selectedEnemy.selectIndicator.SetActive(true);
-            enemyHealthUI.InitializeEnemyUI(selectedEnemy);
-            enemyHealthUI.gameObject.SetActive(true);
+            pickingEnemy = false;
+            EnemySelected(EnemyUnits[0]);
 
             yield return new WaitForSeconds(0.5f);
+            pickingEnemy = true;
 
             while (pickingEnemy)
             {
-                if (battleControls.SelectionUp.triggered) EnemySelect(true);
-                else if (battleControls.SelectionDown.triggered) EnemySelect(false);
-                else if (battleControls.Select.triggered) pickingEnemy = false;
                 yield return null;
             }
-
-            selectedEnemy.selectIndicator.SetActive(false);
+            pickingEnemy = false;
 
             LineMinigameBase minigame = AttackMenu.chosenAttack.Minigame;
             minigameManager.SetMinigame(minigame, AttackMenu.chosenAttack.SecondsToComplete);
@@ -226,23 +216,17 @@ public class BattleManager : MonoBehaviour
         else if (AttackMenu.chosenItem != null)
         {
             AttackMenu.gameObject.SetActive(false);
-            pickingPlayer = true;
-            selectedPlayer = PartyUnits[0];
-            selectedPlayer.selectIndicator.SetActive(true);
-            playerHealthUI.InitializePlayerUI(selectedPlayer);
+            pickingPlayer = false;
+            PlayerSelected(PartyUnits[0]);
 
             yield return new WaitForSeconds(0.5f);
 
+            pickingPlayer = true;
             while (pickingPlayer)
             {
-                print("Hi");
-                if (battleControls.SelectionUp.triggered) PlayerSelect(true);
-                else if (battleControls.SelectionDown.triggered) PlayerSelect(false);
-                else if (battleControls.Select.triggered) pickingPlayer = false;
                 yield return null;
             }
-
-            selectedPlayer.selectIndicator.SetActive(false);
+            pickingPlayer = false;
 
             switch (AttackMenu.chosenItem.Effect)
             {
@@ -264,6 +248,7 @@ public class BattleManager : MonoBehaviour
         else if (AttackMenu.flee)
         {
             AttackMenu.gameObject.SetActive(false);
+            AttackMenu.flee = false;
             ChangeState(BattleState.Flee);
             yield break;
         }
@@ -411,42 +396,42 @@ public class BattleManager : MonoBehaviour
 
     }
 
-    /// <summary>
-    /// Select an enemy
-    /// </summary>
-    /// <param name="up">The direction of the new selection</param>
-    void EnemySelect(bool up)
+    void EnemySelected(EnemyUnitBase enemy)
     {
-        enemyIndex = up ? (enemyIndex + 1) % EnemyUnits.Count : (enemyIndex - 1) < 0 ? EnemyUnits.Count - 1 : enemyIndex - 1;
-        selectedEnemy = EnemyUnits[enemyIndex];
+        if (AttackMenu.chosenAttack == null || pickingEnemy == false) return;
 
-        foreach (EnemyUnitBase enemy in EnemyUnits)
+        if (enemy == selectedEnemy)
         {
-            enemy.selectIndicator.SetActive(false);
+            pickingEnemy = false;
+            selectedPlayer.IsSelected = false;
         }
-
-        selectedEnemy.selectIndicator.SetActive(true);
-        enemyHealthUI.UpdateEntireUI(selectedEnemy.Stats.Health, selectedEnemy.data.name);
+        else
+        {
+            if (selectedEnemy != null) selectedEnemy.IsSelected = false;
+            selectedEnemy = enemy;
+            selectedEnemy.IsSelected = true;
+            enemyHealthUI.InitializeEnemyUI(selectedEnemy);
+            enemyHealthUI.gameObject.SetActive(true);
+        }
     }
 
-    /// <summary>
-    /// Select an player
-    /// </summary>
-    /// <param name="up">The direction of the new selection</param>
-    void PlayerSelect(bool up)
+    void PlayerSelected(HeroUnitBase hero)
     {
-        playerIndex = up ? (playerIndex + 1) % PartyUnits.Count : (playerIndex - 1) < 0 ? PartyUnits.Count - 1 : playerIndex - 1;
-        selectedPlayer = PartyUnits[playerIndex];
+        if (AttackMenu.chosenItem == null || pickingPlayer == false) return;
 
-        foreach (HeroUnitBase player in PartyUnits)
+        if (hero == selectedPlayer)
         {
-            player.selectIndicator.SetActive(false);
+            pickingPlayer = false;
         }
-
-        selectedPlayer.selectIndicator.SetActive(true);
-        playerHealthUI.UpdateEntireUI(selectedPlayer.Stats.Health, selectedPlayer.data.name);
+        else
+        {
+            if (selectedPlayer != null) selectedPlayer.IsSelected = false;
+            selectedPlayer = hero;
+            selectedPlayer.IsSelected = true;
+            playerHealthUI.InitializePlayerUI(selectedPlayer);
+            playerHealthUI.gameObject.SetActive(true);
+        }
     }
-
 
     /// <summary>
     /// Despawns units at the end of battle 

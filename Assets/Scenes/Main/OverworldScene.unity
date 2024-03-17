@@ -6433,7 +6433,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 546464561}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1500403169}
+        m_TargetAssemblyTypeName: ActionSelectMenu, Assembly-CSharp
+        m_MethodName: SelectItemOption
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &546464561
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7088,7 +7100,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 872574874}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1500403169}
+        m_TargetAssemblyTypeName: ActionSelectMenu, Assembly-CSharp
+        m_MethodName: SelectFleeOption
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &872574874
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -63702,6 +63726,7 @@ GameObject:
   - component: {fileID: 1500403166}
   - component: {fileID: 1500403168}
   - component: {fileID: 1500403167}
+  - component: {fileID: 1500403170}
   - component: {fileID: 1500403169}
   m_Layer: 5
   m_Name: ActionMenuPanel
@@ -63787,6 +63812,27 @@ MonoBehaviour:
   chosenAttack: {fileID: 0}
   chosenItem: {fileID: 0}
   flee: 0
+--- !u!95 &1500403170
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1500403165}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: bd979068fd99d4f458d8776316b92a95, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1506804529
 GameObject:
   m_ObjectHideFlags: 0
@@ -65495,7 +65541,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1805456961}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1500403169}
+        m_TargetAssemblyTypeName: ActionSelectMenu, Assembly-CSharp
+        m_MethodName: SelectAttackOption
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1805456961
 MonoBehaviour:
   m_ObjectHideFlags: 0

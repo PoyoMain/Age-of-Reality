@@ -3,6 +3,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
+[RequireComponent(typeof(Animator))]
 public class ActionSelectMenu : MonoBehaviour
 {
     private List<ActionOption> actionButtons;
@@ -23,6 +24,8 @@ public class ActionSelectMenu : MonoBehaviour
 
     [HideInInspector] public bool flee = false;
 
+    private Animator _anim;
+
     private void Awake()
     {
         playerControls = new PlayerControls();
@@ -36,6 +39,8 @@ public class ActionSelectMenu : MonoBehaviour
 
         selectedAction = actionButtons[0];
         EventSystem.current.SetSelectedGameObject(selectedAction.gameObject);
+
+        _anim = GetComponent<Animator>();
     }
 
 
@@ -71,8 +76,7 @@ public class ActionSelectMenu : MonoBehaviour
                 }
                 break;
             case MenuState.SecondaryMenu:
-                moveSelectMenu.menuType = moveSelectMenu.currentUnit.data.Ability;
-                moveSelectMenu.actionChosen = selectedAction.actionType;
+                
                 moveSelectMenu.gameObject.SetActive(true);
 
                 foreach (ActionOption option in actionButtons)
@@ -152,6 +156,43 @@ public class ActionSelectMenu : MonoBehaviour
                         break;
                 }
                 break;
+        }
+    }
+
+    public void SelectAttackOption()
+    {
+        moveSelectMenu.menuType = moveSelectMenu.currentUnit.data.Ability;
+        moveSelectMenu.actionChosen = ActionType.Attack;
+        //_anim.SetTrigger("ShowAttacks");
+
+        ChangeState(MenuState.SecondaryMenu);
+    }
+
+    public void SelectItemOption()
+    {
+        moveSelectMenu.menuType = moveSelectMenu.currentUnit.data.Ability;
+        moveSelectMenu.actionChosen = ActionType.Attack;
+        //_anim.SetTrigger("ShowItems");
+
+        ChangeState(MenuState.SecondaryMenu);
+    }
+
+    public void SelectFleeOption()
+    {
+        flee = true;
+    }
+
+    public void MoveSelected(MoveOption option)
+    {
+        if (option is AttackOption attackOption)
+        {
+            chosenAttack = attackOption.Attack;
+            ChangeState(MenuState.ActionMenu);
+        }
+        else if (option is ItemOption itemOption)
+        {
+            chosenItem = itemOption.item;
+            ChangeState(MenuState.SecondaryMenu);
         }
     }
 
