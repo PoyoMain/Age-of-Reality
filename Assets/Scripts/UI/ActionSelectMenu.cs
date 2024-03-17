@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -6,11 +7,10 @@ using UnityEngine.EventSystems;
 [RequireComponent(typeof(Animator))]
 public class ActionSelectMenu : MonoBehaviour
 {
-    private List<ActionOption> actionButtons;
-    private ActionOption selectedAction;
-    private int actionIndex;
-
     [SerializeField] private MoveSelectMenu moveSelectMenu; // The sub menu to select moves
+    [SerializeField] private AttackSelectMenu attackSelectMenu;
+    [SerializeField] private ItemSelectMenu itemSelectMenu;
+
     [HideInInspector] public ScriptableAttack chosenAttack = null; // The attack chosen from the move select menu
     [HideInInspector] public ScriptableItem chosenItem = null;
     private MoveOption selectedMove;
@@ -31,31 +31,12 @@ public class ActionSelectMenu : MonoBehaviour
         playerControls = new PlayerControls();
         battleControls = playerControls.BattleControls;
 
-        actionButtons = GetComponentsInChildren<ActionOption>().ToList();
-        moveButtons = moveSelectMenu.moveButtons;
-        moveIndex = moveSelectMenu.moveIndex;
-
-        if (actionButtons.Count == 0) Debug.LogError($"No children with MoveOption script on {gameObject.name} gameobject");
-
-        selectedAction = actionButtons[0];
-        EventSystem.current.SetSelectedGameObject(selectedAction.gameObject);
+        //moveButtons = moveSelectMenu.moveButtons;
+        //moveIndex = moveSelectMenu.moveIndex;
 
         _anim = GetComponent<Animator>();
     }
 
-
-
-    private void Update()
-    {
-        switch (menuState)
-        {
-            case MenuState.ActionMenu:
-                break;
-            case MenuState.SecondaryMenu:
-                moveSelectMenu.moveIndex = moveIndex;
-                break;
-        }
-    }
 
     /// <summary>
     /// Change the state of the menu
@@ -68,113 +49,82 @@ public class ActionSelectMenu : MonoBehaviour
         switch (newState)
         {
             case MenuState.ActionMenu:
-                moveSelectMenu.gameObject.SetActive(false);
-
-                foreach (ActionOption option in actionButtons)
-                {
-                    option.button.interactable = true;
-                }
+                attackSelectMenu.enabled = false;
+                itemSelectMenu.enabled = false;
                 break;
-            case MenuState.SecondaryMenu:
-                
-                moveSelectMenu.gameObject.SetActive(true);
-
-                foreach (ActionOption option in actionButtons)
-                {
-                    option.button.interactable = false;
-                }
-
-                moveIndex = 0;
+            case MenuState.AttackMenu:
+                attackSelectMenu.enabled = true;
                 break;
-        }
-    }
-
-    /// <summary>
-    /// Navigate up the menu
-    /// </summary>
-    public void SelectUp()
-    {
-        switch (menuState)
-        {
-            case MenuState.ActionMenu:
-                actionIndex = (actionIndex - 1) < 0 ? actionButtons.Count - 1 : actionIndex - 1;
-                selectedAction = actionButtons[actionIndex];
-                EventSystem.current.SetSelectedGameObject(selectedAction.gameObject);
-                break;
-            case MenuState.SecondaryMenu:
-                moveIndex = (moveIndex - 1) < 0 ? moveButtons.Count - 1 : moveIndex - 1;
-                selectedMove = moveButtons[moveIndex];
-                EventSystem.current.SetSelectedGameObject(selectedMove.gameObject);
-                break;
-        }
-
-    }
-
-    /// <summary>
-    /// Navigate down the menu
-    /// </summary>
-    public void SelectDown()
-    {
-        switch (menuState)
-        {
-            case MenuState.ActionMenu:
-                actionIndex = (actionIndex + 1) % actionButtons.Count;
-                selectedAction = actionButtons[actionIndex];
-                EventSystem.current.SetSelectedGameObject(selectedAction.gameObject);
-                break;
-            case MenuState.SecondaryMenu:
-                moveIndex = (moveIndex + 1) % moveButtons.Count;
-                selectedMove = moveButtons[moveIndex];
-                EventSystem.current.SetSelectedGameObject(selectedMove.gameObject);
-                break;
-        }
-    }
-
-    public void Select()
-    {
-        switch (menuState)
-        {
-            case MenuState.ActionMenu:
-                if (actionButtons[actionIndex].actionType == ActionType.Flee)
-                {
-                    flee = true;
-                    return;
-                }
-                if (actionButtons[actionIndex].button.interactable) ChangeState(MenuState.SecondaryMenu);
-                break;
-            case MenuState.SecondaryMenu:
-                switch (selectedAction.actionType)
-                {
-                    case ActionType.Attack:
-                        chosenAttack = (moveSelectMenu.moveButtons[moveIndex] as AttackOption).Attack;
-                        ChangeState(MenuState.ActionMenu);
-                        break;
-
-                    case ActionType.Item:
-                        chosenItem = (moveSelectMenu.moveButtons[moveIndex] as ItemOption).item;
-                        ChangeState(MenuState.ActionMenu);
-                        break;
-                }
+            case MenuState.ItemMenu:
+                itemSelectMenu.enabled = true;
                 break;
         }
     }
 
     public void SelectAttackOption()
     {
-        moveSelectMenu.menuType = moveSelectMenu.currentUnit.data.Ability;
-        moveSelectMenu.actionChosen = ActionType.Attack;
+        StartCoroutine(SelectAttack());
+    }
+
+    IEnumerator SelectAttack()
+    {
+        //moveSelectMenu.menuType = moveSelectMenu.currentUnit.data.Ability;
+        //moveSelectMenu.actionChosen = ActionType.Attack;
         //_anim.SetTrigger("ShowAttacks");
 
-        ChangeState(MenuState.SecondaryMenu);
+        if (_anim.GetBool("isAttackMenu"))
+        {
+            _anim.SetBool("isAttackMenu", false);
+            ChangeState(MenuState.ActionMenu);
+        }
+        else
+        {
+            _anim.SetTrigger("AttackMenuOpen");
+
+            yield return 0;
+
+            _anim.SetBool("isAttackMenu", true);
+            _anim.SetBool("isItemMenu", false);
+
+            yield return new WaitForSeconds(1);
+
+            ChangeState(MenuState.AttackMenu);
+        }
+
+        yield break;
     }
 
     public void SelectItemOption()
     {
-        moveSelectMenu.menuType = moveSelectMenu.currentUnit.data.Ability;
-        moveSelectMenu.actionChosen = ActionType.Attack;
+        StartCoroutine(SelectItem());
+    }
+
+    IEnumerator SelectItem()
+    {
+        //moveSelectMenu.menuType = moveSelectMenu.currentUnit.data.Ability;
+        //moveSelectMenu.actionChosen = ActionType.Attack;
         //_anim.SetTrigger("ShowItems");
 
-        ChangeState(MenuState.SecondaryMenu);
+        if (_anim.GetBool("isItemMenu"))
+        {
+            _anim.SetBool("isItemMenu", false);
+            ChangeState(MenuState.ActionMenu);
+        }
+        else
+        {
+            _anim.SetTrigger("ItemMenuOpen");
+
+            yield return 0;
+
+            _anim.SetBool("isItemMenu", true);
+            _anim.SetBool("isAttackMenu", false);
+
+            yield return new WaitForSeconds(1);
+
+            ChangeState(MenuState.ItemMenu);
+        }
+        
+        yield break;
     }
 
     public void SelectFleeOption()
@@ -184,33 +134,41 @@ public class ActionSelectMenu : MonoBehaviour
 
     public void MoveSelected(MoveOption option)
     {
+        StartCoroutine(MoveSelect(option));
+    }
+
+    IEnumerator MoveSelect(MoveOption option)
+    {
         if (option is AttackOption attackOption)
         {
+            _anim.SetBool("isAttackMenu", false);
+
+            yield return new WaitForSeconds(1);
+
             chosenAttack = attackOption.Attack;
             ChangeState(MenuState.ActionMenu);
         }
         else if (option is ItemOption itemOption)
         {
+            _anim.SetBool("isItemMenu", false);
+
+            yield return new WaitForSeconds(1);
+
             chosenItem = itemOption.item;
-            ChangeState(MenuState.SecondaryMenu);
+            ChangeState(MenuState.ActionMenu);
         }
     }
 
     public void SetCurrentUnit(HeroUnitBase hero)
     {
-        if (GameManager.Instance.ItemInventory.IsEmpty) actionButtons[1].button.interactable = false;
-        else actionButtons[1].button.interactable = true;
-
-        moveSelectMenu.currentUnit = hero;
+        //moveSelectMenu.currentUnit = hero;
+        attackSelectMenu.currentUnit = hero;
+        itemSelectMenu.currentUnit = hero;
     }
 
     private void OnEnable()
     {
         battleControls.Enable();
-
-        selectedAction = actionButtons[0];
-
-        EventSystem.current.SetSelectedGameObject(selectedAction.gameObject);
         ChangeState(MenuState.ActionMenu);
     }
 
@@ -231,5 +189,6 @@ public class ActionSelectMenu : MonoBehaviour
 public enum MenuState
 {
     ActionMenu,
-    SecondaryMenu
+    AttackMenu,
+    ItemMenu,
 }

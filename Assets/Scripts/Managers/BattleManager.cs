@@ -403,7 +403,7 @@ public class BattleManager : MonoBehaviour
         if (enemy == selectedEnemy)
         {
             pickingEnemy = false;
-            selectedPlayer.IsSelected = false;
+            selectedEnemy.IsSelected = false;
         }
         else
         {
@@ -422,6 +422,7 @@ public class BattleManager : MonoBehaviour
         if (hero == selectedPlayer)
         {
             pickingPlayer = false;
+            selectedPlayer.IsSelected = false;
         }
         else
         {

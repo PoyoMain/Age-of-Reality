@@ -7,18 +7,20 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : Singleton<GameManager>
 {
+    [Header("General Settings")]
     [SerializeField] private PlayerController player; // The player's overworld character
     [SerializeField] private BattleManager battleManager;
     [SerializeField] private Camera overworldCamera;
+    [SerializeField] private Camera battleCamera;
+
+    [Space(15)]
+    [Header("Audio")]
+    [SerializeField] private float audioFadeOutTime;
     private AudioSource overworldAudioSource;
     private float overworldAudioStartVolume;
-
-    [SerializeField] private Camera battleCamera;
     private AudioSource battleAudioSource;
     private AudioBG battleAudioManager;
     private float battleAudioStartVolume;
-
-    [SerializeField] private float audioFadeOutTime;
     [HideInInspector] public bool modeTransitioning;
 
     private GameState State;
@@ -29,7 +31,13 @@ public class GameManager : Singleton<GameManager>
     }
     [HideInInspector] public Enemy enemyHit; // The enemy hit by the player
 
+    [Space(15)]
+    [Header("Inventory")]
     public ScriptableInventory ItemInventory;
+
+    [Space(15)]
+    [Header("Dialogue")]
+    public Dialogue dialogueBox;
 
     [HideInInspector] public int perfectMinigameCount;
     [HideInInspector] public int enemiesDefeated;
@@ -56,7 +64,7 @@ public class GameManager : Singleton<GameManager>
             case GameState.Overworld:
                 EndBattle();
                 break;
-            case GameState.DuringBattle:
+            case GameState.Battle:
                 StartBattle();
                 break;
         }
@@ -65,8 +73,6 @@ public class GameManager : Singleton<GameManager>
     // Starts a battle. 
     void StartBattle()
     {
-        
-
         StartCoroutine(StartBattleCoroutine());
     }
 
@@ -76,6 +82,13 @@ public class GameManager : Singleton<GameManager>
 
         enemyHit.Freeze();
         player.Freeze();
+
+        dialogueBox.Init(enemyHit.Lines);
+
+        while (dialogueBox.PlayingDialogue)
+        {
+            yield return null;
+        }
 
         while (overworldAudioSource.volume > 0.1)
         {
@@ -130,12 +143,16 @@ public class GameManager : Singleton<GameManager>
             enemyHit.MakeInvincible(); // If the player flees, make the enemy invincible for a few seconds
         }
 
+        enemyHit = null;
+
     }
 
     public void EnemyHit(Enemy enemy)
     {
+        if (enemyHit != null) return;
+
         enemyHit = enemy;
-        ChangeGameState(GameState.DuringBattle);
+        ChangeGameState(GameState.Battle);
     }
 
     public Camera GetBattleCamera()
@@ -168,5 +185,5 @@ public class GameManager : Singleton<GameManager>
 public enum GameState
 {
     Overworld,
-    DuringBattle,
+    Battle,
 }

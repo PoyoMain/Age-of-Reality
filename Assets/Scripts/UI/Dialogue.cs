@@ -1,25 +1,35 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro; 
+using TMPro;
 
 public class Dialogue : MonoBehaviour
 {
 
     [SerializeField] private TextMeshProUGUI textComponent;
-    [SerializeField] private string[] lines;
+    [SerializeField] private GameObject dialogueBox;
+    private string[] lines;
     [SerializeField] private float textSpeed;
     private int index;
-    
-    void Start()
+
+    public bool PlayingDialogue
     {
+        get;
+        private set;
+    }
+
+    public void Init(string[] linesToSay)
+    {
+        lines = linesToSay;
+        dialogueBox.SetActive(true);
         textComponent.text = string.Empty;
+        PlayingDialogue = true;
         StartDialogue();
     }
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && PlayingDialogue)
         {
             AdvanceDialogue();
         }
@@ -41,12 +51,12 @@ public class Dialogue : MonoBehaviour
     void StartDialogue()
     {
         index = 0;
-        StartCoroutine(TypeLine()); 
+        StartCoroutine(TypeLine());
     }
 
     IEnumerator TypeLine()
     {
-        foreach(char c in lines[index].ToCharArray())
+        foreach (char c in lines[index].ToCharArray())
         {
             textComponent.text += c;
             yield return new WaitForSeconds(textSpeed);
@@ -63,7 +73,9 @@ public class Dialogue : MonoBehaviour
         }
         else
         {
-            gameObject.SetActive(false); 
+            dialogueBox.SetActive(false);
+            PlayingDialogue = false;
+
         }
     }
 }

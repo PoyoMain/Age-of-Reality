@@ -75,7 +75,7 @@ LineRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -588061379
   m_SortingLayer: 4
-  m_SortingOrder: 2
+  m_SortingOrder: 4
   m_Positions:
   - {x: 0, y: 0, z: 0}
   - {x: 1, y: 0, z: 0}
@@ -153,8 +153,13 @@ MonoBehaviour:
   lineRenderer: {fileID: 8592363984788378300}
   lineGenerator: {fileID: 6633343848253367670, guid: 85fe218a22f91564e8d4efdb1ccd4e9b, type: 3}
   testLine: {fileID: 8962312039684443172, guid: 3e03c361f89250a4c9ea6998c4a49b80, type: 3}
+  pastpastPoint: {x: 0, y: 0}
   pastPoint: {x: 0, y: 0}
+  tempAngle: 0
+  pastAngle: 0
   lineCollider: {fileID: 6776846295852415892}
+  proximityThreshold: 0.1
+  timeCheck: 0
 --- !u!68 &6776846295852415892
 EdgeCollider2D:
   m_ObjectHideFlags: 0

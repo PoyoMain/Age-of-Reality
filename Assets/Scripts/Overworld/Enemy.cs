@@ -18,6 +18,13 @@ public class Enemy : MonoBehaviour
 
     public bool isBoss;
 
+    [TextArea(2,2)]
+    [SerializeField] private string[] lines;
+    public string[] Lines 
+    { 
+        get { return lines; }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
