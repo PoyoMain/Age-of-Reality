@@ -14,8 +14,8 @@ public class ResourceStorage : Singleton<ResourceStorage>
     private Dictionary<string, ScriptableEnemy> _EnemyDict;
 
     // Stores references to all minigames
-    public List<LineGenerator> Minigames { get; private set; }
-    private Dictionary<string, LineGenerator> _MinigameDict;
+    public List<LineMinigameBase> Minigames { get; private set; }
+    private Dictionary<string, LineMinigameBase> _MinigameDict;
     
 
     protected override void Awake()
@@ -35,7 +35,7 @@ public class ResourceStorage : Singleton<ResourceStorage>
         Enemies = Resources.LoadAll<ScriptableEnemy>("Enemies").ToList();
         _EnemyDict = Enemies.ToDictionary(x => x.name, x => x);
 
-        Minigames = Resources.LoadAll<LineGenerator>("Minigames").ToList();
+        Minigames = Resources.LoadAll<LineMinigameBase>("Minigames").ToList();
         _MinigameDict = Minigames.ToDictionary(x => x.name, x => x);
     }
 
@@ -64,7 +64,7 @@ public class ResourceStorage : Singleton<ResourceStorage>
     /// </summary>
     /// <param name="name">The name of the minigame to search for</param>
     /// <returns>The minigame searched for</returns>
-    public LineGenerator GetMinigame(string name)
+    public LineMinigameBase GetMinigame(string name)
     {
         return _MinigameDict[name];
     }

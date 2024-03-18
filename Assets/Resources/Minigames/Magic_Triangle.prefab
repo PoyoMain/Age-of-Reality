@@ -47,20 +47,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8eec6415b4f109b4d8af24dd1abfcb40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DoneDrawing: 0
+  totalPercentage: 0
   linePrefab: {fileID: 291009501671097667, guid: 8901a5a6c053dd54baded0c87f7ba905, type: 3}
   cam: {fileID: 0}
   distanceNeeded: 0
   distanceTravelled: 0
-  totalPercentage: 0
   totalPoints: 0
   closePoints: 0
   lines:
   - {fileID: 535212697824329703}
   - {fileID: 1359450456262749264}
   - {fileID: 7417334490743787034}
+  backwards: 0
+  tempAngle: 0
+  pastAngle: 0
   lineRenderers: []
   startingPos: []
   endingPos: []
+  battleParent: {fileID: 0}
+  drawnPoints: []
+  lastMousePosition: {x: 0, y: 0}
+  lastDirection: {x: 0, y: 0}
+  isDirectionFlipped: 0
+  flipThreshold: 0
 --- !u!1001 &3276651323519624313
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -119,7 +129,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9058770358148240058, guid: 500f6183cedc17546b58058f99f2218c, type: 3}
       propertyPath: m_SortingOrder
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 9058770358148240058, guid: 500f6183cedc17546b58058f99f2218c, type: 3}
       propertyPath: m_SortingLayerID
@@ -301,7 +311,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9058770358148240058, guid: 500f6183cedc17546b58058f99f2218c, type: 3}
       propertyPath: m_SortingOrder
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 9058770358148240058, guid: 500f6183cedc17546b58058f99f2218c, type: 3}
       propertyPath: m_SortingLayerID

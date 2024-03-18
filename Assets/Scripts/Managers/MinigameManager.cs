@@ -8,17 +8,27 @@ public class MinigameManager : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _percentDisplayText;
     [SerializeField] private TextMeshProUGUI _timeDisplayText;
+    [SerializeField] private GameObject _clickIndicator;
 
-    [SerializeField] private float minigameCompleteTime;
     private float timer;
 
-    private LineGenerator _minigamePrefab;
-    private LineGenerator _minigame;
+    private LineMinigameBase _minigamePrefab;
+    private LineMinigameBase _minigame;
 
     private Animator anim;
 
     public bool MinigameRunning { get; private set; }
     private bool isDrawing;
+
+    public float Accuracy
+    {
+        get
+        {
+            return _minigame.totalPercentage;
+        }
+
+        private set { }
+    }
 
     private void Awake()
     {
@@ -27,36 +37,49 @@ public class MinigameManager : MonoBehaviour
 
     private void OnEnable()
     {
-        timer = minigameCompleteTime;
-        UpdateTimerText(timer);
-
         _minigame = Instantiate(_minigamePrefab, GridInfo.GridWorldMidPoint, Quaternion.identity, transform);
         UpdatePercentText();
 
         isDrawing = true;
+
+        _clickIndicator.SetActive(true);
     }
 
-    public void SetMinigame(LineGenerator minigameToSpawn)
+    public void SetMinigame(LineMinigameBase minigameToSpawn, int completeTime)
     {
         _minigamePrefab = minigameToSpawn;
         MinigameRunning = true;
+
+        timer = completeTime;
+        UpdateTimerText(timer);
     }
 
     private void Update()
     {
-        
-        if (timer > 0 && isDrawing)
+        if (_minigame.StartedDrawing)
         {
-            timer -= Time.deltaTime;
-            UpdateTimerText(timer);
-            UpdatePercentText();
-
-            if (timer <= 0 || _minigame.DoneDrawing)
+            if (_clickIndicator.activeSelf == true)
             {
-                UpdateTimerText(0);
-                _minigame.enabled = false;
-                anim.SetTrigger("MinigameDone");
-                isDrawing = false;
+                _clickIndicator.SetActive(false);
+            }
+
+            if (timer > 0 && isDrawing)
+            {
+                timer -= Time.deltaTime;
+                UpdateTimerText(timer);
+                UpdatePercentText();
+
+                if (timer <= 0 || _minigame.DoneDrawing)
+                {
+                    if (_minigame.totalPercentage >= 100)
+                    {
+                        GameManager.Instance.perfectMinigameCount++;
+                    }
+                    UpdateTimerText(0);
+                    _minigame.enabled = false;
+                    anim.SetTrigger("MinigameDone");
+                    isDrawing = false;
+                }
             }
         }
     }

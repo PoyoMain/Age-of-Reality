@@ -2,9 +2,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class LineGenerator : MonoBehaviour
+public class LineGenerator : LineMinigameBase
 {
-
+    [Space(30f)]
     public GameObject linePrefab;
     public Camera cam;
     Line activeLine;
@@ -12,11 +12,8 @@ public class LineGenerator : MonoBehaviour
     public float distanceNeeded = 0;
     public float distanceTravelled = 0;
 
-    public float totalPercentage = 0;
     public float totalPoints = 0;
     public float closePoints = 0;
-
-    public bool DoneDrawing = false;
 
     //Start and endpoint of line on screen
     public GameObject[] lines;
@@ -39,6 +36,8 @@ public class LineGenerator : MonoBehaviour
     public int listLength { get; set; }
     public void OnEnable()
     {
+        StartedDrawing = false;
+
         cam = GameManager.Instance.GetBattleCamera();
         lineRenderers = new List<LineRenderer>();
         startingPos = new List<Vector2>();
@@ -80,6 +79,8 @@ public class LineGenerator : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
+            StartedDrawing = true;
+
             GameObject newLine = Instantiate(linePrefab, transform);
             activeLine = newLine.GetComponent<Line>();
             activeLine.setRefrence(this);
@@ -90,7 +91,7 @@ public class LineGenerator : MonoBehaviour
         {
             //endingPos.Add(mousePos);
             activeLine = null;
-            if (totalPercentage > 90)
+            if (totalPercentage > 60)
             {
                 DoneDrawing = true;
             }

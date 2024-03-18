@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c2d4bc2559759f4c8dea49aaecb85ab, type: 3}
+  m_Name: Default Level System
+  m_EditorClassIdentifier: 
+  levels:
+  - name: Level 2
+    lvl: 2
+    XPToReachLevel: 3
+    MeleeAttackUnlocked: {fileID: 0}
+    MagicAttackUnlocked: {fileID: 0}
+  - name: Level 3
+    lvl: 3
+    XPToReachLevel: 5
+    MeleeAttackUnlocked: {fileID: 11400000, guid: 86312073f281d6440adf256f18bffc54, type: 2}
+    MagicAttackUnlocked: {fileID: 11400000, guid: 283bb9e8f9028464d956c74b87780816, type: 2}
+  - name: Level 4
+    lvl: 4
+    XPToReachLevel: 8
+    MeleeAttackUnlocked: {fileID: 0}
+    MagicAttackUnlocked: {fileID: 0}
+  - name: Level 5
+    lvl: 5
+    XPToReachLevel: 10
+    MeleeAttackUnlocked: {fileID: 11400000, guid: a71255237981ae045b3dc5722d4d53be, type: 2}
+    MagicAttackUnlocked: {fileID: 11400000, guid: af1c063f35298e54e9418e580708e58d, type: 2}

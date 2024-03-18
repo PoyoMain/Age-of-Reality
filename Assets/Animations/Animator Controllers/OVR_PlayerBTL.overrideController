@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: OVR_PlayerBTL
+  m_Controller: {fileID: 9100000, guid: ef83a34718fbe3b40bf9ad6633114470, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: d96c00c65cf43ef49881827d37131ad3, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 39c3fd0d002265545b941a8922ac7129, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 72f439c9965047a4e91251aa8452f57a, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: f767b019b16e0f2459b08346182f996f, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 40c1168fc6bd4484da631ceae39e920e, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 3da0f6c0e107a3f489afc70e00ad17d4, type: 2}

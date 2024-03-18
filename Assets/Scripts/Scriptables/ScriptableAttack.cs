@@ -16,8 +16,9 @@ public abstract class ScriptableAttack : ScriptableObject
     /// </summary>
     protected AttackType _attackType;
 
-    public MinigameType Minigame;
-    
+    public LineMinigameBase Minigame;
+
+    public int SecondsToComplete;
 }
 
 [Serializable]

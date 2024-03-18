@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,12 @@ using UnityEngine;
 public abstract class HeroUnitBase : UnitBase
 {
     [HideInInspector] public ScriptableHero data;
+    private Dictionary<ItemEffect, int> effectTurns = new()
+    {
+        { ItemEffect.Heal, 0 },
+        { ItemEffect.AttackBoost, 0 },
+        { ItemEffect.Evasiveness, 0 },
+    };
 
     public HeroStats Stats { get; private set; }
 
@@ -49,10 +56,10 @@ public abstract class HeroUnitBase : UnitBase
     {
         EnemyUnitBase enemyTarget = target as EnemyUnitBase;
 
-        int damage = Mathf.RoundToInt(((attack.Stats.attackPower + (Stats.Attack * 10) - (enemyTarget.Stats.Defense * 10)) * multiplier) * accuracy);
+        int damage = Mathf.RoundToInt(((attack.Stats.attackPower + (Stats.Attack * 10) - (enemyTarget.Stats.Defense * 10)) * multiplier) * (accuracy/100));
         target.TakeDamage(damage);
 
-        print(damage);
+        print("Player Damage Dealt: " + damage);
     }
 
     /// <summary>
@@ -64,5 +71,67 @@ public abstract class HeroUnitBase : UnitBase
         HeroStats newStats = Stats;
         newStats.Health -= damage;
         SetStats(newStats);
+    }
+
+    public override void SetEffects(ScriptableItem item)
+    {
+        switch (item.Effect)
+        {
+            case ItemEffect.Heal:
+                Heal(item);
+                Effect newEffect = new()
+                {
+                    durationInTurns = item.EffectDurationInTurns,
+                    effect = item.Effect,
+                    itemCausingEffect = item,
+                };
+                currentEffects.Add(newEffect);
+                break;
+        }
+    }
+
+    public override void DoEffects()
+    {
+        List<Effect> finishedEffects = new ();
+        foreach (Effect effect in currentEffects)
+        {
+            switch (effect.effect)
+            {
+                case ItemEffect.Heal:
+                    Heal(effect.itemCausingEffect);
+                    break;
+                case ItemEffect.AttackBoost:
+                    break;
+                case ItemEffect.Evasiveness:
+                    break;
+            }
+
+            effect.durationInTurns--;
+
+            if (effect.durationInTurns <= 0)
+            {
+                finishedEffects.Add(effect);
+            }
+        }
+
+        foreach (Effect effect in  finishedEffects)
+        {
+            currentEffects.Remove(effect);
+        }
+
+        finishedEffects.Clear();
+    }
+
+    void Heal(ScriptableItem item)
+    {
+        HeroStats newStats = Stats;
+        newStats.Health += item.EffectAmount;
+        newStats.Health = Mathf.Clamp(newStats.Health, 0, data.BaseStats.Health);
+        SetStats(newStats);
+    }
+
+    public override void Select()
+    {
+        SendMessageUpwards("PlayerSelected", this);
     }
 }

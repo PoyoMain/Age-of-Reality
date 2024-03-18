@@ -7,19 +7,20 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : Singleton<GameManager>
 {
+    [Header("General Settings")]
     [SerializeField] private PlayerController player; // The player's overworld character
     [SerializeField] private BattleManager battleManager;
     [SerializeField] private Camera overworldCamera;
-    private AudioSource overworldAudio;
-    private float overworldAudioStartVolume;
-
     [SerializeField] private Camera battleCamera;
-    private AudioSource battleAudio;
-    private float battleAudioStartVolume;
 
-    [SerializeField] private LineGenerator minigame;
-
+    [Space(15)]
+    [Header("Audio")]
     [SerializeField] private float audioFadeOutTime;
+    private AudioSource overworldAudioSource;
+    private float overworldAudioStartVolume;
+    private AudioSource battleAudioSource;
+    private AudioBG battleAudioManager;
+    private float battleAudioStartVolume;
     [HideInInspector] public bool modeTransitioning;
 
     private GameState State;
@@ -30,22 +31,28 @@ public class GameManager : Singleton<GameManager>
     }
     [HideInInspector] public Enemy enemyHit; // The enemy hit by the player
 
+    [Space(15)]
+    [Header("Inventory")]
+    public ScriptableInventory ItemInventory;
+
+    [Space(15)]
+    [Header("Dialogue")]
+    public Dialogue dialogueBox;
+
+    [HideInInspector] public int perfectMinigameCount;
+    [HideInInspector] public int enemiesDefeated;
+
     protected override void Awake()
     {
         base.Awake();
 
-        overworldAudio = overworldCamera.gameObject.GetComponent<AudioSource>();
-        overworldAudioStartVolume = overworldAudio.volume;
+        overworldAudioSource = overworldCamera.gameObject.GetComponent<AudioSource>();
+        overworldAudioStartVolume = overworldAudioSource.volume;
 
-        battleAudio = battleCamera.gameObject.GetComponent<AudioSource>();
-        battleAudioStartVolume = battleAudio.volume;
+        battleAudioManager =  battleCamera.gameObject.GetComponent<AudioBG>();
+        battleAudioSource = battleCamera.gameObject.GetComponent<AudioSource>();
+        battleAudioStartVolume = battleAudioSource.volume;
     }
-
-    //private void Start()
-    //{
-    //    LineGenerator minigame = ResourceStorage.Instance.GetMinigame(Enum.GetName(typeof(MinigameType), MinigameType.Magic_Triangle));
-    //    Instantiate(minigame, player.transform.position, Quaternion.identity);
-    //}
 
     // Method to change the state of the game
     public void ChangeGameState(GameState newState)
@@ -57,7 +64,7 @@ public class GameManager : Singleton<GameManager>
             case GameState.Overworld:
                 EndBattle();
                 break;
-            case GameState.DuringBattle:
+            case GameState.Battle:
                 StartBattle();
                 break;
         }
@@ -66,8 +73,6 @@ public class GameManager : Singleton<GameManager>
     // Starts a battle. 
     void StartBattle()
     {
-        
-
         StartCoroutine(StartBattleCoroutine());
     }
 
@@ -78,19 +83,29 @@ public class GameManager : Singleton<GameManager>
         enemyHit.Freeze();
         player.Freeze();
 
-        while (overworldAudio.volume > 0.1)
+        dialogueBox.Init(enemyHit.Lines);
+
+        while (dialogueBox.PlayingDialogue)
         {
-            overworldAudio.volume -=  Time.deltaTime / audioFadeOutTime;
+            yield return null;
+        }
+
+        while (overworldAudioSource.volume > 0.1)
+        {
+            overworldAudioSource.volume -=  Time.deltaTime / audioFadeOutTime;
             yield return null;
         }
 
         modeTransitioning = false;
 
+        if (enemyHit.isBoss) battleAudioManager.playAltTracks = true;
+        else battleAudioManager.playAltTracks = false;
+
         battleManager.gameObject.SetActive(true);
         battleManager.enabled = true; // activates the battle manager
 
         overworldCamera.gameObject.SetActive(false); // deactivates the overworld camera
-        overworldAudio.volume = overworldAudioStartVolume;
+        overworldAudioSource.volume = overworldAudioStartVolume;
 
 
     }
@@ -105,9 +120,9 @@ public class GameManager : Singleton<GameManager>
     {
         modeTransitioning = true;
 
-        while (battleAudio.volume > 0.1)
+        while (battleAudioSource.volume > 0.1)
         {
-            battleAudio.volume -= Time.deltaTime / audioFadeOutTime;
+            battleAudioSource.volume -= Time.deltaTime / audioFadeOutTime;
             yield return null;
         }
 
@@ -115,7 +130,7 @@ public class GameManager : Singleton<GameManager>
 
         battleManager.gameObject.SetActive(false);
         battleManager.enabled = false; // Deactivates the battle manager
-        battleAudio.volume = battleAudioStartVolume;
+        battleAudioSource.volume = battleAudioStartVolume;
 
         overworldCamera.gameObject.SetActive(true); // Activates the overworld camera
 
@@ -125,15 +140,19 @@ public class GameManager : Singleton<GameManager>
         }
         else
         {
-            enemyHit.MakeInvincible(); // If the player loses, make the enemy invincible for a few seconds
+            enemyHit.MakeInvincible(); // If the player flees, make the enemy invincible for a few seconds
         }
+
+        enemyHit = null;
 
     }
 
     public void EnemyHit(Enemy enemy)
     {
+        if (enemyHit != null) return;
+
         enemyHit = enemy;
-        ChangeGameState(GameState.DuringBattle);
+        ChangeGameState(GameState.Battle);
     }
 
     public Camera GetBattleCamera()
@@ -154,11 +173,17 @@ public class GameManager : Singleton<GameManager>
             player.HandleUpdate();
         }
     }
+
+    private void OnDisable()
+    {
+        ItemInventory.Inventory.Clear();
+        perfectMinigameCount = 0;
+    }
 }
 
 // States of the game
 public enum GameState
 {
     Overworld,
-    DuringBattle,
+    Battle,
 }

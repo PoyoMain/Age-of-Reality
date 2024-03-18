@@ -775,6 +775,7 @@ MonoBehaviour:
   allies: []
   team: []
   type: {fileID: 11400000, guid: afb15740988dada4c9a9931cb4f1e9a3, type: 2}
+  isBoss: 0
 --- !u!50 &84349382
 Rigidbody2D:
   serializedVersion: 4
@@ -5376,6 +5377,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: afb15740988dada4c9a9931cb4f1e9a3, type: 2}
   team: []
   type: {fileID: 11400000, guid: afb15740988dada4c9a9931cb4f1e9a3, type: 2}
+  isBoss: 0
 --- !u!50 &434903082
 Rigidbody2D:
   serializedVersion: 4
@@ -5507,6 +5509,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: afb15740988dada4c9a9931cb4f1e9a3, type: 2}
   team: []
   type: {fileID: 11400000, guid: afb15740988dada4c9a9931cb4f1e9a3, type: 2}
+  isBoss: 0
 --- !u!50 &508801933
 Rigidbody2D:
   serializedVersion: 4
@@ -5707,6 +5710,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: afb15740988dada4c9a9931cb4f1e9a3, type: 2}
   team: []
   type: {fileID: 11400000, guid: afb15740988dada4c9a9931cb4f1e9a3, type: 2}
+  isBoss: 0
 --- !u!50 &511020642
 Rigidbody2D:
   serializedVersion: 4
@@ -6004,9 +6008,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b09134c220651846841bd85b24cbeb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioClips: []
+  audioClipsMain:
+  - {fileID: 8300000, guid: 74436c97d72e5504f853013519c35eb5, type: 3}
+  audioClipsAlt: []
   audioSwapTime: 0
   fadeTime: 3
+  playAltTracks: 0
 --- !u!114 &519420036
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6425,19 +6432,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 546464561}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1500403169}
-        m_TargetAssemblyTypeName: ActionSelectMenu, Assembly-CSharp
-        m_MethodName: selectButton
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &546464561
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6824,10 +6819,10 @@ MonoBehaviour:
   battleManager: {fileID: 894439767}
   overworldCamera: {fileID: 519420031}
   battleCamera: {fileID: 1564340127}
-  minigame: {fileID: 0}
   audioFadeOutTime: 0.5
   modeTransitioning: 0
   enemyHit: {fileID: 0}
+  ItemInventory: {fileID: 11400000, guid: 224083c2894e58840b91dc7132be5e43, type: 2}
 --- !u!1 &763444056
 GameObject:
   m_ObjectHideFlags: 0
@@ -6863,6 +6858,7 @@ MonoBehaviour:
   allies: []
   team: []
   type: {fileID: 11400000, guid: afb15740988dada4c9a9931cb4f1e9a3, type: 2}
+  isBoss: 0
 --- !u!50 &763444059
 Rigidbody2D:
   serializedVersion: 4
@@ -7047,6 +7043,9 @@ MonoBehaviour:
   AttackMenu: {fileID: 1500403169}
   playerHealthUI: {fileID: 8906983414525601874}
   enemyHealthUI: {fileID: 6924579164620716373}
+  xpWindow: {fileID: 1462459409}
+  levelSystem: {fileID: 11400000, guid: 909bf1f7f33ce7945a3610db2151197f, type: 2}
+  givenItems: []
 --- !u!1 &908680862
 GameObject:
   m_ObjectHideFlags: 0
@@ -7118,6 +7117,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: afb15740988dada4c9a9931cb4f1e9a3, type: 2}
   team: []
   type: {fileID: 11400000, guid: afb15740988dada4c9a9931cb4f1e9a3, type: 2}
+  isBoss: 0
 --- !u!50 &908680865
 Rigidbody2D:
   serializedVersion: 4
@@ -7282,6 +7282,7 @@ MonoBehaviour:
   allies: []
   team: []
   type: {fileID: 11400000, guid: afb15740988dada4c9a9931cb4f1e9a3, type: 2}
+  isBoss: 0
 --- !u!50 &925940129
 Rigidbody2D:
   serializedVersion: 4
@@ -7446,6 +7447,7 @@ MonoBehaviour:
   allies: []
   team: []
   type: {fileID: 11400000, guid: afb15740988dada4c9a9931cb4f1e9a3, type: 2}
+  isBoss: 0
 --- !u!50 &927576832
 Rigidbody2D:
   serializedVersion: 4
@@ -7878,6 +7880,7 @@ MonoBehaviour:
   allies: []
   team: []
   type: {fileID: 11400000, guid: afb15740988dada4c9a9931cb4f1e9a3, type: 2}
+  isBoss: 0
 --- !u!50 &1039817530
 Rigidbody2D:
   serializedVersion: 4
@@ -8449,6 +8452,7 @@ MonoBehaviour:
   allies: []
   team: []
   type: {fileID: 11400000, guid: e3cce38e5cab2a84c9bbe60ef7ed156a, type: 2}
+  isBoss: 1
 --- !u!50 &1291648736
 Rigidbody2D:
   serializedVersion: 4
@@ -8522,10 +8526,10 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 4, y: 4}
+  m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &1291648738
@@ -8613,6 +8617,7 @@ MonoBehaviour:
   allies: []
   team: []
   type: {fileID: 11400000, guid: afb15740988dada4c9a9931cb4f1e9a3, type: 2}
+  isBoss: 0
 --- !u!50 &1318958636
 Rigidbody2D:
   serializedVersion: 4
@@ -63664,6 +63669,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSelectMenu: {fileID: 2079669488}
   chosenAttack: {fileID: 0}
+  chosenItem: {fileID: 0}
 --- !u!1 &1506804529
 GameObject:
   m_ObjectHideFlags: 0
@@ -63869,6 +63875,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: afb15740988dada4c9a9931cb4f1e9a3, type: 2}
   team: []
   type: {fileID: 11400000, guid: afb15740988dada4c9a9931cb4f1e9a3, type: 2}
+  isBoss: 0
 --- !u!50 &1508218233
 Rigidbody2D:
   serializedVersion: 4
@@ -64203,9 +64210,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b09134c220651846841bd85b24cbeb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioClips: []
+  audioClipsMain:
+  - {fileID: 8300000, guid: 7ba0cf49ce3b5ed4f92affc696a76c1a, type: 3}
+  audioClipsAlt:
+  - {fileID: 8300000, guid: 6782543cf6f1d39468f1f3b28b25c4ad, type: 3}
   audioSwapTime: 0
   fadeTime: 3
+  playAltTracks: 0
 --- !u!82 &1564340129
 AudioSource:
   m_ObjectHideFlags: 0
@@ -64510,6 +64521,7 @@ MonoBehaviour:
   allies: []
   team: []
   type: {fileID: 11400000, guid: afb15740988dada4c9a9931cb4f1e9a3, type: 2}
+  isBoss: 0
 --- !u!50 &1652250590
 Rigidbody2D:
   serializedVersion: 4
@@ -64675,6 +64687,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: afb15740988dada4c9a9931cb4f1e9a3, type: 2}
   team: []
   type: {fileID: 11400000, guid: afb15740988dada4c9a9931cb4f1e9a3, type: 2}
+  isBoss: 0
 --- !u!50 &1683036473
 Rigidbody2D:
   serializedVersion: 4
@@ -65268,19 +65281,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1805456961}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1500403169}
-        m_TargetAssemblyTypeName: ActionSelectMenu, Assembly-CSharp
-        m_MethodName: selectButton
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1805456961
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -66121,10 +66122,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5499606883337998497, guid: 4814d7d22e665e844a64d683d44c6bd1, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6609838293140283321, guid: 4814d7d22e665e844a64d683d44c6bd1, type: 3}
       propertyPath: m_Name
       value: PauseMenu
@@ -66187,9 +66184,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackButton: {fileID: 1869174001798438961, guid: c22280473f116364ca73ce30eb44fe06, type: 3}
+  itemButton: {fileID: 1869174001798438961, guid: 8615944c402b08d47aaff829c7b88718, type: 3}
+  fleeButton: {fileID: 0}
   moveButtons: []
   moveIndex: 0
   menuType: 0
+  actionChosen: 0
   maxElementsOnScreen: 4
   currentUnit: {fileID: 0}
 --- !u!114 &2079669489
@@ -67536,6 +67536,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: afb15740988dada4c9a9931cb4f1e9a3, type: 2}
   team: []
   type: {fileID: 11400000, guid: afb15740988dada4c9a9931cb4f1e9a3, type: 2}
+  isBoss: 0
 --- !u!50 &7942285961093800576
 Rigidbody2D:
   serializedVersion: 4
