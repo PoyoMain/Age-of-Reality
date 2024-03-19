@@ -12,8 +12,8 @@ public class Enemy : MonoBehaviour
     private readonly float invincibleTime = 5f; // Time enemy is invincible
     private float invincibleTimer; // Timer checking how long enemy has been invincible for
 
-    private MeshRenderer mRend;
-    private Collider coll;
+    private SpriteRenderer sRend;
+    private Collider2D coll;
     private Rigidbody2D rigid;
 
     public bool isBoss;
@@ -24,8 +24,8 @@ public class Enemy : MonoBehaviour
         team.Add(type);
         team.AddRange(allies);
 
-        mRend = GetComponent<MeshRenderer>();
-        coll = GetComponent<Collider>();
+        sRend = GetComponent<SpriteRenderer>();
+        coll = GetComponent<Collider2D>();
         rigid = GetComponent<Rigidbody2D>();
     }
 
@@ -46,11 +46,11 @@ public class Enemy : MonoBehaviour
 
         while (invincibleTimer > Time.time)
         {
-            mRend.enabled = !mRend.enabled;
+            sRend.enabled = !sRend.enabled;
             yield return null;
         }
 
-        mRend.enabled = true;
+        sRend.enabled = true;
         coll.enabled = true;
 
         yield return null;

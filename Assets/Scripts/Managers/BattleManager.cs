@@ -40,9 +40,11 @@ public class BattleManager : MonoBehaviour
 
     [SerializeField] private PlayerHealth playerHealthUI;
     [SerializeField] private PlayerHealth enemyHealthUI;
+
     [Space(15f)]
     [SerializeField] private XPWindow xpWindow;
     [SerializeField] private ScriptableLevelSystem levelSystem;
+
     [Space(15f)] 
     [SerializeField] private List<ScriptableItem> givenItems;
 
@@ -154,7 +156,7 @@ public class BattleManager : MonoBehaviour
         AttackMenu.gameObject.SetActive(true);
         AttackMenu.SetCurrentUnit(CurrentPartyMemberActive);
 
-        while (AttackMenu.chosenAttack == null && AttackMenu.chosenItem == null)
+        while (AttackMenu.chosenAttack == null && AttackMenu.chosenItem == null && !AttackMenu.flee)
         {
             if (battleControls.SelectionUp.triggered) AttackMenu.SelectUp();
             else if (battleControls.SelectionDown.triggered) AttackMenu.SelectDown();
@@ -183,8 +185,8 @@ public class BattleManager : MonoBehaviour
 
             selectedEnemy.selectIndicator.SetActive(false);
 
-            LineGenerator minigame = ResourceStorage.Instance.GetMinigame(Enum.GetName(typeof(MinigameType), AttackMenu.chosenAttack.Minigame));
-            minigameManager.SetMinigame(minigame);
+            LineMinigameBase minigame = AttackMenu.chosenAttack.Minigame;
+            minigameManager.SetMinigame(minigame, AttackMenu.chosenAttack.SecondsToComplete);
             minigameManager.gameObject.SetActive(true);
             //Instantiate(minigame, GridInfo.GridWorldMidPoint, Quaternion.identity);
 
@@ -195,7 +197,7 @@ public class BattleManager : MonoBehaviour
 
             minigameManager.gameObject.SetActive(false);
 
-            turnOrder[0].Attack(AttackMenu.chosenAttack, selectedEnemy, multiplier: AttackMenu.chosenAttack.Stats.multiplier);
+            turnOrder[0].Attack(AttackMenu.chosenAttack, selectedEnemy, multiplier: AttackMenu.chosenAttack.Stats.multiplier, accuracy: minigameManager.Accuracy);
             enemyHealthUI.UpdateHealth(selectedEnemy.Stats.Health);
 
             if (selectedEnemy.Stats.Health <= 0)
@@ -214,6 +216,8 @@ public class BattleManager : MonoBehaviour
                 turnOrder.Remove(selectedEnemy);
                 EnemyUnits.Remove(selectedEnemy);
                 Destroy(selectedEnemy.gameObject);
+
+                GameManager.Instance.enemiesDefeated++;
             }
 
             AttackMenu.gameObject.SetActive(false);
@@ -257,7 +261,12 @@ public class BattleManager : MonoBehaviour
             AttackMenu.gameObject.SetActive(false);
             AttackMenu.chosenItem = null;
         }
-
+        else if (AttackMenu.flee)
+        {
+            AttackMenu.gameObject.SetActive(false);
+            ChangeState(BattleState.Flee);
+            yield break;
+        }
 
 
         while (!turnOrder[0].Move(startPos, speed))

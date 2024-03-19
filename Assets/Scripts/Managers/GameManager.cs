@@ -31,6 +31,9 @@ public class GameManager : Singleton<GameManager>
 
     public ScriptableInventory ItemInventory;
 
+    [HideInInspector] public int perfectMinigameCount;
+    [HideInInspector] public int enemiesDefeated;
+
     protected override void Awake()
     {
         base.Awake();
@@ -157,6 +160,7 @@ public class GameManager : Singleton<GameManager>
     private void OnDisable()
     {
         ItemInventory.Inventory.Clear();
+        perfectMinigameCount = 0;
     }
 }
 

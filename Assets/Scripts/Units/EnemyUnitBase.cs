@@ -52,7 +52,7 @@ public abstract class EnemyUnitBase : UnitBase
         int damage = Mathf.RoundToInt(((attack.Stats.attackPower + (Stats.Attack * 10) - (heroTarget.Stats.Defense * 10)) * multiplier) * accuracy);
         target.TakeDamage(damage);
 
-        print(damage);
+        print("Enemy Damage Dealt: " + damage);
     }
 
     /// <summary>

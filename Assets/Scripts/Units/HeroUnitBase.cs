@@ -56,10 +56,10 @@ public abstract class HeroUnitBase : UnitBase
     {
         EnemyUnitBase enemyTarget = target as EnemyUnitBase;
 
-        int damage = Mathf.RoundToInt(((attack.Stats.attackPower + (Stats.Attack * 10) - (enemyTarget.Stats.Defense * 10)) * multiplier) * accuracy);
+        int damage = Mathf.RoundToInt(((attack.Stats.attackPower + (Stats.Attack * 10) - (enemyTarget.Stats.Defense * 10)) * multiplier) * (accuracy/100));
         target.TakeDamage(damage);
 
-        print(damage);
+        print("Player Damage Dealt: " + damage);
     }
 
     /// <summary>

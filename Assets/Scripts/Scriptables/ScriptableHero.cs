@@ -38,7 +38,7 @@ public class ScriptableHero : ScriptableUnitBase
     {
         _stats.XP += xp;
 
-        Debug.Log("XP " + _stats.XP);
+        Debug.Log("XP Gained: " + _stats.XP);
     }
 
     public bool LevelUp(ScriptableLevelSystem levelSystem, out ScriptableAttack unlockedAttack)
@@ -58,7 +58,7 @@ public class ScriptableHero : ScriptableUnitBase
 
         if (_stats.XP >= nextLevel.XPToReachLevel)
         {
-            IncreaseLevel(_stats.XP - _stats.XPToLevelUp);
+            IncreaseLevel(_stats.XP - nextLevel.XPToReachLevel);
 
             if (Ability == Ability.Melee)
             {
@@ -114,7 +114,6 @@ public struct HeroStats
     public int Defense;
     public int Speed;
     public int Stamina;
-    public XPLevels XPLevels;
 
     public int Level
     {
@@ -127,39 +126,8 @@ public struct HeroStats
         set;
     }
 
-    public readonly int XPToLevelUp
-    {
-        get
-        {
-            return GetXPToLevelUP();
-        }
-    }
-
-    private readonly int GetXPToLevelUP()
-    {
-        int levelXP = Level switch
-        {
-            1 => XPLevels.Level2XP,
-            2 => XPLevels.Level3XP,
-            3 => XPLevels.Level4XP,
-            4 => XPLevels.Level5XP,
-            5 => 100,
-            _ => 0,
-        };
-        return levelXP;
-    }
-
     public void SetHealth(int newHealth)
     {
         Health = newHealth;
     }
-}
-
-[Serializable]
-public struct XPLevels
-{
-    public int Level2XP;
-    public int Level3XP;
-    public int Level4XP;
-    public int Level5XP;
 }

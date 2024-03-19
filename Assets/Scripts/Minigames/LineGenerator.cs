@@ -2,9 +2,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class LineGenerator : MonoBehaviour
+public class LineGenerator : LineMinigameBase
 {
-
+    [Space(30f)]
     public GameObject linePrefab;
     public Camera cam;
     Line activeLine;
@@ -12,15 +12,14 @@ public class LineGenerator : MonoBehaviour
     public float distanceNeeded = 0;
     public float distanceTravelled = 0;
 
-    public float totalPercentage = 0;
     public float totalPoints = 0;
     public float closePoints = 0;
 
-    public bool DoneDrawing = false;
-
     //Start and endpoint of line on screen
     public GameObject[] lines;
-
+    public bool backwards = false;
+    public float tempAngle;
+    public float pastAngle;
 
     public List<LineRenderer> lineRenderers;
     //keeps the starting end end point of each line recorded.
@@ -28,13 +27,22 @@ public class LineGenerator : MonoBehaviour
     public List<Vector2> startingPos;
     public List<Vector2> endingPos;
     public GameObject battleParent;
+    public List<Vector2> drawnPoints;
+    public Vector2 lastMousePosition;
+    public Vector2 lastDirection;
+    public bool isDirectionFlipped = false;
+
+    public float flipThreshold = 0f;
     public int listLength { get; set; }
     public void OnEnable()
     {
+        StartedDrawing = false;
+
         cam = GameManager.Instance.GetBattleCamera();
         lineRenderers = new List<LineRenderer>();
         startingPos = new List<Vector2>();
         endingPos = new List<Vector2>();
+        drawnPoints = new List<Vector2>();
         distanceNeeded = 0;
         battleParent = transform.parent.parent.gameObject;
 
@@ -67,9 +75,12 @@ public class LineGenerator : MonoBehaviour
     void Update()
     {
         Vector2 mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
+        //Debug.Log(mousePos);
 
         if (Input.GetMouseButtonDown(0))
         {
+            StartedDrawing = true;
+
             GameObject newLine = Instantiate(linePrefab, transform);
             activeLine = newLine.GetComponent<Line>();
             activeLine.setRefrence(this);
@@ -89,7 +100,12 @@ public class LineGenerator : MonoBehaviour
         if (activeLine != null)
         {
             activeLine.UpdateLine(mousePos);
+
         }
+
+
+        // Check if the mouse has moved
+
     }
 
     public float DistanceToClosestPoint(Vector2 point, Vector2 start, Vector2 end)

@@ -1,9 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.UI;
 
 public class ActionSelectMenu : MonoBehaviour
 {
@@ -20,8 +18,10 @@ public class ActionSelectMenu : MonoBehaviour
 
     private PlayerControls playerControls;
     private PlayerControls.BattleControlsActions battleControls;
-    
+
     private MenuState menuState;
+
+    [HideInInspector] public bool flee = false;
 
     private void Awake()
     {
@@ -38,7 +38,7 @@ public class ActionSelectMenu : MonoBehaviour
         EventSystem.current.SetSelectedGameObject(selectedAction.gameObject);
     }
 
-    
+
 
     private void Update()
     {
@@ -74,7 +74,7 @@ public class ActionSelectMenu : MonoBehaviour
                 moveSelectMenu.menuType = moveSelectMenu.currentUnit.data.Ability;
                 moveSelectMenu.actionChosen = selectedAction.actionType;
                 moveSelectMenu.gameObject.SetActive(true);
-                
+
                 foreach (ActionOption option in actionButtons)
                 {
                     option.button.interactable = false;
@@ -103,14 +103,14 @@ public class ActionSelectMenu : MonoBehaviour
                 EventSystem.current.SetSelectedGameObject(selectedMove.gameObject);
                 break;
         }
-        
+
     }
 
     /// <summary>
     /// Navigate down the menu
     /// </summary>
     public void SelectDown()
-    { 
+    {
         switch (menuState)
         {
             case MenuState.ActionMenu:
@@ -131,6 +131,11 @@ public class ActionSelectMenu : MonoBehaviour
         switch (menuState)
         {
             case MenuState.ActionMenu:
+                if (actionButtons[actionIndex].actionType == ActionType.Flee)
+                {
+                    flee = true;
+                    return;
+                }
                 if (actionButtons[actionIndex].button.interactable) ChangeState(MenuState.SecondaryMenu);
                 break;
             case MenuState.SecondaryMenu:
@@ -172,6 +177,13 @@ public class ActionSelectMenu : MonoBehaviour
     {
         battleControls.Disable();
     }
+
+    //public void selectButton(int index)
+    //{
+    //    selectedAction = actionButtons[index];
+    //    EventSystem.current.SetSelectedGameObject(selectedAction.gameObject);
+    //    Select();
+    //}
 }
 
 // States of the menu
