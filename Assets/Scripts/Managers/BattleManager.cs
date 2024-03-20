@@ -471,6 +471,8 @@ public class BattleManager : MonoBehaviour
     {
         battleControls.Disable();
     }
+
+    
 }
 
 // Battle States
