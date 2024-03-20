@@ -29,6 +29,7 @@ public class TempPause : MonoBehaviour
     [SerializeField] private GameObject statButtons;
     [SerializeField] private TextMeshProUGUI perfectMiniText;
     [SerializeField] private TextMeshProUGUI enemiesDefeatedText;
+    [SerializeField] private GameManager gameManager;
     private int health;
     private int CON;
     private int MaxHP;
@@ -45,8 +46,8 @@ public class TempPause : MonoBehaviour
 
     public void Update()
     {
-        enemiesDefeated = GameManager.Instance.enemiesDefeated;
-        perfectMini = GameManager.Instance.perfectMinigameCount;
+        enemiesDefeated = gameManager.enemiesDefeated;
+        perfectMini = gameManager.perfectMinigameCount;
         statPoints = Hero._stats.ExtraStatPoints;
         ability = Hero.Ability;
         health = Hero._stats.Health;

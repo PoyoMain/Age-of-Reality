@@ -5643,6 +5643,7 @@ MonoBehaviour:
   statButtons: {fileID: 8219946279432794429}
   perfectMiniText: {fileID: 9007672096564477155}
   enemiesDefeatedText: {fileID: 4281396932546733219}
+  gameManager: {fileID: 0}
   statPoints: 0
 --- !u!114 &3047420148426931186
 MonoBehaviour:
