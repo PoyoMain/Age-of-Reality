@@ -16,10 +16,11 @@ MonoBehaviour:
   Description: 
   Sprite: {fileID: 0}
   _stats:
-    Health: 100
+    Health: 1
     Attack: 1
     Defense: 1
     Speed: 1
     XP: 1
   attacks:
   - {fileID: 11400000, guid: fcf377c82c2a78d40b11dd91c2469062, type: 2}
+  droppableItems: []
