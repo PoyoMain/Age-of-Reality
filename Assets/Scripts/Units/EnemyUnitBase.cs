@@ -9,12 +9,25 @@ public abstract class EnemyUnitBase : UnitBase
     public EnemyStats Stats { get; private set; }
 
     /// <summary>
-    /// Sets the stats of the unit
+    /// Initialize the stats of the unit
+    /// </summary>
+    /// <param name="stats">The new stats</param>
+    public virtual void InitStats(EnemyStats stats)
+    {
+        EnemyStats temp = stats;
+        temp.Health = stats.Health * 100;
+        Stats = temp;
+    }
+
+    /// <summary>
+    /// Set the stats of the unit
     /// </summary>
     /// <param name="stats">The new stats</param>
     public virtual void SetStats(EnemyStats stats)
     {
-        Stats = stats;
+        EnemyStats temp = stats;
+        temp.Health = stats.Health;
+        Stats = temp;
     }
 
     private void OnEnable()

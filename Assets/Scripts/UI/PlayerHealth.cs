@@ -37,14 +37,14 @@ public class PlayerHealth : MonoBehaviour
 
     public void InitializePlayerUI(HeroUnitBase player)
     {
-        healthBar.maxValue = player.data.BaseStats.Health;
+        healthBar.maxValue = player.Stats.Health;
         healthBar.value = player.Stats.Health;
         charaName.text = player.data.name;
     }
 
     public void InitializeEnemyUI(EnemyUnitBase enemy)
     {
-        healthBar.maxValue = enemy.data.BaseStats.Health;
+        healthBar.maxValue = enemy.Stats.Health;
         healthBar.value = enemy.Stats.Health;
         charaName.text = enemy.data.name;
     }
