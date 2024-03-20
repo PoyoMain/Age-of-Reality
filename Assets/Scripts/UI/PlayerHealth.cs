@@ -29,8 +29,9 @@ public class PlayerHealth : MonoBehaviour
         healthBar.value = newHealth;
     }
 
-    public void UpdateEntireUI(int newHealth, string newName)
+    public void UpdateEntireUI(int newHealth, string newName, int maxHealth)
     {
+        healthBar.maxValue = maxHealth;
         healthBar.value = newHealth;
         charaName.text = newName;
     }

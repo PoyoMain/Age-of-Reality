@@ -7,6 +7,7 @@ public abstract class EnemyUnitBase : UnitBase
     [HideInInspector] public ScriptableEnemy data;
 
     public EnemyStats Stats { get; private set; }
+    public int MaxHealth { get; private set; }
 
     /// <summary>
     /// Initialize the stats of the unit
@@ -16,6 +17,7 @@ public abstract class EnemyUnitBase : UnitBase
     {
         EnemyStats temp = stats;
         temp.Health = stats.Health * 100;
+        MaxHealth = temp.Health;
         Stats = temp;
     }
 

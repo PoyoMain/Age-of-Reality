@@ -15,12 +15,12 @@ MonoBehaviour:
   Prefab: {fileID: 397257287913442836, guid: a0a1aa82c29f92a45938483299d949c4, type: 3}
   Description: 
   Sprite: {fileID: 0}
-  Ability: 0
+  Ability: 1
   _stats:
     Health: 1
-    Attack: 1
-    Defense: 2
-    Speed: 2
+    Attack: 5
+    Defense: 1
+    Speed: 1
     Stamina: 1
     ExtraStatPoints: 0
   meleeAttacks:
