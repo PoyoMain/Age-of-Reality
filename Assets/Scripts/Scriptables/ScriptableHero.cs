@@ -29,6 +29,7 @@ public class ScriptableHero : ScriptableUnitBase
         _stats.Defense = 1;
         _stats.Speed = 1;
         _stats.Stamina = 1;
+        _stats.ExtraStatPoints = 0;
         meleeAttacks.RemoveRange(1, meleeAttacks.Count - 1);
         magicAttacks.RemoveRange(1, magicAttacks.Count - 1);
     }
@@ -49,6 +50,7 @@ public class ScriptableHero : ScriptableUnitBase
             if ((_stats.Level + 1) == level.lvl)
             {
                 nextLevel = level;
+                _stats.ExtraStatPoints += 2;
                 break;
             }
         }
@@ -113,6 +115,7 @@ public struct HeroStats
     public int Defense;
     public int Speed;
     public int Stamina;
+    public int ExtraStatPoints;
 
     public int Level
     {

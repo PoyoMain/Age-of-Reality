@@ -20,6 +20,10 @@ public class Dialogue : MonoBehaviour
 
     public void Init(string[] linesToSay)
     {
+        if (linesToSay == null) return;
+
+        if (linesToSay.Length == 0) return;
+
         lines = linesToSay;
         dialogueBox.SetActive(true);
         textComponent.text = string.Empty;
