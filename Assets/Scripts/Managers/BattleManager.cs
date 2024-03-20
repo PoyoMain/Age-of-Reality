@@ -152,7 +152,6 @@ public class BattleManager : MonoBehaviour
             yield return null;
         }
 
-        enemyHealthUI.gameObject.SetActive(false);
         AttackMenu.gameObject.SetActive(true);
         AttackMenu.SetCurrentUnit(CurrentPartyMemberActive);
 
@@ -259,6 +258,8 @@ public class BattleManager : MonoBehaviour
         {
             yield return null;
         }
+
+        enemyHealthUI.gameObject.SetActive(false);
 
         NextTurn();
     }

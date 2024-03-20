@@ -7569,6 +7569,7 @@ GameObject:
   m_Component:
   - component: {fileID: 742532239}
   - component: {fileID: 742532240}
+  - component: {fileID: 742532241}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -7614,6 +7615,27 @@ MonoBehaviour:
   dialogueBox: {fileID: 1428798817}
   perfectMinigameCount: 0
   enemiesDefeated: 0
+--- !u!114 &742532241
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 742532238}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef3521f931c09a9448df4b6647da0631, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  battleAudioSource: {fileID: 1564340129}
+  playerSwordAudioClips: []
+  playerFireAudioClips: []
+  playerHurtAudioClips: []
+  enemyAttackAudioClips: []
+  enemyHurtAudioClips: []
+  battleItemJingle: {fileID: 0}
+  battleRareItemJingle: {fileID: 0}
+  battleLevelUpJingle: {fileID: 0}
 --- !u!1 &760091222
 GameObject:
   m_ObjectHideFlags: 0
