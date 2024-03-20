@@ -27,6 +27,8 @@ public class TempPause : MonoBehaviour
     [SerializeField] private TextMeshProUGUI atkTypeText;
     [SerializeField] private TextMeshProUGUI statPointText;
     [SerializeField] private GameObject statButtons;
+    [SerializeField] private TextMeshProUGUI perfectMiniText;
+    [SerializeField] private TextMeshProUGUI enemiesDefeatedText;
     private int health;
     private int CON;
     private int MaxHP;
@@ -36,10 +38,16 @@ public class TempPause : MonoBehaviour
     private int STM;
     private int lvl;
     public int statPoints = 0;
+    private int perfectMini = 0;
+    private int enemiesDefeated = 0;
+
 
 
     public void Update()
     {
+        enemiesDefeated = GameManager.Instance.enemiesDefeated;
+        perfectMini = GameManager.Instance.perfectMinigameCount;
+        statPoints = Hero._stats.ExtraStatPoints;
         ability = Hero.Ability;
         health = Hero._stats.Health;
         MaxHP = Hero._stats.Health;
@@ -167,7 +175,8 @@ public class TempPause : MonoBehaviour
         conText.text = "CON: " + CON.ToString();
         spdText.text = "SPD: " + SPD.ToString();
         defText.text = "DEF: " + DEF.ToString();
-
+        enemiesDefeatedText.text = "Enemied Defeated: " + enemiesDefeated.ToString();
+        perfectMiniText.text = "Perfect Minigames: " + perfectMini.ToString();
     }
 
     public void points()
