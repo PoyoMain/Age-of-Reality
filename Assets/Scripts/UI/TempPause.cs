@@ -1,9 +1,7 @@
 using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 public class TempPause : MonoBehaviour
 {
     public bool isPaused = false;
@@ -12,12 +10,40 @@ public class TempPause : MonoBehaviour
     public GameObject itemMenu;
     [SerializeField]
     private ScriptableInventory gameInventory;
-    public List <PauseItemButton> ButtonsList;
+    public List<PauseItemButton> ButtonsList;
     [SerializeField] private TextMeshProUGUI itemNameText;
     [SerializeField] private TextMeshProUGUI itemDescriptionText;
     [SerializeField] private SpriteRenderer itemSprite;
+    [SerializeField] private ScriptableHero Hero;
+    [SerializeField] private Ability ability;
+
+    [SerializeField] private TextMeshProUGUI hpText;
+    [SerializeField] private TextMeshProUGUI conText;
+    [SerializeField] private TextMeshProUGUI atkText;
+    [SerializeField] private TextMeshProUGUI defText;
+    [SerializeField] private TextMeshProUGUI spdText;
+    [SerializeField] private TextMeshProUGUI stmText;
+    public int health;
+    public int CON;
+    public int MaxHP;
+    public int ATK;
+    public int DEF;
+    public int SPD;
+    public int STM;
+
+
     public void Update()
     {
+        ability = Hero.Ability;
+        health = Hero._stats.Health;
+        MaxHP = Hero._stats.Health;
+        CON = Hero._stats.Health;
+        ATK = Hero._stats.Attack;
+        DEF = Hero._stats.Defense;
+        SPD = Hero._stats.Speed;
+        STM = Hero._stats.Stamina;
+        SetText();
+
         if (Input.GetKeyDown(KeyCode.Tab))
         {
             if (isPaused)
@@ -78,7 +104,7 @@ public class TempPause : MonoBehaviour
     {
         for (int i = 0; i < GameManager.Instance.ItemInventory.Inventory.Count; i++)
         {
-           if (gameInventory.Inventory[i].Value.Amount > 0) 
+            if (gameInventory.Inventory[i].Value.Amount > 0)
             {
                 ButtonsList[i].gameObject.GetComponentInChildren<TextMeshProUGUI>().text = GameManager.Instance.ItemInventory.Inventory[i].Value.item.name;
                 ButtonsList[i].item = GameManager.Instance.ItemInventory.Inventory[i].Value;
@@ -86,12 +112,42 @@ public class TempPause : MonoBehaviour
         }
     }
 
-    public void changeText( int index ) 
+    public void changeText(int index)
     {
         itemNameText.text = ButtonsList[index].item.item.name;
         itemDescriptionText.text = ButtonsList[index].item.item.Description;
         itemSprite.sprite = ButtonsList[index].item.item.Sprite;
 
+
+    }
+
+    public void SetText()
+    {
+        if (health == MaxHP)
+        {
+            hpText.text = "Health: " + health.ToString();
+        }
+        else
+        {
+            hpText.text = "Health: " + health.ToString() + "/" + MaxHP.ToString();
+        }
+
+        switch (ability)
+        {
+            case Ability.Magic:
+
+                atkText.text = "INT: " + ATK.ToString();
+                stmText.text = "WIS: " + STM.ToString();
+                break;
+            case Ability.Melee:
+                atkText.text = "ATK: " + ATK.ToString();
+                stmText.text = "STM: " + STM.ToString();
+                break;
+        }
+
+        conText.text = "CON: " + CON.ToString();
+        spdText.text = "SPD: " + SPD.ToString();
+        defText.text = "DEF: " + DEF.ToString();
 
     }
 }

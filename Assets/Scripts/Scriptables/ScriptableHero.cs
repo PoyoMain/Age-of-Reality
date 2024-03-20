@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,7 +13,7 @@ public class ScriptableHero : ScriptableUnitBase
     /// <summary>
     /// Stats of this unit
     /// </summary>
-    [SerializeField] private HeroStats _stats;
+    [SerializeField] public HeroStats _stats;
     public HeroStats BaseStats { get { return _stats; } private set { } }
 
     public List<ScriptableMeleeAttack> meleeAttacks;
@@ -78,7 +77,7 @@ public class ScriptableHero : ScriptableUnitBase
                     magicAttacks.Add(newAttack);
                 }
             }
-            
+
             return true;
         }
 
