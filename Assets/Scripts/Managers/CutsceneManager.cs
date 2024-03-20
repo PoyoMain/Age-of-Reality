@@ -1,7 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Reflection;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Playables;
@@ -24,6 +22,7 @@ public class CutsceneManager : MonoBehaviour
 
     private int clipIndex = 0;
     private bool playNewClip = false;
+    public int SceneID = 0;
 
     private Coroutine CutsceneVideoCoroutine;
     private Coroutine CutsceneDialogueCoroutine;
@@ -43,7 +42,7 @@ public class CutsceneManager : MonoBehaviour
     }
 
     IEnumerator PlayCutsceneVideo()
-    { 
+    {
         while (clipIndex < timeLineCuts.Length)
         {
             if (playNewClip)
@@ -58,9 +57,9 @@ public class CutsceneManager : MonoBehaviour
                     yield return null;
                 }
 
-                yield return new WaitForSeconds(timeBetweenCuts/2);
+                yield return new WaitForSeconds(timeBetweenCuts / 2);
                 _director.Play(timeLineCuts[clipIndex].Cut);
-                yield return new WaitForSeconds(timeBetweenCuts/2);
+                yield return new WaitForSeconds(timeBetweenCuts / 2);
                 CutsceneDialogueCoroutine = StartCoroutine(PlayCutsceneDialogue());
 
                 if (timeLineCuts[clipIndex].LoopVideo)
@@ -85,6 +84,8 @@ public class CutsceneManager : MonoBehaviour
         }
 
         print("Done");
+        Invoke("SceneLoad", 1f);
+
         yield break;
     }
 
@@ -138,6 +139,11 @@ public class CutsceneManager : MonoBehaviour
             AdvanceDialogue();
         }
     }
+
+    public void SceneLoad()
+    {
+        SceneManager.LoadScene(SceneID);
+    }
 }
 
 
@@ -145,7 +151,7 @@ public class CutsceneManager : MonoBehaviour
 public class CutsceneClip
 {
     public PlayableAsset Cut;
-    [TextArea(2,3)]
+    [TextArea(2, 3)]
     public string Text;
     public float TextSpeed;
     public bool LoopVideo;
