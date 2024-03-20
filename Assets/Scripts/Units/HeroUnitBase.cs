@@ -14,6 +14,7 @@ public abstract class HeroUnitBase : UnitBase
     };
 
     public HeroStats Stats { get; private set; }
+    public int MaxHealth {  get; private set; }
 
     /// <summary>
     /// Initialize the stats of the unit
@@ -23,6 +24,7 @@ public abstract class HeroUnitBase : UnitBase
     {
         HeroStats temp = stats;
         temp.Health = stats.Health * 100;
+        MaxHealth = temp.Health;
         Stats = temp;
     }
 

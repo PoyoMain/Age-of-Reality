@@ -26,7 +26,7 @@ public class ScriptableHero : ScriptableUnitBase
         _stats.Level = 1;
         _stats.XP = 0;
         _stats.Attack = 1;
-        _stats.Health = 100;
+        _stats.Health = 1;
         _stats.Defense = 1;
         _stats.Speed = 1;
         _stats.Stamina = 1;
