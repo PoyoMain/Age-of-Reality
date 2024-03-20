@@ -11,9 +11,14 @@ using UnityEngine.SceneManagement;
 public class CutsceneManager : MonoBehaviour
 {
     private PlayableDirector _director;
+    [SerializeField] private bool clickToAdvanceScene = false;
+    [Space(10)]
+    [SerializeField] private float timeBetweenCuts = 1;
+    [SerializeField] private float fadeSpeed = 2;
 
     [SerializeField] private TextMeshProUGUI dialogueText;
-    [SerializeField] private float textSpeed;
+    [SerializeField] private CanvasGroup cutsceneImage;
+
     [Space(15)]
     [SerializeField] private CutsceneClip[] timeLineCuts;
 
@@ -28,7 +33,7 @@ public class CutsceneManager : MonoBehaviour
         _director = GetComponent<PlayableDirector>();
 
         _director.Play(timeLineCuts[0].Cut);
-        if (timeLineCuts[0].Loop)
+        if (timeLineCuts[0].LoopVideo)
         {
             _director.extrapolationMode = DirectorWrapMode.Loop;
         }
@@ -43,10 +48,22 @@ public class CutsceneManager : MonoBehaviour
         {
             if (playNewClip)
             {
+                float fadeAmount = cutsceneImage.alpha;
+                print(cutsceneImage.alpha);
+
+                while (cutsceneImage.alpha > 0)
+                {
+                    print(cutsceneImage.alpha);
+                    cutsceneImage.alpha -= fadeSpeed * Time.deltaTime;
+                    yield return null;
+                }
+
+                yield return new WaitForSeconds(timeBetweenCuts/2);
                 _director.Play(timeLineCuts[clipIndex].Cut);
+                yield return new WaitForSeconds(timeBetweenCuts/2);
                 CutsceneDialogueCoroutine = StartCoroutine(PlayCutsceneDialogue());
 
-                if (timeLineCuts[clipIndex].Loop)
+                if (timeLineCuts[clipIndex].LoopVideo)
                 {
                     _director.extrapolationMode = DirectorWrapMode.Loop;
                 }
@@ -56,6 +73,12 @@ public class CutsceneManager : MonoBehaviour
                 }
 
                 playNewClip = false;
+
+                while (cutsceneImage.alpha < fadeAmount)
+                {
+                    cutsceneImage.alpha += fadeSpeed * Time.deltaTime;
+                    yield return null;
+                }
             }
 
             yield return null;
@@ -72,8 +95,10 @@ public class CutsceneManager : MonoBehaviour
         foreach (char c in timeLineCuts[clipIndex].Text.ToCharArray())
         {
             dialogueText.text += c;
-            yield return new WaitForSeconds(textSpeed);
+            yield return new WaitForSeconds(timeLineCuts[clipIndex].TextSpeed);
         }
+
+        NextShot();
     }
 
     public void AdvanceDialogue()
@@ -108,7 +133,7 @@ public class CutsceneManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && clickToAdvanceScene)
         {
             AdvanceDialogue();
         }
@@ -122,5 +147,6 @@ public class CutsceneClip
     public PlayableAsset Cut;
     [TextArea(2,3)]
     public string Text;
-    public bool Loop;
+    public float TextSpeed;
+    public bool LoopVideo;
 }

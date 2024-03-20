@@ -135,6 +135,7 @@ GameObject:
   - component: {fileID: 299795903}
   - component: {fileID: 299795902}
   - component: {fileID: 299795904}
+  - component: {fileID: 299795905}
   m_Layer: 5
   m_Name: CutsceneImage1
   m_TagString: Untagged
@@ -220,6 +221,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!225 &299795905
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 299795900}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &525315077
 GameObject:
   m_ObjectHideFlags: 0
@@ -475,7 +488,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -722,7 +735,7 @@ PlayableDirector:
   m_GameObject: {fileID: 1341002173}
   m_Enabled: 1
   serializedVersion: 3
-  m_PlayableAsset: {fileID: 11400000, guid: a594438c66225914d9b47ec0cee8d8ba, type: 2}
+  m_PlayableAsset: {fileID: 11400000, guid: f3674df167ae40545aacccff27c8f825, type: 2}
   m_InitialState: 1
   m_WrapMode: 1
   m_DirectorUpdateMode: 1
@@ -735,6 +748,18 @@ PlayableDirector:
   - key: {fileID: -2953052243086180892, guid: 7d10a4000ca4c5b4dbaa73611ed6ee78, type: 2}
     value: {fileID: 299795904}
   - key: {fileID: -2953052243086180892, guid: 4bc5f3c540a23634fb1d12aa17de0408, type: 2}
+    value: {fileID: 299795904}
+  - key: {fileID: -2953052243086180892, guid: f3674df167ae40545aacccff27c8f825, type: 2}
+    value: {fileID: 299795904}
+  - key: {fileID: -2953052243086180892, guid: aa922d26d7f50c144b2e39b3ffc9e4c0, type: 2}
+    value: {fileID: 299795904}
+  - key: {fileID: -2953052243086180892, guid: 7f790f373f4f2a34397c1b2008495934, type: 2}
+    value: {fileID: 299795904}
+  - key: {fileID: -2953052243086180892, guid: 2d76bd3150fe38b44b200156323fcc5f, type: 2}
+    value: {fileID: 299795904}
+  - key: {fileID: -2953052243086180892, guid: 1bfc46699b73e0b40b685633e925a39f, type: 2}
+    value: {fileID: 299795904}
+  - key: {fileID: -2953052243086180892, guid: cba4245d54e1b244e8c24fc7e3cf1c24, type: 2}
     value: {fileID: 299795904}
   m_ExposedReferences:
     m_References: []
@@ -750,24 +775,60 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 471a8096d94464e4fb57a661e2025c76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timeBetweenCuts: 1
+  fadeSpeed: 1
   dialogueText: {fileID: 1350239647}
-  textSpeed: 0.1
+  cutsceneImage: {fileID: 299795905}
   timeLineCuts:
   - Cut: {fileID: 11400000, guid: a594438c66225914d9b47ec0cee8d8ba, type: 2}
     Text: Long ago, magic flowed through these lands
-    Loop: 1
+    TextSpeed: 0.075
+    LoopVideo: 0
   - Cut: {fileID: 11400000, guid: 2535f0af9b1e48345a2b1fb6d9f75038, type: 2}
     Text: For a time, it's inhabitants were able to harness such power, allowing
       them to perform reality defying feats
-    Loop: 0
+    TextSpeed: 0.075
+    LoopVideo: 0
   - Cut: {fileID: 11400000, guid: 7d10a4000ca4c5b4dbaa73611ed6ee78, type: 2}
     Text: During this time, empires were forged and prospered, boltered by the magic
       of their rulers and people
-    Loop: 0
+    TextSpeed: 0.075
+    LoopVideo: 0
   - Cut: {fileID: 11400000, guid: 4bc5f3c540a23634fb1d12aa17de0408, type: 2}
     Text: With time, the study of magic advanced to where scholars could create cardlike
       artifacts to allow those not gifted with magic to harness it without study
-    Loop: 0
+    TextSpeed: 0.075
+    LoopVideo: 0
+  - Cut: {fileID: 11400000, guid: f3674df167ae40545aacccff27c8f825, type: 2}
+    Text: The mana, once pure, had been contaminated in a catastrophe known as the
+      Arklejonbu. The mana was dying.
+    TextSpeed: 0.075
+    LoopVideo: 0
+  - Cut: {fileID: 11400000, guid: aa922d26d7f50c144b2e39b3ffc9e4c0, type: 2}
+    Text: Empires fell without their current power and the cards were scattered throughout
+      the land, waiting.
+    TextSpeed: 0.075
+    LoopVideo: 0
+  - Cut: {fileID: 11400000, guid: 7f790f373f4f2a34397c1b2008495934, type: 2}
+    Text: After a time, the cards were rediscovered and new empires were formed,
+      once such empire being your home, Fidelgar
+    TextSpeed: 0.075
+    LoopVideo: 0
+  - Cut: {fileID: 11400000, guid: 2d76bd3150fe38b44b200156323fcc5f, type: 2}
+    Text: While the empire is stable, those in the lower classes are forced to live
+      in the dangerous outskirts, where bandits and mutated beasts pray on the weak
+    TextSpeed: 0.075
+    LoopVideo: 0
+  - Cut: {fileID: 11400000, guid: 1bfc46699b73e0b40b685633e925a39f, type: 2}
+    Text: Having being raised in this perilous environment, you have decided to train
+      in order to gain the strength you need to protect yourself and all you hold
+      dear
+    TextSpeed: 0.075
+    LoopVideo: 0
+  - Cut: {fileID: 11400000, guid: cba4245d54e1b244e8c24fc7e3cf1c24, type: 2}
+    Text: The path ahead is treacherous. Are you ready?
+    TextSpeed: 0.075
+    LoopVideo: 0
 --- !u!1 &1350239645
 GameObject:
   m_ObjectHideFlags: 0
