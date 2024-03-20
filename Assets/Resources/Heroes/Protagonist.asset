@@ -18,7 +18,7 @@ MonoBehaviour:
   Ability: 1
   _stats:
     Health: 1
-    Attack: 1
+    Attack: 5
     Defense: 1
     Speed: 1
     Stamina: 1

@@ -7502,6 +7502,8 @@ MonoBehaviour:
   battleItemJingle: {fileID: 0}
   battleRareItemJingle: {fileID: 0}
   battleLevelUpJingle: {fileID: 0}
+  battleWinJingle: {fileID: 8300000, guid: 3df83336a3a64d44b9e40eb0145e1930, type: 3}
+  battleWinLoop: {fileID: 8300000, guid: 60a856de76198e04982c406f91acdd80, type: 3}
 --- !u!1 &763444056
 GameObject:
   m_ObjectHideFlags: 0

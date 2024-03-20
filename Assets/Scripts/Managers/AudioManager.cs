@@ -14,6 +14,8 @@ public class AudioManager : Singleton<AudioManager>
     [SerializeField] private AudioClip battleItemJingle;
     [SerializeField] private AudioClip battleRareItemJingle;
     [SerializeField] private AudioClip battleLevelUpJingle;
+    [SerializeField] private AudioClip battleWinJingle;
+    [SerializeField] private AudioClip battleWinLoop;
 
 
 
@@ -134,7 +136,18 @@ public class AudioManager : Singleton<AudioManager>
             case BattleSounds.RareItem:
                 battleAudioSource.PlayOneShot(battleRareItemJingle);
                 break;
+            case BattleSounds.Victory:
+                battleAudioSource.Stop();
+                battleAudioSource.PlayOneShot(battleWinJingle);
+                Invoke(nameof(PlayBattleWinTheme), 2.71f);
+                break;
         }
+    }
+
+    void PlayBattleWinTheme()
+    {
+        battleAudioSource.clip = battleWinLoop;
+        battleAudioSource.Play();
     }
 
 
@@ -166,6 +179,7 @@ public class AudioManager : Singleton<AudioManager>
 public enum BattleSounds
 {
     None,
+    Victory,
     LevelUp,
     Item,
     RareItem,

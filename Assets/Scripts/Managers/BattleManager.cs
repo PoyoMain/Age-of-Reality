@@ -327,6 +327,7 @@ public class BattleManager : MonoBehaviour
     private IEnumerator WinCoroutine()
     {
         DespawnUnits(true);
+        AudioManager.Instance.PlayBattleSFX(soundType: BattleSounds.Victory);
         xpWindow.gameObject.SetActive(true);
         xpWindow.ActivateWinVisual(givenItems);
 
