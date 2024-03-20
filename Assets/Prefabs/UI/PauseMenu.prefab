@@ -458,7 +458,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -195, y: 118}
+  m_AnchoredPosition: {x: -327, y: 118}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6442415503336297319
@@ -523,7 +523,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 1
-  m_HorizontalAlignment: 2
+  m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 5
@@ -976,7 +976,31 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 492887210382722998}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7024062826002957194}
+        m_TargetAssemblyTypeName: TempPause, Assembly-CSharp
+        m_MethodName: points
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 7024062826002957194}
+        m_TargetAssemblyTypeName: TempPause, Assembly-CSharp
+        m_MethodName: DefUP
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &2058466646821022292
 GameObject:
   m_ObjectHideFlags: 0
@@ -1005,8 +1029,8 @@ RectTransform:
   m_LocalScale: {x: 1.1395432, y: 0.9641188, z: 0.9641188}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2148871738720801927}
   - {fileID: 3686825692089190716}
+  - {fileID: 2148871738720801927}
   m_Father: {fileID: 3205409934305717822}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -1267,7 +1291,31 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2860610907797517712}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7024062826002957194}
+        m_TargetAssemblyTypeName: TempPause, Assembly-CSharp
+        m_MethodName: points
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 7024062826002957194}
+        m_TargetAssemblyTypeName: TempPause, Assembly-CSharp
+        m_MethodName: HpUP
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &2619787532910974411
 GameObject:
   m_ObjectHideFlags: 0
@@ -1854,8 +1902,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 43.999985}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: -191, y: 43.999985}
+  m_SizeDelta: {x: 350, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2230440298705430910
 CanvasRenderer:
@@ -1919,7 +1967,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 1
-  m_HorizontalAlignment: 2
+  m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 5
@@ -2943,7 +2991,31 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2167312982614931628}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7024062826002957194}
+        m_TargetAssemblyTypeName: TempPause, Assembly-CSharp
+        m_MethodName: points
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 7024062826002957194}
+        m_TargetAssemblyTypeName: TempPause, Assembly-CSharp
+        m_MethodName: StmUP
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &4025006647493506523
 GameObject:
   m_ObjectHideFlags: 0
@@ -5222,13 +5294,11 @@ MonoBehaviour:
   defText: {fileID: 489799835477997887}
   spdText: {fileID: 5192973104032855532}
   stmText: {fileID: 7057379330977325507}
-  health: 0
-  CON: 0
-  MaxHP: 0
-  ATK: 0
-  DEF: 0
-  SPD: 0
-  STM: 0
+  lvlText: {fileID: 5421635790322663754}
+  atkTypeText: {fileID: 7709208152799522214}
+  statPointText: {fileID: 8897793515192992119}
+  statButtons: {fileID: 8219946279432794429}
+  statPoints: 0
 --- !u!114 &3047420148426931186
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5514,7 +5584,31 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8768686932100999805}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7024062826002957194}
+        m_TargetAssemblyTypeName: TempPause, Assembly-CSharp
+        m_MethodName: points
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 7024062826002957194}
+        m_TargetAssemblyTypeName: TempPause, Assembly-CSharp
+        m_MethodName: AtkUP
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &7149047694494451842
 GameObject:
   m_ObjectHideFlags: 0
@@ -7292,7 +7386,31 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5989641269355097456}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7024062826002957194}
+        m_TargetAssemblyTypeName: TempPause, Assembly-CSharp
+        m_MethodName: points
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 7024062826002957194}
+        m_TargetAssemblyTypeName: TempPause, Assembly-CSharp
+        m_MethodName: SpdUP
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &8506989931907686291
 GameObject:
   m_ObjectHideFlags: 0

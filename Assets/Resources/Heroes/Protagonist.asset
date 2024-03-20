@@ -19,8 +19,8 @@ MonoBehaviour:
   _stats:
     Health: 100
     Attack: 1
-    Defense: 1
-    Speed: 1
+    Defense: 2
+    Speed: 2
     Stamina: 1
   meleeAttacks:
   - {fileID: 11400000, guid: fcf377c82c2a78d40b11dd91c2469062, type: 2}

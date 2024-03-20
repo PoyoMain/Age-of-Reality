@@ -23,13 +23,19 @@ public class TempPause : MonoBehaviour
     [SerializeField] private TextMeshProUGUI defText;
     [SerializeField] private TextMeshProUGUI spdText;
     [SerializeField] private TextMeshProUGUI stmText;
-    public int health;
-    public int CON;
-    public int MaxHP;
-    public int ATK;
-    public int DEF;
-    public int SPD;
-    public int STM;
+    [SerializeField] private TextMeshProUGUI lvlText;
+    [SerializeField] private TextMeshProUGUI atkTypeText;
+    [SerializeField] private TextMeshProUGUI statPointText;
+    [SerializeField] private GameObject statButtons;
+    private int health;
+    private int CON;
+    private int MaxHP;
+    private int ATK;
+    private int DEF;
+    private int SPD;
+    private int STM;
+    private int lvl;
+    public int statPoints = 0;
 
 
     public void Update()
@@ -42,7 +48,17 @@ public class TempPause : MonoBehaviour
         DEF = Hero._stats.Defense;
         SPD = Hero._stats.Speed;
         STM = Hero._stats.Stamina;
+        lvl = Hero._stats.Level;
         SetText();
+
+        if (statPoints > 0)
+        {
+            statButtons.SetActive(true);
+        }
+        else
+        {
+            statButtons.SetActive(false);
+        }
 
         if (Input.GetKeyDown(KeyCode.Tab))
         {
@@ -123,6 +139,8 @@ public class TempPause : MonoBehaviour
 
     public void SetText()
     {
+
+        lvlText.text = "Lvl: " + lvl.ToString();
         if (health == MaxHP)
         {
             hpText.text = "Health: " + health.ToString();
@@ -144,10 +162,41 @@ public class TempPause : MonoBehaviour
                 stmText.text = "STM: " + STM.ToString();
                 break;
         }
-
+        atkTypeText.text = ability.ToString();
+        statPointText.text = "Stat Points: " + statPoints.ToString();
         conText.text = "CON: " + CON.ToString();
         spdText.text = "SPD: " + SPD.ToString();
         defText.text = "DEF: " + DEF.ToString();
 
+    }
+
+    public void points()
+    {
+        statPoints--;
+    }
+
+    public void HpUP()
+    {
+        Hero._stats.Health++;
+    }
+
+    public void AtkUP()
+    {
+        Hero._stats.Attack++;
+    }
+
+    public void DefUP()
+    {
+        Hero._stats.Defense++;
+    }
+
+    public void SpdUP()
+    {
+        Hero._stats.Speed++;
+    }
+
+    public void StmUP()
+    {
+        Hero._stats.Stamina++;
     }
 }
