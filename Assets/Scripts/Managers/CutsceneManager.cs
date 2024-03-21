@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
 using TMPro;
+using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.SceneManagement;
@@ -12,8 +13,10 @@ public class CutsceneManager : MonoBehaviour
 {
     private PlayableDirector _director;
     [SerializeField] private bool clickToAdvanceScene = false;
+    [SerializeField] private int newSceneID;
     [Space(10)]
     [SerializeField] private float timeBetweenCuts = 1;
+    [SerializeField] private float timeBetweenLinesSameCut = 0.5f;
     [SerializeField] private float fadeSpeed = 2;
 
     [SerializeField] private TextMeshProUGUI dialogueText;
@@ -25,12 +28,22 @@ public class CutsceneManager : MonoBehaviour
     private int clipIndex = 0;
     private bool playNewClip = false;
 
+    private bool dialogueFinished = false;
+    private bool videoFinished = false;
+
     private Coroutine CutsceneVideoCoroutine;
     private Coroutine CutsceneDialogueCoroutine;
 
     private void Awake()
     {
         _director = GetComponent<PlayableDirector>();
+
+        StartCoroutine(StartCutscene());
+    }
+
+    IEnumerator StartCutscene()
+    {
+        yield return new WaitForSeconds(0.25f);
 
         _director.Play(timeLineCuts[0].Cut);
         if (timeLineCuts[0].LoopVideo)
@@ -40,51 +53,61 @@ public class CutsceneManager : MonoBehaviour
 
         CutsceneVideoCoroutine = StartCoroutine(PlayCutsceneVideo());
         CutsceneDialogueCoroutine = StartCoroutine(PlayCutsceneDialogue());
+
+        yield break;
     }
 
     IEnumerator PlayCutsceneVideo()
-    { 
+    {
+        float fadeAmount = cutsceneImage.alpha;
+
         while (clipIndex < timeLineCuts.Length)
         {
             if (playNewClip)
             {
-                float fadeAmount = cutsceneImage.alpha;
-                print(cutsceneImage.alpha);
-
-                while (cutsceneImage.alpha > 0)
-                {
-                    print(cutsceneImage.alpha);
-                    cutsceneImage.alpha -= fadeSpeed * Time.deltaTime;
-                    yield return null;
-                }
-
-                yield return new WaitForSeconds(timeBetweenCuts/2);
-                _director.Play(timeLineCuts[clipIndex].Cut);
-                yield return new WaitForSeconds(timeBetweenCuts/2);
-                CutsceneDialogueCoroutine = StartCoroutine(PlayCutsceneDialogue());
-
-                if (timeLineCuts[clipIndex].LoopVideo)
-                {
-                    _director.extrapolationMode = DirectorWrapMode.Loop;
-                }
-                else
-                {
-                    _director.extrapolationMode = DirectorWrapMode.Hold;
-                }
+                yield return new WaitForSeconds(0.25f);
 
                 playNewClip = false;
 
-                while (cutsceneImage.alpha < fadeAmount)
-                {
-                    cutsceneImage.alpha += fadeSpeed * Time.deltaTime;
-                    yield return null;
-                }
+                _director.Play(timeLineCuts[clipIndex].Cut);
+                CutsceneDialogueCoroutine = StartCoroutine(PlayCutsceneDialogue());
+
+                if (timeLineCuts[clipIndex].LoopVideo) _director.extrapolationMode = DirectorWrapMode.Loop;
+                else _director.extrapolationMode = DirectorWrapMode.Hold;
             }
+
+            while (cutsceneImage.alpha < fadeAmount)
+            {
+                cutsceneImage.alpha += fadeSpeed * Time.deltaTime;
+                yield return null;
+            }
+
+            while (_director.time < _director.playableAsset.duration)
+            {
+                yield return null;
+            }
+
+            yield return new WaitForSeconds(timeBetweenCuts);
+
+            while (cutsceneImage.alpha > 0)
+            {
+                cutsceneImage.alpha -= fadeSpeed * Time.deltaTime;
+                yield return null;
+            }
+
+            videoFinished = true;
 
             yield return null;
         }
 
+        while (cutsceneImage.alpha > 0)
+        {
+            cutsceneImage.alpha -= fadeSpeed * Time.deltaTime;
+            yield return null;
+        }
+
         print("Done");
+        Invoke(nameof(SceneChange), 1f);
         yield break;
     }
 
@@ -92,25 +115,32 @@ public class CutsceneManager : MonoBehaviour
     {
         dialogueText.text = string.Empty;
 
-        foreach (char c in timeLineCuts[clipIndex].Text.ToCharArray())
+        for (int i = 0; i < timeLineCuts[clipIndex].Lines.Length; i++)
         {
-            dialogueText.text += c;
-            yield return new WaitForSeconds(timeLineCuts[clipIndex].TextSpeed);
+            foreach (char c in timeLineCuts[clipIndex].Lines[i].ToCharArray())
+            {
+                dialogueText.text += c;
+                yield return new WaitForSeconds(timeLineCuts[clipIndex].TextSpeed);
+            }
+
+            yield return new WaitForSeconds(timeBetweenLinesSameCut);
+
+            if (i != timeLineCuts[clipIndex].Lines.Length - 1) dialogueText.text = string.Empty;
         }
 
-        NextShot();
+        dialogueFinished = true;
     }
 
     public void AdvanceDialogue()
     {
-        if (dialogueText.text == timeLineCuts[clipIndex].Text)
+        if (dialogueText.text == timeLineCuts[clipIndex].Lines[^1])
         {
             NextShot();
         }
         else
         {
             StopCoroutine(CutsceneDialogueCoroutine);
-            dialogueText.text = timeLineCuts[clipIndex].Text;
+            dialogueText.text = timeLineCuts[clipIndex].Lines[^1];
         }
     }
 
@@ -137,6 +167,18 @@ public class CutsceneManager : MonoBehaviour
         {
             AdvanceDialogue();
         }
+
+        if (dialogueFinished && videoFinished)
+        {
+            dialogueFinished = false;
+            videoFinished = false;
+            NextShot();
+        }
+    }
+
+    public void SceneChange()
+    {
+        SceneManager.LoadScene(newSceneID);
     }
 }
 
@@ -146,7 +188,7 @@ public class CutsceneClip
 {
     public PlayableAsset Cut;
     [TextArea(2,3)]
-    public string Text;
+    public string[] Lines;
     public float TextSpeed;
     public bool LoopVideo;
 }

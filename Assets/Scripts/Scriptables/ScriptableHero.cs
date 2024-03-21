@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,7 +13,7 @@ public class ScriptableHero : ScriptableUnitBase
     /// <summary>
     /// Stats of this unit
     /// </summary>
-    [SerializeField] private HeroStats _stats;
+    [SerializeField] public HeroStats _stats;
     public HeroStats BaseStats { get { return _stats; } private set { } }
 
     public List<ScriptableMeleeAttack> meleeAttacks;
@@ -26,7 +25,7 @@ public class ScriptableHero : ScriptableUnitBase
         _stats.Level = 1;
         _stats.XP = 0;
         _stats.Attack = 1;
-        _stats.Health = 100;
+        _stats.Health = 1;
         _stats.Defense = 1;
         _stats.Speed = 1;
         _stats.Stamina = 1;
@@ -80,7 +79,7 @@ public class ScriptableHero : ScriptableUnitBase
                     magicAttacks.Add(newAttack);
                 }
             }
-            
+
             return true;
         }
 

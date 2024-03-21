@@ -72,7 +72,7 @@ public class UnitManager : Singleton<UnitManager>
         HeroUnitBase heroUnit = Instantiate(heroScriptable.Prefab, pos, Quaternion.identity, transform) as HeroUnitBase;
 
         HeroStats stats = heroScriptable.BaseStats;
-        heroUnit.SetStats(stats);
+        heroUnit.InitStats(stats);
         heroUnit.data = heroScriptable;
 
         return heroUnit;
@@ -86,7 +86,7 @@ public class UnitManager : Singleton<UnitManager>
         EnemyUnitBase enemyUnit = Instantiate(enemyScriptable.Prefab, pos, Quaternion.identity, transform) as EnemyUnitBase;
 
         EnemyStats stats = enemyScriptable.BaseStats;
-        enemyUnit.SetStats(stats);
+        enemyUnit.InitStats(stats);
         enemyUnit.data = enemyScriptable;
 
         return enemyUnit;

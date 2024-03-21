@@ -29,22 +29,23 @@ public class PlayerHealth : MonoBehaviour
         healthBar.value = newHealth;
     }
 
-    public void UpdateEntireUI(int newHealth, string newName)
+    public void UpdateEntireUI(int newHealth, string newName, int maxHealth)
     {
+        healthBar.maxValue = maxHealth;
         healthBar.value = newHealth;
         charaName.text = newName;
     }
 
     public void InitializePlayerUI(HeroUnitBase player)
     {
-        healthBar.maxValue = player.data.BaseStats.Health;
+        healthBar.maxValue = player.Stats.Health;
         healthBar.value = player.Stats.Health;
         charaName.text = player.data.name;
     }
 
     public void InitializeEnemyUI(EnemyUnitBase enemy)
     {
-        healthBar.maxValue = enemy.data.BaseStats.Health;
+        healthBar.maxValue = enemy.Stats.Health;
         healthBar.value = enemy.Stats.Health;
         charaName.text = enemy.data.name;
     }

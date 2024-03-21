@@ -14,14 +14,29 @@ public abstract class HeroUnitBase : UnitBase
     };
 
     public HeroStats Stats { get; private set; }
+    public int MaxHealth {  get; private set; }
 
     /// <summary>
-    /// Sets the stats of the unit
+    /// Initialize the stats of the unit
+    /// </summary>
+    /// <param name="stats">The new stats</param>
+    public virtual void InitStats(HeroStats stats)
+    {
+        HeroStats temp = stats;
+        temp.Health = stats.Health * 100;
+        MaxHealth = temp.Health;
+        Stats = temp;
+    }
+
+    /// <summary>
+    /// Set the stats of the unit
     /// </summary>
     /// <param name="stats">The new stats</param>
     public virtual void SetStats(HeroStats stats)
     {
-        Stats = stats;
+        HeroStats temp = stats;
+        temp.Health = stats.Health;
+        Stats = temp;
     }
 
     private void OnEnable()
@@ -127,7 +142,7 @@ public abstract class HeroUnitBase : UnitBase
         HeroStats newStats = Stats;
         newStats.Health += item.EffectAmount;
         newStats.Health = Mathf.Clamp(newStats.Health, 0, data.BaseStats.Health);
-        SetStats(newStats);
+        InitStats(newStats);
     }
 
     public override void Select()

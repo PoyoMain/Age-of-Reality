@@ -212,6 +212,7 @@ public class BattleManager : MonoBehaviour
 
             AttackMenu.gameObject.SetActive(false);
             AttackMenu.chosenAttack = null;
+            selectedEnemy = null;
         }
         else if (AttackMenu.chosenItem != null)
         {
@@ -244,6 +245,7 @@ public class BattleManager : MonoBehaviour
 
             AttackMenu.gameObject.SetActive(false);
             AttackMenu.chosenItem = null;
+            selectedPlayer = null;
         }
         else if (AttackMenu.flee)
         {
@@ -260,6 +262,7 @@ public class BattleManager : MonoBehaviour
         }
 
         enemyHealthUI.gameObject.SetActive(false);
+
         NextTurn();
     }
 
@@ -324,6 +327,7 @@ public class BattleManager : MonoBehaviour
     private IEnumerator WinCoroutine()
     {
         DespawnUnits(true);
+        AudioManager.Instance.PlayBattleSFX(soundType: BattleSounds.Victory);
         xpWindow.gameObject.SetActive(true);
         xpWindow.ActivateWinVisual(givenItems);
 
@@ -410,7 +414,7 @@ public class BattleManager : MonoBehaviour
             if (selectedEnemy != null) selectedEnemy.IsSelected = false;
             selectedEnemy = enemy;
             selectedEnemy.IsSelected = true;
-            enemyHealthUI.InitializeEnemyUI(selectedEnemy);
+            enemyHealthUI.UpdateEntireUI(selectedEnemy.Stats.Health, selectedEnemy.data.name, selectedEnemy.MaxHealth);
             enemyHealthUI.gameObject.SetActive(true);
         }
     }
@@ -429,7 +433,7 @@ public class BattleManager : MonoBehaviour
             if (selectedPlayer != null) selectedPlayer.IsSelected = false;
             selectedPlayer = hero;
             selectedPlayer.IsSelected = true;
-            playerHealthUI.InitializePlayerUI(selectedPlayer);
+            playerHealthUI.UpdateEntireUI(selectedPlayer.Stats.Health, selectedPlayer.data.name, selectedPlayer.MaxHealth);
             playerHealthUI.gameObject.SetActive(true);
         }
     }
@@ -467,6 +471,8 @@ public class BattleManager : MonoBehaviour
     {
         battleControls.Disable();
     }
+
+    
 }
 
 // Battle States

@@ -182,7 +182,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 1c6dac61009f34140b07121d0d59b981, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d359ae24b286cca4e8b79930cb261931, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -463,6 +463,8 @@ GameObject:
   - component: {fileID: 873420164}
   - component: {fileID: 873420163}
   - component: {fileID: 873420162}
+  - component: {fileID: 873420165}
+  - component: {fileID: 873420166}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -544,6 +546,198 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &873420165
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 873420161}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: -8005855554914658486, guid: 8f3ef7769b2a0b04ca19f6265dc70004, type: 2}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!82 &873420166
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 873420161}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 1580881865588932023, guid: 8f3ef7769b2a0b04ca19f6265dc70004, type: 2}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1166387059
 GameObject:
   m_ObjectHideFlags: 0
@@ -735,9 +929,9 @@ PlayableDirector:
   m_GameObject: {fileID: 1341002173}
   m_Enabled: 1
   serializedVersion: 3
-  m_PlayableAsset: {fileID: 11400000, guid: f3674df167ae40545aacccff27c8f825, type: 2}
-  m_InitialState: 1
-  m_WrapMode: 1
+  m_PlayableAsset: {fileID: 11400000, guid: a594438c66225914d9b47ec0cee8d8ba, type: 2}
+  m_InitialState: 0
+  m_WrapMode: 0
   m_DirectorUpdateMode: 1
   m_InitialTime: 0
   m_SceneBindings:
@@ -761,6 +955,26 @@ PlayableDirector:
     value: {fileID: 299795904}
   - key: {fileID: -2953052243086180892, guid: cba4245d54e1b244e8c24fc7e3cf1c24, type: 2}
     value: {fileID: 299795904}
+  - key: {fileID: -926730954444521248, guid: a594438c66225914d9b47ec0cee8d8ba, type: 2}
+    value: {fileID: 873420165}
+  - key: {fileID: 2842195310564185481, guid: 2535f0af9b1e48345a2b1fb6d9f75038, type: 2}
+    value: {fileID: 873420165}
+  - key: {fileID: 8565362790612583608, guid: 7d10a4000ca4c5b4dbaa73611ed6ee78, type: 2}
+    value: {fileID: 873420165}
+  - key: {fileID: -3140361068841105126, guid: 4bc5f3c540a23634fb1d12aa17de0408, type: 2}
+    value: {fileID: 873420165}
+  - key: {fileID: -3429518716387870037, guid: f3674df167ae40545aacccff27c8f825, type: 2}
+    value: {fileID: 873420165}
+  - key: {fileID: -6018031457742969439, guid: aa922d26d7f50c144b2e39b3ffc9e4c0, type: 2}
+    value: {fileID: 873420165}
+  - key: {fileID: -1929751010923832548, guid: 7f790f373f4f2a34397c1b2008495934, type: 2}
+    value: {fileID: 873420165}
+  - key: {fileID: 9055628427762276263, guid: 2d76bd3150fe38b44b200156323fcc5f, type: 2}
+    value: {fileID: 873420165}
+  - key: {fileID: -1796098665610746604, guid: 1bfc46699b73e0b40b685633e925a39f, type: 2}
+    value: {fileID: 873420165}
+  - key: {fileID: 5342021640421552355, guid: cba4245d54e1b244e8c24fc7e3cf1c24, type: 2}
+    value: {fileID: 873420165}
   m_ExposedReferences:
     m_References: []
 --- !u!114 &1341002179
@@ -775,59 +989,75 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 471a8096d94464e4fb57a661e2025c76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  clickToAdvanceScene: 0
+  newSceneID: 2
   timeBetweenCuts: 1
+  timeBetweenLinesSameCut: 1.05
   fadeSpeed: 1
   dialogueText: {fileID: 1350239647}
   cutsceneImage: {fileID: 299795905}
   timeLineCuts:
   - Cut: {fileID: 11400000, guid: a594438c66225914d9b47ec0cee8d8ba, type: 2}
-    Text: Long ago, magic flowed through these lands
-    TextSpeed: 0.075
+    Lines:
+    - Long ago, magic flowed freely through these lands.
+    TextSpeed: 0.055
     LoopVideo: 0
   - Cut: {fileID: 11400000, guid: 2535f0af9b1e48345a2b1fb6d9f75038, type: 2}
-    Text: For a time, it's inhabitants were able to harness such power, allowing
-      them to perform reality defying feats
-    TextSpeed: 0.075
+    Lines:
+    - For a time, it's inhabitants were able to harness such power, allowing them
+      to perform reality defying feats.
+    TextSpeed: 0.05
     LoopVideo: 0
   - Cut: {fileID: 11400000, guid: 7d10a4000ca4c5b4dbaa73611ed6ee78, type: 2}
-    Text: During this time, empires were forged and prospered, boltered by the magic
-      of their rulers and people
-    TextSpeed: 0.075
+    Lines:
+    - 'During this time, empires were forged and prospered, boltered by the magic
+      of their rulers and people.
+
+'
+    TextSpeed: 0.05
     LoopVideo: 0
   - Cut: {fileID: 11400000, guid: 4bc5f3c540a23634fb1d12aa17de0408, type: 2}
-    Text: With time, the study of magic advanced to where scholars could create cardlike
-      artifacts to allow those not gifted with magic to harness it without study
-    TextSpeed: 0.075
+    Lines:
+    - "\rWith time, the study of magic advanced to where scholars could create cardlike
+      artifacts to allow those not gifted with magic to harness it without study."
+    - But nothing, it seems, ever lasts forever.
+    TextSpeed: 0.046
     LoopVideo: 0
   - Cut: {fileID: 11400000, guid: f3674df167ae40545aacccff27c8f825, type: 2}
-    Text: The mana, once pure, had been contaminated in a catastrophe known as the
-      Arklejonbu. The mana was dying.
-    TextSpeed: 0.075
+    Lines:
+    - The mana, once pure, had been contaminated in a catastrophe known as the Arklejonbu.
+      The magic was dying.
+    TextSpeed: 0.04
     LoopVideo: 0
   - Cut: {fileID: 11400000, guid: aa922d26d7f50c144b2e39b3ffc9e4c0, type: 2}
-    Text: Empires fell without their current power and the cards were scattered throughout
+    Lines:
+    - Empires fell without their former power and the cards were scattered throughout
       the land, waiting.
-    TextSpeed: 0.075
+    TextSpeed: 0.045
     LoopVideo: 0
   - Cut: {fileID: 11400000, guid: 7f790f373f4f2a34397c1b2008495934, type: 2}
-    Text: After a time, the cards were rediscovered and new empires were formed,
-      once such empire being your home, Fidelgar
-    TextSpeed: 0.075
+    Lines:
+    - After a time, the cards were rediscovered and new empires were formed, once
+      such empire being your home, Fidelgar.
+    TextSpeed: 0.05
     LoopVideo: 0
   - Cut: {fileID: 11400000, guid: 2d76bd3150fe38b44b200156323fcc5f, type: 2}
-    Text: While the empire is stable, those in the lower classes are forced to live
-      in the dangerous outskirts, where bandits and mutated beasts pray on the weak
-    TextSpeed: 0.075
+    Lines:
+    - While the empire is stable, those in the lower classes are forced to live in
+      the dangerous outskirts, where bandits and mutated beasts pray on the weak.
+    TextSpeed: 0.045
     LoopVideo: 0
   - Cut: {fileID: 11400000, guid: 1bfc46699b73e0b40b685633e925a39f, type: 2}
-    Text: Having being raised in this perilous environment, you have decided to train
+    Lines:
+    - Having being raised in this perilous environment, you have decided to train
       in order to gain the strength you need to protect yourself and all you hold
-      dear
-    TextSpeed: 0.075
+      dear.
+    TextSpeed: 0.045
     LoopVideo: 0
   - Cut: {fileID: 11400000, guid: cba4245d54e1b244e8c24fc7e3cf1c24, type: 2}
-    Text: The path ahead is treacherous. Are you ready?
-    TextSpeed: 0.075
+    Lines:
+    - The path ahead is treacherous. Are you ready?
+    TextSpeed: 0.045
     LoopVideo: 0
 --- !u!1 &1350239645
 GameObject:
@@ -886,7 +1116,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: New Text
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
