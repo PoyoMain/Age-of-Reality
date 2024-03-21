@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class EnemyUnitBase : UnitBase
+public class EnemyUnitBase : UnitBase
 {
     [HideInInspector] public ScriptableEnemy data;
 
@@ -60,14 +60,27 @@ public abstract class EnemyUnitBase : UnitBase
     /// </summary>
     /// <param name="attack">The attack being used</param>
     /// <param name="target">The target of the attack</param>
-    public override void Attack(ScriptableAttack attack, UnitBase target, float multiplier = 1f, float accuracy = 1f)
+    public override void Attack(ScriptableAttack attack, UnitBase target, float multiplier = 1f, float accuracy = 100f)
     {
-        HeroUnitBase heroTarget = target as HeroUnitBase;
+        HeroUnitBase enemyTarget = target as HeroUnitBase;
 
-        int damage = Mathf.RoundToInt(((attack.Stats.attackPower + (Stats.Attack * 10) - (heroTarget.Stats.Defense * 10)) * multiplier) * accuracy);
+        StartCoroutine(AttackCoroutine(attack, enemyTarget));
+    }
+
+    IEnumerator AttackCoroutine(ScriptableAttack attack, HeroUnitBase target, float multiplier = 1f, float accuracy = 100f)
+    {
+        _anim.SetTrigger("Attacked");
+
+        while (!HasAttacked)
+        {
+            yield return null;
+        }
+
+        int damage = Mathf.RoundToInt(((attack.Stats.attackPower + (Stats.Attack * 10) - (target.Stats.Defense * 10)) * multiplier) * (accuracy / 100));
         target.TakeDamage(damage);
-
         print("Enemy Damage Dealt: " + damage);
+
+        yield break;
     }
 
     /// <summary>
@@ -76,6 +89,7 @@ public abstract class EnemyUnitBase : UnitBase
     /// <param name="damage">The amount of damage to deal</param>
     public override void TakeDamage(int damage)
     {
+        _anim.SetTrigger("Hit");
         EnemyStats newStats = Stats;
         newStats.Health -= damage;
         SetStats(newStats);

@@ -4,13 +4,26 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-[RequireComponent(typeof(Animator), typeof(Button))]
+[RequireComponent(typeof(Animator))]
 public abstract class UnitBase : MonoBehaviour
 {
+    protected Animator _anim;
+
     public GameObject selectIndicator;
     public bool IsSelected;
+    public bool HasAttacked
+    {
+        get;
+        protected set;
+    }
 
     protected List<Effect> currentEffects = new();
+
+    private void Awake()
+    {
+        _anim = GetComponent<Animator>();
+        HasAttacked = false;
+    }
 
     /// <summary>
     /// Damages the unit
@@ -25,7 +38,7 @@ public abstract class UnitBase : MonoBehaviour
     /// </summary>
     /// <param name="attack">The attack being used</param>
     /// <param name="target">The target of the attack</param>
-    public abstract void Attack(ScriptableAttack attack, UnitBase target, float multiplier = 1f, float accuracy = 1f);
+    public abstract void Attack(ScriptableAttack attack, UnitBase target, float multiplier = 1f, float accuracy = 100f);
 
     /// <summary>
     /// Moves the unit
@@ -79,6 +92,16 @@ public abstract class UnitBase : MonoBehaviour
         {
             selectIndicator.SetActive(true);
         }
+    }
+
+    void AttackDone()
+    {
+        HasAttacked = true;
+    }
+
+    public void AttackStateReset()
+    {
+        HasAttacked = false;
     }
 }
 

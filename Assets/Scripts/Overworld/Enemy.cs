@@ -2,7 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Windows;
 
+[RequireComponent(typeof(Animator))]
 public class Enemy : MonoBehaviour
 {
     [SerializeField] private List<ScriptableEnemy> allies;
@@ -15,6 +17,7 @@ public class Enemy : MonoBehaviour
     private SpriteRenderer sRend;
     private Collider2D coll;
     private Rigidbody2D rigid;
+    private Animator anim;
 
     public bool isBoss;
 
@@ -25,8 +28,7 @@ public class Enemy : MonoBehaviour
         get { return lines; }
     }
 
-    // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         team.Add(type);
         team.AddRange(allies);
@@ -34,6 +36,15 @@ public class Enemy : MonoBehaviour
         sRend = GetComponent<SpriteRenderer>();
         coll = GetComponent<Collider2D>();
         rigid = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
+
+        
+    }
+
+    private void Start()
+    {
+        anim.SetFloat("X", 0);
+        anim.SetFloat("Y", -1);
     }
 
 

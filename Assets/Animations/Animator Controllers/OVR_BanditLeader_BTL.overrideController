@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: OVR_BanditLeader_BTL
+  m_Controller: {fileID: 9100000, guid: ef83a34718fbe3b40bf9ad6633114470, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: d96c00c65cf43ef49881827d37131ad3, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 2689f260e06acaf47a8806afe5eb8ee7, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 72f439c9965047a4e91251aa8452f57a, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: aae97e6ef7e2c124ca852795bf11ea4c, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 40c1168fc6bd4484da631ceae39e920e, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 569e5f151bf60db4fa32d9967c0c4866, type: 2}

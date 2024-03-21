@@ -872,6 +872,7 @@ GameObject:
   - component: {fileID: 84349382}
   - component: {fileID: 84349381}
   - component: {fileID: 84349380}
+  - component: {fileID: 84349385}
   m_Layer: 0
   m_Name: Bandit Grunt (6)
   m_TagString: Untagged
@@ -1025,6 +1026,27 @@ Transform:
   m_Children: []
   m_Father: {fileID: 47068469}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &84349385
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 84349379}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 22100000, guid: 66e3b3c995d2bf045a9f265ebc0bff85, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &99266890
 GameObject:
   m_ObjectHideFlags: 3
@@ -5954,6 +5976,7 @@ GameObject:
   - component: {fileID: 434903082}
   - component: {fileID: 434903081}
   - component: {fileID: 434903080}
+  - component: {fileID: 434903085}
   m_Layer: 0
   m_Name: Bandit Grunt (11)
   m_TagString: Untagged
@@ -6111,6 +6134,27 @@ Transform:
   m_Children: []
   m_Father: {fileID: 47068469}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &434903085
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 434903079}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 22100000, guid: 66e3b3c995d2bf045a9f265ebc0bff85, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &508801930
 GameObject:
   m_ObjectHideFlags: 0
@@ -6124,6 +6168,7 @@ GameObject:
   - component: {fileID: 508801933}
   - component: {fileID: 508801931}
   - component: {fileID: 508801936}
+  - component: {fileID: 508801937}
   m_Layer: 0
   m_Name: Bandit Grunt
   m_TagString: Untagged
@@ -6279,6 +6324,27 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 1.25, y: 2.5}
   m_Direction: 0
+--- !u!95 &508801937
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 508801930}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 22100000, guid: 66e3b3c995d2bf045a9f265ebc0bff85, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &511020639
 GameObject:
   m_ObjectHideFlags: 0
@@ -6292,6 +6358,7 @@ GameObject:
   - component: {fileID: 511020642}
   - component: {fileID: 511020641}
   - component: {fileID: 511020640}
+  - component: {fileID: 511020645}
   m_Layer: 0
   m_Name: Bandit Grunt (4)
   m_TagString: Untagged
@@ -6446,6 +6513,27 @@ Transform:
   m_Children: []
   m_Father: {fileID: 47068469}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &511020645
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 511020639}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 22100000, guid: 66e3b3c995d2bf045a9f265ebc0bff85, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -6530,7 +6618,8 @@ Transform:
   m_LocalPosition: {x: 1.6825943, y: -0.67776585, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 634363478}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &519420033
@@ -7207,13 +7296,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 634363475}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.6825943, y: -0.67776585, z: -10}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.8132, y: 1.8132, z: 1.8132}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 99266891}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 519420032}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &644291617
 GameObject:
@@ -7436,6 +7525,7 @@ GameObject:
   - component: {fileID: 742532239}
   - component: {fileID: 742532240}
   - component: {fileID: 742532241}
+  - component: {fileID: 742532242}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -7504,6 +7594,18 @@ MonoBehaviour:
   battleLevelUpJingle: {fileID: 0}
   battleWinJingle: {fileID: 8300000, guid: 3df83336a3a64d44b9e40eb0145e1930, type: 3}
   battleWinLoop: {fileID: 8300000, guid: 60a856de76198e04982c406f91acdd80, type: 3}
+--- !u!114 &742532242
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 742532238}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d041d118e0845ec4f8fb914a4e39465a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &763444056
 GameObject:
   m_ObjectHideFlags: 0
@@ -7517,6 +7619,7 @@ GameObject:
   - component: {fileID: 763444059}
   - component: {fileID: 763444057}
   - component: {fileID: 763444062}
+  - component: {fileID: 763444063}
   m_Layer: 0
   m_Name: Bandit Grunt
   m_TagString: Untagged
@@ -7671,6 +7774,27 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 1, y: 2.5}
   m_Direction: 0
+--- !u!95 &763444063
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 763444056}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 22100000, guid: 66e3b3c995d2bf045a9f265ebc0bff85, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &872574870
 GameObject:
   m_ObjectHideFlags: 0
@@ -7829,6 +7953,7 @@ GameObject:
   m_Component:
   - component: {fileID: 894439766}
   - component: {fileID: 894439767}
+  - component: {fileID: 894439768}
   m_Layer: 0
   m_Name: BattleManager
   m_TagString: Untagged
@@ -7877,6 +8002,27 @@ MonoBehaviour:
   xpWindow: {fileID: 1462459409}
   levelSystem: {fileID: 11400000, guid: 909bf1f7f33ce7945a3610db2151197f, type: 2}
   givenItems: []
+--- !u!95 &894439768
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 894439765}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f58e9c547594b8347a585186c4a44d19, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &908680862
 GameObject:
   m_ObjectHideFlags: 0
@@ -7890,6 +8036,7 @@ GameObject:
   - component: {fileID: 908680865}
   - component: {fileID: 908680864}
   - component: {fileID: 908680863}
+  - component: {fileID: 908680868}
   m_Layer: 0
   m_Name: Bandit Grunt (1)
   m_TagString: Untagged
@@ -8044,6 +8191,27 @@ Transform:
   m_Children: []
   m_Father: {fileID: 47068469}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &908680868
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 908680862}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 22100000, guid: 66e3b3c995d2bf045a9f265ebc0bff85, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &925940126
 GameObject:
   m_ObjectHideFlags: 0
@@ -8057,6 +8225,7 @@ GameObject:
   - component: {fileID: 925940129}
   - component: {fileID: 925940128}
   - component: {fileID: 925940127}
+  - component: {fileID: 925940132}
   m_Layer: 0
   m_Name: Bandit Grunt (10)
   m_TagString: Untagged
@@ -8210,6 +8379,27 @@ Transform:
   m_Children: []
   m_Father: {fileID: 47068469}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &925940132
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 925940126}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 22100000, guid: 66e3b3c995d2bf045a9f265ebc0bff85, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &927576829
 GameObject:
   m_ObjectHideFlags: 0
@@ -8223,6 +8413,7 @@ GameObject:
   - component: {fileID: 927576832}
   - component: {fileID: 927576831}
   - component: {fileID: 927576830}
+  - component: {fileID: 927576835}
   m_Layer: 0
   m_Name: Bandit Grunt (7)
   m_TagString: Untagged
@@ -8376,6 +8567,27 @@ Transform:
   m_Children: []
   m_Father: {fileID: 47068469}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &927576835
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 927576829}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 22100000, guid: 66e3b3c995d2bf045a9f265ebc0bff85, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &970002037
 GameObject:
   m_ObjectHideFlags: 0
@@ -8769,6 +8981,7 @@ GameObject:
   - component: {fileID: 1039817530}
   - component: {fileID: 1039817529}
   - component: {fileID: 1039817528}
+  - component: {fileID: 1039817533}
   m_Layer: 0
   m_Name: Bandit Grunt (5)
   m_TagString: Untagged
@@ -8922,6 +9135,27 @@ Transform:
   m_Children: []
   m_Father: {fileID: 47068469}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &1039817533
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1039817527}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 22100000, guid: 66e3b3c995d2bf045a9f265ebc0bff85, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1049665765
 GameObject:
   m_ObjectHideFlags: 0
@@ -9689,6 +9923,7 @@ GameObject:
   - component: {fileID: 1291648736}
   - component: {fileID: 1291648735}
   - component: {fileID: 1291648734}
+  - component: {fileID: 1291648739}
   m_Layer: 0
   m_Name: Bandit Leader
   m_TagString: Untagged
@@ -9836,12 +10071,33 @@ Transform:
   m_GameObject: {fileID: 1291648733}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.23, y: 21.28, z: 0}
+  m_LocalPosition: {x: -1.52, y: 21.17, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 47068469}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &1291648739
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1291648733}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 22100000, guid: 75d7f3c8dcec5cf4790b1dda707f81cd, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1318958633
 GameObject:
   m_ObjectHideFlags: 0
@@ -9855,6 +10111,7 @@ GameObject:
   - component: {fileID: 1318958636}
   - component: {fileID: 1318958635}
   - component: {fileID: 1318958634}
+  - component: {fileID: 1318958639}
   m_Layer: 0
   m_Name: Bandit Grunt (8)
   m_TagString: Untagged
@@ -10008,6 +10265,27 @@ Transform:
   m_Children: []
   m_Father: {fileID: 47068469}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &1318958639
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1318958633}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 22100000, guid: 66e3b3c995d2bf045a9f265ebc0bff85, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1319072097
 GameObject:
   m_ObjectHideFlags: 0
@@ -65557,6 +65835,7 @@ GameObject:
   - component: {fileID: 1508218233}
   - component: {fileID: 1508218232}
   - component: {fileID: 1508218231}
+  - component: {fileID: 1508218236}
   m_Layer: 0
   m_Name: Bandit Grunt (2)
   m_TagString: Untagged
@@ -65711,6 +65990,27 @@ Transform:
   m_Children: []
   m_Father: {fileID: 47068469}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &1508218236
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1508218230}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 22100000, guid: 66e3b3c995d2bf045a9f265ebc0bff85, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1517078921
 GameObject:
   m_ObjectHideFlags: 0
@@ -66226,6 +66526,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1603596793}
   - component: {fileID: 1603596794}
+  - component: {fileID: 1603596796}
+  - component: {fileID: 1603596795}
   m_Layer: 5
   m_Name: UnitManager
   m_TagString: Untagged
@@ -66264,6 +66566,46 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad5ac15fbe756f94385ced3c0d516436, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1603596795
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1603596792}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+--- !u!223 &1603596796
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1603596792}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 2
+  m_Camera: {fileID: 1564340127}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 0
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
+  m_AdditionalShaderChannelsFlag: 0
+  m_UpdateRectTransformForStandalone: 0
+  m_SortingLayerID: 1471637549
+  m_SortingOrder: 0
+  m_TargetDisplay: 0
 --- !u!1 &1609024532
 GameObject:
   m_ObjectHideFlags: 0
@@ -66456,6 +66798,7 @@ GameObject:
   - component: {fileID: 1652250590}
   - component: {fileID: 1652250589}
   - component: {fileID: 1652250588}
+  - component: {fileID: 1652250593}
   m_Layer: 0
   m_Name: Bandit Grunt (9)
   m_TagString: Untagged
@@ -66609,6 +66952,27 @@ Transform:
   m_Children: []
   m_Father: {fileID: 47068469}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &1652250593
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1652250587}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 22100000, guid: 66e3b3c995d2bf045a9f265ebc0bff85, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1683036470
 GameObject:
   m_ObjectHideFlags: 0
@@ -66622,6 +66986,7 @@ GameObject:
   - component: {fileID: 1683036473}
   - component: {fileID: 1683036472}
   - component: {fileID: 1683036471}
+  - component: {fileID: 1683036476}
   m_Layer: 0
   m_Name: Bandit Grunt (3)
   m_TagString: Untagged
@@ -66776,6 +67141,27 @@ Transform:
   m_Children: []
   m_Father: {fileID: 47068469}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &1683036476
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1683036470}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 22100000, guid: 66e3b3c995d2bf045a9f265ebc0bff85, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1735607044
 GameObject:
   m_ObjectHideFlags: 0
@@ -69173,6 +69559,7 @@ GameObject:
   - component: {fileID: 7942285961093800576}
   - component: {fileID: 7942285961093800575}
   - component: {fileID: 7942285961093800577}
+  - component: {fileID: 7942285961093800578}
   m_Layer: 0
   m_Name: Bandit Grunt
   m_TagString: Untagged
@@ -69829,7 +70216,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 2, y: 4}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -70134,6 +70521,27 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 1.25, y: 2.5}
   m_Direction: 0
+--- !u!95 &7942285961093800578
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1791962047244145098}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 22100000, guid: 66e3b3c995d2bf045a9f265ebc0bff85, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!224 &8057572108450231598
 RectTransform:
   m_ObjectHideFlags: 0
@@ -70386,7 +70794,6 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 519420032}
-  - {fileID: 634363478}
   - {fileID: 520420319}
   - {fileID: 742532239}
   - {fileID: 1428798816}

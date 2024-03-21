@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using static UnityEngine.EventSystems.EventTrigger;
 
+[RequireComponent(typeof(Animator))]
 public class BattleManager : MonoBehaviour
 {
     public static event Action<BattleState> OnBeforeStateChanged; // Event that happens before a state change
@@ -47,10 +48,14 @@ public class BattleManager : MonoBehaviour
     [Space(15f)] 
     [SerializeField] private List<ScriptableItem> givenItems;
 
+    private Animator _anim;
+
     void Awake()
     {
         playerControls = new PlayerControls();
         battleControls = playerControls.BattleControls;
+
+        _anim = GetComponent<Animator>();
     }
 
     // Method to change the state of the battle
@@ -187,12 +192,15 @@ public class BattleManager : MonoBehaviour
 
             minigameManager.gameObject.SetActive(false);
 
+            HeroUnitBase currentHero = turnOrder[0] as HeroUnitBase;
+
             turnOrder[0].Attack(AttackMenu.chosenAttack, selectedEnemy, multiplier: AttackMenu.chosenAttack.Stats.multiplier, accuracy: minigameManager.Accuracy);
+
             enemyHealthUI.UpdateHealth(selectedEnemy.Stats.Health);
+
 
             if (selectedEnemy.Stats.Health <= 0)
             {
-                HeroUnitBase currentHero = turnOrder[0] as HeroUnitBase;
                 currentHero.data.IncreaseXP(selectedEnemy.data.BaseStats.XP);
 
                 foreach (ItemDrop item in selectedEnemy.data.droppableItems)
@@ -299,6 +307,13 @@ public class BattleManager : MonoBehaviour
         HeroUnitBase chosenTarget = PartyUnits[UnityEngine.Random.Range(0, PartyUnits.Count)];
 
         turnOrder[0].Attack(chosenAttack, chosenTarget);
+
+        while (!turnOrder[0].HasAttacked)
+        {
+            yield return null;
+        }
+        _anim.SetTrigger("Shake Cam");
+        turnOrder[0].AttackStateReset();
         playerHealthUI.UpdateHealth(chosenTarget.Stats.Health);
 
         if (chosenTarget.Stats.Health <= 0)
