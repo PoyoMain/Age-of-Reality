@@ -9,7 +9,8 @@ public abstract class UnitBase : MonoBehaviour
 {
     protected Animator _anim;
 
-    public GameObject selectIndicator;
+    protected Outline outline;
+
     public bool IsSelected;
     public bool HasAttacked
     {
@@ -22,6 +23,8 @@ public abstract class UnitBase : MonoBehaviour
     private void Awake()
     {
         _anim = GetComponent<Animator>();
+        outline = GetComponent<Outline>();
+
         HasAttacked = false;
     }
 
@@ -86,11 +89,11 @@ public abstract class UnitBase : MonoBehaviour
 
         if (!IsSelected)
         {
-            selectIndicator.SetActive(false);
+            outline.enabled = false;
         }
         else
         {
-            selectIndicator.SetActive(true);
+            outline.enabled = true;
         }
     }
 

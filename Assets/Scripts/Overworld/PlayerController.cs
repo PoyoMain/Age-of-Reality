@@ -75,8 +75,15 @@ public class PlayerController : MonoBehaviour
 
     public void Freeze()
     {
+        anim.speed = 0;
         rigid.velocity = Vector3.zero;
     }
+
+    public void UnFreeze()
+    {
+        anim.speed = 1;
+    }
+
 
 
     private void OnCollisionEnter2D(Collision2D collision)

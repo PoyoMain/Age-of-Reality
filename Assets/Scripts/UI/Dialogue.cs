@@ -3,14 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
+[RequireComponent(typeof(Animator))]
 public class Dialogue : MonoBehaviour
 {
 
     [SerializeField] private TextMeshProUGUI textComponent;
     [SerializeField] private GameObject dialogueBox;
-    private string[] lines;
-    [SerializeField] private float textSpeed;
-    private int index;
+    private DialogueLine line;
+    [SerializeField] private AudioSource audioSource;
+    //private int index;
+
+    private Animator _anim;
 
     public bool PlayingDialogue
     {
@@ -18,17 +21,23 @@ public class Dialogue : MonoBehaviour
         private set;
     }
 
-    public void Init(string[] linesToSay)
+    private void Awake()
     {
-        if (linesToSay == null) return;
+        _anim = GetComponent<Animator>();
+    }
 
-        if (linesToSay.Length == 0) return;
+    public void Init(DialogueLine lineToSay, ScriptableUnitBase unit)
+    {
+        if (lineToSay == null) return;
 
-        lines = linesToSay;
+        //if (lineToSay.Length == 0) return;
+
+        line = lineToSay;
         dialogueBox.SetActive(true);
         textComponent.text = string.Empty;
         PlayingDialogue = true;
-        StartDialogue();
+
+        _anim.SetTrigger("Open");
     }
 
     void Update()
@@ -41,45 +50,56 @@ public class Dialogue : MonoBehaviour
 
     public void AdvanceDialogue()
     {
-        if (textComponent.text == lines[index])
+        if (textComponent.text == line.Line)
         {
             NextLine();
         }
         else
         {
             StopAllCoroutines();
-            textComponent.text = lines[index];
+            textComponent.text = line.Line;
         }
     }
 
     void StartDialogue()
     {
-        index = 0;
+        //index = 0;
+
+        if (!(audioSource == null || line.VoiceClips == null))
+        {
+            if (line.VoiceClips.Length > 0)
+            {
+                audioSource.PlayOneShot(line.VoiceClips[Random.Range(0, line.VoiceClips.Length)]);
+            }
+        }
+
         StartCoroutine(TypeLine());
     }
 
     IEnumerator TypeLine()
     {
-        foreach (char c in lines[index].ToCharArray())
+        foreach (char c in line.Line.ToCharArray())
         {
             textComponent.text += c;
-            yield return new WaitForSeconds(textSpeed);
+            yield return new WaitForSeconds(line.textSpeed);
         }
     }
 
     void NextLine()
     {
-        if (index < lines.Length - 1)
-        {
-            index++;
-            textComponent.text = string.Empty;
-            StartCoroutine(TypeLine());
-        }
-        else
-        {
+        //if (index < line.Length - 1)
+        //{
+        //    index++;
+        //    textComponent.text = string.Empty;
+        //    StartCoroutine(TypeLine());
+        //}
+        //else
+        //{
+
+            _anim.SetTrigger("Close");
             dialogueBox.SetActive(false);
             PlayingDialogue = false;
 
-        }
+        //}
     }
 }
