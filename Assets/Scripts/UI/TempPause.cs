@@ -181,7 +181,7 @@ public class TempPause : MonoBehaviour
 
     public void points()
     {
-        statPoints--;
+        Hero._stats.ExtraStatPoints--;
     }
 
     public void HpUP()
