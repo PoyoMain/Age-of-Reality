@@ -83,7 +83,7 @@ public class GameManager : Singleton<GameManager>
         enemyHit.Freeze();
         player.Freeze();
 
-        dialogueBox.Init(enemyHit.Lines);
+        dialogueBox.Init(enemyHit.Line, enemyHit.type);
 
         while (dialogueBox.PlayingDialogue)
         {
@@ -133,6 +133,9 @@ public class GameManager : Singleton<GameManager>
         battleAudioSource.volume = battleAudioStartVolume;
 
         overworldCamera.gameObject.SetActive(true); // Activates the overworld camera
+
+        player.UnFreeze();
+        enemyHit.UnFreeze();
 
         if (battleManager.State == BattleState.Win)
         {

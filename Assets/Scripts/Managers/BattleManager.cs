@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using static UnityEngine.EventSystems.EventTrigger;
 
+[RequireComponent(typeof(Animator))]
 public class BattleManager : MonoBehaviour
 {
     public static event Action<BattleState> OnBeforeStateChanged; // Event that happens before a state change
@@ -47,10 +48,14 @@ public class BattleManager : MonoBehaviour
     [Space(15f)] 
     [SerializeField] private List<ScriptableItem> givenItems;
 
+    private Animator _anim;
+
     void Awake()
     {
         playerControls = new PlayerControls();
         battleControls = playerControls.BattleControls;
+
+        _anim = GetComponent<Animator>();
     }
 
     // Method to change the state of the battle
@@ -119,6 +124,7 @@ public class BattleManager : MonoBehaviour
     {
         EnemyUnits = UnitManager.Instance.SpawnEnemies(GameManager.Instance.enemyHit.team);
         turnOrder.AddRange(EnemyUnits);
+        enemyHealthUI.InitializeEnemyUI(EnemyUnits[0]);
         //turnOrder.Sort((a, b) => a.Stats.Speed.CompareTo(b.Stats.Speed));
 
         ChangeState(BattleState.HeroTurn);
@@ -145,9 +151,11 @@ public class BattleManager : MonoBehaviour
 
     private IEnumerator HeroTurnCoroutine()
     {
-        Vector3 startPos = turnOrder[0].transform.position;
+        HeroUnitBase currentHero = turnOrder[0] as HeroUnitBase;
 
-        while (!turnOrder[0].Move(GridInfo.GridWorldMidPoint, speed))
+        Vector3 startPos = currentHero.transform.position;
+
+        while (!currentHero.Move(GridInfo.GridWorldMidPoint, speed))
         {
             yield return null;
         }
@@ -187,12 +195,24 @@ public class BattleManager : MonoBehaviour
 
             minigameManager.gameObject.SetActive(false);
 
-            turnOrder[0].Attack(AttackMenu.chosenAttack, selectedEnemy, multiplier: AttackMenu.chosenAttack.Stats.multiplier, accuracy: minigameManager.Accuracy);
+            int damage = currentHero.Attack(AttackMenu.chosenAttack, selectedEnemy, multiplier: AttackMenu.chosenAttack.Stats.multiplier, accuracy: minigameManager.Accuracy);
+
+            _anim.SetInteger("Damage", damage);
+
+            while (!currentHero.HasAttacked)
+            {
+                yield return null;
+            }
+
+            _anim.SetTrigger("Shake Cam");
+
+            currentHero.AttackStateReset();
+
             enemyHealthUI.UpdateHealth(selectedEnemy.Stats.Health);
+
 
             if (selectedEnemy.Stats.Health <= 0)
             {
-                HeroUnitBase currentHero = turnOrder[0] as HeroUnitBase;
                 currentHero.data.IncreaseXP(selectedEnemy.data.BaseStats.XP);
 
                 foreach (ItemDrop item in selectedEnemy.data.droppableItems)
@@ -256,7 +276,7 @@ public class BattleManager : MonoBehaviour
         }
 
 
-        while (!turnOrder[0].Move(startPos, speed))
+        while (!currentHero.Move(startPos, speed))
         {
             yield return null;
         }
@@ -287,18 +307,29 @@ public class BattleManager : MonoBehaviour
 
     private IEnumerator EnemyTurnCoroutine()
     {
-        Vector3 startPos = turnOrder[0].transform.position;
+        EnemyUnitBase enemy = turnOrder[0] as EnemyUnitBase;
 
-        while (!turnOrder[0].Move(GridInfo.GridWorldMidPoint, speed))
+        Vector3 startPos = enemy.transform.position;
+
+        while (!enemy.Move(GridInfo.GridWorldMidPoint, speed))
+        {
+            yield return null;
+        }
+        
+        ScriptableAttack chosenAttack = enemy.data.attacks[UnityEngine.Random.Range(0, enemy.data.attacks.Count)];
+        HeroUnitBase chosenTarget = PartyUnits[UnityEngine.Random.Range(0, PartyUnits.Count)];
+
+        int damage = enemy.Attack(chosenAttack, chosenTarget);
+        _anim.SetInteger("Damage", damage);
+
+        while (!enemy.HasAttacked)
         {
             yield return null;
         }
 
-        EnemyUnitBase enemy = turnOrder[0] as EnemyUnitBase;
-        ScriptableAttack chosenAttack = enemy.data.attacks[UnityEngine.Random.Range(0, enemy.data.attacks.Count)];
-        HeroUnitBase chosenTarget = PartyUnits[UnityEngine.Random.Range(0, PartyUnits.Count)];
+        _anim.SetTrigger("Shake Cam");
 
-        turnOrder[0].Attack(chosenAttack, chosenTarget);
+        enemy.AttackStateReset();
         playerHealthUI.UpdateHealth(chosenTarget.Stats.Health);
 
         if (chosenTarget.Stats.Health <= 0)
@@ -308,7 +339,7 @@ public class BattleManager : MonoBehaviour
             Destroy(chosenTarget.gameObject);
         }
 
-        while (!turnOrder[0].Move(startPos, speed))
+        while (!enemy.Move(startPos, speed))
         {
             yield return null;
         }
@@ -414,7 +445,7 @@ public class BattleManager : MonoBehaviour
             if (selectedEnemy != null) selectedEnemy.IsSelected = false;
             selectedEnemy = enemy;
             selectedEnemy.IsSelected = true;
-            enemyHealthUI.UpdateEntireUI(selectedEnemy.Stats.Health, selectedEnemy.data.name, selectedEnemy.MaxHealth);
+            enemyHealthUI.UpdateEntireUI(selectedEnemy.Stats.Health, selectedEnemy.data.name, selectedEnemy.MaxHealth, selectedEnemy.data.Profile);
             enemyHealthUI.gameObject.SetActive(true);
         }
     }
@@ -433,7 +464,7 @@ public class BattleManager : MonoBehaviour
             if (selectedPlayer != null) selectedPlayer.IsSelected = false;
             selectedPlayer = hero;
             selectedPlayer.IsSelected = true;
-            playerHealthUI.UpdateEntireUI(selectedPlayer.Stats.Health, selectedPlayer.data.name, selectedPlayer.MaxHealth);
+            playerHealthUI.UpdateEntireUI(selectedPlayer.Stats.Health, selectedPlayer.data.name, selectedPlayer.MaxHealth, selectedPlayer.data.Profile);
             playerHealthUI.gameObject.SetActive(true);
         }
     }

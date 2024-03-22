@@ -49,11 +49,13 @@ public class PlayerController : MonoBehaviour
         //rigid.MovePosition(speed * Time.deltaTime * transform.TransformDirection(moveDirection)); // Moves the player
         rigid.velocity = speed * moveDirection; // Moves the player
 
-        if (moveDirection != Vector3.zero) anim.SetBool("isMoving", true);
+        if (moveDirection != Vector3.zero)
+        {
+            anim.SetBool("isMoving", true);
+            anim.SetFloat("X", input.x);
+            anim.SetFloat("Y", input.y);
+        }
         else anim.SetBool("isMoving", false);
-
-        anim.SetFloat("X", input.x);
-        anim.SetFloat("Y", input.y);
 
         //Uncomment if this ends up being a sidescroller
         //if (!controller.isGrounded) controller.Move(9.8f * Time.deltaTime * Vector3.down); // If off the ground, go towards the ground
@@ -73,8 +75,15 @@ public class PlayerController : MonoBehaviour
 
     public void Freeze()
     {
+        anim.speed = 0;
         rigid.velocity = Vector3.zero;
     }
+
+    public void UnFreeze()
+    {
+        anim.speed = 1;
+    }
+
 
 
     private void OnCollisionEnter2D(Collision2D collision)

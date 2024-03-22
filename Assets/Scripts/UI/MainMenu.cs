@@ -10,7 +10,7 @@ public class MainMenu : MonoBehaviour
     //Plays the game; advance to the main scene
     public void PlayGame()
     {
-        SceneManager.LoadScene("OverworldScene");
+        SceneManager.LoadScene("CutsceneScene");
     }
 
     //Quits the game

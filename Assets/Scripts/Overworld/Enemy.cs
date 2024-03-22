@@ -2,7 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Windows;
 
+[RequireComponent(typeof(Animator))]
 public class Enemy : MonoBehaviour
 {
     [SerializeField] private List<ScriptableEnemy> allies;
@@ -15,18 +17,19 @@ public class Enemy : MonoBehaviour
     private SpriteRenderer sRend;
     private Collider2D coll;
     private Rigidbody2D rigid;
+    private Animator anim;
 
     public bool isBoss;
 
-    [TextArea(2,2)]
-    [SerializeField] private string[] lines;
-    public string[] Lines 
-    { 
-        get { return lines; }
+    [SerializeField] private DialogueLine line;
+
+    public DialogueLine Line
+    {
+        get { return line; }
     }
 
-    // Start is called before the first frame update
-    void Start()
+
+    void Awake()
     {
         team.Add(type);
         team.AddRange(allies);
@@ -34,6 +37,15 @@ public class Enemy : MonoBehaviour
         sRend = GetComponent<SpriteRenderer>();
         coll = GetComponent<Collider2D>();
         rigid = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
+
+        
+    }
+
+    private void Start()
+    {
+        anim.SetFloat("X", 0);
+        anim.SetFloat("Y", -1);
     }
 
 
@@ -65,7 +77,24 @@ public class Enemy : MonoBehaviour
 
     public void Freeze()
     {
+        anim.speed = 0;
         rigid.velocity = Vector3.zero;
     }
+
+    public void UnFreeze()
+    {
+        anim.speed = 1;
+    }
     
+}
+
+[Serializable]
+public class DialogueLine
+{
+    [TextArea(2, 2)]
+    public string Line;
+    public float textSpeed;
+
+    [Space(10)]
+    public AudioClip[] VoiceClips;
 }

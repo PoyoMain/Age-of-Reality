@@ -60,6 +60,7 @@ MonoBehaviour:
   - {fileID: 535212697824329703}
   - {fileID: 1359450456262749264}
   - {fileID: 7417334490743787034}
+  - {fileID: 1993010164143540142}
   backwards: 0
   tempAngle: 0
   pastAngle: 0
@@ -145,6 +146,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 500f6183cedc17546b58058f99f2218c, type: 3}
+--- !u!1 &1993010164143540142 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4585999193696094249, guid: 500f6183cedc17546b58058f99f2218c, type: 3}
+  m_PrefabInstance: {fileID: 2597492691574919047}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8186710910247178843 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6165762029331553756, guid: 500f6183cedc17546b58058f99f2218c, type: 3}

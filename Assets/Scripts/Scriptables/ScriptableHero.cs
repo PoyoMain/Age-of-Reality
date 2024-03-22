@@ -13,7 +13,7 @@ public class ScriptableHero : ScriptableUnitBase
     /// <summary>
     /// Stats of this unit
     /// </summary>
-    [SerializeField] public HeroStats _stats;
+    [SerializeField] private HeroStats _stats;
     public HeroStats BaseStats { get { return _stats; } private set { } }
 
     public List<ScriptableMeleeAttack> meleeAttacks;
@@ -101,6 +101,36 @@ public class ScriptableHero : ScriptableUnitBase
         Debug.Log("Level Up");
     }
 
+    public void IncreaseStat(StatType type)
+    {
+        switch (type)
+        {
+            case StatType.Health:
+                _stats.Health++;
+                break;
+            case StatType.Attack:
+                _stats.Attack++;
+                break;
+            case StatType.Defense:
+                _stats.Defense++;
+                break;
+            case StatType.Speed:
+                _stats.Speed++;
+                break;
+            case StatType.Stamina:
+                _stats.Stamina++;
+                break;
+            case StatType.ExtraStatPoints:
+                _stats.ExtraStatPoints++;
+                break;
+        }
+    }
+
+    public void DecreaseStatPoint()
+    {
+        _stats.ExtraStatPoints--;
+    }
+
     private void OnDisable()
     {
         ResetCharacter();
@@ -132,4 +162,14 @@ public struct HeroStats
     {
         Health = newHealth;
     }
+}
+
+public enum StatType
+{
+    Health,
+    Attack,
+    Defense,
+    Speed,
+    Stamina,
+    ExtraStatPoints
 }
