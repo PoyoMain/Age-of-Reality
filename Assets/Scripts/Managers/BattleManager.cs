@@ -174,7 +174,6 @@ public class BattleManager : MonoBehaviour
             pickingEnemy = false;
             EnemySelected(EnemyUnits[0]);
 
-            yield return new WaitForSeconds(0.5f);
             pickingEnemy = true;
 
             while (pickingEnemy)
