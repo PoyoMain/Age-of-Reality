@@ -16142,10 +16142,20 @@ MonoBehaviour:
   battleManager: {fileID: 0}
   overworldCamera: {fileID: 1585043633}
   battleCamera: {fileID: 0}
+<<<<<<< Updated upstream
   minigame: {fileID: 6633343848253367670, guid: 85fe218a22f91564e8d4efdb1ccd4e9b, type: 3}
   audioFadeOutTime: 0.5
   modeTransitioning: 0
   enemyHit: {fileID: 0}
+=======
+  audioFadeOutTime: 0.5
+  modeTransitioning: 0
+  enemyHit: {fileID: 0}
+  ItemInventory: {fileID: 0}
+  dialogueBox: {fileID: 0}
+  perfectMinigameCount: 0
+  enemiesDefeated: 0
+>>>>>>> Stashed changes
 --- !u!4 &1037068146
 Transform:
   m_ObjectHideFlags: 0
