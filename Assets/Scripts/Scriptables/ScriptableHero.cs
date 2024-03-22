@@ -126,6 +126,11 @@ public class ScriptableHero : ScriptableUnitBase
         }
     }
 
+    public void DecreaseStatPoint()
+    {
+        _stats.ExtraStatPoints--;
+    }
+
     private void OnDisable()
     {
         ResetCharacter();
