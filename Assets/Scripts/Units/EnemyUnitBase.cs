@@ -16,7 +16,7 @@ public class EnemyUnitBase : UnitBase
     public virtual void InitStats(EnemyStats stats)
     {
         EnemyStats temp = stats;
-        temp.Health = stats.Health * 100;
+        temp.Health = stats.Health * 10;
         MaxHealth = temp.Health;
         Stats = temp;
     }
@@ -145,5 +145,23 @@ public class EnemyUnitBase : UnitBase
     public override void Select()
     {
         SendMessageUpwards("EnemySelected", this);
+    }
+
+    void PlayVocalAttackAudio()
+    {
+        AudioClip clipToPlay = data.vocalAttackSFX[Random.Range(0, data.vocalAttackSFX.Length)];
+        AudioManager.Instance.PlayBattleSFX(clipToPlay);
+    }
+
+    void PlayAttackAudio()
+    {
+        AudioClip clipToPlay = data.attackSFX[Random.Range(0, data.attackSFX.Length)];
+        AudioManager.Instance.PlayBattleSFX(clipToPlay);
+    }
+
+    void PlayHurtAudio()
+    {
+        AudioClip clipToPlay = data.hurtSFX[Random.Range(0, data.hurtSFX.Length)];
+        AudioManager.Instance.PlayBattleSFX(clipToPlay);
     }
 }

@@ -361,6 +361,11 @@ public class BattleManager : MonoBehaviour
         xpWindow.gameObject.SetActive(true);
         xpWindow.ActivateWinVisual(givenItems);
 
+        if (givenItems.Count > 0)
+        {
+            AudioManager.Instance.PlayBattleSFX(soundType: BattleSounds.Item);
+        }
+
         foreach (var item in givenItems)
         {
             GameManager.Instance.ItemInventory.AddToInventory(item);
@@ -394,6 +399,7 @@ public class BattleManager : MonoBehaviour
             {
                 xpWindow.SetXPStats(heroUnit.data.name, prevData, currentData, newAttacks);
                 xpWindow.ActivateXPVisual();
+                AudioManager.Instance.PlayBattleSFX(soundType: BattleSounds.LevelUp);
 
                 while (!Input.GetMouseButtonDown(0))
                 {

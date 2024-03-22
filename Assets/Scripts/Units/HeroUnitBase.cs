@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -23,7 +22,7 @@ public class HeroUnitBase : UnitBase
     public virtual void InitStats(HeroStats stats)
     {
         HeroStats temp = stats;
-        temp.Health = stats.Health * 100;
+        temp.Health = stats.Health * 10;
         MaxHealth = temp.Health;
         Stats = temp;
     }
@@ -165,5 +164,29 @@ public class HeroUnitBase : UnitBase
     public override void Select()
     {
         SendMessageUpwards("PlayerSelected", this);
+    }
+
+    void PlayVocalAttackAudio()
+    {
+        AudioClip clipToPlay = data.vocalAttackSFX[Random.Range(0, data.vocalAttackSFX.Length)];
+        AudioManager.Instance.PlayBattleSFX(clipToPlay);
+    }
+
+    void PlaySwordSwingAudio()
+    {
+        AudioClip clipToPlay = data.swordSwingSFX[Random.Range(0, data.swordSwingSFX.Length)];
+        AudioManager.Instance.PlayBattleSFX(clipToPlay);
+    }
+
+    void PlayFireAudio()
+    {
+        AudioClip clipToPlay = data.fireShootSFX[Random.Range(0, data.fireShootSFX.Length)];
+        AudioManager.Instance.PlayBattleSFX(clipToPlay);
+    }
+
+    void PlayHurtAudio()
+    {
+        AudioClip clipToPlay = data.hurtSFX[Random.Range(0, data.hurtSFX.Length)];
+        AudioManager.Instance.PlayBattleSFX(clipToPlay);
     }
 }

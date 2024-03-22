@@ -16,19 +16,27 @@ public class ScriptableHero : ScriptableUnitBase
     [SerializeField] private HeroStats _stats;
     public HeroStats BaseStats { get { return _stats; } private set { } }
 
+    [Space(15)]
     public List<ScriptableMeleeAttack> meleeAttacks;
 
     public List<ScriptableMagicAttack> magicAttacks;
+
+    [Space(15)]
+    public AudioClip[] vocalAttackSFX;
+    public AudioClip[] swordSwingSFX;
+    public AudioClip[] fireShootSFX;
+    public AudioClip[] hurtSFX;
+
 
     public void ResetCharacter()
     {
         _stats.Level = 1;
         _stats.XP = 0;
-        _stats.Attack = 1;
-        _stats.Health = 1;
-        _stats.Defense = 1;
-        _stats.Speed = 1;
-        _stats.Stamina = 1;
+        _stats.Attack = 10;
+        _stats.Health = 10;
+        _stats.Defense = 10;
+        _stats.Speed = 10;
+        _stats.Stamina = 10;
         _stats.ExtraStatPoints = 0;
         meleeAttacks.RemoveRange(1, meleeAttacks.Count - 1);
         magicAttacks.RemoveRange(1, magicAttacks.Count - 1);
@@ -43,6 +51,9 @@ public class ScriptableHero : ScriptableUnitBase
 
     public bool LevelUp(ScriptableLevelSystem levelSystem, out ScriptableAttack unlockedAttack)
     {
+        unlockedAttack = null;
+        if (_stats.Level >= levelSystem.levels[^1].lvl) return false;
+
         Level nextLevel = null;
 
         foreach (Level level in levelSystem.levels)
