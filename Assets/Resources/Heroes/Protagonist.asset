@@ -15,6 +15,7 @@ MonoBehaviour:
   Prefab: {fileID: 905036652051576146, guid: a0a1aa82c29f92a45938483299d949c4, type: 3}
   Description: 
   Sprite: {fileID: 0}
+  Profile: {fileID: 21300000, guid: 5899b6e1085dd5841ac7255ce9bb9ec1, type: 3}
   Ability: 1
   _stats:
     Health: 1
@@ -27,3 +28,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: fcf377c82c2a78d40b11dd91c2469062, type: 2}
   magicAttacks:
   - {fileID: 11400000, guid: 18ebe147ad1d46748ae6c35f34a63de0, type: 2}
+  - {fileID: 11400000, guid: af1c063f35298e54e9418e580708e58d, type: 2}

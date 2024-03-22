@@ -60,14 +60,17 @@ public class EnemyUnitBase : UnitBase
     /// </summary>
     /// <param name="attack">The attack being used</param>
     /// <param name="target">The target of the attack</param>
-    public override void Attack(ScriptableAttack attack, UnitBase target, float multiplier = 1f, float accuracy = 100f)
+    public override int Attack(ScriptableAttack attack, UnitBase target, float multiplier = 1f, float accuracy = 100f)
     {
         HeroUnitBase enemyTarget = target as HeroUnitBase;
+        int damage = Mathf.RoundToInt(((attack.Stats.attackPower + (Stats.Attack * 10) - (enemyTarget.Stats.Defense * 10)) * multiplier) * (accuracy / 100));
 
-        StartCoroutine(AttackCoroutine(attack, enemyTarget));
+        StartCoroutine(AttackCoroutine(enemyTarget, damage));
+
+        return damage;
     }
 
-    IEnumerator AttackCoroutine(ScriptableAttack attack, HeroUnitBase target, float multiplier = 1f, float accuracy = 100f)
+    IEnumerator AttackCoroutine(HeroUnitBase target, int damage)
     {
         _anim.SetTrigger("Attacked");
 
@@ -76,7 +79,6 @@ public class EnemyUnitBase : UnitBase
             yield return null;
         }
 
-        int damage = Mathf.RoundToInt(((attack.Stats.attackPower + (Stats.Attack * 10) - (target.Stats.Defense * 10)) * multiplier) * (accuracy / 100));
         target.TakeDamage(damage);
         print("Enemy Damage Dealt: " + damage);
 

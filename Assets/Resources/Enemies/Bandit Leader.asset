@@ -15,6 +15,7 @@ MonoBehaviour:
   Prefab: {fileID: 5410146630748265147, guid: 8a643bb7411588d41a88f45ef9e25847, type: 3}
   Description: 
   Sprite: {fileID: 0}
+  Profile: {fileID: 21300000, guid: 3558091ceb5ed9b459174979990a59bb, type: 3}
   _stats:
     Health: 1
     Attack: 1

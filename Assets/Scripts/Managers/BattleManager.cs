@@ -124,6 +124,7 @@ public class BattleManager : MonoBehaviour
     {
         EnemyUnits = UnitManager.Instance.SpawnEnemies(GameManager.Instance.enemyHit.team);
         turnOrder.AddRange(EnemyUnits);
+        enemyHealthUI.InitializeEnemyUI(EnemyUnits[0]);
         //turnOrder.Sort((a, b) => a.Stats.Speed.CompareTo(b.Stats.Speed));
 
         ChangeState(BattleState.HeroTurn);
@@ -150,9 +151,11 @@ public class BattleManager : MonoBehaviour
 
     private IEnumerator HeroTurnCoroutine()
     {
-        Vector3 startPos = turnOrder[0].transform.position;
+        HeroUnitBase currentHero = turnOrder[0] as HeroUnitBase;
 
-        while (!turnOrder[0].Move(GridInfo.GridWorldMidPoint, speed))
+        Vector3 startPos = currentHero.transform.position;
+
+        while (!currentHero.Move(GridInfo.GridWorldMidPoint, speed))
         {
             yield return null;
         }
@@ -192,9 +195,18 @@ public class BattleManager : MonoBehaviour
 
             minigameManager.gameObject.SetActive(false);
 
-            HeroUnitBase currentHero = turnOrder[0] as HeroUnitBase;
+            int damage = currentHero.Attack(AttackMenu.chosenAttack, selectedEnemy, multiplier: AttackMenu.chosenAttack.Stats.multiplier, accuracy: minigameManager.Accuracy);
 
-            turnOrder[0].Attack(AttackMenu.chosenAttack, selectedEnemy, multiplier: AttackMenu.chosenAttack.Stats.multiplier, accuracy: minigameManager.Accuracy);
+            _anim.SetInteger("Damage", damage);
+
+            while (!currentHero.HasAttacked)
+            {
+                yield return null;
+            }
+
+            _anim.SetTrigger("Shake Cam");
+
+            currentHero.AttackStateReset();
 
             enemyHealthUI.UpdateHealth(selectedEnemy.Stats.Health);
 
@@ -264,7 +276,7 @@ public class BattleManager : MonoBehaviour
         }
 
 
-        while (!turnOrder[0].Move(startPos, speed))
+        while (!currentHero.Move(startPos, speed))
         {
             yield return null;
         }
@@ -295,25 +307,29 @@ public class BattleManager : MonoBehaviour
 
     private IEnumerator EnemyTurnCoroutine()
     {
-        Vector3 startPos = turnOrder[0].transform.position;
+        EnemyUnitBase enemy = turnOrder[0] as EnemyUnitBase;
 
-        while (!turnOrder[0].Move(GridInfo.GridWorldMidPoint, speed))
+        Vector3 startPos = enemy.transform.position;
+
+        while (!enemy.Move(GridInfo.GridWorldMidPoint, speed))
         {
             yield return null;
         }
-
-        EnemyUnitBase enemy = turnOrder[0] as EnemyUnitBase;
+        
         ScriptableAttack chosenAttack = enemy.data.attacks[UnityEngine.Random.Range(0, enemy.data.attacks.Count)];
         HeroUnitBase chosenTarget = PartyUnits[UnityEngine.Random.Range(0, PartyUnits.Count)];
 
-        turnOrder[0].Attack(chosenAttack, chosenTarget);
+        int damage = enemy.Attack(chosenAttack, chosenTarget);
+        _anim.SetInteger("Damage", damage);
 
-        while (!turnOrder[0].HasAttacked)
+        while (!enemy.HasAttacked)
         {
             yield return null;
         }
+
         _anim.SetTrigger("Shake Cam");
-        turnOrder[0].AttackStateReset();
+
+        enemy.AttackStateReset();
         playerHealthUI.UpdateHealth(chosenTarget.Stats.Health);
 
         if (chosenTarget.Stats.Health <= 0)
@@ -323,7 +339,7 @@ public class BattleManager : MonoBehaviour
             Destroy(chosenTarget.gameObject);
         }
 
-        while (!turnOrder[0].Move(startPos, speed))
+        while (!enemy.Move(startPos, speed))
         {
             yield return null;
         }
@@ -429,7 +445,7 @@ public class BattleManager : MonoBehaviour
             if (selectedEnemy != null) selectedEnemy.IsSelected = false;
             selectedEnemy = enemy;
             selectedEnemy.IsSelected = true;
-            enemyHealthUI.UpdateEntireUI(selectedEnemy.Stats.Health, selectedEnemy.data.name, selectedEnemy.MaxHealth);
+            enemyHealthUI.UpdateEntireUI(selectedEnemy.Stats.Health, selectedEnemy.data.name, selectedEnemy.MaxHealth, selectedEnemy.data.Profile);
             enemyHealthUI.gameObject.SetActive(true);
         }
     }
@@ -448,7 +464,7 @@ public class BattleManager : MonoBehaviour
             if (selectedPlayer != null) selectedPlayer.IsSelected = false;
             selectedPlayer = hero;
             selectedPlayer.IsSelected = true;
-            playerHealthUI.UpdateEntireUI(selectedPlayer.Stats.Health, selectedPlayer.data.name, selectedPlayer.MaxHealth);
+            playerHealthUI.UpdateEntireUI(selectedPlayer.Stats.Health, selectedPlayer.data.name, selectedPlayer.MaxHealth, selectedPlayer.data.Profile);
             playerHealthUI.gameObject.SetActive(true);
         }
     }

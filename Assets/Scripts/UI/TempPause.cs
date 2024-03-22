@@ -47,16 +47,16 @@ public class TempPause : MonoBehaviour
     {
         enemiesDefeated = GameManager.Instance.enemiesDefeated;
         perfectMini = GameManager.Instance.perfectMinigameCount;
-        statPoints = Hero._stats.ExtraStatPoints;
+        statPoints = Hero.BaseStats.ExtraStatPoints;
         ability = Hero.Ability;
-        health = Hero._stats.Health;
-        MaxHP = Hero._stats.Health;
-        CON = Hero._stats.Health;
-        ATK = Hero._stats.Attack;
-        DEF = Hero._stats.Defense;
-        SPD = Hero._stats.Speed;
-        STM = Hero._stats.Stamina;
-        lvl = Hero._stats.Level;
+        health = Hero.BaseStats.Health;
+        MaxHP = Hero.BaseStats.Health;
+        CON = Hero.BaseStats.Health;
+        ATK = Hero.BaseStats.Attack;
+        DEF = Hero.BaseStats.Defense;
+        SPD = Hero.BaseStats.Speed;
+        STM = Hero.BaseStats.Stamina;
+        lvl = Hero.BaseStats.Level;
         SetText();
 
         if (statPoints > 0)
@@ -186,26 +186,26 @@ public class TempPause : MonoBehaviour
 
     public void HpUP()
     {
-        Hero._stats.Health++;
+        Hero.IncreaseStat(StatType.Health);
     }
 
     public void AtkUP()
     {
-        Hero._stats.Attack++;
+        Hero.IncreaseStat(StatType.Attack);
     }
 
     public void DefUP()
     {
-        Hero._stats.Defense++;
+        Hero.IncreaseStat(StatType.Defense);
     }
 
     public void SpdUP()
     {
-        Hero._stats.Speed++;
+        Hero.IncreaseStat(StatType.Speed);
     }
 
     public void StmUP()
     {
-        Hero._stats.Stamina++;
+        Hero.IncreaseStat(StatType.Stamina);
     }
 }

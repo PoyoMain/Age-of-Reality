@@ -19,6 +19,11 @@ public abstract class ScriptableUnitBase : ScriptableObject
     /// Unit's sprite
     /// </summary>
     public Sprite Sprite;
+
+    /// <summary>
+    /// Unit's sprite
+    /// </summary>
+    public Sprite Profile;
 }
 
 [Serializable]
