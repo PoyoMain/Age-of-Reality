@@ -142,7 +142,17 @@ public class ScriptableHero : ScriptableUnitBase
         _stats.ExtraStatPoints--;
     }
 
+    private void OnEnable()
+    {
+        ResetCharacter();
+    }
+
     private void OnDisable()
+    {
+        ResetCharacter();
+    }
+
+    private void OnDestroy()
     {
         ResetCharacter();
     }
