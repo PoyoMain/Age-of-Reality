@@ -13,4 +13,7 @@ MonoBehaviour:
   m_Name: Fireball
   m_EditorClassIdentifier: 
   _stats:
-    attackPower: 0
+    attackPower: 10
+    multiplier: 3
+  Minigame: {fileID: 6633343848253367670, guid: dd96140a0af75db4e9aeb57d7d45e21c, type: 3}
+  SecondsToComplete: 10

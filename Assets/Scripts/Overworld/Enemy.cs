@@ -2,29 +2,49 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Windows;
 
+[RequireComponent(typeof(Animator))]
 public class Enemy : MonoBehaviour
 {
     [SerializeField] private List<ScriptableEnemy> allies;
     [HideInInspector] public List<ScriptableEnemy> team; // The enemy party including this enemy
-    public EnemyClass type;
+    public ScriptableEnemy type;
 
     private readonly float invincibleTime = 5f; // Time enemy is invincible
     private float invincibleTimer; // Timer checking how long enemy has been invincible for
 
-    private MeshRenderer mRend;
-    private Collider coll;
+    private SpriteRenderer sRend;
+    private Collider2D coll;
     private Rigidbody2D rigid;
+    private Animator anim;
 
-    // Start is called before the first frame update
-    void Start()
+    public bool isBoss;
+
+    [TextArea(2,2)]
+    [SerializeField] private string[] lines;
+    public string[] Lines 
+    { 
+        get { return lines; }
+    }
+
+    void Awake()
     {
-        team.Add(ResourceStorage.Instance.GetEnemy(Enum.GetName(typeof(EnemyClass), type)));
+        team.Add(type);
         team.AddRange(allies);
 
-        mRend = GetComponent<MeshRenderer>();
-        coll = GetComponent<Collider>();
+        sRend = GetComponent<SpriteRenderer>();
+        coll = GetComponent<Collider2D>();
         rigid = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
+
+        
+    }
+
+    private void Start()
+    {
+        anim.SetFloat("X", 0);
+        anim.SetFloat("Y", -1);
     }
 
 
@@ -44,11 +64,11 @@ public class Enemy : MonoBehaviour
 
         while (invincibleTimer > Time.time)
         {
-            mRend.enabled = !mRend.enabled;
+            sRend.enabled = !sRend.enabled;
             yield return null;
         }
 
-        mRend.enabled = true;
+        sRend.enabled = true;
         coll.enabled = true;
 
         yield return null;

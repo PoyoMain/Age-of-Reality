@@ -6,9 +6,24 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/OverworldScene.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
+    path: Assets/Scenes/Main/MainMenu.unity
+    guid: 33f57db2e9ec3e54bb8d379d12367a04
   - enabled: 1
+    path: Assets/Scenes/Main/CreditsScene.unity
+    guid: 1e6ff25d47c54e04f8ef2d737137dd4b
+  - enabled: 1
+    path: Assets/Scenes/Main/DecisionScene.unity
+    guid: 4ba9c450d681bec49aea7c080ee0db5f
+  - enabled: 1
+    path: Assets/Scenes/Main/OverworldScene.unity
+    guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 0
     path: Assets/Scenes/BattleScene.unity
     guid: 74952a461e09ad74ab114f3a9adec32a
+  - enabled: 1
+    path: Assets/Scenes/Main/DeathScene.unity
+    guid: ca01b0dd70c25a84ab9147f8a62b2790
+  - enabled: 1
+    path: Assets/Scenes/Main/CutsceneScene.unity
+    guid: 11bbc17d1b275e04daffb71faeb5d1fe
   m_configObjects: {}

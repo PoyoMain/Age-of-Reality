@@ -18,6 +18,7 @@ public class ActionOption : MonoBehaviour
 
 public enum ActionType
 {
-    Melee,
-    Magic
+    Attack,
+    Item,
+    Flee
 }

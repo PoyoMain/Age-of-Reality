@@ -71,8 +71,8 @@ public class UnitManager : Singleton<UnitManager>
         Vector3 pos = new(gridSpot.WorldPosition.x, gridSpot.WorldPosition.y, 0);
         HeroUnitBase heroUnit = Instantiate(heroScriptable.Prefab, pos, Quaternion.identity, transform) as HeroUnitBase;
 
-        Stats stats = heroScriptable.BaseStats;
-        heroUnit.SetStats(stats);
+        HeroStats stats = heroScriptable.BaseStats;
+        heroUnit.InitStats(stats);
         heroUnit.data = heroScriptable;
 
         return heroUnit;
@@ -85,8 +85,9 @@ public class UnitManager : Singleton<UnitManager>
         Vector3 pos = new(gridSpot.WorldPosition.x, gridSpot.WorldPosition.y, 0);
         EnemyUnitBase enemyUnit = Instantiate(enemyScriptable.Prefab, pos, Quaternion.identity, transform) as EnemyUnitBase;
 
-        Stats stats = enemyScriptable.BaseStats;
-        enemyUnit.SetStats(stats);
+        EnemyStats stats = enemyScriptable.BaseStats;
+        enemyUnit.InitStats(stats);
+        enemyUnit.data = enemyScriptable;
 
         return enemyUnit;
     }

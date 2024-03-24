@@ -2,33 +2,49 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class LineGenerator : MonoBehaviour
+public class LineGenerator : LineMinigameBase
 {
-
+    [Space(30f)]
     public GameObject linePrefab;
     public Camera cam;
     Line activeLine;
 
-    public double totalPercentage = 0;
+    public float distanceNeeded = 0;
+    public float distanceTravelled = 0;
+
     public float totalPoints = 0;
     public float closePoints = 0;
 
     //Start and endpoint of line on screen
     public GameObject[] lines;
-
+    public bool backwards = false;
+    public float tempAngle;
+    public float pastAngle;
 
     public List<LineRenderer> lineRenderers;
     //keeps the starting end end point of each line recorded.
     //might be needed?
     public List<Vector2> startingPos;
     public List<Vector2> endingPos;
+    public GameObject battleParent;
+    public List<Vector2> drawnPoints;
+    public Vector2 lastMousePosition;
+    public Vector2 lastDirection;
+    public bool isDirectionFlipped = false;
+
+    public float flipThreshold = 0f;
     public int listLength { get; set; }
-    public void Start()
+    public void OnEnable()
     {
-        cam = Camera.main;
+        StartedDrawing = false;
+
+        cam = GameManager.Instance.GetBattleCamera();
         lineRenderers = new List<LineRenderer>();
         startingPos = new List<Vector2>();
         endingPos = new List<Vector2>();
+        drawnPoints = new List<Vector2>();
+        distanceNeeded = 0;
+        battleParent = transform.parent.parent.gameObject;
 
         if (lines == null)
         {
@@ -45,8 +61,9 @@ public class LineGenerator : MonoBehaviour
             //gets the first and last value of each linerender position into another list
             foreach (LineRenderer obj in lineRenderers)
             {
-                startingPos.Add(obj.GetPosition(0));
-                endingPos.Add(obj.GetPosition(obj.positionCount - 1));
+                startingPos.Add(obj.GetPosition(0) + gameObject.transform.position);
+                endingPos.Add(obj.GetPosition(obj.positionCount - 1) + gameObject.transform.position);
+                distanceNeeded += Vector2.Distance(obj.GetPosition(0), obj.GetPosition(obj.positionCount - 1));
                 listLength = startingPos.Count;
                 //Debug.Log(listLength);
             }
@@ -58,10 +75,13 @@ public class LineGenerator : MonoBehaviour
     void Update()
     {
         Vector2 mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
+        //Debug.Log(mousePos);
 
         if (Input.GetMouseButtonDown(0))
         {
-            GameObject newLine = Instantiate(linePrefab);
+            StartedDrawing = true;
+
+            GameObject newLine = Instantiate(linePrefab, transform);
             activeLine = newLine.GetComponent<Line>();
             activeLine.setRefrence(this);
             //startingPos.Add(mousePos);
@@ -71,12 +91,21 @@ public class LineGenerator : MonoBehaviour
         {
             //endingPos.Add(mousePos);
             activeLine = null;
+            if (totalPercentage > 60)
+            {
+                DoneDrawing = true;
+            }
         }
 
         if (activeLine != null)
         {
             activeLine.UpdateLine(mousePos);
+
         }
+
+
+        // Check if the mouse has moved
+
     }
 
     public float DistanceToClosestPoint(Vector2 point, Vector2 start, Vector2 end)

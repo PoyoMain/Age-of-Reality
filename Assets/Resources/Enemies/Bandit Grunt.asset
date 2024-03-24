@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0eefaf64bd6d79143854aae1932ae3a8, type: 3}
+  m_Name: Bandit Grunt
+  m_EditorClassIdentifier: 
+  Prefab: {fileID: 1177260627863534790, guid: 13d4f072e10f9654cb522dbd699957b2, type: 3}
+  Description: 
+  Sprite: {fileID: 0}
+  _stats:
+    Health: 1
+    Attack: 1
+    Defense: 1
+    Speed: 1
+    XP: 1
+  attacks:
+  - {fileID: 11400000, guid: fcf377c82c2a78d40b11dd91c2469062, type: 2}
+  droppableItems:
+  - Item: {fileID: 11400000, guid: 84892117910462542a78ddd8585684cf, type: 2}
+    ChanceToDrop: 0.25

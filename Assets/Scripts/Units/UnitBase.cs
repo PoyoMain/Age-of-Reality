@@ -1,30 +1,35 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
+[RequireComponent(typeof(Animator))]
 public abstract class UnitBase : MonoBehaviour
 {
-    public Stats Stats { get; private set; }
+    protected Animator _anim;
 
-    /// <summary>
-    /// Sets the stats of the unit
-    /// </summary>
-    /// <param name="stats">The new stats</param>
-    public virtual void SetStats(Stats stats)
+    public GameObject selectIndicator;
+    public bool IsSelected;
+    public bool HasAttacked
     {
-        Stats = stats;
+        get;
+        protected set;
+    }
+
+    protected List<Effect> currentEffects = new();
+
+    private void Awake()
+    {
+        _anim = GetComponent<Animator>();
+        HasAttacked = false;
     }
 
     /// <summary>
     /// Damages the unit
     /// </summary>
     /// <param name="damage">The amount of damage to deal</param>
-    public void TakeDamage(int damage)
-    {
-        Stats newStats = Stats;
-        newStats.Health -= damage;
-        SetStats(newStats);
-    }
+    public abstract void TakeDamage(int damage);
 
     protected bool _canMove;
 
@@ -33,12 +38,7 @@ public abstract class UnitBase : MonoBehaviour
     /// </summary>
     /// <param name="attack">The attack being used</param>
     /// <param name="target">The target of the attack</param>
-    public void Attack(ScriptableAttack attack, UnitBase target)
-    {
-        int damage = attack.Stats.attackPower - target.Stats.Defense;
-        target.TakeDamage(damage);
-    }
-
+    public abstract void Attack(ScriptableAttack attack, UnitBase target, float multiplier = 1f, float accuracy = 100f);
 
     /// <summary>
     /// Moves the unit
@@ -62,4 +62,52 @@ public abstract class UnitBase : MonoBehaviour
 
         return distance <= 0.01f;
     }
+
+    public void DecreaseEffects()
+    {
+
+    }
+
+    public abstract void SetEffects(ScriptableItem item);
+
+    public abstract void DoEffects();
+
+    public abstract void Select();
+
+    private void Update()
+    {
+        if (Input.GetMouseButtonUp(0))
+        {
+            if (Vector2.Distance(GameManager.Instance.GetBattleCamera().ScreenToWorldPoint(Input.mousePosition), transform.position) < 1f)
+            {
+                Select();
+            }
+        }
+
+        if (!IsSelected)
+        {
+            selectIndicator.SetActive(false);
+        }
+        else
+        {
+            selectIndicator.SetActive(true);
+        }
+    }
+
+    void AttackDone()
+    {
+        HasAttacked = true;
+    }
+
+    public void AttackStateReset()
+    {
+        HasAttacked = false;
+    }
+}
+
+public class Effect
+{
+    public int durationInTurns;
+    public ItemEffect effect;
+    public ScriptableItem itemCausingEffect;
 }
