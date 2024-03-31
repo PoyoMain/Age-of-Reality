@@ -104,6 +104,8 @@ public class NPCDecision : MonoBehaviour
 
     public void SetPlayerMelee(bool choice)
     {
+        player.ResetCharacter();
+
         if (choice) player.Ability = Ability.Melee;
         else player.Ability = Ability.Magic;
 

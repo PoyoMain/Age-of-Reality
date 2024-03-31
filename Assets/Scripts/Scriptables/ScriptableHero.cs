@@ -61,7 +61,6 @@ public class ScriptableHero : ScriptableUnitBase
             if ((_stats.Level + 1) == level.lvl)
             {
                 nextLevel = level;
-                _stats.ExtraStatPoints += 2;
                 break;
             }
         }
@@ -109,6 +108,7 @@ public class ScriptableHero : ScriptableUnitBase
     {
         _stats.Level++;
         _stats.XP = excessXP;
+        _stats.ExtraStatPoints += 2;
         Debug.Log("Level Up");
     }
 

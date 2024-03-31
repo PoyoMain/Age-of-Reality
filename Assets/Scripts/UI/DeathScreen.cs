@@ -32,6 +32,6 @@ public class DeathScreen : MonoBehaviour
 
     public void Restart()
     {
-        SceneManager.LoadScene("OverworldScene");
+        SceneManager.LoadScene("DecisionScene");
     }
 }

@@ -155,17 +155,17 @@ public class GridInfo : MonoBehaviour
 
     private Vector2 GetMiddleOfGrid()
     {
-        float x = grid[0, rows - 1].Position.x - grid[0,0].Position.x;
-        float y = grid[0, cols - 1].Position.y - grid[0,0].Position.y;
+        float x = (grid[rows - 1, 0].Position.x + grid[0,0].Position.x) / 2;
+        float y = (grid[0, cols - 1].Position.y - grid[0,0].Position.y) / 2;
 
         return new(x, y);
     }
 
     private Vector3 GetWorldMiddleOfGrid()
     {
-        float x1 = grid[cols - 1, 0].WorldPosition.x;
+        float x1 = grid[rows - 1, 0].WorldPosition.x;
         float x2 = grid[0, 0].WorldPosition.x;
-        float y1 = grid[0, rows - 1].WorldPosition.y;
+        float y1 = grid[0, cols - 1].WorldPosition.y;
         float y2 = grid[0, 0].WorldPosition.y;
 
         Vector2 midpoint = new((x1 + x2) / 2, (y1 + y2) / 2);

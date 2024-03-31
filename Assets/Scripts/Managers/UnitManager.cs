@@ -10,9 +10,9 @@ public class UnitManager : Singleton<UnitManager>
     private readonly Vector2[] _HeroPositions = new Vector2[]
     {
         new Vector2(0, 2),
-        new Vector2(0, 1),
-        new Vector2(0, 3),
+        new Vector2(0, 4),
         new Vector2(0, 0),
+        new Vector2(0, 6),
         new Vector2(0, 4),
     };
 
@@ -21,11 +21,11 @@ public class UnitManager : Singleton<UnitManager>
     /// </summary>
     private readonly Vector2[] _EnemyPositions = new Vector2[]
     {
-        new Vector2(4, 2),
-        new Vector2(4, 1),
-        new Vector2(4, 3),
-        new Vector2(4, 0),
-        new Vector2(4, 4),
+        new Vector2(8, 2),
+        new Vector2(8, 4),
+        new Vector2(8, 0),
+        new Vector2(8, 6),
+        new Vector2(8, 4),
     };
 
     /// <summary>
