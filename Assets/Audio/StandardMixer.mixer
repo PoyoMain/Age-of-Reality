@@ -96,8 +96,14 @@ AudioMixerController:
   m_EnableSuspend: 1
   m_UpdateMode: 0
   m_ExposedParameters:
+  - guid: 8bae1563e2454124db75df5e7a9086cb
+    name: Dialogue
   - guid: 8c29091f860a42a4ba08329d38728979
     name: masterVol
+  - guid: 1bbb927a5daece54884d51696aaa2228
+    name: Music
+  - guid: a0c38d18011a85d42b837e03736d3b35
+    name: SFX
   m_AudioMixerGroupViews:
   - guids:
     - b88400583f49dbf4c8d9655cb24910e9
