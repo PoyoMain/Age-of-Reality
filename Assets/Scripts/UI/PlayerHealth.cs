@@ -8,32 +8,21 @@ public class PlayerHealth : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI charaName;
     [SerializeField] private Slider healthBar;
+    [SerializeField] private Image characterProfile;
 
-    private float maxHealth = 4;
-    private float currentHealth;
     //public Image Fill;
-
-    void Start()
-    {
-        currentHealth = maxHealth;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        //Fill.fillAmount = Mathf.Clamp(currentHealth / maxHealth, 0, 1);
-    }
 
     public void UpdateHealth(int newHealth)
     {
         healthBar.value = newHealth;
     }
 
-    public void UpdateEntireUI(int newHealth, string newName, int maxHealth)
+    public void UpdateEntireUI(int newHealth, string newName, int maxHealth, Sprite profile)
     {
         healthBar.maxValue = maxHealth;
         healthBar.value = newHealth;
         charaName.text = newName;
+        characterProfile.sprite = profile;
     }
 
     public void InitializePlayerUI(HeroUnitBase player)
@@ -41,6 +30,7 @@ public class PlayerHealth : MonoBehaviour
         healthBar.maxValue = player.Stats.Health;
         healthBar.value = player.Stats.Health;
         charaName.text = player.data.name;
+        characterProfile.sprite = player.data.Profile;
     }
 
     public void InitializeEnemyUI(EnemyUnitBase enemy)
@@ -48,5 +38,6 @@ public class PlayerHealth : MonoBehaviour
         healthBar.maxValue = enemy.Stats.Health;
         healthBar.value = enemy.Stats.Health;
         charaName.text = enemy.data.name;
+        characterProfile.sprite = enemy.data.Profile;
     }
 }

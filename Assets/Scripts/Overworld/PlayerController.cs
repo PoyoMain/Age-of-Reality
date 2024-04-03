@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.InputSystem.DefaultInputActions;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(Collider2D), typeof(Animator))]
 public class PlayerController : MonoBehaviour
@@ -13,9 +12,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private ScriptableHero playerClass; // The class of the player
     [SerializeField] private List<ScriptableHero> allies; // The player's allies
 
-    [HideInInspector] public List<ScriptableHero> Party // The entire party, player included
-    {  get { return GetParty(); }
-        private set { } }
+    [HideInInspector]
+    public List<ScriptableHero> Party // The entire party, player included
+    {
+        get { return GetParty(); }
+        private set { }
+    }
 
     private PlayerControls playerControls;
     private PlayerControls.OverworldControlsActions overworldActions;
@@ -75,8 +77,15 @@ public class PlayerController : MonoBehaviour
 
     public void Freeze()
     {
+        anim.speed = 0;
         rigid.velocity = Vector3.zero;
     }
+
+    public void UnFreeze()
+    {
+        anim.speed = 1;
+    }
+
 
 
     private void OnCollisionEnter2D(Collision2D collision)

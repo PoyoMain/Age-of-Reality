@@ -21,12 +21,13 @@ public class Enemy : MonoBehaviour
 
     public bool isBoss;
 
-    [TextArea(2,2)]
-    [SerializeField] private string[] lines;
-    public string[] Lines 
-    { 
-        get { return lines; }
+    [SerializeField] private DialogueLine line;
+
+    public DialogueLine Line
+    {
+        get { return line; }
     }
+
 
     void Awake()
     {
@@ -76,7 +77,24 @@ public class Enemy : MonoBehaviour
 
     public void Freeze()
     {
+        anim.speed = 0;
         rigid.velocity = Vector3.zero;
     }
+
+    public void UnFreeze()
+    {
+        anim.speed = 1;
+    }
     
+}
+
+[Serializable]
+public class DialogueLine
+{
+    [TextArea(2, 2)]
+    public string Line;
+    public float textSpeed;
+
+    [Space(10)]
+    public AudioClip[] VoiceClips;
 }
