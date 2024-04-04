@@ -30,6 +30,7 @@ public class XPWindow : MonoBehaviour
     private void Awake()
     {
         winVisual.SetActive(false);
+        itemVisual.SetActive(false);
         XPVisual.SetActive(false);
     }
 

@@ -108,6 +108,7 @@ public class BattleManager : MonoBehaviour
     private void StartingCase()
     {
         turnOrder.Clear();
+        givenItems.Clear();
         ChangeState(BattleState.SpawningHeroes);
     }
 
@@ -124,9 +125,84 @@ public class BattleManager : MonoBehaviour
     {
         EnemyUnits = UnitManager.Instance.SpawnEnemies(GameManager.Instance.enemyHit.team);
         turnOrder.AddRange(EnemyUnits);
-        //turnOrder.Sort((a, b) => a.Stats.Speed.CompareTo(b.Stats.Speed));
+        enemyHealthUI.InitializeEnemyUI(EnemyUnits[0]);
+
+        //List<UnitBase> temp = turnOrder;
+        //for (int i = 0; i <= turnOrder.Count - 1; i++)
+        //{
+        //    for (int j = 0; i <= turnOrder.Count - 1; j++)
+        //    {
+        //        if (!(j == turnOrder.Count))
+        //        {
+        //            if (CompareSpeed(temp[i], temp[j]))
+        //            {
+        //                UnitBase tempUnit = temp[i];
+        //                temp[i] = temp[j];
+        //                temp[j] = tempUnit;
+        //            }
+        //        }
+        //    }
+        //}
 
         ChangeState(BattleState.HeroTurn);
+    }
+
+    bool CompareSpeed(UnitBase a, UnitBase b)
+    {
+        if (a is HeroUnitBase && b is HeroUnitBase)
+        {
+            if (b is HeroUnitBase)
+            {
+                if ((a as HeroUnitBase).data.BaseStats.Speed >= (b as HeroUnitBase).data.BaseStats.Speed)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                if ((a as HeroUnitBase).data.BaseStats.Speed >= (b as EnemyUnitBase).data.BaseStats.Speed)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            
+        }
+
+        if (a is EnemyUnitBase && b is EnemyUnitBase)
+        {
+            if (b is EnemyUnitBase)
+            {
+                if ((a as EnemyUnitBase).data.BaseStats.Speed >= (b as EnemyUnitBase).data.BaseStats.Speed)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                if ((a as EnemyUnitBase).data.BaseStats.Speed >= (b as HeroUnitBase).data.BaseStats.Speed)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
+
+        return false;
     }
 
     /// <summary>
@@ -150,9 +226,11 @@ public class BattleManager : MonoBehaviour
 
     private IEnumerator HeroTurnCoroutine()
     {
-        Vector3 startPos = turnOrder[0].transform.position;
+        HeroUnitBase currentHero = turnOrder[0] as HeroUnitBase;
 
-        while (!turnOrder[0].Move(GridInfo.GridWorldMidPoint, speed))
+        Vector3 startPos = currentHero.transform.position;
+
+        while (!currentHero.Move(GridInfo.GridWorldMidPoint, speed * 2))
         {
             yield return null;
         }
@@ -169,10 +247,9 @@ public class BattleManager : MonoBehaviour
         {
             AttackMenu.gameObject.SetActive(false);
             pickingEnemy = false;
-            EnemySelected(EnemyUnits[0]);
 
-            yield return new WaitForSeconds(0.5f);
             pickingEnemy = true;
+            EnemySelected(EnemyUnits[0]);
 
             while (pickingEnemy)
             {
@@ -180,7 +257,7 @@ public class BattleManager : MonoBehaviour
             }
             pickingEnemy = false;
 
-            LineMinigameBase minigame = AttackMenu.chosenAttack.Minigame;
+            LineMinigameBase minigame = AttackMenu.chosenAttack.Minigames[UnityEngine.Random.Range(0, AttackMenu.chosenAttack.Minigames.Length)];
             minigameManager.SetMinigame(minigame, AttackMenu.chosenAttack.SecondsToComplete);
             minigameManager.gameObject.SetActive(true);
             //Instantiate(minigame, GridInfo.GridWorldMidPoint, Quaternion.identity);
@@ -192,9 +269,18 @@ public class BattleManager : MonoBehaviour
 
             minigameManager.gameObject.SetActive(false);
 
-            HeroUnitBase currentHero = turnOrder[0] as HeroUnitBase;
+            int damage = currentHero.Attack(AttackMenu.chosenAttack, selectedEnemy, multiplier: AttackMenu.chosenAttack.Stats.multiplier, accuracy: minigameManager.Accuracy);
 
-            turnOrder[0].Attack(AttackMenu.chosenAttack, selectedEnemy, multiplier: AttackMenu.chosenAttack.Stats.multiplier, accuracy: minigameManager.Accuracy);
+            _anim.SetInteger("Damage", damage);
+
+            while (!currentHero.HasAttacked)
+            {
+                yield return null;
+            }
+
+            _anim.SetTrigger("Shake Cam");
+
+            currentHero.AttackStateReset();
 
             enemyHealthUI.UpdateHealth(selectedEnemy.Stats.Health);
 
@@ -263,8 +349,9 @@ public class BattleManager : MonoBehaviour
             yield break;
         }
 
+        
 
-        while (!turnOrder[0].Move(startPos, speed))
+        while (!currentHero.Move(startPos, speed * 2))
         {
             yield return null;
         }
@@ -295,25 +382,29 @@ public class BattleManager : MonoBehaviour
 
     private IEnumerator EnemyTurnCoroutine()
     {
-        Vector3 startPos = turnOrder[0].transform.position;
+        EnemyUnitBase enemy = turnOrder[0] as EnemyUnitBase;
 
-        while (!turnOrder[0].Move(GridInfo.GridWorldMidPoint, speed))
+        Vector3 startPos = enemy.transform.position;
+
+        while (!enemy.Move(GridInfo.GridWorldMidPoint, speed * 2))
         {
             yield return null;
         }
-
-        EnemyUnitBase enemy = turnOrder[0] as EnemyUnitBase;
+        
         ScriptableAttack chosenAttack = enemy.data.attacks[UnityEngine.Random.Range(0, enemy.data.attacks.Count)];
         HeroUnitBase chosenTarget = PartyUnits[UnityEngine.Random.Range(0, PartyUnits.Count)];
 
-        turnOrder[0].Attack(chosenAttack, chosenTarget);
+        int damage = enemy.Attack(chosenAttack, chosenTarget);
+        _anim.SetInteger("Damage", damage);
 
-        while (!turnOrder[0].HasAttacked)
+        while (!enemy.HasAttacked)
         {
             yield return null;
         }
+
         _anim.SetTrigger("Shake Cam");
-        turnOrder[0].AttackStateReset();
+
+        enemy.AttackStateReset();
         playerHealthUI.UpdateHealth(chosenTarget.Stats.Health);
 
         if (chosenTarget.Stats.Health <= 0)
@@ -323,14 +414,13 @@ public class BattleManager : MonoBehaviour
             Destroy(chosenTarget.gameObject);
         }
 
-        while (!turnOrder[0].Move(startPos, speed))
+        while (!enemy.Move(startPos, speed * 2))
         {
             yield return null;
         }
 
-
-
         NextTurn();
+
         yield return null;
     }
 
@@ -345,6 +435,11 @@ public class BattleManager : MonoBehaviour
         AudioManager.Instance.PlayBattleSFX(soundType: BattleSounds.Victory);
         xpWindow.gameObject.SetActive(true);
         xpWindow.ActivateWinVisual(givenItems);
+
+        if (givenItems.Count > 0)
+        {
+            AudioManager.Instance.PlayBattleSFX(soundType: BattleSounds.Item);
+        }
 
         foreach (var item in givenItems)
         {
@@ -379,6 +474,7 @@ public class BattleManager : MonoBehaviour
             {
                 xpWindow.SetXPStats(heroUnit.data.name, prevData, currentData, newAttacks);
                 xpWindow.ActivateXPVisual();
+                AudioManager.Instance.PlayBattleSFX(soundType: BattleSounds.LevelUp);
 
                 while (!Input.GetMouseButtonDown(0))
                 {
@@ -429,7 +525,7 @@ public class BattleManager : MonoBehaviour
             if (selectedEnemy != null) selectedEnemy.IsSelected = false;
             selectedEnemy = enemy;
             selectedEnemy.IsSelected = true;
-            enemyHealthUI.UpdateEntireUI(selectedEnemy.Stats.Health, selectedEnemy.data.name, selectedEnemy.MaxHealth);
+            enemyHealthUI.UpdateEntireUI(selectedEnemy.Stats.Health, selectedEnemy.data.name, selectedEnemy.MaxHealth, selectedEnemy.data.Profile);
             enemyHealthUI.gameObject.SetActive(true);
         }
     }
@@ -448,7 +544,7 @@ public class BattleManager : MonoBehaviour
             if (selectedPlayer != null) selectedPlayer.IsSelected = false;
             selectedPlayer = hero;
             selectedPlayer.IsSelected = true;
-            playerHealthUI.UpdateEntireUI(selectedPlayer.Stats.Health, selectedPlayer.data.name, selectedPlayer.MaxHealth);
+            playerHealthUI.UpdateEntireUI(selectedPlayer.Stats.Health, selectedPlayer.data.name, selectedPlayer.MaxHealth, selectedPlayer.data.Profile);
             playerHealthUI.gameObject.SetActive(true);
         }
     }

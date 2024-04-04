@@ -12,9 +12,15 @@ public class ScriptableEnemy : ScriptableUnitBase
     [SerializeField] private EnemyStats _stats;
     public EnemyStats BaseStats { get { return _stats; } }
 
+    [Space(15)]
     public List<ScriptableAttack> attacks;
-
+    [Space(15)]
     public List<ItemDrop> droppableItems;
+
+    [Space(15)]
+    public AudioClip[] vocalAttackSFX;
+    public AudioClip[] attackSFX;
+    public AudioClip[] hurtSFX;
 }
 
 [Serializable]

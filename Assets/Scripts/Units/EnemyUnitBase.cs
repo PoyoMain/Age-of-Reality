@@ -16,7 +16,7 @@ public class EnemyUnitBase : UnitBase
     public virtual void InitStats(EnemyStats stats)
     {
         EnemyStats temp = stats;
-        temp.Health = stats.Health * 100;
+        temp.Health = stats.Health * 10;
         MaxHealth = temp.Health;
         Stats = temp;
     }
@@ -60,14 +60,17 @@ public class EnemyUnitBase : UnitBase
     /// </summary>
     /// <param name="attack">The attack being used</param>
     /// <param name="target">The target of the attack</param>
-    public override void Attack(ScriptableAttack attack, UnitBase target, float multiplier = 1f, float accuracy = 100f)
+    public override int Attack(ScriptableAttack attack, UnitBase target, float multiplier = 1f, float accuracy = 100f)
     {
         HeroUnitBase enemyTarget = target as HeroUnitBase;
+        int damage = Mathf.RoundToInt(((attack.Stats.attackPower + (Stats.Attack * 10) - (enemyTarget.Stats.Defense * 10)) * multiplier) * (accuracy / 100));
 
-        StartCoroutine(AttackCoroutine(attack, enemyTarget));
+        StartCoroutine(AttackCoroutine(enemyTarget, damage));
+
+        return damage;
     }
 
-    IEnumerator AttackCoroutine(ScriptableAttack attack, HeroUnitBase target, float multiplier = 1f, float accuracy = 100f)
+    IEnumerator AttackCoroutine(HeroUnitBase target, int damage)
     {
         _anim.SetTrigger("Attacked");
 
@@ -76,7 +79,6 @@ public class EnemyUnitBase : UnitBase
             yield return null;
         }
 
-        int damage = Mathf.RoundToInt(((attack.Stats.attackPower + (Stats.Attack * 10) - (target.Stats.Defense * 10)) * multiplier) * (accuracy / 100));
         target.TakeDamage(damage);
         print("Enemy Damage Dealt: " + damage);
 
@@ -143,5 +145,23 @@ public class EnemyUnitBase : UnitBase
     public override void Select()
     {
         SendMessageUpwards("EnemySelected", this);
+    }
+
+    void PlayVocalAttackAudio()
+    {
+        AudioClip clipToPlay = data.vocalAttackSFX[Random.Range(0, data.vocalAttackSFX.Length)];
+        AudioManager.Instance.PlayBattleSFX(clipToPlay);
+    }
+
+    void PlayAttackAudio()
+    {
+        AudioClip clipToPlay = data.attackSFX[Random.Range(0, data.attackSFX.Length)];
+        AudioManager.Instance.PlayBattleSFX(clipToPlay);
+    }
+
+    void PlayHurtAudio()
+    {
+        AudioClip clipToPlay = data.hurtSFX[Random.Range(0, data.hurtSFX.Length)];
+        AudioManager.Instance.PlayBattleSFX(clipToPlay);
     }
 }

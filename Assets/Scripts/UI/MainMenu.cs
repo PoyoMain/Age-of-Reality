@@ -7,10 +7,16 @@ public class MainMenu : MonoBehaviour
 {
     public GameObject optionsMenu;
     public GameObject mainMenu;
+
+    private void Awake()
+    {
+        Screen.SetResolution(1920, 1080, true);
+    }
+
     //Plays the game; advance to the main scene
     public void PlayGame()
     {
-        SceneManager.LoadScene("OverworldScene");
+        SceneManager.LoadScene("CutsceneScene");
     }
 
     //Quits the game

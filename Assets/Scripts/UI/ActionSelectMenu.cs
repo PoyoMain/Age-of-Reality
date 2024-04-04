@@ -86,7 +86,7 @@ public class ActionSelectMenu : MonoBehaviour
             _anim.SetBool("isAttackMenu", true);
             _anim.SetBool("isItemMenu", false);
 
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(0.25f);
 
             ChangeState(MenuState.AttackMenu);
         }
@@ -119,7 +119,7 @@ public class ActionSelectMenu : MonoBehaviour
             _anim.SetBool("isItemMenu", true);
             _anim.SetBool("isAttackMenu", false);
 
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(0.25f);
 
             ChangeState(MenuState.ItemMenu);
         }
