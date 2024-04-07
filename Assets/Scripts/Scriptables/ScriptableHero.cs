@@ -32,11 +32,11 @@ public class ScriptableHero : ScriptableUnitBase
     {
         _stats.Level = 1;
         _stats.XP = 0;
-        _stats.Attack = 10;
-        _stats.Health = 10;
-        _stats.Defense = 10;
-        _stats.Speed = 10;
-        _stats.Stamina = 10;
+        _stats.Attack = 1;
+        _stats.Health = 1;
+        _stats.Defense = 1;
+        _stats.Speed = 1;
+        _stats.Stamina = 1;
         _stats.ExtraStatPoints = 0;
         meleeAttacks.RemoveRange(1, meleeAttacks.Count - 1);
         magicAttacks.RemoveRange(1, magicAttacks.Count - 1);
@@ -107,6 +107,11 @@ public class ScriptableHero : ScriptableUnitBase
     private void IncreaseLevel(int excessXP)
     {
         _stats.Level++;
+        _stats.Health++;
+        _stats.Attack++;
+        _stats.Defense++;
+        _stats.Speed++;
+        _stats.Stamina++;
         _stats.XP = excessXP;
         _stats.ExtraStatPoints += 2;
         Debug.Log("Level Up");

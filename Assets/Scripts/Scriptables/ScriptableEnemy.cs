@@ -13,8 +13,6 @@ public class ScriptableEnemy : ScriptableUnitBase
     public EnemyStats BaseStats { get { return _stats; } }
 
     [Space(15)]
-    public List<ScriptableAttack> attacks;
-    [Space(15)]
     public List<ItemDrop> droppableItems;
 
     [Space(15)]
@@ -27,9 +25,11 @@ public class ScriptableEnemy : ScriptableUnitBase
 public struct EnemyStats
 {
     public int Health;
+    public int HealthRange;
     public int Attack;
     public int Defense;
     public int Speed;
+    public int Damage;
     public int XP;
 }
 

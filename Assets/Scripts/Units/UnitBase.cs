@@ -41,7 +41,7 @@ public abstract class UnitBase : MonoBehaviour
     /// </summary>
     /// <param name="attack">The attack being used</param>
     /// <param name="target">The target of the attack</param>
-    public abstract int Attack(ScriptableAttack attack, UnitBase target, float multiplier = 1f, float accuracy = 100f);
+    //public abstract int Attack(ScriptableAttack attack, UnitBase target, float multiplier = 1f, float accuracy = 100f);
 
     /// <summary>
     /// Moves the unit

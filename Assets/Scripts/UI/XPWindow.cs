@@ -5,11 +5,17 @@ using UnityEngine;
 
 public class XPWindow : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI strengthText;
-    [SerializeField] private TextMeshProUGUI staminaText;
+    [Header("Win Popup Variables")]
+    [SerializeField] private GameObject winVisual;
+    [Space(15f)]
+    [SerializeField] private ItemSlot itemSlotPrefab;
+    [SerializeField] private Transform itemParent;
+
+    [Space(20f)]
+    [Header("XP Popup Variables")]
+    [SerializeField] private GameObject XPVisual;
     [Space(15f)]
     [SerializeField] private TextMeshProUGUI playerName;
-    [Space(15f)]
     [SerializeField] private TextMeshProUGUI levelAmount;
     [Space(15f)]
     [SerializeField] private TextMeshProUGUI healthAmount;
@@ -17,20 +23,21 @@ public class XPWindow : MonoBehaviour
     [SerializeField] private TextMeshProUGUI speedAmount;
     [SerializeField] private TextMeshProUGUI strengthAmount;
     [SerializeField] private TextMeshProUGUI staminaAmount;
+    [Space(10f)]
+    [SerializeField] private TextMeshProUGUI strengthText;
+    [SerializeField] private TextMeshProUGUI staminaText;
     [Space(15f)]
     [SerializeField] private GameObject newAttackVisual;
     [SerializeField] private TextMeshProUGUI newAttacksText;
-    [Space(15f)]
-    [SerializeField] private GameObject itemVisual;
-    [SerializeField] private TextMeshProUGUI itemText;
-    [Space(15f)]
-    [SerializeField] private GameObject winVisual;
-    [SerializeField] private GameObject XPVisual;
+
+    
+    //[SerializeField] private GameObject itemVisual;
+    //[SerializeField] private TextMeshProUGUI itemText;
 
     private void Awake()
     {
         winVisual.SetActive(false);
-        itemVisual.SetActive(false);
+        //itemVisual.SetActive(false);
         XPVisual.SetActive(false);
     }
 
@@ -38,17 +45,28 @@ public class XPWindow : MonoBehaviour
     {
         winVisual.SetActive(true);
 
-        if (drops.Count > 0)
+        foreach(Transform child in itemParent)
         {
-            itemText.text = "<align=\"center\"><u><size=70>Items Gained</size></u></align><size=45>\n\n";
-
-            foreach (ScriptableItem iDrop in drops)
-            {
-                itemText.text += "<align=\"center\">" + iDrop.name + "</align>\n";
-            }
-
-            itemVisual.SetActive(true);
+            Destroy(child.gameObject);
         }
+
+        foreach (ScriptableItem item in drops)
+        {
+            ItemSlot itemSlot = Instantiate(itemSlotPrefab, itemParent);
+            itemSlot.SetItem(item.Sprite, item.name);
+        }
+
+        //if (drops.Count > 0)
+        //{
+        //    itemText.text = "<align=\"center\"><u><size=70>Items Gained</size></u></align><size=45>\n\n";
+
+        //    foreach (ScriptableItem iDrop in drops)
+        //    {
+        //        itemText.text += "<align=\"center\">" + iDrop.name + "</align>\n";
+        //    }
+
+        //    itemVisual.SetActive(true);
+        //}
 
         XPVisual.SetActive(false);
     }
@@ -56,16 +74,16 @@ public class XPWindow : MonoBehaviour
     public void ActivateXPVisual()
     {
         winVisual.SetActive(false);
-        itemVisual.SetActive(false);
+        //itemVisual.SetActive(false);
         XPVisual.SetActive(true);
     }
 
-    public void SetXPStats(string heroName, HeroStats beforeStats, HeroStats afterStats, List<ScriptableAttack> newAttacks = null)
+    public void SetXPStats(string heroName, bool magic, HeroStats beforeStats, HeroStats afterStats, List<ScriptableAttack> newAttacks = null)
     {
         playerName.text = heroName;
-        levelAmount.text = "Level " + beforeStats.Level + " -> <color=#FFD300>" + afterStats.Level + "</color>";
+        levelAmount.text = "Level " + beforeStats.Level + "         <color=#FFD300>" + afterStats.Level + "</color>";
 
-        if (newAttacks != null)
+        if (newAttacks.Count > 0)
         {
             newAttackVisual.SetActive(true);
 
@@ -81,10 +99,21 @@ public class XPWindow : MonoBehaviour
             newAttackVisual.SetActive(false);
         }
 
-        healthAmount.text = beforeStats.Health + " -> <color=#FFD300>" + afterStats.Health + "</color>";
-        defenseAmount.text = beforeStats.Defense + " -> <color=#FFD300>" + afterStats.Defense + "</color>";
-        speedAmount.text = beforeStats.Speed + " -> <color=#FFD300>" + afterStats.Speed + "</color>";
-        strengthAmount.text = beforeStats.Attack + " -> <color=#FFD300>" + afterStats.Attack + "</color>";
-        staminaAmount.text = beforeStats.Stamina + " -> <color=#FFD300>" + afterStats.Stamina + "</color>";
+        healthAmount.text = beforeStats.Health + "         <color=#FFD300>" + afterStats.Health + "</color>";
+        defenseAmount.text = beforeStats.Defense + "         <color=#FFD300>" + afterStats.Defense + "</color>";
+        speedAmount.text = beforeStats.Speed + "         <color=#FFD300>" + afterStats.Speed + "</color>";
+        strengthAmount.text = beforeStats.Attack + "         <color=#FFD300>" + afterStats.Attack + "</color>";
+        staminaAmount.text = beforeStats.Stamina + "         <color=#FFD300>" + afterStats.Stamina + "</color>";
+
+        if (magic)
+        {
+            strengthText.text = "Intellegence";
+            staminaText.text = "Wisdom";
+        }
+        else
+        {
+            strengthText.text = "Strength";
+            staminaText.text = "Stamina";
+        }
     }
 }

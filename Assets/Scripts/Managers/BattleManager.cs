@@ -391,10 +391,9 @@ public class BattleManager : MonoBehaviour
             yield return null;
         }
         
-        ScriptableAttack chosenAttack = enemy.data.attacks[UnityEngine.Random.Range(0, enemy.data.attacks.Count)];
         HeroUnitBase chosenTarget = PartyUnits[UnityEngine.Random.Range(0, PartyUnits.Count)];
 
-        int damage = enemy.Attack(chosenAttack, chosenTarget);
+        int damage = enemy.Attack(enemy.Stats.Damage, chosenTarget);
         _anim.SetInteger("Damage", damage);
 
         while (!enemy.HasAttacked)
@@ -472,7 +471,7 @@ public class BattleManager : MonoBehaviour
 
             if (canLevelUp)
             {
-                xpWindow.SetXPStats(heroUnit.data.name, prevData, currentData, newAttacks);
+                xpWindow.SetXPStats(heroUnit.data.name, heroUnit.data.Ability == Ability.Magic ,prevData, currentData, newAttacks);
                 xpWindow.ActivateXPVisual();
                 AudioManager.Instance.PlayBattleSFX(soundType: BattleSounds.LevelUp);
 

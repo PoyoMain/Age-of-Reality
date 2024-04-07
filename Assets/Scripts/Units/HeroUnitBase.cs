@@ -22,7 +22,7 @@ public class HeroUnitBase : UnitBase
     public virtual void InitStats(HeroStats stats)
     {
         HeroStats temp = stats;
-        temp.Health = stats.Health * 10;
+        temp.Health = stats.Health * 100;
         MaxHealth = temp.Health;
         Stats = temp;
     }
@@ -66,10 +66,11 @@ public class HeroUnitBase : UnitBase
     /// </summary>
     /// <param name="attack">The attack being used</param>
     /// <param name="target">The target of the attack</param>
-    public override int Attack(ScriptableAttack attack, UnitBase target, float multiplier = 1f, float accuracy = 100f)
+    public int Attack(ScriptableAttack attack, UnitBase target, float multiplier = 1f, float accuracy = 100f)
     {
         EnemyUnitBase enemyTarget = target as EnemyUnitBase;
-        int damage = Mathf.RoundToInt(((attack.Stats.attackPower + (Stats.Attack * 10) - (enemyTarget.Stats.Defense * 10)) * multiplier) * (accuracy / 100));
+        //int damage = Mathf.RoundToInt(((attack.Stats.attackPower + (Stats.Attack * 10) - (enemyTarget.Stats.Defense * 10)) * multiplier) * (accuracy / 100));
+        int damage = Mathf.RoundToInt((((attack.Stats.attackPower * ((1 + ((Stats.Attack - 1) / 10)))) - (enemyTarget.Stats.Defense - 1)) * multiplier) * (accuracy / 100));
 
         StartCoroutine(AttackCoroutine(enemyTarget, damage));
         

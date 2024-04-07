@@ -16,7 +16,8 @@ public class EnemyUnitBase : UnitBase
     public virtual void InitStats(EnemyStats stats)
     {
         EnemyStats temp = stats;
-        temp.Health = stats.Health * 10;
+        int rangeValue = Random.Range(minInclusive: stats.Health - stats.HealthRange, stats.Health + stats.HealthRange + 1);
+        temp.Health = rangeValue;
         MaxHealth = temp.Health;
         Stats = temp;
     }
@@ -60,14 +61,15 @@ public class EnemyUnitBase : UnitBase
     /// </summary>
     /// <param name="attack">The attack being used</param>
     /// <param name="target">The target of the attack</param>
-    public override int Attack(ScriptableAttack attack, UnitBase target, float multiplier = 1f, float accuracy = 100f)
+    public int Attack(int damage, UnitBase target)
     {
         HeroUnitBase enemyTarget = target as HeroUnitBase;
-        int damage = Mathf.RoundToInt(((attack.Stats.attackPower + (Stats.Attack * 10) - (enemyTarget.Stats.Defense * 10)) * multiplier) * (accuracy / 100));
+        //int damage = Mathf.RoundToInt(((attack.Stats.attackPower + (Stats.Attack * 10) - (enemyTarget.Stats.Defense * 10)) * multiplier) * (accuracy / 100));
+        int damageDealt = Mathf.RoundToInt((((damage * (( 1 + (( Stats.Attack - 1) / 10)))) - (enemyTarget.Stats.Defense - 1))));
 
-        StartCoroutine(AttackCoroutine(enemyTarget, damage));
+        StartCoroutine(AttackCoroutine(enemyTarget, damageDealt));
 
-        return damage;
+        return damageDealt;
     }
 
     IEnumerator AttackCoroutine(HeroUnitBase target, int damage)
