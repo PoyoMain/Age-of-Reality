@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Art/UI/HealthBar/health_and_xp_bar_parts_health_bar_-_back.png.meta
 guid: 044471a5f6406e24f847029383dd1a5c
+========
+guid: 36ce5c4a5cbe6164a8d2f64bb59b82cc
+>>>>>>>> origin/TrajuanS-Branch:Assets/Art/UI/HealthBar/health_and_xp_bar_parts_information_box_outside.png.meta
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}

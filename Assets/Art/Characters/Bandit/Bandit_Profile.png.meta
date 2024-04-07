@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Art/Characters/Bandit/Bandit_Profile.png.meta
 guid: eae7e41b3f8743b4081efa12e8f81292
+========
+guid: 32deaddce664a354ab901ab15a7d3a1f
+>>>>>>>> origin/TrajuanS-Branch:Assets/Art/UI/HealthBar/health_and_xp_bar_parts_information_box_background.png.meta
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}

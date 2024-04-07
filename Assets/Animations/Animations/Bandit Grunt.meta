@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Animations/Animations/Bandit Grunt.meta
 guid: 2f242b0ad80c21945b6dbc8f515bb42b
+========
+guid: f97f515161865db4da26d916c394b0e5
+>>>>>>>> origin/TrajuanS-Branch:Assets/Animations/Animations/Bandit Leader.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}
