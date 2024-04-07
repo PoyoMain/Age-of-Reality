@@ -393,7 +393,7 @@ public class BattleManager : MonoBehaviour
         
         HeroUnitBase chosenTarget = PartyUnits[UnityEngine.Random.Range(0, PartyUnits.Count)];
 
-        int damage = enemy.Attack(enemy.Stats.Damage, chosenTarget);
+        int damage = enemy.Attack(chosenTarget);
         _anim.SetInteger("Damage", damage);
 
         while (!enemy.HasAttacked)

@@ -61,11 +61,11 @@ public class EnemyUnitBase : UnitBase
     /// </summary>
     /// <param name="attack">The attack being used</param>
     /// <param name="target">The target of the attack</param>
-    public int Attack(int damage, UnitBase target)
+    public int Attack(UnitBase target)
     {
         HeroUnitBase enemyTarget = target as HeroUnitBase;
         //int damage = Mathf.RoundToInt(((attack.Stats.attackPower + (Stats.Attack * 10) - (enemyTarget.Stats.Defense * 10)) * multiplier) * (accuracy / 100));
-        int damageDealt = Mathf.RoundToInt((((damage * (( 1 + (( Stats.Attack - 1) / 10)))) - (enemyTarget.Stats.Defense - 1))));
+        int damageDealt = Mathf.RoundToInt(Stats.Damage - (enemyTarget.Stats.Defense - 1));
 
         StartCoroutine(AttackCoroutine(enemyTarget, damageDealt));
 

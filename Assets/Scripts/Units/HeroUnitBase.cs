@@ -22,7 +22,7 @@ public class HeroUnitBase : UnitBase
     public virtual void InitStats(HeroStats stats)
     {
         HeroStats temp = stats;
-        temp.Health = stats.Health * 100;
+        temp.Health = 100 + ((stats.Health * 10) - 10);
         MaxHealth = temp.Health;
         Stats = temp;
     }

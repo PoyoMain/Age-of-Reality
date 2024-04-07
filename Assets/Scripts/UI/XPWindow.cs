@@ -87,7 +87,7 @@ public class XPWindow : MonoBehaviour
         {
             newAttackVisual.SetActive(true);
 
-            newAttacksText.text = "<align=\"center\"><u>New Attacks Unlocked</u></align>\n";
+            newAttacksText.text = "";
 
             foreach (ScriptableAttack attack in newAttacks)
             {
