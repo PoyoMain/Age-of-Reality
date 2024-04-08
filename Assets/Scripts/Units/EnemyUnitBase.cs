@@ -76,12 +76,12 @@ public class EnemyUnitBase : UnitBase
     {
         _anim.SetTrigger("Attacked");
 
-        while (!HasAttacked)
+        while (!AttackFinished)
         {
             yield return null;
         }
 
-        target.TakeDamage(damage);
+        target.TakeDamage(damage, false, 0);
         print("Enemy Damage Dealt: " + damage);
 
         yield break;
@@ -91,12 +91,40 @@ public class EnemyUnitBase : UnitBase
     /// Damages the unit
     /// </summary>
     /// <param name="damage">The amount of damage to deal</param>
-    public override void TakeDamage(int damage)
+    public void TakeDamage(int damage)
     {
-        _anim.SetTrigger("Hit");
         EnemyStats newStats = Stats;
         newStats.Health -= damage;
         SetStats(newStats);
+    }
+
+    public void TakeDamage(int damage, bool magicAttack, int attackNum)
+    {
+        StartCoroutine(TakeDamageCoroutine(damage, magicAttack, attackNum));
+    }
+
+    private IEnumerator TakeDamageCoroutine(int damage, bool magicAttack, int attackNum)
+    {
+        PlayEffect(attackNum, magicAttack);
+
+        while (!EffectFinished)
+        {
+            yield return null;
+        }
+
+        SendMessageUpwards("ShakeCamera");
+        _anim.SetTrigger("Hit");
+
+        EnemyStats newStats = Stats;
+        newStats.Health -= damage;
+        SetStats(newStats);
+
+        while (!FullAttackDone)
+        {
+            yield return null;
+        }
+
+        yield break;
     }
 
     public override void SetEffects(ScriptableItem item)

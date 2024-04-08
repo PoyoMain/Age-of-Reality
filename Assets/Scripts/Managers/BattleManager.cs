@@ -269,18 +269,17 @@ public class BattleManager : MonoBehaviour
 
             minigameManager.gameObject.SetActive(false);
 
-            int damage = currentHero.Attack(AttackMenu.chosenAttack, selectedEnemy, multiplier: AttackMenu.chosenAttack.Stats.multiplier, accuracy: minigameManager.Accuracy);
+            int damage = currentHero.Attack(AttackMenu.chosenAttack, selectedEnemy, accuracy: minigameManager.Accuracy);
 
             _anim.SetInteger("Damage", damage);
 
-            while (!currentHero.HasAttacked)
+            while (!selectedEnemy.FullAttackDone)
             {
                 yield return null;
             }
 
-            _anim.SetTrigger("Shake Cam");
-
             currentHero.AttackStateReset();
+            selectedEnemy.AttackStateReset();
 
             enemyHealthUI.UpdateHealth(selectedEnemy.Stats.Health);
 
@@ -343,6 +342,13 @@ public class BattleManager : MonoBehaviour
         }
         else if (AttackMenu.flee)
         {
+            AttackMenu.ResetAnimator();
+
+            while (AttackMenu.flee)
+            {
+                yield return null;
+            }
+
             AttackMenu.gameObject.SetActive(false);
             AttackMenu.flee = false;
             ChangeState(BattleState.Flee);
@@ -394,16 +400,18 @@ public class BattleManager : MonoBehaviour
         HeroUnitBase chosenTarget = PartyUnits[UnityEngine.Random.Range(0, PartyUnits.Count)];
 
         int damage = enemy.Attack(chosenTarget);
-        _anim.SetInteger("Damage", damage);
+        
 
-        while (!enemy.HasAttacked)
+        while (!chosenTarget.FullAttackDone)
         {
             yield return null;
         }
 
-        _anim.SetTrigger("Shake Cam");
+        
 
         enemy.AttackStateReset();
+        chosenTarget.AttackStateReset();
+
         playerHealthUI.UpdateHealth(chosenTarget.Stats.Health);
 
         if (chosenTarget.Stats.Health <= 0)
@@ -569,6 +577,12 @@ public class BattleManager : MonoBehaviour
             }
             PartyUnits.Clear();
         }
+    }
+
+    public void ShakeCamera()
+    {
+        _anim.SetTrigger("Shake Cam");
+
     }
 
     private void OnEnable()

@@ -25,7 +25,7 @@ public abstract class ScriptableAttack : ScriptableObject
 public struct AttackStats
 {
     public int attackPower;
-    public float multiplier;
+    public int multiplier;
 }
 
 public enum AttackType

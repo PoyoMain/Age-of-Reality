@@ -12,6 +12,7 @@ public class CreditsManager : MonoBehaviour
     [SerializeField] private SkimButton skimButton;
     [SerializeField] private float speedUpSpeed;
     [SerializeField] private int buttonDisappearTime;
+    [SerializeField] private AudioSource creditsAudioSource;
     private float timeSinceLastInput;
 
     private void Awake()
@@ -41,8 +42,14 @@ public class CreditsManager : MonoBehaviour
         {
             _director.playableGraph.GetRootPlayable(0).SetSpeed(speedUpSpeed);
             timeSinceLastInput = 0;
+            creditsAudioSource.pitch = speedUpSpeed;
+
         }
-        else _director.playableGraph.GetRootPlayable(0).SetSpeed(1);
+        else
+        {
+            _director.playableGraph.GetRootPlayable(0).SetSpeed(1);
+            creditsAudioSource.pitch = 1;
+        }
 
 
         if (_director.time >= _director.duration)

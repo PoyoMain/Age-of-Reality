@@ -35,6 +35,7 @@ public class ActionSelectMenu : MonoBehaviour
         //moveIndex = moveSelectMenu.moveIndex;
 
         _anim = GetComponent<Animator>();
+        _anim.keepAnimatorStateOnDisable = false;
     }
 
 
@@ -132,6 +133,22 @@ public class ActionSelectMenu : MonoBehaviour
         flee = true;
     }
 
+    public void ResetAnimator()
+    {
+        StartCoroutine(ResetCoroutine());
+    }
+
+    private IEnumerator ResetCoroutine()
+    {
+        _anim.SetBool("isAttackMenu", false);
+        _anim.SetBool("isItemMenu", false);
+        _anim.SetTrigger("CloseFullMenu");
+
+        yield return new WaitForSeconds(1);
+
+        flee = false;
+    }
+
     public void MoveSelected(MoveOption option)
     {
         StartCoroutine(MoveSelect(option));
@@ -174,6 +191,9 @@ public class ActionSelectMenu : MonoBehaviour
 
     private void OnDisable()
     {
+        _anim.SetBool("isAttackMenu", false);
+        _anim.SetBool("isItemMenu", false);
+        _anim.SetTrigger("CloseFullMenu");
         battleControls.Disable();
     }
 

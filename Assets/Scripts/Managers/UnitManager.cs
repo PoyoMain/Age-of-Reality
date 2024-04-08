@@ -71,9 +71,10 @@ public class UnitManager : Singleton<UnitManager>
         Vector3 pos = new(gridSpot.WorldPosition.x, gridSpot.WorldPosition.y, 0);
         HeroUnitBase heroUnit = Instantiate(heroScriptable.Prefab, pos, Quaternion.identity, transform) as HeroUnitBase;
 
+        heroUnit.data = heroScriptable;
         HeroStats stats = heroScriptable.BaseStats;
         heroUnit.InitStats(stats);
-        heroUnit.data = heroScriptable;
+        
 
         return heroUnit;
     }

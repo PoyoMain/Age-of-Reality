@@ -182,7 +182,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: d359ae24b286cca4e8b79930cb261931, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6928a1117e653b6408fdd1653c77b318, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1244,6 +1244,10 @@ PlayableDirector:
     value: {fileID: 873420165}
   - key: {fileID: 5342021640421552355, guid: cba4245d54e1b244e8c24fc7e3cf1c24, type: 2}
     value: {fileID: 873420165}
+  - key: {fileID: -1104310500510987736, guid: 0a06df5ed3bb70e4b82a7657e6684c92, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 3968334051361289888, guid: 0a06df5ed3bb70e4b82a7657e6684c92, type: 2}
+    value: {fileID: 0}
   m_ExposedReferences:
     m_References: []
 --- !u!114 &1341002179
@@ -1277,7 +1281,7 @@ MonoBehaviour:
     Lines:
     - For a time, it's inhabitants were able to harness such power, allowing them
       to perform reality defying feats.
-    TextSpeed: 0.05
+    TextSpeed: 0.04
     LoopVideo: 0
   - Cut: {fileID: 11400000, guid: 7d10a4000ca4c5b4dbaa73611ed6ee78, type: 2}
     Lines:
@@ -1285,14 +1289,14 @@ MonoBehaviour:
       of their rulers and people.
 
 '
-    TextSpeed: 0.05
+    TextSpeed: 0.04
     LoopVideo: 0
   - Cut: {fileID: 11400000, guid: 4bc5f3c540a23634fb1d12aa17de0408, type: 2}
     Lines:
     - "\rWith time, the study of magic advanced to where scholars could create cardlike
       artifacts to allow those not gifted with magic to harness it without study."
     - But nothing, it seems, ever lasts forever.
-    TextSpeed: 0.046
+    TextSpeed: 0.04
     LoopVideo: 0
   - Cut: {fileID: 11400000, guid: f3674df167ae40545aacccff27c8f825, type: 2}
     Lines:
@@ -1308,22 +1312,24 @@ MonoBehaviour:
     LoopVideo: 0
   - Cut: {fileID: 11400000, guid: 7f790f373f4f2a34397c1b2008495934, type: 2}
     Lines:
-    - After a time, the cards were rediscovered and new empires were formed, once
+    - 'After a time, the cards were rediscovered and new empires were formed. One
       such empire being your home, Fidelgar.
+
+'
     TextSpeed: 0.05
     LoopVideo: 0
   - Cut: {fileID: 11400000, guid: 2d76bd3150fe38b44b200156323fcc5f, type: 2}
     Lines:
     - While the empire is stable, those in the lower classes are forced to live in
       the dangerous outskirts, where bandits and mutated beasts pray on the weak.
-    TextSpeed: 0.045
+    TextSpeed: 0.04
     LoopVideo: 0
   - Cut: {fileID: 11400000, guid: 1bfc46699b73e0b40b685633e925a39f, type: 2}
     Lines:
     - Having being raised in this perilous environment, you have decided to train
       in order to gain the strength you need to protect yourself and all you hold
       dear.
-    TextSpeed: 0.045
+    TextSpeed: 0.04
     LoopVideo: 0
   - Cut: {fileID: 11400000, guid: cba4245d54e1b244e8c24fc7e3cf1c24, type: 2}
     Lines:

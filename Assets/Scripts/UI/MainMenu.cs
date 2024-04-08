@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {
     public GameObject optionsMenu;
-    public GameObject mainMenu;
 
     private void Awake()
     {
@@ -29,13 +28,11 @@ public class MainMenu : MonoBehaviour
     public void OptionsButton()
     {
         optionsMenu.SetActive(true);
-        mainMenu.SetActive(false);
     }
 
     //Swaps to main menu from options screen
     public void BackButton()
     {
         optionsMenu.SetActive(false);
-        mainMenu.SetActive(true);
     }
 }
