@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Chase : MonoBehaviour
@@ -9,7 +7,7 @@ public class Chase : MonoBehaviour
     public float chaseDuration = 5f;
 
     private Transform target;
-    private bool isChasing = false;
+    public bool isChasing = false;
     private float chaseTimer = 0f;
 
     void Start()
