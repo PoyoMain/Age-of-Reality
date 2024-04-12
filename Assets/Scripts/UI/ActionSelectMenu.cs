@@ -25,6 +25,7 @@ public class ActionSelectMenu : MonoBehaviour
     [HideInInspector] public bool flee = false;
 
     private Animator _anim;
+    private HeroUnitBase currentUnit;
 
     private void Awake()
     {
@@ -158,12 +159,16 @@ public class ActionSelectMenu : MonoBehaviour
     {
         if (option is AttackOption attackOption)
         {
-            _anim.SetBool("isAttackMenu", false);
+            if (currentUnit.Stats.Stamina < attackOption.Attack.Stats.MP) yield break;
+            else
+            {
+                _anim.SetBool("isAttackMenu", false);
 
-            yield return new WaitForSeconds(1);
+                yield return new WaitForSeconds(1);
 
-            chosenAttack = attackOption.Attack;
-            ChangeState(MenuState.ActionMenu);
+                chosenAttack = attackOption.Attack;
+                ChangeState(MenuState.ActionMenu);
+            }
         }
         else if (option is ItemOption itemOption)
         {
@@ -179,6 +184,7 @@ public class ActionSelectMenu : MonoBehaviour
     public void SetCurrentUnit(HeroUnitBase hero)
     {
         //moveSelectMenu.currentUnit = hero;
+        currentUnit = hero;
         attackSelectMenu.currentUnit = hero;
         itemSelectMenu.currentUnit = hero;
     }

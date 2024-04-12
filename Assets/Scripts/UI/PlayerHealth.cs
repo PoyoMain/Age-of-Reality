@@ -8,6 +8,7 @@ public class PlayerHealth : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI charaName;
     [SerializeField] private Slider healthBar;
+    [SerializeField] private Slider mpBar;
     [SerializeField] private Image characterProfile;
 
     //public Image Fill;
@@ -17,18 +18,31 @@ public class PlayerHealth : MonoBehaviour
         healthBar.value = newHealth;
     }
 
-    public void UpdateEntireUI(int newHealth, string newName, int maxHealth, Sprite profile)
+    public void UpdateMP(int newMP)
+    {
+        mpBar.value = newMP;
+    }
+
+    public void UpdateEntireUI(int newHealth, string newName, int maxHealth, Sprite profile, int newMP = 0, int maxMP = 0)
     {
         healthBar.maxValue = maxHealth;
         healthBar.value = newHealth;
         charaName.text = newName;
         characterProfile.sprite = profile;
+
+        if (maxMP > 0)
+        {
+            mpBar.maxValue = maxMP;
+            mpBar.value = newMP;
+        }
     }
 
     public void InitializePlayerUI(HeroUnitBase player)
     {
         healthBar.maxValue = player.Stats.Health;
         healthBar.value = player.Stats.Health;
+        mpBar.maxValue = player.Stats.Stamina;
+        mpBar.value = player.Stats.Stamina;
         charaName.text = player.data.name;
         characterProfile.sprite = player.data.Profile;
     }

@@ -281,6 +281,7 @@ public class BattleManager : MonoBehaviour
             currentHero.AttackStateReset();
             selectedEnemy.AttackStateReset();
 
+            playerHealthUI.UpdateMP(currentHero.Stats.Stamina);
             enemyHealthUI.UpdateHealth(selectedEnemy.Stats.Health);
 
 
@@ -326,8 +327,12 @@ public class BattleManager : MonoBehaviour
             {
                 case ItemEffect.Heal:
                     selectedPlayer.SetEffects(AttackMenu.chosenItem);
-                    HeroUnitBase playerUnit = turnOrder[0] as HeroUnitBase;
-                    playerHealthUI.UpdateHealth(playerUnit.Stats.Health);
+                    playerHealthUI.UpdateHealth(currentHero.Stats.Health);
+                    GameManager.Instance.ItemInventory.UseItem(AttackMenu.chosenItem);
+                    break;
+                case ItemEffect.MP:
+                    selectedPlayer.SetEffects(AttackMenu.chosenItem);
+                    playerHealthUI.UpdateMP(currentHero.Stats.Stamina);
                     GameManager.Instance.ItemInventory.UseItem(AttackMenu.chosenItem);
                     break;
                 case ItemEffect.AttackBoost:
@@ -551,7 +556,7 @@ public class BattleManager : MonoBehaviour
             if (selectedPlayer != null) selectedPlayer.IsSelected = false;
             selectedPlayer = hero;
             selectedPlayer.IsSelected = true;
-            playerHealthUI.UpdateEntireUI(selectedPlayer.Stats.Health, selectedPlayer.data.name, selectedPlayer.MaxHealth, selectedPlayer.data.Profile);
+            playerHealthUI.UpdateEntireUI(selectedPlayer.Stats.Health, selectedPlayer.data.name, selectedPlayer.MaxHealth, selectedPlayer.data.Profile, selectedPlayer.Stats.Stamina, selectedPlayer.MaxMP);
             playerHealthUI.gameObject.SetActive(true);
         }
     }
