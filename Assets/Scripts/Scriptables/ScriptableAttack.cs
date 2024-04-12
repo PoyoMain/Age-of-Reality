@@ -26,6 +26,7 @@ public struct AttackStats
 {
     public int attackPower;
     public int multiplier;
+    public int MP;
 }
 
 public enum AttackType

@@ -22,7 +22,8 @@ public class CutsceneManager : MonoBehaviour
     [SerializeField] private CanvasGroup cutsceneImage;
     [Space(15)]
     [Header("Skip Button")]
-    [SerializeField] private Button skipButton;
+    [SerializeField] private Button skipFullButton;
+    [SerializeField] private Button skipSlideButton;
     [SerializeField] private int buttonDisappearTime;
     private float timeSinceLastInput;
 
@@ -170,16 +171,22 @@ public class CutsceneManager : MonoBehaviour
         if (Input.anyKeyDown)
         {
             timeSinceLastInput = 0;
-            skipButton.gameObject.SetActive(true);
+            skipFullButton.gameObject.SetActive(true);
+            //skipSlideButton.gameObject.SetActive(true);
         }
         else
         {
             timeSinceLastInput += Time.deltaTime;
 
-            if (skipButton.gameObject.activeSelf && timeSinceLastInput >= buttonDisappearTime)
+            if (skipFullButton.gameObject.activeSelf && timeSinceLastInput >= buttonDisappearTime)
             {
-                skipButton.gameObject.SetActive(false);
+                skipFullButton.gameObject.SetActive(false);
             }
+
+            //if (skipSlideButton.gameObject.activeSelf && timeSinceLastInput >= buttonDisappearTime)
+            //{
+            //    skipSlideButton.gameObject.SetActive(false);
+            //}
         }
 
 
@@ -199,6 +206,12 @@ public class CutsceneManager : MonoBehaviour
     public void SceneChange()
     {
         SceneManager.LoadScene(newSceneID);
+    }
+
+    public void SlideChange()
+    {
+        AdvanceDialogue();
+        NextShot();
     }
 }
 

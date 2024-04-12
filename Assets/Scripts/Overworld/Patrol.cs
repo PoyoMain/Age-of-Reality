@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Patrol : MonoBehaviour
@@ -11,6 +9,8 @@ public class Patrol : MonoBehaviour
 
     public Transform[] moveSpots;
     private int randomSpot;
+    public Chase chaseRef;
+    public bool chasing;
 
 
     void Start()
@@ -22,18 +22,22 @@ public class Patrol : MonoBehaviour
 
     void Update()
     {
-        transform.position = Vector2.MoveTowards(transform.position, moveSpots[randomSpot].position, speed * Time.deltaTime);
-
-        if (Vector2.Distance(transform.position, moveSpots[randomSpot].position) < 0.2f)
+        chasing = chaseRef.isChasing;
+        if (!chasing)
         {
-            if (waitTime <= 0)
+            transform.position = Vector2.MoveTowards(transform.position, moveSpots[randomSpot].position, speed * Time.deltaTime);
+
+            if (Vector2.Distance(transform.position, moveSpots[randomSpot].position) < 0.2f)
             {
-                randomSpot = Random.Range(0, moveSpots.Length);
-                waitTime = startWaitTime;
-            }
-            else
-            {
-                waitTime -= Time.deltaTime;
+                if (waitTime <= 0)
+                {
+                    randomSpot = Random.Range(0, moveSpots.Length);
+                    waitTime = startWaitTime;
+                }
+                else
+                {
+                    waitTime -= Time.deltaTime;
+                }
             }
         }
     }
