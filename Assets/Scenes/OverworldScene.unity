@@ -735,6 +735,7 @@ GameObject:
   - component: {fileID: 508801933}
   - component: {fileID: 508801931}
   - component: {fileID: 508801936}
+  - component: {fileID: 508801937}
   m_Layer: 0
   m_Name: Bandit Grunt
   m_TagString: Untagged
@@ -759,6 +760,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: afb15740988dada4c9a9931cb4f1e9a3, type: 2}
   team: []
   type: {fileID: 11400000, guid: afb15740988dada4c9a9931cb4f1e9a3, type: 2}
+  isBoss: 0
+  lines: []
 --- !u!50 &508801933
 Rigidbody2D:
   serializedVersion: 4
@@ -888,6 +891,27 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 1.25, y: 2.5}
   m_Direction: 0
+--- !u!95 &508801937
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 508801930}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -1275,10 +1299,13 @@ MonoBehaviour:
   battleManager: {fileID: 894439767}
   overworldCamera: {fileID: 519420031}
   battleCamera: {fileID: 1564340127}
-  minigame: {fileID: 0}
   audioFadeOutTime: 0.5
   modeTransitioning: 0
   enemyHit: {fileID: 0}
+  ItemInventory: {fileID: 0}
+  dialogueBox: {fileID: 0}
+  perfectMinigameCount: 0
+  enemiesDefeated: 0
 --- !u!1 &763444056
 GameObject:
   m_ObjectHideFlags: 0
@@ -1292,6 +1319,7 @@ GameObject:
   - component: {fileID: 763444059}
   - component: {fileID: 763444057}
   - component: {fileID: 763444062}
+  - component: {fileID: 763444063}
   m_Layer: 0
   m_Name: Bandit Grunt
   m_TagString: Untagged
@@ -1314,6 +1342,8 @@ MonoBehaviour:
   allies: []
   team: []
   type: {fileID: 11400000, guid: afb15740988dada4c9a9931cb4f1e9a3, type: 2}
+  isBoss: 0
+  lines: []
 --- !u!50 &763444059
 Rigidbody2D:
   serializedVersion: 4
@@ -1443,6 +1473,27 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 1, y: 2.5}
   m_Direction: 0
+--- !u!95 &763444063
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 763444056}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &894439765
 GameObject:
   m_ObjectHideFlags: 0
@@ -1453,6 +1504,7 @@ GameObject:
   m_Component:
   - component: {fileID: 894439766}
   - component: {fileID: 894439767}
+  - component: {fileID: 894439768}
   m_Layer: 0
   m_Name: BattleManager
   m_TagString: Untagged
@@ -1497,6 +1549,30 @@ MonoBehaviour:
   AttackMenu: {fileID: 1500403169}
   playerHealthUI: {fileID: 8906983414525601874}
   enemyHealthUI: {fileID: 6924579164620716373}
+  xpWindow: {fileID: 0}
+  levelSystem: {fileID: 0}
+  givenItems: []
+--- !u!95 &894439768
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 894439765}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1014016180
 GameObject:
   m_ObjectHideFlags: 0
@@ -1867,7 +1943,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _percentDisplayText: {fileID: 1771725854}
   _timeDisplayText: {fileID: 142469512}
-  minigameCompleteTime: 15
+  _clickIndicator: {fileID: 0}
 --- !u!95 &1248717828
 Animator:
   serializedVersion: 5
@@ -22205,6 +22281,7 @@ GameObject:
   - component: {fileID: 1500403168}
   - component: {fileID: 1500403167}
   - component: {fileID: 1500403169}
+  - component: {fileID: 1500403170}
   m_Layer: 5
   m_Name: ActionMenuPanel
   m_TagString: Untagged
@@ -22284,7 +22361,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSelectMenu: {fileID: 2079669488}
+  attackSelectMenu: {fileID: 0}
+  itemSelectMenu: {fileID: 0}
   chosenAttack: {fileID: 0}
+  chosenItem: {fileID: 0}
+  flee: 0
+--- !u!95 &1500403170
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1500403165}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1517078921
 GameObject:
   m_ObjectHideFlags: 0
@@ -22525,9 +22627,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b09134c220651846841bd85b24cbeb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioClips: []
+  audioClipsMain: []
+  audioClipsAlt: []
   audioSwapTime: 0
   fadeTime: 3
+  playAltTracks: 0
 --- !u!82 &1564340129
 AudioSource:
   m_ObjectHideFlags: 0
@@ -23307,9 +23411,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackButton: {fileID: 1869174001798438961, guid: c22280473f116364ca73ce30eb44fe06, type: 3}
+  itemButton: {fileID: 0}
+  fleeButton: {fileID: 0}
   moveButtons: []
   moveIndex: 0
   menuType: 0
+  actionChosen: 0
   maxElementsOnScreen: 4
   currentUnit: {fileID: 0}
 --- !u!114 &2079669489
@@ -23682,6 +23789,7 @@ GameObject:
   - component: {fileID: 7942285961093800576}
   - component: {fileID: 7942285961093800575}
   - component: {fileID: 7942285961093800577}
+  - component: {fileID: 7942285961093800578}
   m_Layer: 0
   m_Name: Bandit Grunt
   m_TagString: Untagged
@@ -24579,6 +24687,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: afb15740988dada4c9a9931cb4f1e9a3, type: 2}
   team: []
   type: {fileID: 11400000, guid: afb15740988dada4c9a9931cb4f1e9a3, type: 2}
+  isBoss: 0
+  lines: []
 --- !u!50 &7942285961093800576
 Rigidbody2D:
   serializedVersion: 4
@@ -24641,6 +24751,27 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 1.25, y: 2.5}
   m_Direction: 0
+--- !u!95 &7942285961093800578
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1791962047244145098}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!224 &8057572108450231598
 RectTransform:
   m_ObjectHideFlags: 0

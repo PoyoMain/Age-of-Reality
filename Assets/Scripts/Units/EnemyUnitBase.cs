@@ -16,7 +16,8 @@ public class EnemyUnitBase : UnitBase
     public virtual void InitStats(EnemyStats stats)
     {
         EnemyStats temp = stats;
-        temp.Health = stats.Health * 100;
+        int rangeValue = Random.Range(minInclusive: stats.Health - stats.HealthRange, stats.Health + stats.HealthRange + 1);
+        temp.Health = rangeValue;
         MaxHealth = temp.Health;
         Stats = temp;
     }
@@ -60,26 +61,27 @@ public class EnemyUnitBase : UnitBase
     /// </summary>
     /// <param name="attack">The attack being used</param>
     /// <param name="target">The target of the attack</param>
-    public override int Attack(ScriptableAttack attack, UnitBase target, float multiplier = 1f, float accuracy = 100f)
+    public int Attack(UnitBase target)
     {
         HeroUnitBase enemyTarget = target as HeroUnitBase;
-        int damage = Mathf.RoundToInt(((attack.Stats.attackPower + (Stats.Attack * 10) - (enemyTarget.Stats.Defense * 10)) * multiplier) * (accuracy / 100));
+        //int damage = Mathf.RoundToInt(((attack.Stats.attackPower + (Stats.Attack * 10) - (enemyTarget.Stats.Defense * 10)) * multiplier) * (accuracy / 100));
+        int damageDealt = Mathf.RoundToInt(Stats.Damage - (enemyTarget.Stats.Defense - 1));
 
-        StartCoroutine(AttackCoroutine(enemyTarget, damage));
+        StartCoroutine(AttackCoroutine(enemyTarget, damageDealt));
 
-        return damage;
+        return damageDealt;
     }
 
     IEnumerator AttackCoroutine(HeroUnitBase target, int damage)
     {
         _anim.SetTrigger("Attacked");
 
-        while (!HasAttacked)
+        while (!AttackFinished)
         {
             yield return null;
         }
 
-        target.TakeDamage(damage);
+        target.TakeDamage(damage, false, 0);
         print("Enemy Damage Dealt: " + damage);
 
         yield break;
@@ -89,12 +91,40 @@ public class EnemyUnitBase : UnitBase
     /// Damages the unit
     /// </summary>
     /// <param name="damage">The amount of damage to deal</param>
-    public override void TakeDamage(int damage)
+    public void TakeDamage(int damage)
     {
-        _anim.SetTrigger("Hit");
         EnemyStats newStats = Stats;
         newStats.Health -= damage;
         SetStats(newStats);
+    }
+
+    public void TakeDamage(int damage, bool magicAttack, int attackNum)
+    {
+        StartCoroutine(TakeDamageCoroutine(damage, magicAttack, attackNum));
+    }
+
+    private IEnumerator TakeDamageCoroutine(int damage, bool magicAttack, int attackNum)
+    {
+        PlayEffect(attackNum, magicAttack);
+
+        while (!EffectFinished)
+        {
+            yield return null;
+        }
+
+        SendMessageUpwards("ShakeCamera");
+        _anim.SetTrigger("Hit");
+
+        EnemyStats newStats = Stats;
+        newStats.Health -= damage;
+        SetStats(newStats);
+
+        while (!FullAttackDone)
+        {
+            yield return null;
+        }
+
+        yield break;
     }
 
     public override void SetEffects(ScriptableItem item)
@@ -145,5 +175,23 @@ public class EnemyUnitBase : UnitBase
     public override void Select()
     {
         SendMessageUpwards("EnemySelected", this);
+    }
+
+    void PlayVocalAttackAudio()
+    {
+        AudioClip clipToPlay = data.vocalAttackSFX[Random.Range(0, data.vocalAttackSFX.Length)];
+        AudioManager.Instance.PlayBattleSFX(clipToPlay);
+    }
+
+    void PlayAttackAudio()
+    {
+        AudioClip clipToPlay = data.attackSFX[Random.Range(0, data.attackSFX.Length)];
+        AudioManager.Instance.PlayBattleSFX(clipToPlay);
+    }
+
+    void PlayHurtAudio()
+    {
+        AudioClip clipToPlay = data.hurtSFX[Random.Range(0, data.hurtSFX.Length)];
+        AudioManager.Instance.PlayBattleSFX(clipToPlay);
     }
 }

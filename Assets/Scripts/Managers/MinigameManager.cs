@@ -37,7 +37,7 @@ public class MinigameManager : MonoBehaviour
 
     private void OnEnable()
     {
-        _minigame = Instantiate(_minigamePrefab, GridInfo.GridWorldMidPoint, Quaternion.identity, transform);
+        _minigame = Instantiate(_minigamePrefab, GridInfo.GridWorldMidPoint + (Vector3.up * 1), Quaternion.identity, transform);
         UpdatePercentText();
 
         isDrawing = true;

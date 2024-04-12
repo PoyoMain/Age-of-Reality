@@ -83,11 +83,14 @@ public class GameManager : Singleton<GameManager>
         enemyHit.Freeze();
         player.Freeze();
 
-        dialogueBox.Init(enemyHit.Line, enemyHit.type);
-
-        while (dialogueBox.PlayingDialogue)
+        if (!(enemyHit.Line == null || enemyHit.Line.Line == string.Empty))
         {
-            yield return null;
+            dialogueBox.Init(enemyHit.Line, enemyHit.type);
+
+            while (dialogueBox.PlayingDialogue)
+            {
+                yield return null;
+            }
         }
 
         while (overworldAudioSource.volume > 0.1)

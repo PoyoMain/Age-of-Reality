@@ -8,11 +8,24 @@ using UnityEngine.UI;
 public abstract class UnitBase : MonoBehaviour
 {
     protected Animator _anim;
+    [SerializeField] protected Animator _effectAnim;
 
     protected Outline outline;
 
     public bool IsSelected;
-    public bool HasAttacked
+    public bool AttackFinished
+    {
+        get;
+        protected set;
+    }
+
+    protected bool EffectFinished
+    {
+        get;
+        set;
+    }
+
+    public bool FullAttackDone
     {
         get;
         protected set;
@@ -25,14 +38,14 @@ public abstract class UnitBase : MonoBehaviour
         _anim = GetComponent<Animator>();
         outline = GetComponent<Outline>();
 
-        HasAttacked = false;
+        AttackFinished = false;
     }
 
     /// <summary>
     /// Damages the unit
     /// </summary>
     /// <param name="damage">The amount of damage to deal</param>
-    public abstract void TakeDamage(int damage);
+    //public abstract void TakeDamage(int damage);
 
     protected bool _canMove;
 
@@ -41,7 +54,7 @@ public abstract class UnitBase : MonoBehaviour
     /// </summary>
     /// <param name="attack">The attack being used</param>
     /// <param name="target">The target of the attack</param>
-    public abstract int Attack(ScriptableAttack attack, UnitBase target, float multiplier = 1f, float accuracy = 100f);
+    //public abstract int Attack(ScriptableAttack attack, UnitBase target, float multiplier = 1f, float accuracy = 100f);
 
     /// <summary>
     /// Moves the unit
@@ -99,12 +112,33 @@ public abstract class UnitBase : MonoBehaviour
 
     void AttackDone()
     {
-        HasAttacked = true;
+        AttackFinished = true;
+    }
+
+    void EffectDone()
+    {
+        EffectFinished = true;
+    }
+
+    void HurtDone()
+    {
+        FullAttackDone = true;
+    }
+
+    protected void PlayEffect(int attackNum, bool magicAttack)
+    {
+        _effectAnim.SetInteger("AttackNum", attackNum);
+
+        if (magicAttack) _effectAnim.SetTrigger("Magic Attack");
+        else _effectAnim.SetTrigger("Melee Attack");
     }
 
     public void AttackStateReset()
     {
-        HasAttacked = false;
+        AttackFinished = false;
+
+        EffectFinished = false;
+        FullAttackDone = false;
     }
 }
 

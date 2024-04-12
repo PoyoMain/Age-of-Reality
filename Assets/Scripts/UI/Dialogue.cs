@@ -11,6 +11,8 @@ public class Dialogue : MonoBehaviour
     [SerializeField] private GameObject dialogueBox;
     private DialogueLine line;
     [SerializeField] private AudioSource audioSource;
+    private Coroutine textCoroutine;
+    private bool dialogueBoxOpen;
     //private int index;
 
     private Animator _anim;
@@ -50,6 +52,9 @@ public class Dialogue : MonoBehaviour
 
     public void AdvanceDialogue()
     {
+        if (textCoroutine == null) return;
+        StopCoroutine(textCoroutine);
+
         if (textComponent.text == line.Line)
         {
             NextLine();
@@ -64,6 +69,7 @@ public class Dialogue : MonoBehaviour
     void StartDialogue()
     {
         //index = 0;
+        //dialogueDone = false;
 
         if (!(audioSource == null || line.VoiceClips == null))
         {
@@ -73,16 +79,22 @@ public class Dialogue : MonoBehaviour
             }
         }
 
-        StartCoroutine(TypeLine());
+        textCoroutine = StartCoroutine(TypeLine());
+        Debug.Log("Start Dialogue");
     }
 
     IEnumerator TypeLine()
     {
         foreach (char c in line.Line.ToCharArray())
         {
+            if (textComponent.text == line.Line) yield break;
+
             textComponent.text += c;
             yield return new WaitForSeconds(line.textSpeed);
         }
+
+        //dialogueDone = true;
+        yield break;
     }
 
     void NextLine()
@@ -95,8 +107,8 @@ public class Dialogue : MonoBehaviour
         //}
         //else
         //{
-
             _anim.SetTrigger("Close");
+            textCoroutine = null;
             dialogueBox.SetActive(false);
             PlayingDialogue = false;
 

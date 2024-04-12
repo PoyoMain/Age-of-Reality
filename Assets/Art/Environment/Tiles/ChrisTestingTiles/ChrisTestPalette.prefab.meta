@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Art/Environment/Tiles/ChrisTestingTiles/ChrisTestPalette.prefab.meta
 guid: 381f9d2c0d21b9643a58c0e3d6c27b04
+========
+guid: 7b70aa105ffa5694a9e6a9d80fd253f0
+>>>>>>>> origin/TrajuanS-Branch:Assets/Art/Environment/Tiles/TestTiles/Test Palette.prefab.meta
 PrefabImporter:
   externalObjects: {}
   userData: 

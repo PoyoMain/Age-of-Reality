@@ -1,12 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Reflection;
 using TMPro;
-using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(PlayableDirector))]
 public class CutsceneManager : MonoBehaviour
@@ -21,6 +20,11 @@ public class CutsceneManager : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI dialogueText;
     [SerializeField] private CanvasGroup cutsceneImage;
+    [Space(15)]
+    [Header("Skip Button")]
+    [SerializeField] private Button skipButton;
+    [SerializeField] private int buttonDisappearTime;
+    private float timeSinceLastInput;
 
     [Space(15)]
     [SerializeField] private CutsceneClip[] timeLineCuts;
@@ -163,6 +167,22 @@ public class CutsceneManager : MonoBehaviour
 
     void Update()
     {
+        if (Input.anyKeyDown)
+        {
+            timeSinceLastInput = 0;
+            skipButton.gameObject.SetActive(true);
+        }
+        else
+        {
+            timeSinceLastInput += Time.deltaTime;
+
+            if (skipButton.gameObject.activeSelf && timeSinceLastInput >= buttonDisappearTime)
+            {
+                skipButton.gameObject.SetActive(false);
+            }
+        }
+
+
         if (Input.GetMouseButtonDown(0) && clickToAdvanceScene)
         {
             AdvanceDialogue();

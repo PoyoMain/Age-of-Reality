@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -23,9 +22,12 @@ public class HeroUnitBase : UnitBase
     public virtual void InitStats(HeroStats stats)
     {
         HeroStats temp = stats;
-        temp.Health = stats.Health * 100;
+        temp.Health = 100 + ((stats.Health * 10) - 10);
         MaxHealth = temp.Health;
         Stats = temp;
+        
+        if (data.Ability == Ability.Magic) _anim.SetBool("Magic", true);
+        else _anim.SetBool("Magic", false);
     }
 
     /// <summary>
@@ -67,25 +69,29 @@ public class HeroUnitBase : UnitBase
     /// </summary>
     /// <param name="attack">The attack being used</param>
     /// <param name="target">The target of the attack</param>
-    public override int Attack(ScriptableAttack attack, UnitBase target, float multiplier = 1f, float accuracy = 100f)
+    public int Attack(ScriptableAttack attack, UnitBase target, float accuracy = 100f)
     {
         EnemyUnitBase enemyTarget = target as EnemyUnitBase;
-        int damage = Mathf.RoundToInt(((attack.Stats.attackPower + (Stats.Attack * 10) - (enemyTarget.Stats.Defense * 10)) * multiplier) * (accuracy / 100));
+        //int damage = Mathf.RoundToInt(((attack.Stats.attackPower + (Stats.Attack * 10) - (enemyTarget.Stats.Defense * 10)) * multiplier) * (accuracy / 100));
+        int damage = Mathf.RoundToInt((((attack.Stats.attackPower * ((1 + ((Stats.Attack - 1) / 10)))) - (enemyTarget.Stats.Defense - 1)) * attack.Stats.multiplier) * (accuracy / 100));
 
-        StartCoroutine(AttackCoroutine(enemyTarget, damage));
+        
+
+        StartCoroutine(AttackCoroutine(enemyTarget, damage, attack is ScriptableMagicAttack, attack.Stats.multiplier));
         
         return damage;
     }
 
-    IEnumerator AttackCoroutine(EnemyUnitBase target, int damage)
-    {
+    IEnumerator AttackCoroutine(EnemyUnitBase target, int damage, bool magicAttack, int attackNum)
+    { 
         _anim.SetTrigger("Attacked");
 
-        while (!HasAttacked)
+        while (!AttackFinished)
         {
             yield return null;
         }
-        target.TakeDamage(damage);
+
+        target.TakeDamage(damage, magicAttack, attackNum);
         print("Player Damage Dealt: " + damage);
 
         yield return new WaitForSeconds(0.5f);
@@ -97,12 +103,40 @@ public class HeroUnitBase : UnitBase
     /// Damages the unit
     /// </summary>
     /// <param name="damage">The amount of damage to deal</param>
-    public override void TakeDamage(int damage)
+    public void TakeDamage(int damage)
     {
-        _anim.SetTrigger("Hit");
         HeroStats newStats = Stats;
         newStats.Health -= damage;
         SetStats(newStats);
+    }
+
+    public void TakeDamage(int damage, bool magicAttack, int attackNum)
+    {
+        StartCoroutine(TakeDamageCoroutine(damage, magicAttack, attackNum));
+    }
+
+    private IEnumerator TakeDamageCoroutine(int damage, bool magicAttack, int attackNum)
+    {
+        PlayEffect(attackNum, magicAttack);
+
+        while (!EffectFinished)
+        {
+            yield return null;
+        }
+
+        SendMessageUpwards("ShakeCamera");
+        _anim.SetTrigger("Hit");
+
+        HeroStats newStats = Stats;
+        newStats.Health -= damage;
+        SetStats(newStats);
+
+        while (!FullAttackDone)
+        {
+            yield return null;
+        }
+
+        yield break;
     }
 
     public override void SetEffects(ScriptableItem item)
@@ -165,5 +199,29 @@ public class HeroUnitBase : UnitBase
     public override void Select()
     {
         SendMessageUpwards("PlayerSelected", this);
+    }
+
+    void PlayVocalAttackAudio()
+    {
+        AudioClip clipToPlay = data.vocalAttackSFX[Random.Range(0, data.vocalAttackSFX.Length)];
+        AudioManager.Instance.PlayBattleSFX(clipToPlay);
+    }
+
+    void PlaySwordSwingAudio()
+    {
+        AudioClip clipToPlay = data.swordSwingSFX[Random.Range(0, data.swordSwingSFX.Length)];
+        AudioManager.Instance.PlayBattleSFX(clipToPlay);
+    }
+
+    void PlayFireAudio()
+    {
+        AudioClip clipToPlay = data.fireShootSFX[Random.Range(0, data.fireShootSFX.Length)];
+        AudioManager.Instance.PlayBattleSFX(clipToPlay);
+    }
+
+    void PlayHurtAudio()
+    {
+        AudioClip clipToPlay = data.hurtSFX[Random.Range(0, data.hurtSFX.Length)];
+        AudioManager.Instance.PlayBattleSFX(clipToPlay);
     }
 }

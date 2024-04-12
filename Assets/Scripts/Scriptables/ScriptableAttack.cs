@@ -16,7 +16,7 @@ public abstract class ScriptableAttack : ScriptableObject
     /// </summary>
     protected AttackType _attackType;
 
-    public LineMinigameBase Minigame;
+    public LineMinigameBase[] Minigames;
 
     public int SecondsToComplete;
 }
@@ -25,7 +25,7 @@ public abstract class ScriptableAttack : ScriptableObject
 public struct AttackStats
 {
     public int attackPower;
-    public float multiplier;
+    public int multiplier;
 }
 
 public enum AttackType

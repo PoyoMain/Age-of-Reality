@@ -49,7 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DoneDrawing: 0
   totalPercentage: 0
-  linePrefab: {fileID: 291009501671097667, guid: 8901a5a6c053dd54baded0c87f7ba905, type: 3}
+  linePrefab: {fileID: 291009501671097667, guid: 6330ad9cd4248714f84df62bebe4c399, type: 3}
   cam: {fileID: 0}
   distanceNeeded: 0
   distanceTravelled: 0

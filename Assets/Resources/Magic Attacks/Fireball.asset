@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _stats:
     attackPower: 10
-    multiplier: 3
-  Minigame: {fileID: 6633343848253367670, guid: dd96140a0af75db4e9aeb57d7d45e21c, type: 3}
+    multiplier: 2
+  Minigames:
+  - {fileID: 6633343848253367670, guid: dd96140a0af75db4e9aeb57d7d45e21c, type: 3}
+  - {fileID: 6633343848253367670, guid: b324ef7d50bbe344cb257f2ab4f6eddf, type: 3}
   SecondsToComplete: 10

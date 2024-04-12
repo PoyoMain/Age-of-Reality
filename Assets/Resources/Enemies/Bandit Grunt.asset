@@ -17,13 +17,28 @@ MonoBehaviour:
   Sprite: {fileID: 0}
   Profile: {fileID: 21300000, guid: eae7e41b3f8743b4081efa12e8f81292, type: 3}
   _stats:
-    Health: 1
+    Health: 25
+    HealthRange: 5
     Attack: 1
     Defense: 1
     Speed: 1
+    Damage: 10
     XP: 1
-  attacks:
-  - {fileID: 11400000, guid: fcf377c82c2a78d40b11dd91c2469062, type: 2}
   droppableItems:
   - Item: {fileID: 11400000, guid: 84892117910462542a78ddd8585684cf, type: 2}
     ChanceToDrop: 0.25
+  vocalAttackSFX:
+  - {fileID: 8300000, guid: 0d43b282c489d1840a7a172a26be4562, type: 3}
+  - {fileID: 8300000, guid: 70f0efda49934c8439972796d7228855, type: 3}
+  - {fileID: 8300000, guid: 4443575229b11dd4dabe9526f72a3388, type: 3}
+  - {fileID: 8300000, guid: 878324ba7dc76be4ea7e5a496df92100, type: 3}
+  attackSFX:
+  - {fileID: 8300000, guid: 4c02f33cfd8788044a850906f9103e52, type: 3}
+  hurtSFX:
+  - {fileID: 8300000, guid: d757dd91690506a4a99cbfe5610435f7, type: 3}
+  - {fileID: 8300000, guid: a7e81a62550063a488bc974f2698f960, type: 3}
+  - {fileID: 8300000, guid: 06b5a4d85e0fe9c4a8753bebfc852333, type: 3}
+  - {fileID: 8300000, guid: bf6c45b5f0fc4554eaf543d2aee2da78, type: 3}
+  - {fileID: 8300000, guid: b0c23fd7bcf88b1408a3db7b156ea6d7, type: 3}
+  - {fileID: 8300000, guid: c0ec4bd179d141c419f48874c73437c6, type: 3}
+  - {fileID: 8300000, guid: bd269bb19089fb94cba808a068604628, type: 3}

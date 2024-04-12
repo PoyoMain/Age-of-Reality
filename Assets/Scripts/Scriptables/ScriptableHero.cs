@@ -16,9 +16,17 @@ public class ScriptableHero : ScriptableUnitBase
     [SerializeField] private HeroStats _stats;
     public HeroStats BaseStats { get { return _stats; } private set { } }
 
+    [Space(15)]
     public List<ScriptableMeleeAttack> meleeAttacks;
 
     public List<ScriptableMagicAttack> magicAttacks;
+
+    [Space(15)]
+    public AudioClip[] vocalAttackSFX;
+    public AudioClip[] swordSwingSFX;
+    public AudioClip[] fireShootSFX;
+    public AudioClip[] hurtSFX;
+
 
     public void ResetCharacter()
     {
@@ -43,6 +51,9 @@ public class ScriptableHero : ScriptableUnitBase
 
     public bool LevelUp(ScriptableLevelSystem levelSystem, out ScriptableAttack unlockedAttack)
     {
+        unlockedAttack = null;
+        if (_stats.Level >= levelSystem.levels[^1].lvl) return false;
+
         Level nextLevel = null;
 
         foreach (Level level in levelSystem.levels)
@@ -50,7 +61,6 @@ public class ScriptableHero : ScriptableUnitBase
             if ((_stats.Level + 1) == level.lvl)
             {
                 nextLevel = level;
-                _stats.ExtraStatPoints += 2;
                 break;
             }
         }
@@ -97,7 +107,13 @@ public class ScriptableHero : ScriptableUnitBase
     private void IncreaseLevel(int excessXP)
     {
         _stats.Level++;
+        _stats.Health++;
+        _stats.Attack++;
+        _stats.Defense++;
+        _stats.Speed++;
+        _stats.Stamina++;
         _stats.XP = excessXP;
+        _stats.ExtraStatPoints += 2;
         Debug.Log("Level Up");
     }
 
@@ -131,7 +147,17 @@ public class ScriptableHero : ScriptableUnitBase
         _stats.ExtraStatPoints--;
     }
 
+    private void OnEnable()
+    {
+        ResetCharacter();
+    }
+
     private void OnDisable()
+    {
+        ResetCharacter();
+    }
+
+    private void OnDestroy()
     {
         ResetCharacter();
     }
