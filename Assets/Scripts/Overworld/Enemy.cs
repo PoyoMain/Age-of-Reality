@@ -18,6 +18,8 @@ public class Enemy : MonoBehaviour
     private Collider2D coll;
     private Rigidbody2D rigid;
     private Animator anim;
+    private Chase chaseScript;
+    private Patrol patrolScript;
 
     public bool isBoss;
 
@@ -39,7 +41,8 @@ public class Enemy : MonoBehaviour
         rigid = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
 
-        
+        chaseScript = GetComponent<Chase>();
+        patrolScript = GetComponent<Patrol>();
     }
 
     private void Start()
@@ -79,11 +82,17 @@ public class Enemy : MonoBehaviour
     {
         anim.speed = 0;
         rigid.velocity = Vector3.zero;
+
+        if (chaseScript != null) chaseScript.enabled = false;
+        if (patrolScript != null) patrolScript.enabled = false;
     }
 
     public void UnFreeze()
     {
         anim.speed = 1;
+
+        if (chaseScript != null) chaseScript.enabled = true;
+        if (patrolScript != null) patrolScript.enabled = true;
     }
     
 }

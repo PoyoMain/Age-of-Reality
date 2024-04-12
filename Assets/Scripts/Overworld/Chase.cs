@@ -7,8 +7,14 @@ public class Chase : MonoBehaviour
     public float chaseDuration = 5f;
 
     private Transform target;
+    private Animator _anim;
     public bool isChasing = false;
     private float chaseTimer = 0f;
+
+    private void Awake()
+    {
+        _anim = GetComponent<Animator>();
+    }
 
     void Start()
     {
@@ -29,7 +35,13 @@ public class Chase : MonoBehaviour
         // If chasing, move towards the player
         if (isChasing)
         {
+            Vector3 ogPos = transform.position;
             transform.position = Vector2.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
+
+            Vector2 disp = transform.position - ogPos;
+            _anim.SetFloat("X", disp.x);
+            _anim.SetFloat("Y", disp.y);
+
 
             // Increment timer
             chaseTimer += Time.deltaTime;
