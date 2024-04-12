@@ -98,7 +98,7 @@ public class ScriptableInventory : ScriptableObject
         Inventory.Clear();
     }
 }
-public enum Items { HealthPot, Sword, Card }
+public enum Items { HealthPot, MP, Sword, Card }
 
 [Serializable]
 public class Item 
