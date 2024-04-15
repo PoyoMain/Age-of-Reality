@@ -24,7 +24,7 @@ public class ScriptableItem : ScriptableObject
         Items typeReturn = Effect switch
         {
             ItemEffect.Heal => Items.HealthPot,
-            ItemEffect.MP => Items.MP,
+            ItemEffect.AP => Items.MP,
             _ => Items.HealthPot,
         };
         return typeReturn;
@@ -34,7 +34,7 @@ public class ScriptableItem : ScriptableObject
 public enum ItemEffect
 {
     Heal,
-    MP,
+    AP,
     AttackBoost,
     Evasiveness
 }

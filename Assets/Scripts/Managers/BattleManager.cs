@@ -245,6 +245,8 @@ public class BattleManager : MonoBehaviour
 
         if (AttackMenu.chosenAttack != null)
         {
+            AttackMenu.ResetAnimator();
+            yield return new WaitForSeconds(0.5f);
             AttackMenu.gameObject.SetActive(false);
             pickingEnemy = false;
 
@@ -291,7 +293,7 @@ public class BattleManager : MonoBehaviour
 
                 foreach (ItemDrop item in selectedEnemy.data.droppableItems)
                 {
-                    if (UnityEngine.Random.Range(0, 1) <= item.ChanceToDrop)
+                    if (UnityEngine.Random.Range(0, 1.0f) <= item.ChanceToDrop)
                     {
                         givenItems.Add(item.Item);
                     }
@@ -310,6 +312,8 @@ public class BattleManager : MonoBehaviour
         }
         else if (AttackMenu.chosenItem != null)
         {
+            AttackMenu.ResetAnimator();
+            yield return new WaitForSeconds(0.5f);
             AttackMenu.gameObject.SetActive(false);
             pickingPlayer = false;
             PlayerSelected(PartyUnits[0]);
@@ -330,7 +334,7 @@ public class BattleManager : MonoBehaviour
                     playerHealthUI.UpdateHealth(currentHero.Stats.Health);
                     GameManager.Instance.ItemInventory.UseItem(AttackMenu.chosenItem);
                     break;
-                case ItemEffect.MP:
+                case ItemEffect.AP:
                     selectedPlayer.SetEffects(AttackMenu.chosenItem);
                     playerHealthUI.UpdateMP(currentHero.Stats.Stamina);
                     GameManager.Instance.ItemInventory.UseItem(AttackMenu.chosenItem);
@@ -556,7 +560,7 @@ public class BattleManager : MonoBehaviour
             if (selectedPlayer != null) selectedPlayer.IsSelected = false;
             selectedPlayer = hero;
             selectedPlayer.IsSelected = true;
-            playerHealthUI.UpdateEntireUI(selectedPlayer.Stats.Health, selectedPlayer.data.name, selectedPlayer.MaxHealth, selectedPlayer.data.Profile, selectedPlayer.Stats.Stamina, selectedPlayer.MaxMP);
+            playerHealthUI.UpdateEntireUI(selectedPlayer.Stats.Health, selectedPlayer.data.name, selectedPlayer.MaxHealth, selectedPlayer.data.Profile, selectedPlayer.Stats.Stamina, selectedPlayer.MaxAP);
             playerHealthUI.gameObject.SetActive(true);
         }
     }

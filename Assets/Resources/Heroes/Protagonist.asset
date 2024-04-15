@@ -28,8 +28,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: fcf377c82c2a78d40b11dd91c2469062, type: 2}
   magicAttacks:
   - {fileID: 11400000, guid: 18ebe147ad1d46748ae6c35f34a63de0, type: 2}
-  - {fileID: 11400000, guid: 283bb9e8f9028464d956c74b87780816, type: 2}
-  - {fileID: 11400000, guid: af1c063f35298e54e9418e580708e58d, type: 2}
   vocalAttackSFX:
   - {fileID: 8300000, guid: 1f9073ef68c126043ac710b8311322e4, type: 3}
   - {fileID: 8300000, guid: 2e9706e08f31e2e4a91e72229552832f, type: 3}

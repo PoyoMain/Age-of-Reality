@@ -6,17 +6,18 @@ using UnityEngine;
 public class HeroUnitBase : UnitBase
 {
     [HideInInspector] public ScriptableHero data;
+
     private readonly Dictionary<ItemEffect, int> effectTurns = new()
     {
         { ItemEffect.Heal, 0 },
-        { ItemEffect.MP, 0 },
+        { ItemEffect.AP, 0 },
         { ItemEffect.AttackBoost, 0 },
         { ItemEffect.Evasiveness, 0 },
     };
 
     public HeroStats Stats { get; private set; }
     public int MaxHealth {  get; private set; }
-    public int MaxMP { get; private set; }
+    public int MaxAP { get; private set; }
 
     /// <summary>
     /// Initialize the stats of the unit
@@ -26,9 +27,9 @@ public class HeroUnitBase : UnitBase
     {
         HeroStats temp = stats;
         temp.Health = 100 + ((stats.Health * 10) - 10);
-        temp.Stamina = 100 * stats.Stamina;
+        temp.Stamina = 2 * stats.Stamina;
         MaxHealth = temp.Health;
-        MaxMP = temp.Stamina;
+        MaxAP = temp.Stamina;
         Stats = temp;
         
         if (data.Ability == Ability.Magic) _anim.SetBool("Magic", true);
@@ -81,7 +82,7 @@ public class HeroUnitBase : UnitBase
         int damage = Mathf.RoundToInt((((attack.Stats.attackPower * ((1 + ((Stats.Attack - 1) / 10)))) - (enemyTarget.Stats.Defense - 1)) * attack.Stats.multiplier) * (accuracy / 100));
 
         HeroStats temp = Stats;
-        temp.Stamina -= attack.Stats.MP;
+        temp.Stamina -= attack.Stats.AP;
         Stats = temp;  
 
         StartCoroutine(AttackCoroutine(enemyTarget, damage, attack is ScriptableMagicAttack, attack.Stats.multiplier));
@@ -161,15 +162,15 @@ public class HeroUnitBase : UnitBase
                 currentEffects.Add(healEff);
                 break;
 
-            case ItemEffect.MP:
-                BoostMP(item);
-                Effect MPEff = new()
+            case ItemEffect.AP:
+                BoostAP(item);
+                Effect APEff = new()
                 {
                     durationInTurns = item.EffectDurationInTurns,
                     effect = item.Effect,
                     itemCausingEffect = item,
                 };
-                currentEffects.Add(MPEff);
+                currentEffects.Add(APEff);
                 break;
 
         }
@@ -211,16 +212,16 @@ public class HeroUnitBase : UnitBase
     {
         HeroStats newStats = Stats;
         newStats.Health += item.EffectAmount;
-        newStats.Health = Mathf.Clamp(newStats.Health, 0, data.BaseStats.Health);
-        InitStats(newStats);
+        newStats.Health = Mathf.Clamp(newStats.Health, 0, MaxHealth);
+        Stats = newStats;
     }
 
-    void BoostMP(ScriptableItem item)
+    void BoostAP(ScriptableItem item)
     {
         HeroStats newStats = Stats;
         newStats.Stamina += item.EffectAmount;
-        newStats.Stamina = Mathf.Clamp(newStats.Stamina, 0, data.BaseStats.Stamina);
-        InitStats(newStats);
+        newStats.Stamina = Mathf.Clamp(newStats.Stamina, 0, MaxAP);
+        Stats = newStats;
     }
 
     public override void Select()

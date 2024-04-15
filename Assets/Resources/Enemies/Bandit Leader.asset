@@ -25,6 +25,9 @@ MonoBehaviour:
     Damage: 20
     XP: 1
   droppableItems: []
-  vocalAttackSFX: []
-  attackSFX: []
-  hurtSFX: []
+  vocalAttackSFX:
+  - {fileID: 8300000, guid: 4443575229b11dd4dabe9526f72a3388, type: 3}
+  attackSFX:
+  - {fileID: 8300000, guid: 4c02f33cfd8788044a850906f9103e52, type: 3}
+  hurtSFX:
+  - {fileID: 8300000, guid: b0c23fd7bcf88b1408a3db7b156ea6d7, type: 3}

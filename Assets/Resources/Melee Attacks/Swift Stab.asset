@@ -15,7 +15,7 @@ MonoBehaviour:
   _stats:
     attackPower: 10
     multiplier: 1
-    MP: 5
+    AP: 0
   Minigames:
   - {fileID: 5566356909101358543, guid: 5a6f88ac1f78ddd42bcd9fb5aa7fe6a6, type: 3}
   SecondsToComplete: 5

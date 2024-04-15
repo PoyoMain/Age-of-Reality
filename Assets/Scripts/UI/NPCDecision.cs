@@ -5,6 +5,7 @@ using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(PlayableDirector))]
 public class NPCDecision : MonoBehaviour
@@ -15,6 +16,11 @@ public class NPCDecision : MonoBehaviour
     [SerializeField] private PlayableAsset openingTimeline;
     [SerializeField] private PlayableAsset closingTimeline;
 
+    [SerializeField] private Sprite playerImage;
+    [SerializeField] private Sprite NPCImage;
+    [SerializeField] private Image speakerImage;
+    [SerializeField] private TextMeshProUGUI speakerName;
+
     private bool dialogueFinished = false;
     [SerializeField] private TextMeshProUGUI dialogueText;
     [TextArea(2,3)]
@@ -24,6 +30,7 @@ public class NPCDecision : MonoBehaviour
     [SerializeField] private float textSpeed;
     [SerializeField] private GameObject decisionButtons;
     private bool choiceMade = false;
+    private bool skipDialogue = false;
 
     private void Awake()
     {
@@ -83,12 +90,63 @@ public class NPCDecision : MonoBehaviour
 
         dialogueText.text = string.Empty;
 
+        bool readingName = false;
+        string nameString = "";
+
         for (int i = 0; i < linesToPut.Length; i++)
         {
             foreach (char c in linesToPut[i].ToCharArray())
             {
-                dialogueText.text += c;
-                yield return new WaitForSeconds(textSpeed);
+                if (skipDialogue)
+                {
+                    skipDialogue = false;
+                    dialogueText.text = string.Empty;
+                    bool skipName = false;
+                    foreach (char c2 in linesToPut[i])
+                    {
+                        if (c2 == '<')
+                        {
+                            skipName = true;
+                        }
+                        if (c2 == '>')
+                        {
+                            skipName = false;
+                        }
+
+                        if (!skipName && c2 != '>')
+                        {
+                            dialogueText.text += c2;
+                        }
+                        
+                    }
+                    dialogueText.text = linesToPut[i];
+                    break;
+                }
+                if (c == '<') readingName = true;
+                else if (c == '>')
+                {
+                    readingName = false;
+
+                    if (nameString == "Player")
+                    {
+                        speakerImage.sprite = playerImage;
+                        speakerName.text = "Player";
+                    }
+                    else if (nameString == "NPC")
+                    {
+                        speakerImage.sprite = NPCImage;
+                        speakerName.text = "NPC";
+                    }
+
+                    nameString = string.Empty;
+                }
+
+                if (readingName && c != '<' && c != '>') nameString += c;
+                else if (!readingName)
+                {
+                    dialogueText.text += c;
+                    yield return new WaitForSeconds(textSpeed);
+                }
             }
 
             while (!Input.GetMouseButtonDown(0))
@@ -110,5 +168,13 @@ public class NPCDecision : MonoBehaviour
         else player.Ability = Ability.Magic;
 
         choiceMade = true;
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            skipDialogue = true;
+        }
     }
 }

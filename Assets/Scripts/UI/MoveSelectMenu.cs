@@ -94,7 +94,7 @@ public class MoveSelectMenu : MonoBehaviour
                             moveButtons.Add(moveOption);
                             moveOption.Attack = attack;
                             moveOption.gameObject.name = attack.name;
-                            moveOption.GetComponentInChildren<TextMeshProUGUI>().text = attack.name + " (MP: " + attack.Stats.MP + ")";
+                            moveOption.GetComponentInChildren<TextMeshProUGUI>().text = attack.name + " (MP: " + attack.Stats.AP + ")";
                         }
 
                         EventSystem.current.SetSelectedGameObject(moveButtons[0].gameObject);
@@ -112,7 +112,7 @@ public class MoveSelectMenu : MonoBehaviour
                             moveButtons.Add(moveOption);
                             moveOption.Attack = attack;
                             moveOption.gameObject.name = attack.name;
-                            moveOption.GetComponentInChildren<TextMeshProUGUI>().text = attack.name + " (MP: " + attack.Stats.MP + ")";
+                            moveOption.GetComponentInChildren<TextMeshProUGUI>().text = attack.name + " (MP: " + attack.Stats.AP + ")";
                         }
 
                         EventSystem.current.SetSelectedGameObject(moveButtons[0].gameObject);

@@ -140,6 +140,11 @@ public class GameManager : Singleton<GameManager>
         player.UnFreeze();
         enemyHit.UnFreeze();
 
+        if (enemyHit.isBoss && battleManager.State != BattleState.Flee)
+        {
+            //SceneManager.LoadScene("WinScene");
+        }
+
         if (battleManager.State == BattleState.Win)
         {
             Destroy(enemyHit.gameObject); // If the player wins the battle, destroy the enemy

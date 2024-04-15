@@ -6,7 +6,7 @@ using TMPro;
 [RequireComponent(typeof(Animator))]
 public class Dialogue : MonoBehaviour
 {
-
+    [SerializeField] private TextMeshProUGUI nameTxt;
     [SerializeField] private TextMeshProUGUI textComponent;
     [SerializeField] private GameObject dialogueBox;
     private DialogueLine line;
@@ -34,6 +34,7 @@ public class Dialogue : MonoBehaviour
 
         //if (lineToSay.Length == 0) return;
 
+        nameTxt.text = unit.name;
         line = lineToSay;
         dialogueBox.SetActive(true);
         textComponent.text = string.Empty;

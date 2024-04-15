@@ -147,6 +147,8 @@ public class ActionSelectMenu : MonoBehaviour
 
         yield return new WaitForSeconds(1);
 
+        currentUnit = null;
+        chosenAttack = null;
         flee = false;
     }
 
@@ -159,7 +161,7 @@ public class ActionSelectMenu : MonoBehaviour
     {
         if (option is AttackOption attackOption)
         {
-            if (currentUnit.Stats.Stamina < attackOption.Attack.Stats.MP) yield break;
+            if (currentUnit.Stats.Stamina < attackOption.Attack.Stats.AP) yield break;
             else
             {
                 _anim.SetBool("isAttackMenu", false);

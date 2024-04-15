@@ -8,12 +8,15 @@ public class Chase : MonoBehaviour
 
     private Transform target;
     private Animator _anim;
+    private Rigidbody2D rigid;
+
     public bool isChasing = false;
     private float chaseTimer = 0f;
 
     private void Awake()
     {
         _anim = GetComponent<Animator>();
+        rigid = GetComponent<Rigidbody2D>();
     }
 
     void Start()
@@ -36,7 +39,8 @@ public class Chase : MonoBehaviour
         if (isChasing)
         {
             Vector3 ogPos = transform.position;
-            transform.position = Vector2.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
+            //transform.position = Vector2.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
+            rigid.AddForce((target.position - transform.position) * speed * Time.deltaTime, ForceMode2D.Impulse);
 
             Vector2 disp = transform.position - ogPos;
             _anim.SetFloat("X", disp.x);
