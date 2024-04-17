@@ -1227,6 +1227,7 @@ GameObject:
   - component: {fileID: 1341002174}
   - component: {fileID: 1341002178}
   - component: {fileID: 1341002179}
+  - component: {fileID: 1341002180}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -1332,7 +1333,7 @@ PlayableDirector:
   m_GameObject: {fileID: 1341002173}
   m_Enabled: 1
   serializedVersion: 3
-  m_PlayableAsset: {fileID: 11400000, guid: a594438c66225914d9b47ec0cee8d8ba, type: 2}
+  m_PlayableAsset: {fileID: 11400000, guid: aa922d26d7f50c144b2e39b3ffc9e4c0, type: 2}
   m_InitialState: 0
   m_WrapMode: 0
   m_DirectorUpdateMode: 1
@@ -1398,8 +1399,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   clickToAdvanceScene: 0
   newSceneID: 2
-  timeBetweenCuts: 1
-  timeBetweenLinesSameCut: 1.05
+  timeBetweenCuts: 0.75
+  timeBetweenLinesSameCut: 0.65
   fadeSpeed: 1
   dialogueText: {fileID: 1035534903}
   cutsceneImage: {fileID: 299795905}
@@ -1431,7 +1432,7 @@ MonoBehaviour:
     - "\rWith time, the study of magic advanced to where scholars could create cardlike
       artifacts to allow those not gifted with magic to harness it without study."
     - But nothing, it seems, ever lasts forever.
-    TextSpeed: 0.04
+    TextSpeed: 0.045
     LoopVideo: 0
   - Cut: {fileID: 11400000, guid: f3674df167ae40545aacccff27c8f825, type: 2}
     Lines:
@@ -1471,6 +1472,102 @@ MonoBehaviour:
     - The path ahead is treacherous. Are you ready?
     TextSpeed: 0.045
     LoopVideo: 0
+--- !u!82 &1341002180
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1341002173}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 01683b2f4518f134593ec7afd5b3222f, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1.005
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1350239645
 GameObject:
   m_ObjectHideFlags: 0
