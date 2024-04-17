@@ -112,7 +112,7 @@ public class CutsceneManager : MonoBehaviour
         }
 
         print("Done");
-        Invoke(nameof(SceneChange), 1f);
+        Invoke(nameof(SceneChange), 5.5f);
         yield break;
     }
 
