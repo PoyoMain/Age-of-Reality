@@ -10,10 +10,12 @@ public class Dialogue : MonoBehaviour
     [SerializeField] private TextMeshProUGUI textComponent;
     [SerializeField] private GameObject dialogueBox;
     private DialogueLine line;
-    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioSource dialogueAudioSource;
+    [SerializeField] private AudioSource mainMusicAudioSource;
     private Coroutine textCoroutine;
     private bool dialogueBoxOpen;
     //private int index;
+    private float startMainVolume;
 
     private Animator _anim;
 
@@ -64,6 +66,9 @@ public class Dialogue : MonoBehaviour
         {
             StopAllCoroutines();
             textComponent.text = line.Line;
+
+            if (dialogueAudioSource != null) dialogueAudioSource.Stop();
+            mainMusicAudioSource.volume = startMainVolume;
         }
     }
 
@@ -72,11 +77,14 @@ public class Dialogue : MonoBehaviour
         //index = 0;
         //dialogueDone = false;
 
-        if (!(audioSource == null || line.VoiceClips == null))
+        if (!(dialogueAudioSource == null || line.VoiceClips == null))
         {
             if (line.VoiceClips.Length > 0)
             {
-                audioSource.PlayOneShot(line.VoiceClips[Random.Range(0, line.VoiceClips.Length)]);
+                dialogueAudioSource.clip = line.VoiceClips[Random.Range(0, line.VoiceClips.Length)];
+                dialogueAudioSource.Play();
+                startMainVolume = mainMusicAudioSource.volume;
+                mainMusicAudioSource.volume /= 2;
             }
         }
 

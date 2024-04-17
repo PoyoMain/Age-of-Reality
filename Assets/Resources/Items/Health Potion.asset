@@ -15,5 +15,5 @@ MonoBehaviour:
   Description: this item heals you :)
   Sprite: {fileID: 21300000, guid: b5278931f07efdd4c85e2bcf0a73b24c, type: 3}
   Effect: 0
-  EffectAmount: 30
-  EffectDurationInTurns: 1
+  EffectAmount: 25
+  EffectDurationInTurns: 0

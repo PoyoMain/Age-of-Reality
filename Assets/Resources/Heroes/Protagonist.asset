@@ -16,7 +16,7 @@ MonoBehaviour:
   Description: 
   Sprite: {fileID: 0}
   Profile: {fileID: 21300000, guid: 5899b6e1085dd5841ac7255ce9bb9ec1, type: 3}
-  Ability: 1
+  Ability: 0
   _stats:
     Health: 1
     Attack: 1
