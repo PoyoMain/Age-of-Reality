@@ -15,5 +15,5 @@ MonoBehaviour:
   Description: this item gives you MP :)
   Sprite: {fileID: 21300000, guid: b5278931f07efdd4c85e2bcf0a73b24c, type: 3}
   Effect: 1
-  EffectAmount: 5
-  EffectDurationInTurns: 1
+  EffectAmount: 30
+  EffectDurationInTurns: 0

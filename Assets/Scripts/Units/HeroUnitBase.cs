@@ -1,6 +1,6 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 
 public class HeroUnitBase : UnitBase
@@ -153,24 +153,30 @@ public class HeroUnitBase : UnitBase
         {
             case ItemEffect.Heal:
                 Heal(item);
-                Effect healEff = new()
+                if (item.EffectDurationInTurns > 0)
                 {
-                    durationInTurns = item.EffectDurationInTurns,
-                    effect = item.Effect,
-                    itemCausingEffect = item,
-                };
-                currentEffects.Add(healEff);
+                    Effect healEff = new()
+                    {
+                        durationInTurns = item.EffectDurationInTurns,
+                        effect = item.Effect,
+                        itemCausingEffect = item,
+                    };
+                    currentEffects.Add(healEff);
+                }
                 break;
 
             case ItemEffect.AP:
                 BoostAP(item);
-                Effect APEff = new()
+                if (item.EffectDurationInTurns > 0)
                 {
-                    durationInTurns = item.EffectDurationInTurns,
-                    effect = item.Effect,
-                    itemCausingEffect = item,
-                };
-                currentEffects.Add(APEff);
+                    Effect APEff = new()
+                    {
+                        durationInTurns = item.EffectDurationInTurns,
+                        effect = item.Effect,
+                        itemCausingEffect = item,
+                    };
+                    currentEffects.Add(APEff);
+                }
                 break;
 
         }
@@ -211,7 +217,7 @@ public class HeroUnitBase : UnitBase
     void Heal(ScriptableItem item)
     {
         HeroStats newStats = Stats;
-        newStats.Health += item.EffectAmount;
+        newStats.Health += Mathf.RoundToInt((item.EffectAmount / 100.0f) * MaxHealth);
         newStats.Health = Mathf.Clamp(newStats.Health, 0, MaxHealth);
         Stats = newStats;
     }
@@ -219,7 +225,7 @@ public class HeroUnitBase : UnitBase
     void BoostAP(ScriptableItem item)
     {
         HeroStats newStats = Stats;
-        newStats.Stamina += item.EffectAmount;
+        newStats.Stamina += Mathf.RoundToInt((item.EffectAmount / 100.0f) * MaxAP);
         newStats.Stamina = Mathf.Clamp(newStats.Stamina, 0, MaxAP);
         Stats = newStats;
     }
@@ -231,25 +237,25 @@ public class HeroUnitBase : UnitBase
 
     void PlayVocalAttackAudio()
     {
-        AudioClip clipToPlay = data.vocalAttackSFX[Random.Range(0, data.vocalAttackSFX.Length)];
+        AudioClip clipToPlay = data.vocalAttackSFX[UnityEngine.Random.Range(0, data.vocalAttackSFX.Length)];
         AudioManager.Instance.PlayBattleSFX(clipToPlay);
     }
 
     void PlaySwordSwingAudio()
     {
-        AudioClip clipToPlay = data.swordSwingSFX[Random.Range(0, data.swordSwingSFX.Length)];
+        AudioClip clipToPlay = data.swordSwingSFX[UnityEngine.Random.Range(0, data.swordSwingSFX.Length)];
         AudioManager.Instance.PlayBattleSFX(clipToPlay);
     }
 
     void PlayFireAudio()
     {
-        AudioClip clipToPlay = data.fireShootSFX[Random.Range(0, data.fireShootSFX.Length)];
+        AudioClip clipToPlay = data.fireShootSFX[UnityEngine.Random.Range(0, data.fireShootSFX.Length)];
         AudioManager.Instance.PlayBattleSFX(clipToPlay);
     }
 
     void PlayHurtAudio()
     {
-        AudioClip clipToPlay = data.hurtSFX[Random.Range(0, data.hurtSFX.Length)];
+        AudioClip clipToPlay = data.hurtSFX[UnityEngine.Random.Range(0, data.hurtSFX.Length)];
         AudioManager.Instance.PlayBattleSFX(clipToPlay);
     }
 }

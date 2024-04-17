@@ -26,9 +26,9 @@ MonoBehaviour:
     XP: 1
   droppableItems:
   - Item: {fileID: 11400000, guid: 7c7ff08ff27c5764a9d528c43ce1d862, type: 2}
-    ChanceToDrop: 1
+    ChanceToDrop: 0.2
   - Item: {fileID: 11400000, guid: 84892117910462542a78ddd8585684cf, type: 2}
-    ChanceToDrop: 0.1
+    ChanceToDrop: 0.2
   vocalAttackSFX:
   - {fileID: 8300000, guid: 0d43b282c489d1840a7a172a26be4562, type: 3}
   - {fileID: 8300000, guid: 70f0efda49934c8439972796d7228855, type: 3}

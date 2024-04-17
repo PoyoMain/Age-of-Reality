@@ -19,4 +19,6 @@ MonoBehaviour:
   Minigames:
   - {fileID: 6633343848253367670, guid: be65d15ac52520a44b460fd49e62c448, type: 3}
   - {fileID: 6633343848253367670, guid: 719befbee65ecf64dbf9fafd059e178a, type: 3}
-  SecondsToComplete: 7
+  - {fileID: 6633343848253367670, guid: aa921b9be9b94394cb10d522e074ff3f, type: 3}
+  - {fileID: 6633343848253367670, guid: 4e8291c9e3a056b42bb4a6bc0a5714d6, type: 3}
+  SecondsToComplete: 3
