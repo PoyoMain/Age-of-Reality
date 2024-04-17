@@ -177,7 +177,7 @@ MonoBehaviour:
     m_PreExtrapolationTime: 0
     m_DisplayName: Narration 5
   - m_Version: 1
-    m_Start: 9.6
+    m_Start: 9.5
     m_ClipIn: 0
     m_Asset: {fileID: -9171351016779230327}
     m_Duration: 3.408
