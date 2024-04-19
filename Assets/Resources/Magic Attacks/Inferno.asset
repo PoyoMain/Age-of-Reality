@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _stats:
     attackPower: 10
+    attackNumber: 3
     multiplier: 3
     AP: 7
   Minigames:

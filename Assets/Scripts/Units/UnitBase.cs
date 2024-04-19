@@ -33,7 +33,13 @@ public abstract class UnitBase : MonoBehaviour
 
     protected List<Effect> currentEffects = new();
 
-    private void Awake()
+    public int Speed
+    {
+        get;
+        protected set;
+    }
+
+    protected void Awake()
     {
         _anim = GetComponent<Animator>();
         outline = GetComponent<Outline>();

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -47,6 +48,11 @@ public class BattleManager : MonoBehaviour
 
     [Space(15f)] 
     [SerializeField] private List<ScriptableItem> givenItems;
+
+    [Space(15f)]
+    [SerializeField] private AudioClip enemyHighlightSFX;
+    [SerializeField] private AudioClip enemySelectSFX;
+    [SerializeField] private AudioClip menuSelectSFX;
 
     private Animator _anim;
 
@@ -127,6 +133,9 @@ public class BattleManager : MonoBehaviour
         turnOrder.AddRange(EnemyUnits);
         enemyHealthUI.InitializeEnemyUI(EnemyUnits[0]);
 
+        turnOrder.Sort((x, y) => (x is HeroUnitBase) ? ((y is HeroUnitBase) ? (x as HeroUnitBase).Stats.Speed.CompareTo((y as HeroUnitBase).Stats.Speed) : (x as HeroUnitBase).Stats.Speed.CompareTo((y as EnemyUnitBase).Stats.Speed)) : ((y is HeroUnitBase) ? (x as EnemyUnitBase).Stats.Speed.CompareTo((y as HeroUnitBase).Stats.Speed) : (x as EnemyUnitBase).Stats.Speed.CompareTo((y as EnemyUnitBase).Stats.Speed)));
+        turnOrder.Sort((x, y) => x.Speed.CompareTo(y.Speed));
+        turnOrder.Reverse();
         //List<UnitBase> temp = turnOrder;
         //for (int i = 0; i <= turnOrder.Count - 1; i++)
         //{
@@ -144,7 +153,9 @@ public class BattleManager : MonoBehaviour
         //    }
         //}
 
-        ChangeState(BattleState.HeroTurn);
+        if (turnOrder[0] is HeroUnitBase) ChangeState(BattleState.HeroTurn);
+        else ChangeState(BattleState.EnemyTurn);
+
     }
 
     bool CompareSpeed(UnitBase a, UnitBase b)
@@ -533,12 +544,15 @@ public class BattleManager : MonoBehaviour
 
         if (enemy == selectedEnemy)
         {
+            AudioManager.Instance.PlayBattleSFX(enemySelectSFX);
             pickingEnemy = false;
             selectedEnemy.IsSelected = false;
         }
         else
         {
             if (selectedEnemy != null) selectedEnemy.IsSelected = false;
+
+            AudioManager.Instance.PlayBattleSFX(enemyHighlightSFX);
             selectedEnemy = enemy;
             selectedEnemy.IsSelected = true;
             enemyHealthUI.UpdateEntireUI(selectedEnemy.Stats.Health, selectedEnemy.data.name, selectedEnemy.MaxHealth, selectedEnemy.data.Profile);

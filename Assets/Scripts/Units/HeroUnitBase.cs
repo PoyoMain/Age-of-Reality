@@ -31,6 +31,7 @@ public class HeroUnitBase : UnitBase
         MaxHealth = temp.Health;
         MaxAP = temp.Stamina;
         Stats = temp;
+        Speed = temp.Speed;
         
         if (data.Ability == Ability.Magic) _anim.SetBool("Magic", true);
         else _anim.SetBool("Magic", false);
@@ -85,7 +86,7 @@ public class HeroUnitBase : UnitBase
         temp.Stamina -= attack.Stats.AP;
         Stats = temp;  
 
-        StartCoroutine(AttackCoroutine(enemyTarget, damage, attack is ScriptableMagicAttack, attack.Stats.multiplier));
+        StartCoroutine(AttackCoroutine(enemyTarget, damage, attack is ScriptableMagicAttack, attack.Stats.attackNumber));
         
         return damage;
     }

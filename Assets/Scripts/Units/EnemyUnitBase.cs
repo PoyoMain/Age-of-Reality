@@ -20,6 +20,7 @@ public class EnemyUnitBase : UnitBase
         temp.Health = rangeValue;
         MaxHealth = temp.Health;
         Stats = temp;
+        Speed = temp.Speed;
     }
 
     /// <summary>

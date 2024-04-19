@@ -48,7 +48,7 @@ public class AttackSelectMenu : MonoBehaviour
                     AttackOption moveOption = Instantiate(attackButton, transform).GetComponent<AttackOption>();
                     moveOption.Attack = attack;
                     moveOption.gameObject.name = attack.name;
-                    moveOption.GetComponentInChildren<TextMeshProUGUI>().text = attack.name + " (MP: " + attack.Stats.AP + ")";
+                    moveOption.GetComponentInChildren<TextMeshProUGUI>().text = attack.name + " (AP: " + attack.Stats.AP + ")";
                 }
 
                 break;
@@ -65,7 +65,7 @@ public class AttackSelectMenu : MonoBehaviour
                     AttackOption moveOption = Instantiate(attackButton, transform).GetComponent<AttackOption>();
                     moveOption.Attack = attack;
                     moveOption.gameObject.name = attack.name;
-                    moveOption.GetComponentInChildren<TextMeshProUGUI>().text = attack.name + " (MP: " + attack.Stats.AP + ")";
+                    moveOption.GetComponentInChildren<TextMeshProUGUI>().text = attack.name + " (AP: " + attack.Stats.AP + ")";
                 }
 
                 break;

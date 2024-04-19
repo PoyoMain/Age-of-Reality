@@ -25,7 +25,8 @@ public abstract class ScriptableAttack : ScriptableObject
 public struct AttackStats
 {
     public int attackPower;
-    public int multiplier;
+    public int attackNumber;
+    public float multiplier;
     public int AP;
 }
 
