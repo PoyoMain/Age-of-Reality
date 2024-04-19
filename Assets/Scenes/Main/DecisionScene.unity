@@ -1437,14 +1437,17 @@ MonoBehaviour:
   - <Player>What's this about wanting to see me? I thought I had the day off.
   - "<NPC>Change of plans. The village is short on this month\u2019s magic cards
     so I am sending you out to retrieve more."
-  - "<NPC>It's urgent! Plus it's a dangerous mission, and I know I can trust you
-    to get it done safely! Don\u2019t go weak on me!"
+  - "It's urgent! Plus it's a dangerous mission, and I know I can trust you to get
+    it done safely! Don\u2019t go weak on me!"
   - "<Player>....huh\u2026.Fine! But you owe me!"
   - "<NPC>Since It's your day off, I\u2019ll let you choose your own weapon for a
     change. Do you want to be a master magician or a deadly swordsman?"
   linesAfterChoice:
-  - <NPC>Great choice, I would have made the same decision. Stay safe young hero.
-    Now get out of here!
+  - 'Great choice, I would have made the same decision. '
+  - 'Up to the north is the leader of a fearsome group of bandits. It seems they''re
+    guarding an artifact. You need to recover it from them. '
+  - Defeat some of the underlings to prepare yourself. Stay safe young hero. Now
+    get out of here!
   textSpeed: 0.01
   decisionButtons: {fileID: 1316057120}
 --- !u!320 &1316057119
@@ -1772,7 +1775,7 @@ Transform:
   m_GameObject: {fileID: 1833728602}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.28850177, y: 1.87, z: 0}
+  m_LocalPosition: {x: 0.28850177, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

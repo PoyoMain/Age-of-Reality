@@ -22,7 +22,7 @@ MonoBehaviour:
     Attack: 1
     Defense: 3
     Speed: 8
-    Damage: 20
+    Damage: 30
     XP: 1
   droppableItems: []
   vocalAttackSFX:
