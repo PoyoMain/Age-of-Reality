@@ -32,7 +32,7 @@ public class InteractableProp : MonoBehaviour
 
     private void Update()
     {
-        if (active && Input.GetKeyDown(KeyCode.Return))
+        if (active && Input.GetMouseButton(0))
         {
             SceneManager.LoadScene("WinScene");
         }

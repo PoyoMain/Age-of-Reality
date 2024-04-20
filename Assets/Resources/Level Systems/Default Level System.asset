@@ -20,16 +20,41 @@ MonoBehaviour:
     MagicAttackUnlocked: {fileID: 0}
   - name: Level 3
     lvl: 3
-    XPToReachLevel: 5
+    XPToReachLevel: 3
     MeleeAttackUnlocked: {fileID: 11400000, guid: 86312073f281d6440adf256f18bffc54, type: 2}
     MagicAttackUnlocked: {fileID: 11400000, guid: 283bb9e8f9028464d956c74b87780816, type: 2}
   - name: Level 4
     lvl: 4
-    XPToReachLevel: 8
+    XPToReachLevel: 3
     MeleeAttackUnlocked: {fileID: 0}
     MagicAttackUnlocked: {fileID: 0}
   - name: Level 5
     lvl: 5
-    XPToReachLevel: 10
+    XPToReachLevel: 4
     MeleeAttackUnlocked: {fileID: 11400000, guid: a71255237981ae045b3dc5722d4d53be, type: 2}
     MagicAttackUnlocked: {fileID: 11400000, guid: af1c063f35298e54e9418e580708e58d, type: 2}
+  - name: Level 6
+    lvl: 6
+    XPToReachLevel: 4
+    MeleeAttackUnlocked: {fileID: 0}
+    MagicAttackUnlocked: {fileID: 0}
+  - name: Level 7
+    lvl: 7
+    XPToReachLevel: 4
+    MeleeAttackUnlocked: {fileID: 0}
+    MagicAttackUnlocked: {fileID: 0}
+  - name: Level 8
+    lvl: 8
+    XPToReachLevel: 5
+    MeleeAttackUnlocked: {fileID: 0}
+    MagicAttackUnlocked: {fileID: 0}
+  - name: Level 9
+    lvl: 9
+    XPToReachLevel: 5
+    MeleeAttackUnlocked: {fileID: 0}
+    MagicAttackUnlocked: {fileID: 0}
+  - name: Level 10
+    lvl: 10
+    XPToReachLevel: 5
+    MeleeAttackUnlocked: {fileID: 0}
+    MagicAttackUnlocked: {fileID: 0}

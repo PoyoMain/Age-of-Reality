@@ -22,4 +22,4 @@ MonoBehaviour:
   - {fileID: 6633343848253367670, guid: b324ef7d50bbe344cb257f2ab4f6eddf, type: 3}
   - {fileID: 6633343848253367670, guid: 566866fed724bab4d97d13e716ec7f77, type: 3}
   - {fileID: 6633343848253367670, guid: 05ed46caea4f5a34c97dc87cb85f156f, type: 3}
-  SecondsToComplete: 3
+  SecondsToComplete: 4

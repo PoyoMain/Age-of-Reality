@@ -55,6 +55,7 @@ public class BattleManager : MonoBehaviour
     [SerializeField] private AudioClip menuSelectSFX;
 
     private Animator _anim;
+    private int gainedXP;
 
     void Awake()
     {
@@ -115,6 +116,7 @@ public class BattleManager : MonoBehaviour
     {
         turnOrder.Clear();
         givenItems.Clear();
+        gainedXP = 0;
         ChangeState(BattleState.SpawningHeroes);
     }
 
@@ -136,84 +138,10 @@ public class BattleManager : MonoBehaviour
         turnOrder.Sort((x, y) => (x is HeroUnitBase) ? ((y is HeroUnitBase) ? (x as HeroUnitBase).Stats.Speed.CompareTo((y as HeroUnitBase).Stats.Speed) : (x as HeroUnitBase).Stats.Speed.CompareTo((y as EnemyUnitBase).Stats.Speed)) : ((y is HeroUnitBase) ? (x as EnemyUnitBase).Stats.Speed.CompareTo((y as HeroUnitBase).Stats.Speed) : (x as EnemyUnitBase).Stats.Speed.CompareTo((y as EnemyUnitBase).Stats.Speed)));
         turnOrder.Sort((x, y) => x.Speed.CompareTo(y.Speed));
         turnOrder.Reverse();
-        //List<UnitBase> temp = turnOrder;
-        //for (int i = 0; i <= turnOrder.Count - 1; i++)
-        //{
-        //    for (int j = 0; i <= turnOrder.Count - 1; j++)
-        //    {
-        //        if (!(j == turnOrder.Count))
-        //        {
-        //            if (CompareSpeed(temp[i], temp[j]))
-        //            {
-        //                UnitBase tempUnit = temp[i];
-        //                temp[i] = temp[j];
-        //                temp[j] = tempUnit;
-        //            }
-        //        }
-        //    }
-        //}
 
         if (turnOrder[0] is HeroUnitBase) ChangeState(BattleState.HeroTurn);
         else ChangeState(BattleState.EnemyTurn);
 
-    }
-
-    bool CompareSpeed(UnitBase a, UnitBase b)
-    {
-        if (a is HeroUnitBase && b is HeroUnitBase)
-        {
-            if (b is HeroUnitBase)
-            {
-                if ((a as HeroUnitBase).data.BaseStats.Speed >= (b as HeroUnitBase).data.BaseStats.Speed)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-            }
-            else
-            {
-                if ((a as HeroUnitBase).data.BaseStats.Speed >= (b as EnemyUnitBase).data.BaseStats.Speed)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-            }
-            
-        }
-
-        if (a is EnemyUnitBase && b is EnemyUnitBase)
-        {
-            if (b is EnemyUnitBase)
-            {
-                if ((a as EnemyUnitBase).data.BaseStats.Speed >= (b as EnemyUnitBase).data.BaseStats.Speed)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-            }
-            else
-            {
-                if ((a as EnemyUnitBase).data.BaseStats.Speed >= (b as HeroUnitBase).data.BaseStats.Speed)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-            }
-        }
-
-        return false;
     }
 
     /// <summary>
@@ -257,7 +185,7 @@ public class BattleManager : MonoBehaviour
         if (AttackMenu.chosenAttack != null)
         {
             AttackMenu.ResetAnimator();
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.01f);
             AttackMenu.gameObject.SetActive(false);
             pickingEnemy = false;
 
@@ -301,6 +229,7 @@ public class BattleManager : MonoBehaviour
             if (selectedEnemy.Stats.Health <= 0)
             {
                 currentHero.data.IncreaseXP(selectedEnemy.data.BaseStats.XP);
+                gainedXP += selectedEnemy.data.BaseStats.XP;
 
                 foreach (ItemDrop item in selectedEnemy.data.droppableItems)
                 {
@@ -461,7 +390,7 @@ public class BattleManager : MonoBehaviour
         DespawnUnits(true);
         AudioManager.Instance.PlayBattleSFX(soundType: BattleSounds.Victory);
         xpWindow.gameObject.SetActive(true);
-        xpWindow.ActivateWinVisual(givenItems);
+        xpWindow.ActivateWinVisual(givenItems, gainedXP);
 
         if (givenItems.Count > 0)
         {

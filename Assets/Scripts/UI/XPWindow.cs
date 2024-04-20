@@ -10,6 +10,8 @@ public class XPWindow : MonoBehaviour
     [Space(15f)]
     [SerializeField] private ItemSlot itemSlotPrefab;
     [SerializeField] private Transform itemParent;
+    [Space(15f)]
+    [SerializeField] private TextMeshProUGUI xpGainText;
 
     [Space(20f)]
     [Header("XP Popup Variables")]
@@ -41,11 +43,13 @@ public class XPWindow : MonoBehaviour
         XPVisual.SetActive(false);
     }
 
-    public void ActivateWinVisual(List<ScriptableItem> drops)
+    public void ActivateWinVisual(List<ScriptableItem> drops, int xpGained)
     {
         winVisual.SetActive(true);
 
-        foreach(Transform child in itemParent)
+        xpGainText.text = "You gained\n" + xpGained + " XP";
+
+        foreach (Transform child in itemParent)
         {
             Destroy(child.gameObject);
         }
@@ -104,6 +108,8 @@ public class XPWindow : MonoBehaviour
         speedAmount.text = beforeStats.Speed + "         <color=#FFD300>" + afterStats.Speed + "</color>";
         strengthAmount.text = beforeStats.Attack + "         <color=#FFD300>" + afterStats.Attack + "</color>";
         staminaAmount.text = beforeStats.Stamina + "         <color=#FFD300>" + afterStats.Stamina + "</color>";
+
+        
 
         if (magic)
         {

@@ -26,6 +26,7 @@ public class ActionSelectMenu : MonoBehaviour
 
     private Animator _anim;
     private HeroUnitBase currentUnit;
+    [SerializeField] private GameObject fleeButton;
 
     private void Awake()
     {
@@ -195,6 +196,17 @@ public class ActionSelectMenu : MonoBehaviour
     {
         battleControls.Enable();
         ChangeState(MenuState.ActionMenu);
+
+        fleeButton = GameObject.Find("FleeButton");
+
+        if (GameManager.Instance.enemyHit.isBoss)
+        {
+            fleeButton.SetActive(false);
+        }
+        else
+        {
+            fleeButton.SetActive(true);
+        }
     }
 
     private void OnDisable()

@@ -25,12 +25,18 @@ public class NPCDecision : MonoBehaviour
     [SerializeField] private TextMeshProUGUI dialogueText;
     [TextArea(2,3)]
     [SerializeField] private string[] lines;
+    [TextArea(2, 3)]
+    [SerializeField] private string[] linesAfterDecision;
     [TextArea(2,3)]
     [SerializeField] private string[] linesAfterChoice;
     [SerializeField] private float textSpeed;
     [SerializeField] private GameObject decisionButtons;
     private bool choiceMade = false;
     private bool skipDialogue = false;
+
+    [SerializeField] private GameObject instructionsPanel;
+    [SerializeField] private Sprite meleeInstructions;
+    [SerializeField] private Sprite magicInstructions;
 
     private void Awake()
     {
@@ -65,6 +71,20 @@ public class NPCDecision : MonoBehaviour
         }
 
         decisionButtons.SetActive(false);
+        StartCoroutine(PlayDecisionDialogue(linesAfterDecision));
+
+        while (!dialogueFinished)
+        {
+            yield return null;
+        }
+
+        ShowInstructions(player.Ability == Ability.Magic);
+
+        while (instructionsPanel.activeInHierarchy)
+        {
+            yield return null;
+        }
+
         StartCoroutine(PlayDecisionDialogue(linesAfterChoice));
 
         while (!dialogueFinished)
@@ -168,6 +188,17 @@ public class NPCDecision : MonoBehaviour
         else player.Ability = Ability.Magic;
 
         choiceMade = true;
+    }
+
+    public void ShowInstructions(bool magic)
+    {
+        instructionsPanel.GetComponent<Image>().sprite = magic ? magicInstructions : meleeInstructions;
+        instructionsPanel.SetActive(true);
+    }
+
+    public void HideInstructions()
+    {
+        instructionsPanel.SetActive(false);
     }
 
     private void Update()

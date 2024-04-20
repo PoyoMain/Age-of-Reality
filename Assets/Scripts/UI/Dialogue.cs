@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(Animator))]
 public class Dialogue : MonoBehaviour
@@ -9,6 +10,7 @@ public class Dialogue : MonoBehaviour
     [SerializeField] private TextMeshProUGUI nameTxt;
     [SerializeField] private TextMeshProUGUI textComponent;
     [SerializeField] private GameObject dialogueBox;
+    [SerializeField] private Image profile;
     private DialogueLine line;
     [SerializeField] private AudioSource dialogueAudioSource;
     [SerializeField] private AudioSource mainMusicAudioSource;
@@ -37,6 +39,12 @@ public class Dialogue : MonoBehaviour
         //if (lineToSay.Length == 0) return;
 
         nameTxt.text = unit.name;
+
+        if (profile != null)
+        {
+            profile.sprite = unit.Profile;
+        }
+
         line = lineToSay;
         dialogueBox.SetActive(true);
         textComponent.text = string.Empty;

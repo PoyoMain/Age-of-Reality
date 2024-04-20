@@ -1100,7 +1100,7 @@ AnimationClip:
     - time: 127.5
       value: {fileID: 21300000, guid: 424fbe5ce90bb104f932d31235c63aed, type: 3}
     - time: 150
-      value: {fileID: 0}
+      value: {fileID: 21300000, guid: 82cfe320710a94244ad833f548435293, type: 3}
     attribute: m_Sprite
     path: Image_Left
     classID: 114
@@ -1123,9 +1123,9 @@ AnimationClip:
     - time: 113.5
       value: {fileID: 21300000, guid: a107310e327248442bcae9bee521a2b2, type: 3}
     - time: 118
-      value: {fileID: 21300000, guid: 4c880567a76b79140874560da7681ad6, type: 3}
+      value: {fileID: 21300000, guid: b445f098891c5824f88e9550719bac12, type: 3}
     - time: 138
-      value: {fileID: 0}
+      value: {fileID: 21300000, guid: ff59fb24c7abcd54e8cf4073916746f1, type: 3}
     attribute: m_Sprite
     path: Image_Right
     classID: 114
@@ -1220,7 +1220,7 @@ AnimationClip:
     - {fileID: 21300000, guid: 37a81b921267cec46b282d8661abcbbe, type: 3}
     - {fileID: 21300000, guid: 5eb5065104e36794997093ebd1c3c1dd, type: 3}
     - {fileID: 21300000, guid: 424fbe5ce90bb104f932d31235c63aed, type: 3}
-    - {fileID: 0}
+    - {fileID: 21300000, guid: 82cfe320710a94244ad833f548435293, type: 3}
     - {fileID: 21300000, guid: e226b6464d4888d459151da890c38e94, type: 3}
     - {fileID: 21300000, guid: 6623ab5f655cb4147aa44f104cfd7ba9, type: 3}
     - {fileID: 21300000, guid: 2cbda70b320e262449e5b6ebe731a32b, type: 3}
@@ -1228,8 +1228,8 @@ AnimationClip:
     - {fileID: 21300000, guid: 3e525d2464ab7e24e8fed944b208f02b, type: 3}
     - {fileID: 21300000, guid: 725608891f82eff43ab1faec0b528307, type: 3}
     - {fileID: 21300000, guid: a107310e327248442bcae9bee521a2b2, type: 3}
-    - {fileID: 21300000, guid: 4c880567a76b79140874560da7681ad6, type: 3}
-    - {fileID: 0}
+    - {fileID: 21300000, guid: b445f098891c5824f88e9550719bac12, type: 3}
+    - {fileID: 21300000, guid: ff59fb24c7abcd54e8cf4073916746f1, type: 3}
     - {fileID: 21300000, guid: 7f1206ac74dd6374a8ccdb1bc1cfe4b2, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2

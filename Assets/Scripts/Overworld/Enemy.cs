@@ -94,7 +94,6 @@ public class Enemy : MonoBehaviour
         if (chaseScript != null) chaseScript.enabled = true;
         if (patrolScript != null) patrolScript.enabled = true;
     }
-    
 }
 
 [Serializable]
